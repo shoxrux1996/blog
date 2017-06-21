@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use yuridik\City;
 use yuridik\Client;
+use File;
+use Session;
+
 class ClientController extends Controller
 {
     public function __construct()
@@ -29,22 +32,27 @@ class ClientController extends Controller
     	return view('client.info')->withClient($client)->withCities($cities);
     }
     public function update(Request $request, $id){
-    	$client = Client::findOrFail($id);
+    	
             $this->validate($request, [
-               'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+               'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
-
+            $file = $request->file('image');
+            $file_name = $file->getClientOriginalName();
+            
+            $client = Client::findOrFail($id);
             $client->gender = $request->gender;
     		$client->user->dateOfBirth= $request->dateOfBirth;
             $client->user->city_id = $request->city;
 
-            $client->user->photo = $file = $path = $request->image->path();
-
-
-        $client->push();
+            $upload_folder = '/clients/photo/';
+            File::delete(public_path() . $upload_folder. $client->user->photo);
+            $client->user->photo = $file_name;
+            $file->move(public_path() . $upload_folder, $file_name);
+            
+            $client->push();
+    	Session::flash('message', 'Your account updated successfully');
     	
-    	//Print "<script> alert('Your profile was successfully updated');</script>"; 
-    	//return redirect()->route('client.dashboard');
+    	return redirect()->route('client.dashboard');
 
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-        {{Form::model($client, ['route' => ['client.update', $client->id], 'class' => 'form-horizontal'])}}
+        {{Form::model($client, ['route' => ['client.update', $client->id], 'enctype' => 'multipart/form-data', 'method' => 'post', 'class' => 'form-horizontal'])}}
          <div class="form-group">
             {{Form::label('email', 'Email: ', ['class' => 'col-sm-1 control-labe'])}}
             <div class="col-sm-8">
@@ -50,7 +50,8 @@
           <img src="{!!asset('clients/photo/' . $client->user->photo)!!}" alt="..." class="img-thumbnail" style="width: 100px;">
             {{Form::label('image', 'Photo: ', ['class' => 'col-sm-1 control-labe'])}}
             <div class="col-sm-8">
-                {{Form::file('image', ['class' => 'image'])}}
+            <input class = "image" type="file" name="image" />
+               
             </div>
         </div>
 
