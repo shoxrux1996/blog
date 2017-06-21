@@ -14,10 +14,15 @@ Route::prefix('user')->group(function(){
 });
 
 Route::prefix('client')->group(function(){
-	Route::get('/', 'ClientController@index')->name('client.dashboard');
+
 //	Route::post('/password/email', 'Auth\ClientForgotPasswordController@sendResetLinkEmail')->name('client.password.email');
+
 	Route::post('/password/reset', 'Auth\ClientResetPasswordController@reset')->name('client.password.request');
 	Route::get('/password/reset/{token}', 'Auth\ClientResetPasswordController@showResetForm')->name('client.password.reset');
+	Route::get('/', 'ClientController@index')->name('client.dashboard');
+	Route::get('/settings/info', 'ClientController@info')->name('client.info');
+	Route::put('/update/{id}', 'ClientController@update')->name('client.update');
+    
 });
 Route::prefix('lawyer')->group(function(){
 	Route::get('/', 'LawyerController@index')->name('lawyer.dashboard');

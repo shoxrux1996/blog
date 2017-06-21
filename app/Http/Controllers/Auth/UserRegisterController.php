@@ -13,6 +13,7 @@ use Auth;
 
 use yuridik\Client;
 use yuridik\Lawyer;
+use yuridik\User;
 
 class UserRegisterController extends Controller
 {
@@ -29,16 +30,24 @@ class UserRegisterController extends Controller
          $this->validate($request, [
             'email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
             'password' => 'required|string|min:6|confirmed',
+            'name' => 'required',
             ]);
 
         $confirmation_code = str_random(30);       
-        
+        $user = new User;
+        $user->firstName = $request->name;
+        $user->save();
+        $userID=$user->id;
+
         if($request->user == "lawyer"){
+
             $client=new lawyer;
             $client->email= $request->email;
             $client->password=bcrypt($request->password);
             $client->confirmation_code=$confirmation_code;
-            $data=array('code' =>$confirmation_code, 'email' =>$request->email, 'name' => "Shokhrukh");
+            $client->user_id = $userID;
+
+            $data=array('code' =>$confirmation_code, 'email' =>$request->email, 'name' => $request->name);
             Mail::send('email.verify', ['data' => $data], function($message) use ($data) {
             $message->to($data['email'], $data['name'])
                 ->subject('Verify your email address');
@@ -46,16 +55,17 @@ class UserRegisterController extends Controller
              $client->save();
         }
         else{
-            $client=new Client;
-            $client->email= $request->email;
-            $client->password=bcrypt($request->password);
-            $client->confirmation_code=$confirmation_code;
-            $data=array('code' =>$confirmation_code, 'email' =>$request->email, 'name' => "Shokhrukh");
+            $lawyer=new Client;
+            $lawyer->email= $request->email;
+            $lawyer->password=bcrypt($request->password);
+            $lawyer->confirmation_code=$confirmation_code;
+            $lawyer->user_id = $userID;
+            $data=array('code' =>$confirmation_code, 'email' =>$request->email, 'name' => $request->name);
             Mail::send('email.verify', ['data' => $data], function($message) use ($data) {
             $message->to($data['email'], $data['name'])
                 ->subject('Verify your email address');
         });
-            $client->save();
+            $lawyer->save();
         }
             
 
