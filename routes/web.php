@@ -21,7 +21,7 @@ Route::prefix('client')->group(function(){
 	Route::get('/password/reset/{token}', 'Auth\ClientResetPasswordController@showResetForm')->name('client.password.reset');
 	Route::get('/', 'ClientController@index')->name('client.dashboard');
 	Route::get('/settings/info', 'ClientController@info')->name('client.info');
-	Route::put('/update/{id}', 'ClientController@update')->name('client.update');
+	Route::post('/update/{id}', 'ClientController@update')->name('client.update');
     
 });
 Route::prefix('lawyer')->group(function(){

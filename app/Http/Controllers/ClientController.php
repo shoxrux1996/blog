@@ -30,8 +30,18 @@ class ClientController extends Controller
     }
     public function update(Request $request, $id){
     	$client = Client::findOrFail($id);
+            $this->validate($request, [
+               'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+
+            $client->gender = $request->gender;
     		$client->user->dateOfBirth= $request->dateOfBirth;
-    		$client->push();
+            $client->user->city_id = $request->city;
+
+            $client->user->photo = $file = $path = $request->image->path();
+
+
+        $client->push();
     	
     	//Print "<script> alert('Your profile was successfully updated');</script>"; 
     	//return redirect()->route('client.dashboard');
