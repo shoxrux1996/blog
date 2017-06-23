@@ -43,6 +43,15 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group{{ $errors->has('wrong-attempt') ? ' has-error' : '' }}">
+                            
+                                 @if ($errors->has('wrong-attempt'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('wrong-attempt') }}</strong>
+                                    </span>
+                                @endif
+                        </div>
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

@@ -28,26 +28,23 @@ class UserLoginController extends Controller
 		    $this->validate($request, [
 		            'email' => 'required|email|exists:clients',
 		            'password' => 'required|min:6'
-		            ], [
-			        'email.exists' => 'entered email does not exists',
-			        ]);
+		            ]);
 		    if(Auth::guard('client')->attempt(['email' => $request->email, 'password'=> $request->password, 'confirmed'=> 1],$request->remember)){
 	        	 return redirect()->intended(route('client.dashboard'));
         		}
-         return  redirect()->back()->withInput($request->only('email', 'remember'));
+         return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'entered email or password wrong']);
 		}
 
 	    	 $this->validate($request, [
 		            'email' => 'required|email|exists:lawyers',
 		            'password' => 'required|min:6'
-		            ], [
-				    'email.exists' => 'entered email does not exists',
-   			 	]);
+		            ]);
+
 	    	if(Auth::guard('lawyer')->attempt(['email' => $request->email, 'password'=> $request->password, 'confirmed'=> 1],$request->remember)){
 	        	 return redirect()->intended(route('lawyer.dashboard'));
         	}
-        	return  redirect()->back()->withInput($request->only('email', 'remember'));
-        	
+ 			
+        	return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'entered email or password wrong']);
     }
 
       public function userLogout()

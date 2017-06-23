@@ -14,5 +14,7 @@ class Category extends Model
     }
 
 
-
+    public function lawyers(){
+    	return $this->belongsToMany('yuridik\Lawyer');
+    }
 }
