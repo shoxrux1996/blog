@@ -29,6 +29,8 @@ Route::prefix('lawyer')->group(function(){
 //	Route::post('/password/email', 'Auth\LawyerForgotPasswordController@sendResetLinkEmail')->name('lawyer.password.email');
 	Route::post('/password/reset', 'Auth\LawyerResetPasswordController@reset')->name('lawyer.password.request');
 	Route::get('/password/reset/{token}', 'Auth\LawyerResetPasswordController@showResetForm')->name('lawyer.password.reset');
+    Route::get('/settings/info', 'LawyerController@info')->name('lawyer.info');
+    Route::post('/update/{id}', 'LawyerController@update')->name('lawyer.update');
 });
 
 Route::prefix('admin')->group(function(){
