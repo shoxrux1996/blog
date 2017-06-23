@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        {{Form::model($client, ['route' => ['lawyer.update', $lawyer->id], 'enctype' => 'multipart/form-data', 'method' => 'post', 'class' => 'form-horizontal'])}}
+        {{Form::model($lawyer, ['route' => ['lawyer.update', $lawyer->id], 'enctype' => 'multipart/form-data', 'method' => 'post', 'class' => 'form-horizontal'])}}
         <div class="form-group">
             {{Form::label('email', 'Email: ', ['class' => 'col-sm-1 control-labe'])}}
             <div class="col-sm-8">
@@ -36,7 +36,7 @@
         <div class="form-group">
             {{Form::label('city', 'City: ', ['class' => 'col-sm-1 control-labe'])}}
             <div class="col-sm-8">
-                {{Form::select('city', $cities, $client->user->city_id, ['class'=>'form-control'])}}
+                {{Form::select('city', $cities, $lawyer->user->city_id, ['class'=>'form-control'])}}
             </div>
         </div>
 
@@ -47,7 +47,7 @@
                         <strong>{{ $errors->first('image') }}</strong>
                     </span>
             @endif
-            <img src="{!!asset('clients/photo/' . $lawyer->user->photo)!!}" alt="..." class="img-thumbnail" style="width: 100px;">
+            <img src="{!!asset('lawyers/photo/' . $lawyer->user->photo)!!}" alt="..." class="img-thumbnail" style="width: 100px;">
             {{Form::label('image', 'Photo: ', ['class' => 'col-sm-1 control-labe'])}}
             <div class="col-sm-8">
                 <input class = "image" type="file" name="image" />

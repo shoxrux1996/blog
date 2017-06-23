@@ -3,6 +3,11 @@
 namespace yuridik\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use yuridik\City;
+use yuridik\Lawyer;
+use File;
+use Session;
 
 class LawyerController extends Controller
 {
@@ -16,9 +21,6 @@ class LawyerController extends Controller
         return view('lawyer.dashboard');
     }
 
-    /**
-     * @return mixed
-     */
     public function info(){
         $lawyer = Auth::user();
         $city = City::all();
@@ -31,11 +33,9 @@ class LawyerController extends Controller
     }
     public function update(Request $request, $id){
 
-        $this->validate($request, [
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $this->validate($request, ['image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
         $file = $request->file('image');
-        $file_name = $file->getLawyerOriginalName();
+        $file_name = $file->getClientOriginalName();
 
         $lawyer = Lawyer::findOrFail($id);
         $lawyer->gender = $request->gender;
