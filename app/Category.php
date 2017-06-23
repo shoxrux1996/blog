@@ -13,16 +13,6 @@ class Category extends Model
     	return $this->belongsTo('yuridik\Category');
     }
 
-     public static function htmlFromArray($array) {      
-       foreach ($array as $key) {
-       	Print '<ul>';
-	        Print "<li>".$key->name. '__'.$key->id.'__'.$key->category_id."</li>";
-	            if($key->children != null) {
-	                $categories = Category::where('category_id', $key->id)->get();
-	                $this->htmlFromArray($categories);
-	            }
-        Print '</ul>';
-        } 
-        
-    }
+
+
 }
