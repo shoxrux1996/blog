@@ -26,25 +26,23 @@ class UserLoginController extends Controller
 			
 		if(!empty($cl)){
 		    $this->validate($request, [
-		            'email' => 'required|email|exists:clients',
+		            'email' => 'required|email',
 		            'password' => 'required|min:6'
 		            ]);
 		    if(Auth::guard('client')->attempt(['email' => $request->email, 'password'=> $request->password, 'confirmed'=> 1],$request->remember)){
 	        	 return redirect()->intended(route('client.dashboard'));
         		}
-         return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt', 'entered email or password were wrong']);
+         return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'entered email or password were wrong']);
 		}
 
 	    	 $this->validate($request, [
-		            'email' => 'required|email|exists:lawyers',
+		            'email' => 'required|email',
 		            'password' => 'required|min:6'
-		            ], [
-				    'email.exists' => 'entered email does not exists',
-   			 	]);
+		            ]);
 	    	if(Auth::guard('lawyer')->attempt(['email' => $request->email, 'password'=> $request->password, 'confirmed'=> 1],$request->remember)){
 	        	 return redirect()->intended(route('lawyer.dashboard'));
         	}
-        	return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt', 'entered email or password were wrong']);``;
+        	return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'entered email or password were wrong']);
         	
     }
 
