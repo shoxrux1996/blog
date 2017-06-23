@@ -41,6 +41,7 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
+                               
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('wrong-attempt') ? ' has-error' : '' }}">
