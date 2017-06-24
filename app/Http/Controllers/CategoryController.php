@@ -21,8 +21,15 @@ class CategoryController extends Controller
 
         return view('category.index')->withCategories($categories);
     }
-   
-    /**
+    
+    public function show($name){
+        
+        $category = Category::find($name);
+        foreach ($category->lawyers as $law){
+          echo $law->email;
+      }
+    }
+        /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -49,10 +56,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    // public function show($id)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.

@@ -12,7 +12,10 @@ class Category extends Model
     public function parent(){
     	return $this->belongsTo('yuridik\Category');
     }
+
+
+
     public function lawyers(){
-    	return $this->belongsToMany('yuridik\Lawyer');
+    	return $this->belongsToMany('yuridik\Lawyer','lawyer_category');
     }
 }

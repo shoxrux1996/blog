@@ -36,14 +36,19 @@ class Lawyer extends Authenticatable
     {
         return $this->belongsTo('yuridik\User');
     }
-       public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new LawyerResetPasswordNotification($token));
-    }
-
+   
         public function categories() 
     {
-        return $this->belongsTo('yuridik\Category');
+        return $this->belongsToMany('yuridik\Category','lawyer_category');
+    }
+
+
+
+
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new LawyerResetPasswordNotification($token));
     }
 
 }

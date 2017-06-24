@@ -74,7 +74,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('category/info', 'CategoryController@index');
-
+Route::get('lawyers/search/{name}', 'CategoryController@show')->name('search.lawyers.bycategory');
 
 Route::get('tag/{id}', function($id){
 	$i = 2;
