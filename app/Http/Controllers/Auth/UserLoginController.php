@@ -32,7 +32,7 @@ class UserLoginController extends Controller
 		    if(Auth::guard('client')->attempt(['email' => $request->email, 'password'=> $request->password, 'confirmed'=> 1],$request->remember)){
 	        	 return redirect()->intended(route('client.dashboard'));
         		}
-         return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'entered email or password were wrong']);
+         return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Entered email or password were wrong']);
 		}
 
 	    	 $this->validate($request, [
@@ -42,7 +42,7 @@ class UserLoginController extends Controller
 	    	if(Auth::guard('lawyer')->attempt(['email' => $request->email, 'password'=> $request->password, 'confirmed'=> 1],$request->remember)){
 	        	 return redirect()->intended(route('lawyer.dashboard'));
         	}
-        	return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'entered email or password were wrong']);
+        	return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Entered email or password were wrong']);
         	
     }
 

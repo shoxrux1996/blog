@@ -16,7 +16,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('user.login.submit') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ ($errors->has('email') || $errors->has('wrong-attempt')) ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
@@ -30,7 +30,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <div class="form-group{{ ($errors->has('password') || $errors->has('wrong-attempt')) ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
@@ -40,20 +40,15 @@
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
-                               
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('wrong-attempt') ? ' has-error' : '' }}">
-                            
-                                 @if ($errors->has('wrong-attempt'))
+                                @elseif ($errors->has('wrong-attempt'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('wrong-attempt') }}</strong>
                                     </span>
                                 @endif
+
+                            </div>
                         </div>
-
-
+                
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
