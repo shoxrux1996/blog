@@ -42,6 +42,10 @@ class Client extends Authenticatable
         return $this->hasMany('yuridik\Blog');
     }
 
+    public function questions(){
+        return $this->hasMany('yuridik\Question');
+    }
+
 
 
 

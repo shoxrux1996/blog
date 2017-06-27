@@ -75,7 +75,7 @@ class UserRegisterController extends Controller
     public function confirm($code){
         if( !$code)
         {
-            throw new InvalidConfirmationCodeException;
+            Print "<script>alert('Invalid Confirmation Code ');</script>";
         }
         $cl = Client::where(['confirmation_code'=> $code])->first();
         $lw = Lawyer::where(['confirmation_code'=> $code])->first();
@@ -103,7 +103,8 @@ class UserRegisterController extends Controller
             return redirect('user/login');
         }
 
-        throw new InvalidConfirmationCodeException;
+        Print "<script>alert('Invalid Confirmation Code ');</script>";
+
         
     }
     /**

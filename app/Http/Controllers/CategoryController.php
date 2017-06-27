@@ -24,7 +24,7 @@ class CategoryController extends Controller
     
     public function show($name){
         
-        $category = Category::find($name);
+        $category = Category::where('name', $name)->first();
         foreach ($category->lawyers as $law){
           echo $law->email;
       }
@@ -36,7 +36,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $cat= array('' => null);
+        foreach ($categories as $key) {
+            $cat[$key->id] = $key->name;
+        }
+        return view('category.insert')->withCategories($cat);
     }
 
     /**
@@ -47,7 +52,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+           'name' => 'required|unique:categories'
+        ]);
+
+        $category = new Category;
+        $category->name = $request->name;
+        $category->category_id =$request->parent;
+        $category->save();
+        return redirect()->route('category.info');
     }
 
     /**
@@ -90,8 +103,19 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-        //
+
+
+        $category = Category::find($id);
+        foreach ($category->children as $key) {
+            $key->category_id = $category->category_id;
+            $key->save();
+        }
+        $category->lawyers()->detach();
+        $category->delete();  
+                
+     return redirect()->route('category.info');
     }
 }

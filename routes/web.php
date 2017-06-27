@@ -73,7 +73,14 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('category/info', 'CategoryController@index');
+Route::prefix('category')->group(function(){
+	Route::get('/info', 'CategoryController@index')->name('category.info');
+	Route::get('/insert', 'CategoryController@create');
+	Route::post('/insert/submit', 'CategoryController@store')->name('category.insert.submit');
+	Route::get('delete/{id}', 'CategoryController@destroy')->name('category.delete');
+});
+
+
 Route::get('lawyers/search/{name}', 'CategoryController@show')->name('search.lawyers.bycategory');
 
 Route::get('tag/{id}', function($id){
