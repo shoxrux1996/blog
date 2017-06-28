@@ -4,9 +4,8 @@ namespace yuridik;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model
+class File extends Model
 {
-    public function lawyer(){
-
-    }
+	public $timestamps = false;
+    
 }

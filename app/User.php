@@ -18,4 +18,7 @@ class User extends Model
     public function client(){
     	return $this->hasOne('yuridik\Client');
     }
+    public function file(){
+        return $this->belongsTo('yuridik\File');
+    }
 }

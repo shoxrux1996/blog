@@ -47,11 +47,10 @@
                         <strong>{{ $errors->first('image') }}</strong>
                     </span>
                 @endif
-          <img src="{!!asset('clients/photo/' . $client->user->photo)!!}" alt="..." class="img-thumbnail" style="width: 100px;">
+          <img src="{!!asset('clients/photo/' . $client->user->file->file)!!}" alt="..." class="img-thumbnail" style="width: 100px;">
             {{Form::label('image', 'Photo: ', ['class' => 'col-sm-1 control-labe'])}}
             <div class="col-sm-8">
-            <input class = "image" type="file" name="image" />
-               
+                <input class = "image" type="file" name="image" />   
             </div>
         </div>
 

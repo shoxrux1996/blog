@@ -31,6 +31,8 @@ Route::prefix('lawyer')->group(function(){
 	Route::get('/password/reset/{token}', 'Auth\LawyerResetPasswordController@showResetForm')->name('lawyer.password.reset');
     Route::get('/settings/info', 'LawyerController@info')->name('lawyer.info');
     Route::post('/update/{id}', 'LawyerController@update')->name('lawyer.update');
+    Route::get('/search/{name}', 'CategoryController@show')->name('search.lawyers.bycategory');
+    Route::get('/search', 'ClientController@showLawyersList')->name('search.lawyers');
 });
 
 Route::prefix('admin')->group(function(){
@@ -81,7 +83,12 @@ Route::prefix('category')->group(function(){
 });
 
 
-Route::get('lawyers/search/{name}', 'CategoryController@show')->name('search.lawyers.bycategory');
+
+Route::prefix('question')->group(function(){
+	Route::get('/list', 'QuestionController@index')->name('question.list');
+	Route::get('/create', 'QuestionController@create')->name('question.create');
+	Route::post('/insert', 'QuestionController@store')->name('question.insert.submit');
+});
 
 Route::get('tag/{id}', function($id){
 	$i = 2;

@@ -1,0 +1,26 @@
+@extends('layouts.app-admin')
+
+@section('title', "| Questions")
+
+@section('content')
+
+	@foreach($questions as $question)
+		<div class="bg-info col-md-8" style="margin-bottom: 20px;">
+			<div class="row">
+				<div class="col-md-12" >
+						<label class="col-sm-6" >{{ $question->title }}</label>
+						<div class="tags col-md-8 ">
+							<h4>Client:</h4> <p>{{$question->client->email}}</p>
+							<h4>Category:</h4> <p>{{$question->category->name}}</p>
+						</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4"><p>{{substr(strip_tags($question->text),0,250)}} {{strlen(strip_tags($question->text))>250 ? '...' : ""}}</p></div>
+			</div>
+			
+		</div>
+	@endforeach
+
+@endsection

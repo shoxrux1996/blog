@@ -43,6 +43,8 @@ class AdminBlogController extends Controller
                $this->validate($request, array(
             'title' => 'required|max:255',
             'text' => 'required|min:10'));
+                dd($request->tags);
+
         $blog = new Blog;
         $blog->title= $request->title;
         $blog->text= $request->text;
@@ -50,8 +52,7 @@ class AdminBlogController extends Controller
         $blog->dislikes= $request->dislikes;
         $blog->author_id = $request->author_id;
         $blog->save();
-
-        $blog->tags()->sync($request->tags, false);
+               $blog->tags()->sync($request->tags, false);
 Session::flash('message', 'Blog was inserted successfully');
       return redirect()->route('admin.blogs');
     }

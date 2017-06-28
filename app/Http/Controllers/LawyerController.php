@@ -42,8 +42,8 @@ class LawyerController extends Controller
             $file = $request->file('image');
             $file_name = $file->getClientOriginalName();
             $upload_folder = '/lawyers/photo/';
-            File::delete(public_path() . $upload_folder . $lawyer->user->photo);
-            $lawyer->user->photo = $file_name;
+            File::delete(public_path() . $upload_folder . $lawyer->user->file->file);
+            $lawyer->user->file->file = $file_name;
             $file->move(public_path() . $upload_folder, $file_name);
         }
         $lawyer->push();
