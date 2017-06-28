@@ -51,7 +51,6 @@ class QuestionController extends Controller
         $rules = array(
            'title' => 'required|min:3',
             'text' => 'required|min:10',
-
             );
 
        
