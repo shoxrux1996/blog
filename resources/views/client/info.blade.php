@@ -47,7 +47,9 @@
                         <strong>{{ $errors->first('image') }}</strong>
                     </span>
                 @endif
-          <img src="{!!asset('clients/photo/' . $client->user->file->file)!!}" alt="..." class="img-thumbnail" style="width: 100px;">
+        @if($client->user->file_id != null)
+          <img src="{!!asset($client->user->file->path . $client->user->file->file)!!}" alt="..." class="img-thumbnail" style="height: 300px;">
+        @endif
             {{Form::label('image', 'Photo: ', ['class' => 'col-sm-1 control-labe'])}}
             <div class="col-sm-8">
                 <input class = "image" type="file" name="image" />   

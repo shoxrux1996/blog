@@ -12,6 +12,12 @@
 						<div class="tags col-md-8 ">
 							<h4>Client:</h4> <p>{{$question->client->email}}</p>
 							<h4>Category:</h4> <p>{{$question->category->name}}</p>
+							<div class="tags col-md-8 ">
+								@foreach($question->files as $file)
+								<a class="label label-default" href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+								@endforeach
+								<hr>
+							</div>
 						</div>
 				</div>
 			</div>

@@ -78,10 +78,13 @@ class QuestionController extends Controller
              foreach ($file as $key) {
                 $fil = new File;
                 $fil->file = $key->getClientOriginalName();
+                $upload_folder = '/questions/'.time().'/';
+                $fil->path = $upload_folder;
+             
                 $fil->save();
                 $question->files()->attach($fil->id);
 
-                $upload_folder = '/questions/files/';
+                
                 $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
                 
             }

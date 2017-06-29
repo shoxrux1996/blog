@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use yuridik\City;
 use yuridik\Client;
-use File;
+use yuridik\File;
 use Session;
-
+use Illuminate\Support\Facades\File as LaraFile;
 class ClientController extends Controller
 {
     public function __construct()
@@ -43,9 +43,19 @@ class ClientController extends Controller
         if($request->file('image') != null) {
             $file = $request->file('image');
             $file_name = $file->getClientOriginalName();
-            $upload_folder = '/clients/photo/';
-            File::delete(public_path() . $upload_folder . $client->user->file->file);
-            $client->user->file->file = $file_name;
+            $upload_folder = '/clients/photo'.$client->id.'/';
+            if($client->user->file_id != null){
+            LaraFile::delete(public_path().$upload_folder.$client->user->file->file);
+                $client->user->file->file = $file_name;
+                $client->user->file->path = $upload_folder;
+            }
+            else{
+                $fil = new File;
+                $fil->file = $file_name;
+                $fil->path = $upload_folder;
+                $fil->save();
+                $client->user->file_id = $fil->id;
+            }
             $file->move(public_path() . $upload_folder, $file_name);
         }            
         $client->push();
