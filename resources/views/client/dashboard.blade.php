@@ -17,7 +17,7 @@
                             
                         </ul>
 
-                        <li><a href="{{ route('search.lawyers') }}">Наши юристы</a></li>
+                        <li><a href="{{ route('lawyers.list') }}">Наши юристы</a></li>
                         <li><a href="#">Активные заявки</a></li>
                         <ul>
                             <li><a href="{{ route('question.list') }}">Вопросы</a></li>

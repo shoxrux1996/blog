@@ -1,5 +1,42 @@
 <?php
 
+Route::prefix('admin')->group(function(){
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/', 'AdminController@index')->name('admin.dashboard');
+    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+
+    Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+    Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+    Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.request.confirm');
+    Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
+
+    Route::prefix('blogs')->group(function(){
+        Route::get('/delete/{id}', 'AdminBlogController@destroy')->name('admin.blog.delete');
+        Route::get('/insertform','AdminBlogController@insertform')->name('admin.blog.insert');
+        Route::post('/create','AdminBlogController@store')->name('admin.blog.submit');
+        Route::get('/editform/{id}','AdminBlogController@editform')->name('admin.blog.edit');
+        Route::post('edit/{id}','AdminBlogController@edit')->name('admin.blog.edit.submit');
+        Route::get('/', 'AdminBlogController@showBlogList')->name('admin.blogs');
+        Route::get('/show/{id}', 'AdminBlogController@show')->name('admin.blog.show');
+    });
+    Route::prefix('tags')->group(function(){
+
+        Route::get('edit/{id}', 'AdminTagController@edit')->name('admin.tag.edit');
+        Route::put('/update/{id}', 'AdminTagController@update')->name('admin.tag.update');
+
+        Route::delete('/delete/{id}', 'AdminTagController@destroy')->name('admin.tag.delete');
+        Route::get('/insertform', 'AdminTagController@insertForm')->name('admin.tag.insert');
+        Route::post('/insert', 'AdminTagController@insert')->name('admin.tag.insert.submit');
+
+        Route::get('/', 'AdminTagController@taglist')->name('admin.tags.index');
+        Route::get('/{id}', 'AdminTagController@show')->name('admin.tag.showeach');
+    });
+    Route::prefix('comment')->group(function(){
+        Route::post('/{blog_id}', 'AdminCommentController@store')->name('admin.comment.store');
+    });
+});
+
 Route::prefix('user')->group(function(){
 	Route::get('/login', 'Auth\UserLoginController@showLoginForm')->name('user.login');
 	Route::post('/login', 'Auth\UserLoginController@login')->name('user.login.submit');
@@ -31,46 +68,14 @@ Route::prefix('lawyer')->group(function(){
 	Route::get('/password/reset/{token}', 'Auth\LawyerResetPasswordController@showResetForm')->name('lawyer.password.reset');
     Route::get('/settings/info', 'LawyerController@info')->name('lawyer.info');
     Route::post('/update/{id}', 'LawyerController@update')->name('lawyer.update');
+    
+});
+Route::prefix('lawyer_info')->group(function(){
     Route::get('/search/{name}', 'CategoryController@show')->name('search.lawyers.bycategory');
-    Route::get('/search', 'ClientController@showLawyersList')->name('search.lawyers');
+    Route::get('/', 'LawyersInfoController@showLawyersList')->name('lawyers.list');
 });
 
-Route::prefix('admin')->group(function(){
-	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-	Route::get('/', 'AdminController@index')->name('admin.dashboard');
-	Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
-	Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-	Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-	Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.request.confirm');
-	Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
-
-	Route::prefix('blogs')->group(function(){
-		Route::get('/delete/{id}', 'AdminBlogController@destroy')->name('admin.blog.delete');
-		Route::get('/insertform','AdminBlogController@insertform')->name('admin.blog.insert');
-		Route::post('/create','AdminBlogController@store')->name('admin.blog.submit');
-		Route::get('/editform/{id}','AdminBlogController@editform')->name('admin.blog.edit');
-		Route::post('edit/{id}','AdminBlogController@edit')->name('admin.blog.edit.submit');
-		Route::get('/', 'AdminBlogController@showBlogList')->name('admin.blogs');
-		Route::get('/show/{id}', 'AdminBlogController@show')->name('admin.blog.show');
-		});
-	Route::prefix('tags')->group(function(){
-
-		Route::get('edit/{id}', 'AdminTagController@edit')->name('admin.tag.edit');
-		Route::put('/update/{id}', 'AdminTagController@update')->name('admin.tag.update');
-	
-		Route::delete('/delete/{id}', 'AdminTagController@destroy')->name('admin.tag.delete');
-		Route::get('/insertform', 'AdminTagController@insertForm')->name('admin.tag.insert');
-		Route::post('/insert', 'AdminTagController@insert')->name('admin.tag.insert.submit');
-
-		Route::get('/', 'AdminTagController@taglist')->name('admin.tags.index');
-		Route::get('/{id}', 'AdminTagController@show')->name('admin.tag.showeach');
-	});
-	Route::prefix('comment')->group(function(){
-		Route::post('/{blog_id}', 'AdminCommentController@store')->name('admin.comment.store');
-	});
-});
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -90,26 +95,13 @@ Route::prefix('question')->group(function(){
 	Route::post('/insert', 'QuestionController@store')->name('question.insert.submit');
 });
 
-Route::get('tag/{id}', function($id){
-	$i = 2;
-	$blogs = yuridik\Blog::find($id);
-	$tags = yuridik\Tag::find($i);
-	foreach ($blogs->tags as $key) {
-		echo $key->name. '<br>';
-	}
-	echo '<br>';
-	foreach ($tags->blogs as $key) {
-		echo $key->title. '<br>';
-	}
 
-	
-});
-Route::get('bloglist','BlogController@blog_list');
-Route::get('insertform','BlogController@insertform');
-Route::post('create','BlogController@store');
-Route::get('editform/{id}','BlogController@show');
-Route::post('edit/{id}','BlogController@edit');
-Route::get('delete/{id}','BlogController@destroy');
+//Route::get('bloglist','BlogController@blog_list');
+//Route::get('insertform','BlogController@insertform');
+//Route::post('create','BlogController@store');
+//Route::get('editform/{id}','BlogController@show');
+//Route::post('edit/{id}','BlogController@edit');
+//Route::get('delete/{id}','BlogController@destroy');
 
 
 /*
