@@ -3,7 +3,7 @@
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    Route::get('/', 'AdminController@index')->name('admin.dashboard');
+    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
     Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
@@ -12,29 +12,34 @@ Route::prefix('admin')->group(function(){
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
     Route::prefix('blogs')->group(function(){
-        Route::get('/delete/{id}', 'AdminBlogController@destroy')->name('admin.blog.delete');
-        Route::get('/insertform','AdminBlogController@insertform')->name('admin.blog.insert');
-        Route::post('/create','AdminBlogController@store')->name('admin.blog.submit');
-        Route::get('/editform/{id}','AdminBlogController@editform')->name('admin.blog.edit');
-        Route::post('edit/{id}','AdminBlogController@edit')->name('admin.blog.edit.submit');
-        Route::get('/', 'AdminBlogController@showBlogList')->name('admin.blogs');
-        Route::get('/show/{id}', 'AdminBlogController@show')->name('admin.blog.show');
+        Route::get('/delete/{id}', 'Admin\AdminBlogController@destroy')->name('admin.blog.delete');
+
+        Route::get('/editform/{id}','Admin\AdminBlogController@editform')->name('admin.blog.edit');
+        Route::post('edit/{id}','Admin\AdminBlogController@edit')->name('admin.blog.edit.submit');
+        Route::get('/', 'Admin\AdminBlogController@showBlogList')->name('admin.blogs');
+        Route::get('/show/{id}', 'Admin\AdminBlogController@show')->name('admin.blog.show');
     });
     Route::prefix('tags')->group(function(){
 
-        Route::get('edit/{id}', 'AdminTagController@edit')->name('admin.tag.edit');
-        Route::put('/update/{id}', 'AdminTagController@update')->name('admin.tag.update');
+        Route::get('edit/{id}', 'Admin\AdminTagController@edit')->name('admin.tag.edit');
+        Route::put('/update/{id}', 'Admin\AdminTagController@update')->name('admin.tag.update');
 
-        Route::delete('/delete/{id}', 'AdminTagController@destroy')->name('admin.tag.delete');
-        Route::get('/insertform', 'AdminTagController@insertForm')->name('admin.tag.insert');
-        Route::post('/insert', 'AdminTagController@insert')->name('admin.tag.insert.submit');
+        Route::delete('/delete/{id}', 'Admin\AdminTagController@destroy')->name('admin.tag.delete');
+        Route::get('/insertform', 'Admin\AdminTagController@insertForm')->name('admin.tag.insert');
+        Route::post('/insert', 'Admin\AdminTagController@insert')->name('admin.tag.insert.submit');
 
-        Route::get('/', 'AdminTagController@taglist')->name('admin.tags.index');
-        Route::get('/{id}', 'AdminTagController@show')->name('admin.tag.showeach');
+        Route::get('/', 'Admin\AdminTagController@taglist')->name('admin.tags.index');
+        Route::get('/{id}', 'Admin\AdminTagController@show')->name('admin.tag.showeach');
     });
-    Route::prefix('comment')->group(function(){
-        Route::post('/{blog_id}', 'AdminCommentController@store')->name('admin.comment.store');
-    });
+
+    Route::prefix('category')->group(function(){
+		Route::get('/info', 'Admin\AdminCategoryController@index')->name('category.info');
+		Route::get('/insert', 'Admin\AdminCategoryController@create');
+		Route::post('/insert/submit', 'Admin\AdminCategoryController@store')->name('category.insert.submit');
+		Route::get('delete/{id}', 'Admin\AdminCategoryController@destroy')->name('category.delete');
+	});
+
+   
 });
 
 Route::prefix('user')->group(function(){
@@ -44,56 +49,72 @@ Route::prefix('user')->group(function(){
 	Route::get('/register', 'Auth\UserRegisterController@showRegistrationForm')->name('user.register');
 	Route::post('/register', 'Auth\UserRegisterController@postRegister')->name('user.register.submit');
 	Route::get('/register/verify/{code}', 'Auth\UserRegisterController@confirm')->name('user.register.confirm');
-
 	Route::get('/password/reset', 'Auth\UserLoginController@showLinkRequestForm')->name('user.password.request');
 	Route::post('/password/email', 'Auth\UserLoginController@userfinder')->name('user.password.email');
 
 });
 
 Route::prefix('client')->group(function(){
-
-//	Route::post('/password/email', 'Auth\ClientForgotPasswordController@sendResetLinkEmail')->name('client.password.email');
-
 	Route::post('/password/reset', 'Auth\ClientResetPasswordController@reset')->name('client.password.request');
 	Route::get('/password/reset/{token}', 'Auth\ClientResetPasswordController@showResetForm')->name('client.password.reset');
-	Route::get('/', 'ClientController@index')->name('client.dashboard');
-	Route::get('/settings/info', 'ClientController@info')->name('client.info');
-	Route::post('/update/{id}', 'ClientController@update')->name('client.update');
+	Route::get('/', 'Client\ClientController@index')->name('client.dashboard');
+	Route::get('/settings/info', 'Client\ClientController@info')->name('client.info');
+	Route::post('/update/{id}', 'Client\ClientController@update')->name('client.update');
+
+    Route::prefix('question')->group(function(){
+        Route::get('/create', 'Client\ClientQuestionController@create')->name('question.create');
+        Route::post('/insert', 'Client\ClientQuestionController@store')->name('question.insert.submit');
+    });
+
+
     
+    Route::prefix('blogs')->group(function(){
+	 	
+	 	Route::get('/show/{id}', 'Admin\AdminBlogController@show')->name('client.blog.show');
+	});
 });
+
 Route::prefix('lawyer')->group(function(){
-	Route::get('/', 'LawyerController@index')->name('lawyer.dashboard');
+    Route::get('/', 'Lawyer\LawyerController@index')->name('lawyer.dashboard');
 //	Route::post('/password/email', 'Auth\LawyerForgotPasswordController@sendResetLinkEmail')->name('lawyer.password.email');
 	Route::post('/password/reset', 'Auth\LawyerResetPasswordController@reset')->name('lawyer.password.request');
 	Route::get('/password/reset/{token}', 'Auth\LawyerResetPasswordController@showResetForm')->name('lawyer.password.reset');
-    Route::get('/settings/info', 'LawyerController@info')->name('lawyer.info');
-    Route::post('/update/{id}', 'LawyerController@update')->name('lawyer.update');
+    Route::get('/settings/info', 'Lawyer\LawyerController@info')->name('lawyer.info');
+    Route::post('/update/{id}', 'Lawyer\LawyerController@update')->name('lawyer.update');
     
-});
-Route::prefix('lawyer_info')->group(function(){
-    Route::get('/search/{name}', 'CategoryController@show')->name('search.lawyers.bycategory');
-    Route::get('/', 'LawyersInfoController@showLawyersList')->name('lawyers.list');
+    Route::prefix('blogs')->group(function(){
+        Route::get('/insertform','Lawyer\LawyerBlogController@insertform')->name('lawyer.blog.insert');
+        Route::post('/create','Lawyer\LawyerBlogController@store')->name('lawyer.blog.submit');
+    });
+    Route::prefix('comment')->group(function(){
+        Route::post('/{blog_id}', 'Lawyer\LawyerCommentController@store')->name('lawyer.comment.store');
+    });
+
 });
 
+Route::prefix('question_info')->group(function (){
+    Route::get('/list', 'Web\QuestionController@index')->name('question.list');
+});
+
+Route::prefix('lawyer_info')->group(function(){
+    Route::get('/category/{name}', 'Web\CategoryController@show')->name('search.lawyers.bycategory');
+    Route::get('/city/{name}', 'Web\CityController@show')->name('search.lawyers.bycity');
+    Route::get('/', 'Web\LawyersInfoController@showLawyersList')->name('lawyers.list');
+});
+Route::prefix('blogs_info')->group(function(){
+	Route::get('/', 'Web\BlogController@showBlogList')->name('web.blogs');
+    Route::get('/show/{id}', 'Web\BlogController@show')->name('web.blog.show');
+});
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::prefix('category')->group(function(){
-	Route::get('/info', 'CategoryController@index')->name('category.info');
-	Route::get('/insert', 'CategoryController@create');
-	Route::post('/insert/submit', 'CategoryController@store')->name('category.insert.submit');
-	Route::get('delete/{id}', 'CategoryController@destroy')->name('category.delete');
-});
 
 
 
-Route::prefix('question')->group(function(){
-	Route::get('/list', 'QuestionController@index')->name('question.list');
-	Route::get('/create', 'QuestionController@create')->name('question.create');
-	Route::post('/insert', 'QuestionController@store')->name('question.insert.submit');
-});
+
+
 
 
 //Route::get('bloglist','BlogController@blog_list');

@@ -1,6 +1,7 @@
 <?php
 
-namespace yuridik\Http\Controllers;
+namespace yuridik\Http\Controllers\Admin;
+use yuridik\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use yuridik\Blog;

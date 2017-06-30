@@ -9,9 +9,9 @@
     <div class="row">
         <div class="col-md-20 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">ADMIN Insert</div>
+                <div class="panel-heading">Blog Insert</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.blog.submit') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('lawyer.blog.submit') }}">
                         {{ csrf_field() }}
 
                         @if ($errors->has('title'))

@@ -27,6 +27,11 @@
 	@endif
 </div>
 @endforeach
+@foreach($cities as $city)
+	<ul>
+		<li><a href="{{route('search.lawyers.bycity', ['name' => $city->name]) }}">{{$city->name}}</a></li>
+	</ul>
+@endforeach
 	<div class="col-md-8">
 		<div class="pager">
 		{!! $lawyers->links('pagination') !!}

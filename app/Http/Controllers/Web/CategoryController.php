@@ -1,7 +1,7 @@
 <?php
 
-namespace yuridik\Http\Controllers;
-
+namespace yuridik\Http\Controllers\Web;
+use yuridik\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use yuridik\Category;
 

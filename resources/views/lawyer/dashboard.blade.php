@@ -10,7 +10,8 @@
                         <div class="alert alert-info">{{ Session::get('message') }}</div>
                     @endif
                     <button class="btn btn-info"><a href="{{ route('lawyer.info') }}">Info</a></button>
-                    <button class="btn btn-info"><a href="#">Create Blogs</a></button>
+                    <button class="btn btn-info"><a href="{{ route('lawyer.blog.insert') }}">Написать блок</a></button>
+                    <a href="{{route('question.list')}}">Вопросы</a>
                     <div class="panel-body">
                         @component('components.who')
                         @endcomponent

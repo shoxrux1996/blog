@@ -1,49 +1,52 @@
 <?php
 
-namespace yuridik\Http\Controllers;
+namespace yuridik\Http\Controllers\Lawyer;
+use yuridik\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Auth;
 use yuridik\City;
-use yuridik\Client;
+use yuridik\Lawyer;
 use yuridik\File;
-use Session;
+
 use Illuminate\Support\Facades\File as LaraFile;
-class ClientController extends Controller
+use Session;
+
+class LawyerController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:client');
+        $this->middleware('auth:lawyer');
     }
 
      public function index()
     {
-        return view('client.dashboard');
+        return view('lawyer.dashboard');
     }
-    
-    public function info(){
-    	$client = Auth::user();
-    	$city = City::all();
-    	$cities= array();
-    	foreach ($city as $key) {
-    		$cities[$key->id]= $key->name;
-    	}
 
-    	return view('client.info')->withClient($client)->withCities($cities);
+    public function info(){
+        $lawyer = Auth::user();
+        $city = City::all();
+        $cities= array();
+        foreach ($city as $key) {
+            $cities[$key->id]= $key->name;
+        }
+
+        return view('lawyer.info')->withLawyer($lawyer)->withCities($cities);
     }
     public function update(Request $request, $id){
-    	
+        
         $this->validate($request, ['image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
        
             
-        $client = Client::findOrFail($id);
+        $client = Lawyer::findOrFail($id);
         $client->gender = $request->gender;
-    	$client->user->dateOfBirth= $request->dateOfBirth;
+        $client->user->dateOfBirth= $request->dateOfBirth;
         $client->user->city_id = $request->city;
         if($request->file('image') != null) {
             $file = $request->file('image');
             $file_name = $file->getClientOriginalName();
-            $upload_folder = '/clients/photo'.$client->id.'/';
+            $upload_folder = '/lawyers/photo'.$client->id.'/';
             if($client->user->file_id != null){
             LaraFile::delete(public_path().$upload_folder.$client->user->file->file);
                 $client->user->file->file = $file_name;
@@ -59,10 +62,10 @@ class ClientController extends Controller
             $file->move(public_path() . $upload_folder, $file_name);
         }            
         $client->push();
-    	Session::flash('message', 'Your account updated successfully');
-    	
-    	return redirect()->route('client.dashboard');
+        Session::flash('message', 'Your account updated successfully');
+        
+        return redirect()->route('lawyer.dashboard');
 
     }
-    
+
 }
