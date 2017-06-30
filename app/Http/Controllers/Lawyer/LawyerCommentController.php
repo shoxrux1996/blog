@@ -7,6 +7,7 @@ use yuridik\Blog;
 use yuridik\Tag;
 use yuridik\Comment;
 use Session;
+use Auth;
 class LawyerCommentController extends Controller
 {
     /**
@@ -34,14 +35,16 @@ class LawyerCommentController extends Controller
             'comment' => 'required|min:5|max:2000'
             ));
         $blog = Blog::find($blog_id);
+
+        $lawyer = Auth::guard('lawyer')->user();
         $comment = new Comment;
         $comment->comment = $request->comment;
         $comment->approved =true;
         $comment->blog()->associate($blog);
-        $comment->save();
-        
+        $lawyer->comments()->save($comment);
+
         Session::flash('success', 'Comment was added');
-        return redirect()->route('admin.blog.show', ['id' => $blog_id]);
+        return redirect()->route('web.blog.show', ['id' => $blog_id]);
     }
 
 }

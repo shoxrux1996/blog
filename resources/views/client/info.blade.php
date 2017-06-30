@@ -47,7 +47,7 @@
                         <strong>{{ $errors->first('image') }}</strong>
                     </span>
                 @endif
-        @if($client->user->file_id != null)
+        @if($client->user->file != null)
           <img src="{!!asset($client->user->file->path . $client->user->file->file)!!}" alt="..." class="img-thumbnail" style="height: 300px;">
         @endif
             {{Form::label('image', 'Photo: ', ['class' => 'col-sm-1 control-labe'])}}

@@ -62,21 +62,15 @@ class ClientQuestionController extends Controller
         $question->type_id = 1;
         $question->save();
 
-         if($request->file('files') != null) {
-
+        if ($request->file('files') != null) {
             $file = $request->file('files');
-             foreach ($file as $key) {
+            foreach ($file as $key) {
                 $fil = new File;
                 $fil->file = $key->getClientOriginalName();
-                $upload_folder = '/questions/'.time().'/';
+                $upload_folder = '/questions/' . time() . '/';
                 $fil->path = $upload_folder;
-             
-                $fil->save();
-                $question->files()->attach($fil->id);
-
-                
+                $question->files()->save($fil);
                 $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
-                
             }
         }
         Session::flash('message', 'Question created successfully');

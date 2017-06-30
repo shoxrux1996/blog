@@ -23,6 +23,10 @@ class QuestionController extends Controller
         $questions = Question::all();
         return view('question.index')->withQuestions($questions);
     }
-
+     public function show($id){
+        $question = Question::find($id);
+        return view('question.question_show')->withQuestion($question);
+    }
+  
     
 }

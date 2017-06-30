@@ -11,7 +11,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Blog Insert</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('lawyer.blog.submit') }}">
+                  <form class="form-horizontal" role="form" method="POST" action="{{ route('lawyer.blog.submit') }}">
                         {{ csrf_field() }}
 
                         @if ($errors->has('title'))
@@ -37,6 +37,7 @@
           						<input type='submit' value="Add Blog" />
                     </form>
                 </div>
+             
             </div>
         </div>
     </div>

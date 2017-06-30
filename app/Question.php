@@ -13,7 +13,11 @@ class Question extends Model
     public function category(){
         return $this->belongsTo('yuridik\Category');
     }
-    public function files(){
-    	return $this->belongsToMany('yuridik\File', 'question_file');
+    public function files()
+    {
+        return $this->morphMany('yuridik\File', 'fileable');
+    }
+    public function answers(){
+        return $this->hasMany('yuridik\Answer');
     }
 }

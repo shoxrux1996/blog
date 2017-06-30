@@ -12,6 +12,8 @@
                         <a class="btn btn-info btn-sm col-md-offset-1" href="{{ route('client.info') }}">Info</a>
                     <ul>
                         <li>Заказать услугу</li>
+                        <li><a href="{{route('web.blogs')}}">Блоги</a></li>
+
                         <ul>
                             <li><a href="{{ route('question.create') }}">Задать вопрос</a></li>
                             
@@ -21,7 +23,6 @@
                         <li><a href="#">Активные заявки</a></li>
                         <ul>
                             <li><a href="{{ route('question.list') }}">Вопросы</a></li>
-                            
                         </ul>
                     </ul>
                     <div class="panel-body">

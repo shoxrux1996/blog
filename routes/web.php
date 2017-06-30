@@ -85,15 +85,18 @@ Route::prefix('lawyer')->group(function(){
     Route::prefix('blogs')->group(function(){
         Route::get('/insertform','Lawyer\LawyerBlogController@insertform')->name('lawyer.blog.insert');
         Route::post('/create','Lawyer\LawyerBlogController@store')->name('lawyer.blog.submit');
+        
     });
     Route::prefix('comment')->group(function(){
         Route::post('/{blog_id}', 'Lawyer\LawyerCommentController@store')->name('lawyer.comment.store');
     });
+    Route::post('answer/create/{question_id}', 'Lawyer\LawyerAnswerController@store')->name('lawyer.answer.store');
 
 });
 
 Route::prefix('question_info')->group(function (){
     Route::get('/list', 'Web\QuestionController@index')->name('question.list');
+    Route::get('/show/{id}', 'Web\QuestionController@show')->name('web.question.show');
 });
 
 Route::prefix('lawyer_info')->group(function(){

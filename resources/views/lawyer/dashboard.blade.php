@@ -9,9 +9,13 @@
                     @if (Session::has('message'))
                         <div class="alert alert-info">{{ Session::get('message') }}</div>
                     @endif
-                    <button class="btn btn-info"><a href="{{ route('lawyer.info') }}">Info</a></button>
-                    <button class="btn btn-info"><a href="{{ route('lawyer.blog.insert') }}">Написать блок</a></button>
-                    <a href="{{route('question.list')}}">Вопросы</a>
+                    <ul class="btn btn-default">
+                    <li><a href="{{ route('lawyer.info') }}">Info</a></li>
+                    <li><a href="{{ route('lawyer.blog.insert') }}">Написать блок</a></li>
+                    <li><a href="{{route('question.list')}}">Вопросы</a></li>
+                    <li><a href="{{route('web.blogs')}}">Блоги</a></li>
+
+                    </ul>
                     <div class="panel-body">
                         @component('components.who')
                         @endcomponent

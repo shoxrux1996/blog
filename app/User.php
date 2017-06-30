@@ -17,6 +17,6 @@ class User extends Model
     }
 
     public function file(){
-        return $this->belongsTo('yuridik\File');
+        return $this->morphOne('yuridik\File', 'fileable');
     }
 }

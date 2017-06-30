@@ -28,10 +28,12 @@ class Lawyer extends Authenticatable
         'password', 'remember_token',
     ];
 
-/*
- 
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new LawyerResetPasswordNotification($token));
+    }
 
-    */
+
         public function user() 
     {
         return $this->belongsTo('yuridik\User');
@@ -42,14 +44,12 @@ class Lawyer extends Authenticatable
         return $this->belongsToMany('yuridik\Category','lawyer_category');
     }
 
-
-
-
-
-
-    public function sendPasswordResetNotification($token)
+    public function comments()
     {
-        $this->notify(new LawyerResetPasswordNotification($token));
+        return $this->morphMany('yuridik\Comment', 'commentable');
+    }
+    public function answers(){
+        return $this->hasMany('yuridik\Answer');
     }
 
 }

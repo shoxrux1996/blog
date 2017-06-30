@@ -39,4 +39,6 @@ class LawyerBlogController extends Controller
         $tags=Tag::all();
         return view('blogs.blog_create')->withTags($tags);
     }
+
+     
 }

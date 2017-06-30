@@ -40,21 +40,23 @@ class ClientController extends Controller
         $client->gender = $request->gender;
     	$client->user->dateOfBirth= $request->dateOfBirth;
         $client->user->city_id = $request->city;
+
         if($request->file('image') != null) {
             $file = $request->file('image');
             $file_name = $file->getClientOriginalName();
             $upload_folder = '/clients/photo'.$client->id.'/';
-            if($client->user->file_id != null){
+            if($client->user->file != null){
             LaraFile::delete(public_path().$upload_folder.$client->user->file->file);
                 $client->user->file->file = $file_name;
                 $client->user->file->path = $upload_folder;
+
             }
             else{
                 $fil = new File;
                 $fil->file = $file_name;
                 $fil->path = $upload_folder;
-                $fil->save();
-                $client->user->file_id = $fil->id;
+
+                $client->user->file()->save($fil);
             }
             $file->move(public_path() . $upload_folder, $file_name);
         }            

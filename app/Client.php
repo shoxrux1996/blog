@@ -38,15 +38,14 @@ class Client extends Authenticatable
         return $this->belongsTo('yuridik\User');
     }
 
-    public function comments(){
-        return $this->hasMany('yuridik\Blog');
+    public function comments()
+    {
+        return $this->morphMany('yuridik\Comment', 'commentable');
     }
 
     public function questions(){
         return $this->hasMany('yuridik\Question');
     }
-
-
 
 
 }
