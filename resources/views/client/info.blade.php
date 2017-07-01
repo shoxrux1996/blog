@@ -55,7 +55,7 @@
                 <input class = "image" type="file" name="image" />   
             </div>
         </div>
-
+    <div></div>
         {{Form::submit('Save Changes', ['class' => 'btn btn-success']) }}
         {{Form::close()}}
     
