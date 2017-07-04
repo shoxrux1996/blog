@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июл 01 2017 г., 09:51
+-- Время создания: Июл 04 2017 г., 08:55
 -- Версия сервера: 10.1.21-MariaDB
 -- Версия PHP: 5.6.30
 
@@ -52,7 +52,7 @@ INSERT INTO `admins` (`id`, `name`, `email`, `password`, `remember_token`, `crea
 --
 
 CREATE TABLE `answers` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `lawyer_id` int(10) UNSIGNED NOT NULL,
   `question_id` int(10) UNSIGNED NOT NULL,
@@ -199,7 +199,8 @@ CREATE TABLE `clients` (
 
 INSERT INTO `clients` (`id`, `email`, `password`, `remember_token`, `confirmed`, `confirmation_code`, `user_id`, `created_at`, `updated_at`, `gender`) VALUES
 (29, 'shohrux.shomaxmudov@gmail.com', '$2y$10$c31oOtQ0.Y6yFq5dk40mn.49VGa0jXIWwnIhW75nr1VAiSiuiGEnG', 'PMWbPfB23wxh1OwuHiSo10hAjJXb0Dq43CtxvUesUUOb8YmQvUw9TFXZqtIf', 1, NULL, 5, '2017-06-19 07:58:54', '2017-06-21 03:25:44', 'M'),
-(30, 'shoxrux19960822@gmail.com', '$2y$10$XWLZtcctV03d/U4iz32Qku0HZ7bHiFBpBuzi09gWDZUCfgHUuN4xa', NULL, 1, NULL, 17, '2017-06-24 13:46:45', '2017-06-24 13:47:03', 'M');
+(30, 'shoxrux19960822@gmail.com', '$2y$10$XWLZtcctV03d/U4iz32Qku0HZ7bHiFBpBuzi09gWDZUCfgHUuN4xa', NULL, 1, NULL, 17, '2017-06-24 13:46:45', '2017-06-24 13:47:03', 'M'),
+(31, 'ulug@mail.ru', '$2y$10$w8lLR7lBBEBQaxRFrySreuRuyalLerteZJj8u3e7MiGA4JoSdx2aO', 'yZ7XTD81Xi7TiksEsJqjNMzvS4FJyh1adsrp551GQddKBMzwE9eJcmik9mir', 1, NULL, 19, '2017-07-01 07:12:53', '2017-07-01 07:13:45', 'M');
 
 -- --------------------------------------------------------
 
@@ -232,6 +233,86 @@ INSERT INTO `comments` (`id`, `comment`, `approved`, `blog_id`, `commentable_id`
 (21, 'asd asdas dasd asd', 1, 15, 7, 'yuridik\\Lawyer', '2017-06-30 02:07:35', '2017-06-30 02:07:35'),
 (22, 'qweknk nwknk wn nkq wq', 1, 18, 7, 'yuridik\\Lawyer', '2017-06-30 09:00:12', '2017-06-30 09:00:12'),
 (23, 'sdakns ksdnasdas', 1, 19, 7, 'yuridik\\Lawyer', '2017-06-30 09:25:09', '2017-06-30 09:25:09');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `documents`
+--
+
+CREATE TABLE `documents` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `sub_type_id` int(11) UNSIGNED NOT NULL,
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cost` int(11) UNSIGNED DEFAULT NULL,
+  `client_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `documents`
+--
+
+INSERT INTO `documents` (`id`, `sub_type_id`, `title`, `description`, `payment_type`, `cost`, `client_id`, `created_at`, `updated_at`) VALUES
+(1, 7, 'test', 'testpayment_typepayment_typepayment_type', 'later', NULL, 29, '2017-07-03 02:54:17', '2017-07-03 02:54:17');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `document_type`
+--
+
+CREATE TABLE `document_type` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent_id` int(11) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `document_type`
+--
+
+INSERT INTO `document_type` (`id`, `name`, `parent_id`) VALUES
+(1, 'Регистрация бизнеса', NULL),
+(2, 'Документы в суд', NULL),
+(3, 'Жалоба на чиновника', NULL),
+(4, 'Договоры и соглашения', NULL),
+(5, 'Претензии потребителей', NULL),
+(6, 'Другое', NULL),
+(7, 'Регистрация ООО', 1),
+(8, 'Внести изменения в учредительные документы', 1),
+(9, 'Регистрации ИП', 1),
+(10, 'Регистрации ТСЖ', 1),
+(11, 'Другое', 1),
+(12, 'Исковое заявление', 2),
+(13, 'Отзыв на исковое заявление', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `feedbacks`
+--
+
+CREATE TABLE `feedbacks` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `client_id` int(10) UNSIGNED NOT NULL,
+  `answer_id` int(10) UNSIGNED NOT NULL,
+  `helped` tinyint(1) NOT NULL,
+  `text` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `feedbacks`
+--
+
+INSERT INTO `feedbacks` (`id`, `client_id`, `answer_id`, `helped`, `text`, `created_at`, `updated_at`) VALUES
+(4, 29, 3, 1, 'dasdak sdksak adsn dkasn d', '2017-07-03 02:12:14', '2017-07-03 02:12:14'),
+(5, 29, 3, 1, 'dasdak sdksak adsn dkasn d', '2017-07-03 02:12:26', '2017-07-03 02:12:26');
 
 -- --------------------------------------------------------
 
@@ -365,7 +446,9 @@ CREATE TABLE `questions` (
   `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `client_id` int(10) UNSIGNED NOT NULL,
   `category_id` int(10) UNSIGNED NOT NULL,
-  `type_id` int(10) UNSIGNED NOT NULL,
+  `type` tinyint(10) UNSIGNED NOT NULL,
+  `price` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `solved` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -374,14 +457,16 @@ CREATE TABLE `questions` (
 -- Дамп данных таблицы `questions`
 --
 
-INSERT INTO `questions` (`id`, `title`, `text`, `client_id`, `category_id`, `type_id`, `created_at`, `updated_at`) VALUES
-(34, 'dasdasdas dasd asd asd', 'asd asdas dsd asd asd a ds', 29, 23, 1, '2017-06-28 12:36:54', '2017-06-28 12:36:54'),
-(35, 'das dasd as dasd asd as', 'dasd asd asd asd sa dasd as da dsad asd', 29, 26, 1, '2017-06-28 12:37:18', '2017-06-28 12:37:18'),
-(36, 'dasdasdasd a das', 'd as asd asd asd asd asd', 29, 25, 1, '2017-06-29 01:14:39', '2017-06-29 01:14:39'),
-(37, 'sadasdas das', 'as dadasdas das da', 29, 24, 1, '2017-06-29 11:34:06', '2017-06-29 11:34:06'),
-(38, 'dasdasdasdasdsad', 'daskndakn dnaskdnasknd askndk nasdn as', 29, 23, 1, '2017-06-30 08:20:08', '2017-06-30 08:20:08'),
-(39, 'dasda dasdasd', 'asdm asmd asmdm asdm asmd asmd masl dmasl', 29, 25, 1, '2017-06-30 08:28:55', '2017-06-30 08:28:55'),
-(40, 'ad asdasasd sa', 'asd nasdkn askndkasndn aksn d', 29, 24, 1, '2017-06-30 08:32:51', '2017-06-30 08:32:51');
+INSERT INTO `questions` (`id`, `title`, `text`, `client_id`, `category_id`, `type`, `price`, `solved`, `created_at`, `updated_at`) VALUES
+(34, 'dasdasdas dasd asd asd', 'asd asdas dsd asd asd a ds', 29, 23, 1, 0, 0, '2017-06-28 12:36:54', '2017-06-28 12:36:54'),
+(35, 'das dasd as dasd asd as', 'dasd asd asd asd sa dasd as da dsad asd', 29, 26, 1, 0, 0, '2017-06-28 12:37:18', '2017-06-28 12:37:18'),
+(36, 'dasdasdasd a das', 'd as asd asd asd asd asd', 29, 25, 1, 0, 0, '2017-06-29 01:14:39', '2017-06-29 01:14:39'),
+(37, 'sadasdas das', 'as dadasdas das da', 29, 24, 1, 0, 0, '2017-06-29 11:34:06', '2017-06-29 11:34:06'),
+(38, 'dasdasdasdasdsad', 'daskndakn dnaskdnasknd askndk nasdn as', 29, 23, 1, 0, 0, '2017-06-30 08:20:08', '2017-06-30 08:20:08'),
+(39, 'dasda dasdasd', 'asdm asmd asmdm asdm asmd asmd masl dmasl', 29, 25, 1, 0, 0, '2017-06-30 08:28:55', '2017-06-30 08:28:55'),
+(40, 'ad asdasasd sa', 'asd nasdkn askndkasndn aksn d', 29, 24, 1, 0, 0, '2017-06-30 08:32:51', '2017-06-30 08:32:51'),
+(41, 'dsadasdasdas d das da d', 'as asdas das das dasd as dasd', 29, 26, 2, 800, 0, '2017-07-03 07:02:05', '2017-07-03 07:02:05'),
+(42, 'dsasdasd', 'dasdasdasds ad as dasd asd asd as', 29, 25, 2, 1000, 0, '2017-07-03 07:05:17', '2017-07-03 07:05:17');
 
 -- --------------------------------------------------------
 
@@ -434,7 +519,8 @@ INSERT INTO `users` (`id`, `firstName`, `lastName`, `dateOfBirth`, `city_id`, `n
 (15, 'Tema', NULL, NULL, 3, NULL, NULL),
 (16, 'Erkin', NULL, NULL, 5, NULL, NULL),
 (17, 'Shox', NULL, NULL, 1, NULL, NULL),
-(18, 'Shokhrukh', NULL, NULL, 1, NULL, NULL);
+(18, 'Shokhrukh', NULL, NULL, 1, NULL, NULL),
+(19, 'Ulug\'bek', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -499,6 +585,29 @@ ALTER TABLE `clients`
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `comments_blog_id_foreign` (`blog_id`);
+
+--
+-- Индексы таблицы `documents`
+--
+ALTER TABLE `documents`
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `sub_type_id` (`sub_type_id`),
+  ADD KEY `documents_ibfk_1` (`client_id`);
+
+--
+-- Индексы таблицы `document_type`
+--
+ALTER TABLE `document_type`
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `parent_id` (`parent_id`);
+
+--
+-- Индексы таблицы `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `feedbacks_ibfk_1` (`client_id`),
+  ADD KEY `answer_id` (`answer_id`);
 
 --
 -- Индексы таблицы `files`
@@ -568,7 +677,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT для таблицы `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `blogs`
 --
@@ -593,12 +702,27 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT для таблицы `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT для таблицы `documents`
+--
+ALTER TABLE `documents`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `document_type`
+--
+ALTER TABLE `document_type`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT для таблицы `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблицы `files`
 --
@@ -623,7 +747,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT для таблицы `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT для таблицы `tags`
 --
@@ -633,7 +757,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -642,8 +766,8 @@ ALTER TABLE `users`
 -- Ограничения внешнего ключа таблицы `answers`
 --
 ALTER TABLE `answers`
-  ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`lawyer_id`) REFERENCES `lawyers` (`id`),
-  ADD CONSTRAINT `answers_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
+  ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`lawyer_id`) REFERENCES `lawyers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `answers_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `blogs`
@@ -675,6 +799,26 @@ ALTER TABLE `clients`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_blog_id_foreign` FOREIGN KEY (`blog_id`) REFERENCES `blogs` (`id`) ON DELETE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `documents`
+--
+ALTER TABLE `documents`
+  ADD CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
+  ADD CONSTRAINT `documents_ibfk_2` FOREIGN KEY (`sub_type_id`) REFERENCES `document_type` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `document_type`
+--
+ALTER TABLE `document_type`
+  ADD CONSTRAINT `document_type_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `document_type` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  ADD CONSTRAINT `feedbacks_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `feedbacks_ibfk_2` FOREIGN KEY (`answer_id`) REFERENCES `answers` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `lawyers`
