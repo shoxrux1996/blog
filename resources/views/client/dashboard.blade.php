@@ -16,6 +16,7 @@
 
                         <ul>
                             <li><a href="{{ route('question.create') }}">Задать вопрос</a></li>
+                            <li><a href="{{ route('document.create') }}">Заказать документ</a></li>
                             
                         </ul>
 

@@ -70,6 +70,10 @@ Route::prefix('client')->group(function(){
     Route::prefix('feedback')->group(function(){
     	Route::post('/send/answer/{answer_id}', 'Client\ClientFeedbackController@store')->name('feedback.create');
     });
+    Route::prefix('document')->group(function(){
+	Route::get('/create', 'Client\ClientDocumentController@create')->name('document.create');
+	Route::post('/store', 'Client\ClientDocumentController@store')->name('document.store');
+});
 
 
     
