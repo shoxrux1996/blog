@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 30 2017 г., 16:05
+-- Время создания: Июл 04 2017 г., 08:17
 -- Версия сервера: 10.1.21-MariaDB
 -- Версия PHP: 5.6.30
 
@@ -32,7 +32,9 @@ CREATE TABLE `questions` (
   `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `client_id` int(10) UNSIGNED NOT NULL,
   `category_id` int(10) UNSIGNED NOT NULL,
-  `type_id` int(10) UNSIGNED NOT NULL,
+  `type` tinyint(10) UNSIGNED NOT NULL,
+  `price` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `solved` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,14 +43,16 @@ CREATE TABLE `questions` (
 -- Дамп данных таблицы `questions`
 --
 
-INSERT INTO `questions` (`id`, `title`, `text`, `client_id`, `category_id`, `type_id`, `created_at`, `updated_at`) VALUES
-(34, 'dasdasdas dasd asd asd', 'asd asdas dsd asd asd a ds', 29, 23, 1, '2017-06-28 12:36:54', '2017-06-28 12:36:54'),
-(35, 'das dasd as dasd asd as', 'dasd asd asd asd sa dasd as da dsad asd', 29, 26, 1, '2017-06-28 12:37:18', '2017-06-28 12:37:18'),
-(36, 'dasdasdasd a das', 'd as asd asd asd asd asd', 29, 25, 1, '2017-06-29 01:14:39', '2017-06-29 01:14:39'),
-(37, 'sadasdas das', 'as dadasdas das da', 29, 24, 1, '2017-06-29 11:34:06', '2017-06-29 11:34:06'),
-(38, 'dasdasdasdasdsad', 'daskndakn dnaskdnasknd askndk nasdn as', 29, 23, 1, '2017-06-30 08:20:08', '2017-06-30 08:20:08'),
-(39, 'dasda dasdasd', 'asdm asmd asmdm asdm asmd asmd masl dmasl', 29, 25, 1, '2017-06-30 08:28:55', '2017-06-30 08:28:55'),
-(40, 'ad asdasasd sa', 'asd nasdkn askndkasndn aksn d', 29, 24, 1, '2017-06-30 08:32:51', '2017-06-30 08:32:51');
+INSERT INTO `questions` (`id`, `title`, `text`, `client_id`, `category_id`, `type`, `price`, `solved`, `created_at`, `updated_at`) VALUES
+(34, 'dasdasdas dasd asd asd', 'asd asdas dsd asd asd a ds', 29, 23, 1, 0, 0, '2017-06-28 12:36:54', '2017-06-28 12:36:54'),
+(35, 'das dasd as dasd asd as', 'dasd asd asd asd sa dasd as da dsad asd', 29, 26, 1, 0, 0, '2017-06-28 12:37:18', '2017-06-28 12:37:18'),
+(36, 'dasdasdasd a das', 'd as asd asd asd asd asd', 29, 25, 1, 0, 0, '2017-06-29 01:14:39', '2017-06-29 01:14:39'),
+(37, 'sadasdas das', 'as dadasdas das da', 29, 24, 1, 0, 0, '2017-06-29 11:34:06', '2017-06-29 11:34:06'),
+(38, 'dasdasdasdasdsad', 'daskndakn dnaskdnasknd askndk nasdn as', 29, 23, 1, 0, 0, '2017-06-30 08:20:08', '2017-06-30 08:20:08'),
+(39, 'dasda dasdasd', 'asdm asmd asmdm asdm asmd asmd masl dmasl', 29, 25, 1, 0, 0, '2017-06-30 08:28:55', '2017-06-30 08:28:55'),
+(40, 'ad asdasasd sa', 'asd nasdkn askndkasndn aksn d', 29, 24, 1, 0, 0, '2017-06-30 08:32:51', '2017-06-30 08:32:51'),
+(41, 'dsadasdasdas d das da d', 'as asdas das das dasd as dasd', 29, 26, 2, 800, 0, '2017-07-03 07:02:05', '2017-07-03 07:02:05'),
+(42, 'dsasdasd', 'dasdasdasds ad as dasd asd asd as', 29, 25, 2, 1000, 0, '2017-07-03 07:05:17', '2017-07-03 07:05:17');
 
 --
 -- Индексы сохранённых таблиц
@@ -70,7 +74,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT для таблицы `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
