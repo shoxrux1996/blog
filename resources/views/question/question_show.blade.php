@@ -43,8 +43,28 @@
                                     <a class="label label-default" href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
                                 @endforeach
                                 <hr>
+                                @if($answer->feedback != null)
+                                <h2>{{$answer->feedback->text}}</h2>
+                                @endif
                             </div>
-                        </div>
+
+                            @if (Auth::guard('client')->check() && ($answer->feedback == null))
+                                <div class="row">
+                                    <div id="comment-form" class="col-md-4 col-md-offset-2" style="left:0">
+                                        {{Form::open(['route' => ['feedback.create', $answer->id],'method' => 'POST']) }}
+                                        <div class="row">
+                                            <div class=".col-md-12">
+                                                {{Form::label('text', "Feedback: ") }}
+                                                {{Form::textarea('text', null, ['class'=>'form-control', 'rows'=>'5'])}}
+                                                {{Form::radio('helped', true)}}
+                                                {{Form::radio('helped', false)}}
+                                                {{Form::submit('Add Comment', ['class'=> 'btn btn-success btn-block'])}}
+                                            </div>
+                                        </div>
+                                        {{Form::close() }}
+                                    </div>
+                                </div>
+                            @endif
                     @endforeach
                     <hr>
                 </div>

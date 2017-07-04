@@ -18,4 +18,7 @@ class Answer extends Model
     public function question(){
         return $this->belongsTo('yuridik\Question');
     }
+    public function feedback(){
+        return $this->hasOne('yuridik\Feedback');
+    }
 }

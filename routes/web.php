@@ -62,8 +62,13 @@ Route::prefix('client')->group(function(){
 	Route::post('/update/{id}', 'Client\ClientController@update')->name('client.update');
 
     Route::prefix('question')->group(function(){
-        Route::get('/create', 'Client\ClientQuestionController@create')->name('question.create');
-        Route::post('/insert', 'Client\ClientQuestionController@store')->name('question.insert.submit');
+        Route::get('/free/create', 'Client\ClientQuestionController@create')->name('question.create');
+        Route::post('/free/insert', 'Client\ClientQuestionController@store')->name('question.insert.submit');
+        
+        Route::post('/billable/insert', 'Client\ClientQuestionController@store')->name('question.billable.insert.submit');
+    });
+    Route::prefix('feedback')->group(function(){
+    	Route::post('/send/answer/{answer_id}', 'Client\ClientFeedbackController@store')->name('feedback.create');
     });
 
 
@@ -113,7 +118,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-
+Route::get('card', function(){
+	return view('card.checkout');
+});
 
 
 
