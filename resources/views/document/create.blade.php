@@ -29,10 +29,10 @@
         
     <script>
         
-        var subtypes = <?php echo json_encode($subtypes, JSON_PRETTY_PRINT) ?>
+        var subtypes = {!!json_encode($subtypes, JSON_PRETTY_PRINT) !!}
         console.log(subtypes)
         
-        var parents = <?php echo json_encode($parents, JSON_PRETTY_PRINT) ?>
+        var parents = {!!json_encode($parents, JSON_PRETTY_PRINT) !!}
         console.log(parents)
 
     </script>
