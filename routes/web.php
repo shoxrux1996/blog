@@ -65,6 +65,10 @@ Route::prefix('client')->group(function(){
         Route::get('/create', 'Client\ClientQuestionController@create')->name('question.create');
         Route::post('/insert', 'Client\ClientQuestionController@store')->name('question.insert.submit');
     });
+    Route::prefix('document')->group(function(){
+	Route::get('/create', 'Client\ClientDocumentController@create')->name('document.create');
+	Route::post('/store', 'Client\ClientDocumentController@store')->name('document.store');
+});
 
 
     
