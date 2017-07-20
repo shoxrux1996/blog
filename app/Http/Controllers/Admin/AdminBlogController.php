@@ -39,28 +39,19 @@ class AdminBlogController extends Controller
        Session::flash('message', 'Blog was deleted successfully');
       return redirect()->route('admin.blogs');
     }
-      public function store(Request $request)
-    {
-               $this->validate($request, array(
-            'title' => 'required|max:255',
-            'text' => 'required|min:10'));
-                dd($request->tags);
+    public function show($id){
+        $blog = Blog::find($id);
 
-        $blog = new Blog;
-        $blog->title= $request->title;
-        $blog->text= $request->text;
-        $blog->likes= $request->likes;
-        $blog->dislikes= $request->dislikes;
-        $blog->author_id = $request->author_id;
-        $blog->save();
-               $blog->tags()->sync($request->tags, false);
-Session::flash('message', 'Blog was inserted successfully');
-      return redirect()->route('admin.blogs');
+        $tags = Tag::all();
+
+        $tags2 = array();
+
+        foreach ($tags as $tag) {
+            $tags2[$tag->id] = $tag->name;
+        }
+        return view('blogs.blog_show')->withBlog($blog)->withTags($tags2);
     }
-   public function insertform(){
-        $tags=Tag::all();
-        return view('blogs.blog_create')->withTags($tags);
-    }
+   /*
  public function edit(Request $request, $id)
     {
        $this->validate($request, array(
@@ -87,18 +78,7 @@ Session::flash('message', 'Blog was inserted successfully');
           $tags2[$tag->id] = $tag->name;
         }
         return view('blogs.blog_edit')->withBlog($blog)->with('tags', $tags2);
-    }
-     public function show($id){
-        $blog = Blog::find($id);
+    }*/
 
-        $tags = Tag::all();
-
-        $tags2 = array();
-
-        foreach ($tags as $tag) {
-          $tags2[$tag->id] = $tag->name;
-        }
-        return view('blogs.blog_show')->withBlog($blog)->withTags($tags2);
-    }
   
 }

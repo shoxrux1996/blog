@@ -6,9 +6,9 @@
 	</title>
 </head>
 <body>
-	@section('sidebar')
+
 		
-	@show
+
 
 	<div class="container">
 	@yield('content')

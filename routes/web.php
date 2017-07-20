@@ -13,33 +13,55 @@ Route::prefix('admin')->group(function(){
 
     Route::prefix('blogs')->group(function(){
         Route::get('/delete/{id}', 'Admin\AdminBlogController@destroy')->name('admin.blog.delete');
-
-        Route::get('/editform/{id}','Admin\AdminBlogController@editform')->name('admin.blog.edit');
-        Route::post('edit/{id}','Admin\AdminBlogController@edit')->name('admin.blog.edit.submit');
         Route::get('/', 'Admin\AdminBlogController@showBlogList')->name('admin.blogs');
         Route::get('/show/{id}', 'Admin\AdminBlogController@show')->name('admin.blog.show');
     });
     Route::prefix('tags')->group(function(){
-
         Route::get('edit/{id}', 'Admin\AdminTagController@edit')->name('admin.tag.edit');
         Route::put('/update/{id}', 'Admin\AdminTagController@update')->name('admin.tag.update');
-
         Route::delete('/delete/{id}', 'Admin\AdminTagController@destroy')->name('admin.tag.delete');
         Route::get('/insertform', 'Admin\AdminTagController@insertForm')->name('admin.tag.insert');
         Route::post('/insert', 'Admin\AdminTagController@insert')->name('admin.tag.insert.submit');
-
         Route::get('/', 'Admin\AdminTagController@taglist')->name('admin.tags.index');
         Route::get('/{id}', 'Admin\AdminTagController@show')->name('admin.tag.showeach');
     });
-
+    Route::prefix('cities')->group(function (){
+        Route::get('/', 'Admin\AdminCityController@cities')->name('admin.cities.index');
+        Route::post('/deny/{id}','Admin\AdminCityController@cityDeny')->name('admin.cities.delete');
+    });
     Route::prefix('category')->group(function(){
-		Route::get('/info', 'Admin\AdminCategoryController@index')->name('category.info');
-		Route::get('/insert', 'Admin\AdminCategoryController@create');
-		Route::post('/insert/submit', 'Admin\AdminCategoryController@store')->name('category.insert.submit');
-		Route::get('delete/{id}', 'Admin\AdminCategoryController@destroy')->name('category.delete');
+		Route::get('/info', 'Admin\AdminCategoryController@index')->name('admin.category.info');
+		Route::get('/insert', 'Admin\AdminCategoryController@create')->name('admin.category.insert');
+		Route::post('/insert/submit', 'Admin\AdminCategoryController@store')->name('admin.category.insert.submit');
+		Route::get('delete/{id}', 'Admin\AdminCategoryController@destroy')->name('admin.category.delete');
 	});
 
-   
+   Route::prefix('questions')->group(function (){
+       Route::get('/', 'Admin\AdminPostController@questions')->name('admin.questions.index');
+       Route::post('/deny/{id}','Admin\AdminPostController@questionDeny')->name('admin.question.delete');
+   });
+    Route::prefix('documents')->group(function (){
+        Route::get('/', 'Admin\AdminPostController@documents')->name('admin.documents.index');
+        Route::post('/deny/{id}','Admin\AdminPostController@documentDeny')->name('admin.document.delete');
+    });
+    Route::prefix('answers')->group(function (){
+        Route::get('/', 'Admin\AdminPostController@answers')->name('admin.answers.index');
+        Route::post('/deny/{id}','Admin\AdminPostController@answerDeny')->name('admin.answer.delete');
+    });
+    Route::prefix('comments')->group(function (){
+        Route::get('/', 'Admin\AdminPostController@comments')->name('admin.comments.index');
+        Route::post('/deny/{id}','Admin\AdminPostController@commentDeny')->name('admin.comments.delete');
+    });
+    Route::prefix('feedbacks')->group(function (){
+        Route::get('/', 'Admin\AdminPostController@feedbacks')->name('admin.feedbacks.index');
+        Route::post('/deny/{id}','Admin\AdminPostController@feedbackDeny')->name('admin.feedbacks.delete');
+    });
+    
+    Route::prefix('users')->group(function (){
+        Route::get('/', 'Admin\AdminPostController@users')->name('admin.users.index');
+        Route::post('client/block/{id}','Admin\AdminPostController@clientBlock')->name('admin.client.block');
+        Route::post('lawyer/block/{id}','Admin\AdminPostController@lawyerBlock')->name('admin.lawyer.block');
+    });
 });
 
 Route::prefix('user')->group(function(){
@@ -122,13 +144,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('card', function(){
-	return view('card.checkout');
-});
 
-
-
-
+Route::get('card','Web\ApiController@show');
 
 
 //Route::get('bloglist','BlogController@blog_list');
