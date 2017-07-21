@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use yuridik\Http\Requests;
 use Session;
 use Auth;
-
+use Validator;
 use yuridik\Client;
 use yuridik\Lawyer;
 use yuridik\User;
@@ -23,49 +23,60 @@ class UserRegisterController extends Controller
     }
 
     public function showRegistrationForm(){
-        return view('auth.register');
+
+        if(isset($activeuser))
+            return view('auth.register')->withActiveuser($activeuser);
+        else
+            return view('auth.register')->withActiveuser('client');
     }
-    public function postRegister(Request $request)
+    public function postRegister(Request $request, $usertype)
     {
+        // $usertype = $request->route('usertype');
          $this->validate($request, [
             'email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
             'password' => 'required|string|min:6|confirmed',
             'name' => 'required',
             ]);
+        if(! auth()->attempt(request(['employee_no', 'password']))) {
+
+        return back()->withErrors('Invalid Login Credentials')->withInput();
+    }
 
         $confirmation_code = str_random(30);       
         $user = new User;
         $user->firstName = $request->name;
+        if($request->surname!=='')
+            $user->lastName = $request->surname;
         $user->save();
         $userID=$user->id;
 
-        if($request->user == "lawyer"){
+        if($usertype === "lawyer"){
 
-            $client=new lawyer;
-            $client->email= $request->email;
-            $client->password=bcrypt($request->password);
-            $client->confirmation_code=$confirmation_code;
-            $client->user_id = $userID;
+            $lawyer=new lawyer;
+            $lawyer->email= $request->email;
+            $lawyer->password=bcrypt($request->password);
+            $lawyer->confirmation_code=$confirmation_code;
+            $lawyer->user_id = $userID;
 
             $data=array('code' =>$confirmation_code, 'email' =>$request->email, 'name' => $request->name);
             Mail::send('email.verify', ['data' => $data], function($message) use ($data) {
             $message->to($data['email'], $data['name'])
                 ->subject('Verify your email address');
                     });
-             $client->save();
+             $lawyer->save();
         }
-        else{
-            $lawyer=new Client;
-            $lawyer->email= $request->email;
-            $lawyer->password=bcrypt($request->password);
-            $lawyer->confirmation_code=$confirmation_code;
-            $lawyer->user_id = $userID;
+        elseif($usertype==="client"){
+            $client=new Client;
+            $client->email= $request->email;
+            $client->password=bcrypt($request->password);
+            $client->confirmation_code=$confirmation_code;
+            $client->user_id = $userID;
             $data=array('code' =>$confirmation_code, 'email' =>$request->email, 'name' => $request->name);
             Mail::send('email.verify', ['data' => $data], function($message) use ($data) {
             $message->to($data['email'], $data['name'])
                 ->subject('Verify your email address');
         });
-            $lawyer->save();
+            $client->save();
         }
             
 

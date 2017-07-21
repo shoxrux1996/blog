@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', "| Insert Category ")
-
+@section('body')
+@extends('layouts.body')
+@section('content')
 @if (Session::has('message'))
                         <div class="alert alert-info">{{ Session::get('message') }}</div>
                     @endif
@@ -34,4 +35,5 @@
             {{Form::text('price', null, ['class' => 'form-control'])}}
         {{Form::submit('Save Changes', ['class' => 'btn btn-success', 'style' =>'margin-top:20px;']) }}
     {{Form::close()}}
+@endsection
 @endsection

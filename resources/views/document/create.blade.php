@@ -1,6 +1,6 @@
 @extends('layouts.app')
-
-
+@section('body')
+@extends('layouts.body')
 @section('content')
 <div class="container">
         {{Form::open(['route' => ['document.store'], 'enctype' => 'multipart/form-data', 'method' => 'post', 'class' => 'form-horizontal'])}}
@@ -94,4 +94,5 @@
 @section('scripts')
 
 {!! Html::script('js/document.js') !!}
+@endsection
 @endsection

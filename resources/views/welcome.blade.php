@@ -83,8 +83,16 @@
                 @if (Session::has('message'))
                                  <div class="alert alert-info">{{ Session::get('message') }}</div>
                 @endif
-                   @component('components.who')
-                    @endcomponent
+                <ul>
+                    <li><a href="{{ route('question.create') }}">Задать вопрос</a></li>
+                    <li><a href="{{ route('document.create') }}">Заказать документ</a></li>
+                    <li><a href="#">Заказать звонок</a></li>
+                
+               
+                    <li><a href="{{ route('question.list') }}">Смотреть все вопросы</a></li>
+                    <li><a href="{{ route('category.list') }}">Посмотреть все категории</a></li>
+                    <li><a href="{{ route('lawyers.list') }}">Все юристи проекта</a></li>
+                </ul>
             </div>
         </div>
     </body>

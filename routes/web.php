@@ -47,7 +47,7 @@ Route::prefix('user')->group(function(){
 	Route::post('/login', 'Auth\UserLoginController@login')->name('user.login.submit');
 	Route::post('/logout', 'Auth\UserLoginController@userLogout')->name('user.logout');
 	Route::get('/register', 'Auth\UserRegisterController@showRegistrationForm')->name('user.register');
-	Route::post('/register', 'Auth\UserRegisterController@postRegister')->name('user.register.submit');
+	Route::post('/register/{usertype}', 'Auth\UserRegisterController@postRegister')->name('user.register.submit');
 	Route::get('/register/verify/{code}', 'Auth\UserRegisterController@confirm')->name('user.register.confirm');
 	Route::get('/password/reset', 'Auth\UserLoginController@showLinkRequestForm')->name('user.password.request');
 	Route::post('/password/email', 'Auth\UserLoginController@userfinder')->name('user.password.email');
@@ -117,9 +117,11 @@ Route::prefix('blogs_info')->group(function(){
 	Route::get('/', 'Web\BlogController@showBlogList')->name('web.blogs');
     Route::get('/show/{id}', 'Web\BlogController@show')->name('web.blog.show');
 });
-
+Route::prefix('category_info')->group(function(){
+	Route::get('/', 'Web\CategoryController@index')->name('category.list');
+});
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 })->name('home');
 
 Route::get('card', function(){
