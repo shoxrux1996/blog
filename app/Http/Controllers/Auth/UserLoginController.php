@@ -75,6 +75,6 @@ class UserLoginController extends Controller
 		    return redirect()->route('user.password.request');		
    		}
    	}
-   	//shox
+
 	
 }

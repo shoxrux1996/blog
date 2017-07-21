@@ -21,6 +21,7 @@
                 <!-- 
                 @each('partials.category', $categories, 'category')
                 -->
+                    <a href="{{route('admin.category.insert')}}">Insert</a>
                 </div>
             </div>
         </div>

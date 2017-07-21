@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+Route::any('app', function (){
+
+})->middleware('Api');
+Route::any('success/{transaction}', function ($transaction){
+    $trans = yuridik\Transaction::where('paycom_transaction_id', '=', $transaction)->first();
+    if($trans){
+        dd($trans);
+    }
 });

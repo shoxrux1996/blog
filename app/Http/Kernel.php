@@ -39,7 +39,9 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+
         ],
+        
     ];
 
     /**
@@ -56,10 +58,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \yuridik\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'Age' => \yuridik\Http\Middlware\AgeMiddleware::class,
-        'Role' => \yuridik\Http\Middleware\RoleMiddleware::class,
-        'terminate' => \yuridik\Http\Middleware\TerminateMiddleware::class,
-        'First'=> \yuridik\Http\Middleware\FirstMiddleware::class,
-        'Second'=> \yuridik\Http\Middleware\SecondMiddleware::class,
+        'Api' => \yuridik\Http\Middleware\Api::class,
+      
     ];
 }

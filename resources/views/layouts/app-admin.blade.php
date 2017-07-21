@@ -141,7 +141,7 @@
 </footer>
 <!-- Footer -->
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+
 {!! Html::script('js/jquery-3.2.1.min.js') !!}
 {!! Html::script('js/select2.min.js') !!}
 {!! Html::script('js/bootstrap.min.js') !!}

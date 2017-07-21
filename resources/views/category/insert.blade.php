@@ -4,9 +4,11 @@
 
 
 @section('content')
-    {{Form::open(['route' => ['category.insert.submit'], 'method' => 'POST'])}}
+    {{Form::open(['route' => ['admin.category.insert.submit'], 'method' => 'POST'])}}
         {{Form::label('name', 'Name: ')}}
         {{Form::text('name', null, ['class'=>'form-control'])}}
+        {{Form::label('text', 'Text: ')}}
+        {{Form::text('text', null, ['class'=>'form-control'])}}
         {{Form::label('parent', 'Parent: ')}}
         {{Form::select('parent', $categories,null , ['class'=>'form-control'])}}
         {{Form::submit('Save Changes', ['class' => 'btn btn-success', 'style' =>'margin-top:20px;']) }}
