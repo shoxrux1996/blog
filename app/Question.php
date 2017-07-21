@@ -20,4 +20,8 @@ class Question extends Model
     public function answers(){
         return $this->hasMany('yuridik\Answer');
     }
+    public function order()
+    {
+        return $this->morphMany('yuridik\Order', 'typeable');
+    }
 }

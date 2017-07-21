@@ -45,11 +45,13 @@ class ClientDocumentController extends Controller
             );
        
        
+        $client=Auth::guard('client')->user();
         $count = count($request->file('files'))-1;
         foreach(range(0, $count) as $i) {
              $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
         }
         Validator::make($request->all(), $rules)->validate();
+        
         $document = new Document;
         $document->title = $request->title;
         $document->description = $request->description;
@@ -58,7 +60,6 @@ class ClientDocumentController extends Controller
         if($request->payment_type=="about")
             $document->cost=$request->cost;
 
-        $client=Client::where('email',$request->email)->first();
 
         $document->client_id = $client->id;
         $document->save();

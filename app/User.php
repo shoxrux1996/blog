@@ -19,4 +19,13 @@ class User extends Model
     public function file(){
         return $this->morphOne('yuridik\File', 'fileable');
     }
+    public function transactions(){
+        return $this->hasMany('yuridik\Transaction');
+    }
+    public function orders(){
+        return $this->hasMany('yuridik\Order');
+    }
+    public function balance(){
+        return $this->transactions()->where('state',2)->sum('amount') - $this->orders()->sum('amount');
+    }
 }

@@ -11,7 +11,7 @@ use yuridik\Client;
 use Illuminate\Support\Facades\Session;
 use Auth;
 use Validator;
-
+use yuridik\Order;
 class ClientQuestionController extends Controller
 {
     public function __construct()
@@ -51,22 +51,20 @@ class ClientQuestionController extends Controller
              $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
         }
         Validator::make($request->all(), $rules)->validate();
-        if($request->type == 2){
+        $client = Auth::guard('client')->user();
 
-            $client=Client::where('email',$request->email)->first();
-            if($request->price <= $client->user->balance){
-                $client->user->balance = $client->user->balance - $request->price;
+        if($request->type == 2){
+            if($client->user->balance() >= $request->price){
                 $question = new Question;
                 $question->title = $request->title;
                 $question->text = $request->text;
                 $question->category_id = $request->category;
-                $question->price = $request->price;
-
                 $question->client_id = $client->id;
+                $question->price = $request->price;
                 $question->type = 2;
                 $question->save();
-
                 $client->user->save();// is it possible?
+
                 if ($request->file('files') != null) {
                     $file = $request->file('files');
                     foreach ($file as $key) {
@@ -78,13 +76,19 @@ class ClientQuestionController extends Controller
                         $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
                     }
                 }
+
+                $order = new Order;
+                $order->user_id = $question->client->user->id;
+                $order->amount = $question->price;
+                $question->order()->save($order);
+
                 Session::flash('message', 'Question created successfully');
                 return redirect()->route('client.dashboard');
             }
             else
             {
-                Session::flash('message', 'Not enough money');
-                return back()->withInput($request->all());
+                Session::flash('message', 'Not enough money, Please charge your balance');
+                return redirect()->route('card.payment');
             }
         }
         else{

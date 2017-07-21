@@ -67,22 +67,7 @@
                 {{Form::text('cost','',['class'=>'form-control'])}}
             </div>
         </div>
-       
-        @if (Auth::guard('client')->check())
-        <div class="form-group">
-        <?php $client = Auth::guard('client')->user();  ?>
-            <div class="col-sm-6">
-            {{Form::label('email', 'Email: ', ['class' => 'col-sm-1 control-label'])}}
-            </div>  
-            {{Form::text('email', $client->email, ['class'=>'form-control', 'readonly' => 'readonly'])}}
-             
-            <div class="col-sm-6">
-            {{Form::label('name', 'First Name: ', ['class' => 'col-sm-1 control-label'])}}
-                
-            {{Form::text('firstName', $client->user->firstName, ['class'=>'form-control', 'readonly' => 'readonly'])}}
-            </div>
-        </div>
-        @endif
+
         {{Form::submit('Готова', ['class' => 'btn btn-success']) }}
         {{Form::close()}}
 
