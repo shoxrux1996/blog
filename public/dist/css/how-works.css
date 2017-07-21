@@ -1,0 +1,33 @@
+#ask-question{
+    background-image: url(../images/lawyer-bg.jpg);
+    background-size: cover;
+    height: 512px;
+    padding: 100px;
+}
+
+#unique-services, #how-it-works, #we-guarantee, #ask-question-now{
+    text-align: center;
+    padding: 100px;
+    padding-top: 20px;
+}
+
+#unique-services i, #how-it-works i, #we-guarantee i{
+    font-size: 64px;
+    margin-top: 30px;
+}
+#how-it-works{
+    background-color: #F7F7F7;
+}
+
+#ask-question-now{
+    background-image: url(../images/lawyer-bg-2.jpg);
+    background-size: cover;
+    height: 600px;
+    padding: 120px;
+    color: #fff;
+}
+
+#ask-question-now h3, #ask-question-now h5{
+    color: #fff;
+}
+

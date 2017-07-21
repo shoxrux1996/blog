@@ -1,0 +1,358 @@
+#wrapper{
+    padding: 10px;
+}
+.blog-item{
+    background-color: #fff;
+    height: 470px;
+}
+
+.blog-item:hover{
+    box-shadow: 0px 0px 20px 5px rgba(204,204,204,0.75);
+}
+
+.blog-item .blog-item-img img{
+    width: 100%;
+    height: 240px;
+}
+
+.blog-item .blog-item-description{
+    padding: 20px;
+    padding-bottom: 0;
+    color: #1F2746;
+}
+.blog-item .blog-item-footer{
+    padding: 20px;
+    padding-top: 0;
+}
+
+.col-sm-6{
+    padding-bottom: 40px;
+    position: relative;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%)
+}
+
+.col-sm-4:hover img {
+    transition: 1s;
+    opacity: 0.3;
+}
+
+.col-sm-4:hover .middle {
+    opacity: 1;
+}
+
+
+.btn-dark-blue{
+    margin-bottom: 10px;
+    background-color: #1F2746;
+    color: #ffffff;
+    border: none;
+    /* Rectangle 16: */
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+    border-radius: 0px;
+    padding: 15px;
+    font-size: 16px;
+}
+
+
+.btn-dark-blue:hover{
+    color: #18BB9B;
+}
+
+
+.blog-title{
+    height: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 100px;
+}
+
+.blog-title h6, .blog-title h1, .blog-title h3{
+    color: #fff;
+}
+
+.container-fluid .row .blog-title > h6{
+    margin-top: 0px;
+}
+
+.btn-group .btn{
+    border-radius: 0;
+}
+
+.btn-group .active{
+    background-color: #337AB7;
+    color: #fff;
+    border-color: #337AB7;
+}
+
+.btn-group .btn:hover{
+    background-color: #337AB7;
+    color: #fff;
+    border-color: #337AB7;
+}
+
+.btn-group .btn:focus{
+    background-color: #337AB7;
+    color: #fff;
+    border-color: #337AB7;
+}
+
+.blog-item .blog-item-description, .blog-item .blog-item-footer{
+    color: #8B8F9C;
+}
+
+.blog-item .blog-item-description .post-info{
+    color: #5CB85C;
+    font-size: 16px;
+}
+
+.blog-item hr{
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.show-others{
+    padding: 10px 20px;
+}
+
+.subscribe{
+    background-image: url(../images/bg-subscribe.jpg);
+    background-color: #fff;
+    background-size: cover;
+}
+
+.subscribe .dark-blue{
+    color: #fff;
+    border-radius: 0;
+}
+
+.subscribe .dark-blue:hover{
+    background: #1F2746;
+    border-color: #1F2746;
+}
+
+.blog-text-description h4{
+    line-height: 40px;
+}
+
+.blog-text-description p{
+    font-size: 18px;
+    line-height: 1.55;
+}
+
+.blog-text-description img{
+    padding: 10px 0px;
+}
+
+#other-articles{
+    background-color: #F6F6F6;
+}
+
+#accordion-category ul li{
+    list-style: square;
+}
+
+#accordion-category ul li a{
+    color: #1F2746;
+}
+
+.post-mini{
+    padding: 10px;
+}
+
+.post-mini img{
+    float: left;
+    height: 64px;
+    width: 84px;
+    margin-right: 5px;
+}
+
+hr{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#accordion-last-posts a, #accordion-popular-posts a, #accordion-last-comments a{
+    color: #1F2746;
+}
+
+.post-mini:hover{
+    box-shadow: 0px 0px 20px 5px rgba(204,204,204,0.75);
+    border-radius: 4px;
+}
+
+.last-comments{
+    padding: 10px;
+}
+
+.last-comments img{
+    float: left;
+    height: 64px;
+    width: 64px;
+    margin-right: 5px;
+}
+
+.last-comments p{
+    margin-bottom: 0;
+}
+
+.last-comments .comment-time{
+    font-size: 12px;
+    color: #8B8F9C;
+}
+
+.last-comments .comment-content{
+    font-size: 12px;
+    color: #8B8F9C;
+}
+
+.last-comments:hover{
+    box-shadow: 0px 0px 20px 5px rgba(204,204,204,0.75);
+    border-radius: 4px;
+}
+
+.panel-heading{
+    border-radius: 0;
+}
+
+.panel-group .panel{
+    border-radius: 0;
+    margin-bottom: 10px;
+}
+
+
+.panel-default>.panel-heading{
+    background-color: #337AB7;
+    color: #fff;
+}
+
+.social {
+    height: 220px;
+    position: fixed;
+    margin-top: 30px;
+    perspective: 1000px;
+    z-index: 5;
+    list-style: none;
+    top: 30%;
+    right: 0;
+}
+
+.social li a {
+    display: block;
+    height: 40px;
+    width: 40px;
+    background: #222;
+    border-bottom: 1px solid #333;
+    font: normal normal normal
+    16px/20px
+    'FontAwesome', 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    padding: 10px;
+    text-decoration: none;
+    text-align: center;
+    transition: background .5s ease .300ms
+}
+
+.social li:first-child a:hover { background: #3b5998 }
+.social li:nth-child(2) a:hover { background: #ed812b }
+.social li:nth-child(3) a:hover { background: #0088cc }
+.social li:nth-child(4) a:hover { background: #4099FF }
+
+
+.social li a span {
+    width: 100px;
+    float: left;
+    text-align: center;
+    background: #222;
+    color: #fff;
+    margin: -25px 74px;
+    padding: 8px;
+    transform-origin: 0;
+    visibility: hidden;
+    opacity: 0;
+    transform: rotateY(45deg);
+    border-radius: 5px;
+    transition: all .5s ease .300ms
+}
+
+.social li span:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -20px;
+    top: 7px;
+    border-right: 10px solid transparent;
+    border-left: 10px solid #222;
+    border-bottom: 10px solid transparent;
+    border-top: 10px solid transparent;
+}
+
+.social li a:hover span {
+    visibility: visible;
+    opacity: 1;
+    transform: rotateY(0)
+}
+
+
+/*Ribbon*/
+.blog-item {
+    position: relative;
+}
+.ribbon {
+    position: absolute;
+    left: -5px; top: -5px;
+    z-index: 1;
+    overflow: hidden;
+    width: 75px; height: 75px;
+    text-align: right;
+}
+.ribbon span {
+    font-size: 10px;
+    font-weight: bold;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    width: 100px;
+    display: block;
+    background: #337AB7;
+    background: linear-gradient(#337AB7 0%, #337AB7 100%);
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 19px; left: -21px;
+}
+.ribbon span::before {
+    content: "";
+    position: absolute; left: 0px; top: 100%;
+    z-index: -1;
+    border-left: 3px solid #337AB7;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #337AB7;
+}
+.ribbon span::after {
+    content: "";
+    position: absolute; right: 0px; top: 100%;
+    z-index: -1;
+    border-left: 3px solid transparent;
+    border-right: 3px solid #337AB7;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #337AB7;
+}
+
+.advertisement > img{
+    margin-bottom: 100px;
+}

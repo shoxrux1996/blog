@@ -1,0 +1,36 @@
+html,body{
+    height: 100%;
+}
+
+#login{
+    position: relative;
+    background-image: url(../images/dashboard-login-bg.jpg);
+    background-size: cover;
+    height: 100%;
+}
+
+#login form{
+    top: 30%;
+    left: 50%;
+    position: absolute;
+    width: 300px;
+    color: #fff;
+}
+
+#login form input{
+    background-color: transparent;
+    color: #fff;
+}
+
+#login form button{
+    background-color: transparent;
+}
+
+#login form button:hover{
+    background-color: #2E6DA4;
+}
+
+#login form input:focus{
+    background-color: #fff;
+    color: #8B8F9C;
+}

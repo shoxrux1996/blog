@@ -1,0 +1,80 @@
+/*Login Section*/
+#login-bg, #register-bg{
+    margin: 30px 0;
+}
+#login-bg > h1, #register-bg > h1{
+    margin-bottom: 30px;
+}
+
+#login-bg .nav>li{
+    width: 49%;
+    margin-right: 0;
+    text-align: center;
+}
+
+#register-bg .nav>li{
+    width: 32%;
+    margin-right: 2%;
+    text-align: center;
+}
+
+#login-bg .nav>li:nth-child(2), #register-bg .nav>li:nth-child(3){
+    float: right;
+}
+
+#login-bg .nav>li>a, #register-bg .nav>li>a{
+    border-radius: 0;
+    border: 1px solid #1F2746;
+    margin-right: 0;
+}
+
+
+#login-bg .nav .active a, #register-bg .nav .active a{
+    background-color: #1F2746;
+    color: #fff;;
+}
+
+#login-bg .nav .active, #register-bg .nav .active{
+    margin-right: 0;
+}
+
+#login-bg .nav-tabs, #register-bg .nav-tabs{
+    border-bottom: 0;
+}
+
+#login-bg .tab-content, #register-bg .tab-content{
+    background-color: #1F2746;
+    color: #fff;
+    padding: 10px 30px;
+}
+
+#login-bg .form-control, #register-bg .form-control{
+    border-radius: 0;
+}
+
+#login-bg .green-button, #register-bg .form-control{
+    margin-bottom: 10px;
+}
+
+#login-bg #login-form a{
+    color: #fff;
+    text-decoration: underline;
+}
+
+#login-bg .nav-tabs li a, #register-bg .nav-tabs li a{
+    color: #1F2746;
+}
+
+.green-text{
+    color: #18BB9B;
+}
+
+.green-text a{
+    color: #18BB9B;
+    text-decoration: underline;
+}
+
+.register{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

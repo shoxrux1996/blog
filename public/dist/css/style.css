@@ -1,0 +1,469 @@
+/* Styles */
+/*Open Sans Font */
+
+/*Navigation bar*/
+body *{
+    font-family: "Open Sans";
+}
+.color-white{
+    color: #fff;
+}
+
+.color-gray{
+    color: #8B8F9C;
+}
+
+.dark-blue{
+    background-color: #1F2746;
+}
+
+.my-header{
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.my-header .row{
+    margin: 0;
+}
+
+/*Link hover effect*/
+.my-header a{
+    text-decoration: none;
+    position: relative;
+    color: white;
+}
+
+.my-header a:hover{
+    text-decoration: none;
+    color: #18BB9B;
+}
+
+.my-header a:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #18BB9B;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.my-header a:hover:before{
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+/*Link hover effect*/
+
+.my-header .col-md-10{
+    text-align: right;
+}
+
+.header-divider{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.navbar{
+    border: none;
+    margin-bottom: 0px;
+    border-radius: 0;
+}
+
+.navbar-default{
+    background-color: #1F2746;
+}
+
+.navbar-default.navbar .container{
+    padding-left: 0;
+    margin-left: 0;
+}
+.navbar a{
+    text-decoration: none;
+    position: relative;
+    color: #ffffff!important;
+}
+
+.navbar a:hover{
+    text-decoration: none;
+    color: #18BB9B!important;
+}
+
+.navbar a:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: #18BB9B;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.navbar a:hover:before{
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+.navbar .active-link a{
+    color: #18BB9B!important;
+    border-bottom: 2px solid #18BB9B;
+}
+
+.navbar .container-fluid{
+    padding: 0;
+}
+
+.my-header .info button{
+    padding:0;
+}
+
+.my-header .info .dropdown-menu{
+    right: 20px;
+    left: auto;
+    top: 50%;
+    min-width: 0;
+    border-radius: 0;
+    border-color: #1F2746;
+}
+
+.green-button{
+    /* Rectangle 16: */
+    background: #18BB9B;
+    border: 1px solid #18BB9B;
+    border-radius: 0;
+    padding: 5px 25px;
+}
+
+.green-button:hover{
+    /* Rectangle 16: */
+    background: #18BB9B;
+}
+
+.blue-button{
+    margin-bottom: 10px;
+    background-color: #1F2746;
+    color: #ffffff;
+    border: none;
+    /* Rectangle 16: */
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+    border-radius: 0px;
+    padding: 10px;
+}
+
+.blue-button:hover{
+    background-color: #1F2746;
+    color: #fff;
+}
+
+.background-white{
+    background-color: #fff;
+}
+
+.color-dark-blue{
+    color: #1F2746;
+}
+
+#wrapper{
+    background-color: #F6F6F6;
+    padding: 30px;
+}
+
+.best-lawyers img{
+    height: 84px;
+    display: block;
+    float: left;
+    margin-right: 5px;
+}
+
+.best-lawyers{
+    border: 1px solid #1F2746;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.best-lawyers h3{
+    margin-top: 5px;
+}
+
+.best-lawyers h6{
+    font-size: 12px;
+    color: #8B8F9C;
+}
+
+.best-lawyers a{
+    margin-top: 5px;
+}
+
+.ask-question-block{
+    border-radius: 2px;
+    border: 1px solid #8B8F9C;
+}
+
+.ask-question-block{
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.ask-question-block img{
+    float: left;
+    height: 53px;
+    width: 63px;
+    margin-top: 5px;
+}
+
+.ask-question-block h6{
+    color: #1F2746;
+}
+
+.pulse-button {
+    border: none;
+    box-shadow: 0 0 0 0 rgba(92, 184, 92, 1);
+    cursor: pointer;
+    -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+.pulse-button:hover
+{
+    -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
+}
+
+@-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+
+
+.question{
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+
+.question .author{
+    float: right;
+}
+
+.date, .author, .number{
+    color: #888888;
+}
+
+.question .answers{
+    float: right;
+    background-color: #18BB9B;
+    padding: 10px;
+    color: #fff;
+    margin-top: -15px;
+}
+
+
+.question .question-price{
+    font-size: 16px;
+    background-color: #DDE5F1;
+    padding: 5px 10px 10px 5px;
+    margin-left: -30px;
+    color: #3c66a0!important;
+    margin-bottom: 20px;
+}
+
+.question .question-price span{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 10px;
+}
+
+.padding-top-30{
+    padding-top: 30px;
+}
+
+#questions-section .active{
+    color: #18BB9B!important;
+    border-bottom: 1px dashed #18BB9B!important;
+    pointer-events: none;
+    cursor: default;
+}
+
+
+#questions-section .not-active{
+    color: #8B8F9C!important;
+    border-bottom: 0!important;
+}
+
+.general-input{
+    border-radius: 0;
+    border-color: #1F2746;
+    color: #1F2746;
+    background-color: #fff;
+}
+
+
+.padding-30{
+    padding: 30px;
+}
+
+.sidebar-ad{
+    margin-top: 10px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/*footer*/
+footer{
+    padding: 30px;
+    background-color: #1F2746;
+    padding-bottom: 10px;
+}
+
+footer span{
+    text-align: center;
+    display: block;
+    color: #18BB9B;
+    border-top: 1px solid #18BB9B;
+    border-bottom: 1px solid #18BB9B;
+    padding: 10px 0px;
+    font-size: 18px;
+}
+
+footer p{
+    margin-top: 10px;
+    color: #ffffff;
+}
+
+footer .guarantee p{
+    margin-top: 10px;
+    text-align: right;
+    color: #ffffff;
+}
+
+footer a{
+    text-decoration: none;
+    position: relative;
+    color: white;
+}
+
+footer a:hover{
+    text-decoration: none;
+    color: #18BB9B;
+}
+
+footer a:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #18BB9B;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+footer a:hover:before{
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+footer .social-link i{
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+footer .social-link i:hover{
+    color: #18BB9B;
+}
+
+/*Media Queries Medium Screen*/
+@media (max-width: 1199px){
+    /*Footer*/
+    footer span{
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 991px) {
+
+   .best-lawyers img{
+        height: 72px;
+        display: block;
+        float: left;
+        margin-right: 5px;
+    }
+
+   .best-lawyers{
+        margin-top: 10px;
+        border: 1px solid #1F2746;
+        padding: 5px;
+    }
+
+    .best-lawyers a{
+        padding: 5px 10px;
+        width: 60%;
+        font-size: 10px;
+    }
+
+    /*Footer*/
+    footer p{
+        margin: 5px 0;
+        font-size: 12px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    /*Navbar*/
+    .navbar-default .navbar-toggle{
+        border-color: #ffffff;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar{
+        background-color: #ffffff;
+    }
+
+    .navbar-default.navbar .container{
+        padding-left: 15px;
+        margin-left: auto;
+    }
+
+
+    footer .guarantee p{
+        text-align: center;
+    }
+}
+
+@media (max-width: 473px){
+    .my-header .info{
+        font-size: 8px;
+    }
+
+    .navbar .navbar-header{
+        padding: 0 10px;
+    }
+
+    /*Footer*/
+    footer .guarantee p{
+        text-align: center;
+    }
+    .hidden-xxs{
+        display: none;
+    }
+}

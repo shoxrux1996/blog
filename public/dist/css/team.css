@@ -1,0 +1,40 @@
+body{
+    background-color: #F6F6F6;
+}
+
+#wrapper{
+    background-image: url(../images/photo_2017-07-05_17-38-51.jpg);
+    background-size: cover;
+    height: 400px;
+}
+
+#mission{
+    padding: 10px 50px;
+    border: 5px solid #8B8F9C;
+    width: 900px;
+    margin-top: -20px;
+    background-color: #fff;
+    color: #1F2746;
+}
+
+#mission .text-center i{
+    font-size: 64px;
+}
+
+#work{
+    margin-top: 20px;
+    width: 900px;
+    background-color: white;
+    padding: 10px 50px;
+}
+
+#vacancy{
+    margin-top: 20px;
+    width: 900px;
+    padding: 50px 10px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    height: 300px;
+    background-image: url(../images/1-small.jpg);
+    background-size: cover;
+}
