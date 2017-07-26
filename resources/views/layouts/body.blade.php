@@ -35,6 +35,14 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                      <a href="{{('client.dashboard')}}">
+                                      Личный кабинет</a>
+                                    </li>
+                                    <li>
+                                      <a href="{{('client.info')}}">
+                                      Редактировать профиль</a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('user.logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
