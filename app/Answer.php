@@ -21,4 +21,6 @@ class Answer extends Model
     public function feedback(){
         return $this->hasOne('yuridik\Feedback');
     }
+   
+
 }

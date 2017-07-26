@@ -42,9 +42,12 @@ class Client extends Authenticatable
     {
         return $this->morphMany('yuridik\Comment', 'commentable');
     }
-
+    
     public function questions(){
         return $this->hasMany('yuridik\Question');
+    }
+    public function documents(){
+        return $this->hasMany('yuridik\Document');
     }
 
 

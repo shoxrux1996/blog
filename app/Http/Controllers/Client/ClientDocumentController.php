@@ -37,6 +37,9 @@ class ClientDocumentController extends Controller
         }
         return view('document.create')->withClient($client)->withTypes($types)->withSubtypes($subtypes)->withParents($parents)->withDefault_options($default_option);
     }
+
+
+    
     public function store(Request $request){
        $rules = array(
             'title' => 'required|min:3',
@@ -57,11 +60,13 @@ class ClientDocumentController extends Controller
         $document->description = $request->description;
         $document->sub_type_id = $request->subType;
         $document->payment_type = $request->payment_type;
+
         if($request->payment_type=="about")
             $document->cost=$request->cost;
 
 
         $document->client_id = $client->id;
+        
         $document->save();
 
            if ($request->file('files') != null) {
@@ -78,42 +83,5 @@ class ClientDocumentController extends Controller
         Session::flash('message', 'Request submitted successfully');
         return redirect()->route('client.dashboard');       
     }
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+  
 }

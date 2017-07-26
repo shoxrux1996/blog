@@ -1,5 +1,5 @@
 @extends('layouts.app-admin')
-@section('title', "| Document")
+@section('title', "| Documents")
 @section('content')
 
 <div class="container">

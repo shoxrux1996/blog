@@ -17,8 +17,8 @@ class Document extends Model
     {
         return $this->morphMany('yuridik\File', 'fileable');
     }
-    public function answers(){
-        return $this->hasMany('yuridik\Answer');
+    public function requests(){
+        return $this->hasMany('yuridik\Request');
     }
     public function order()
     {
