@@ -25,15 +25,23 @@
                 </li>
             </ul>
           <br />
-          @if (Auth::guest())
+          @if (!(Auth::guard('client')->check() || Auth::guard('lawyer')->check()))
           <a href="{{ route('user.register') }}">Зарегистрироваться</a> | <a href="{{ route('user.login') }}">Войти</a>
           @else
           <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->email }} <span class="caret"></span>
+                                 @if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->email }} @else {{ Auth::guard('lawyer')->user()->email }} @endif <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                      <a href="{{('client.dashboard')}}">
+                                      Личный кабинет</a>
+                                    </li>
+                                    <li>
+                                      <a href="{{('client.info')}}">
+                                      Редактировать профиль</a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('user.logout') }}"
                                             onclick="event.preventDefault();
@@ -47,7 +55,7 @@
                                     </li>
                                 </ul>
                             </li>
-                        @endif
+          @endif
         </div>
       </div>
       <hr class="header-divider">

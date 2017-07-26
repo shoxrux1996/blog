@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+<link href="{{ asset('dist/css/login-regis.css')}}" rel="stylesheet">
+@endsection
 @section('body')
 @extends('layouts.body')
 @section('menu')
@@ -99,7 +102,7 @@
             <div class="tab-content">
                 <div id="menu1" class="tab-pane fade in active">
                     <h4>Ваш аккаунт</h4>
-                    <form id="login-form">
+                    <form id="login-form" role="form" method="POST" action="{{ route('user.login.submit') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ ($errors->has('email') || $errors->has('wrong-attempt')) ? ' has-error' : '' }}">
                             <label for="username"><i class="fa fa-user-circle" aria-hidden="true"></i> Эл. почта</label>
@@ -108,7 +111,7 @@
                                     <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                             @endif
-                            <input type="text"  class="form-control" id="username" name="email" placeholder="Введите электронную почту" value="{{ old('email') }}" required autofocus>
+                            <input type="text"  class="form-control" id="email" name="email" placeholder="Введите электронную почту" value="{{ old('email') }}" required autofocus>
                         </div>
                         <div class="form-group{{ ($errors->has('password') || $errors->has('wrong-attempt')) ? ' has-error' : '' }}">
                             <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> Пароль</label>
