@@ -13,10 +13,7 @@
   <li><a href="{{ route('about')}}">О нас</a></li>
 @endsection
 @section('content')
-  @if (Session::has('message'))
-    <!-- <div class="alert alert-info">{{ Session::get('message') }}</div> -->
-    <script type="text/javascript"> alert({{ Session::get('message'))</script>
-  @endif
+
 <!-- Search Section -->
     <div class="container-fluid" id="search-section">
       <div class="row">
@@ -41,7 +38,7 @@
     <div class="container-fluid" id="services-section">
       <div class="row">
         <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-          <img src="{{ asset('dist/images/logo.png')}}" alt="Call icon"/>
+          <img src="{{ asset('dist/images/question-icon.png')}}" alt="Question icon"/>
           <a type="button" class="btn btn-default" href="{{ route('question.create')}}">Задать вопрос</a>
           <p class="statistics">50,000+</p>
           <p class="what">Отвеченных вопросов</p>
