@@ -7,7 +7,8 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel=icon href="{{ asset('dist/images/favicon.png')}}" sizes="32x32" type="image/png">
+
+    <link rel="shortcut icon" href="{{ asset('dist/images/favicon.ico')}}">
     <title>Юридическая консультация онлайн - бесплатная помощь юристов и адвокатов 24 часа в сутки</title>
 
     <!-- Styles -->

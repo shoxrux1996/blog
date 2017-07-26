@@ -169,10 +169,13 @@ Route::prefix('blogs_info')->group(function(){
 Route::prefix('category_info')->group(function(){
 	Route::get('/', 'Web\CategoryController@index')->name('category.list');
 });
-Route::get('/', function () {
-    return view('index');
-})->name('home');
-
+Route::get('/', 'Web\IndexController@index')->name('home');
+Route::get('/about', function(){
+	return view('about');
+})->name('about');
+Route::get('/how-works', function(){
+	return view('how-works');
+})->name('how-works');
 
 
 

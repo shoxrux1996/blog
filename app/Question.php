@@ -24,4 +24,7 @@ class Question extends Model
     {
         return $this->morphMany('yuridik\Order', 'typeable');
     }
+    public function countAnswers(){
+        return $this->answers()->count();
+    }
 }

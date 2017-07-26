@@ -9,11 +9,14 @@
   <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
   <li><a href="{{ route('question.list')}}">Вопросы</a></li>
   <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-  <li><a href="">Как это работает</a></li>
-  <li><a href="">О нас</a></li>
+  <li><a href="{{ route('how-works')}}">Как это работает</a></li>
+  <li><a href="{{ route('about')}}">О нас</a></li>
 @endsection
 @section('content')
-
+  @if (Session::has('message'))
+    <!-- <div class="alert alert-info">{{ Session::get('message') }}</div> -->
+    <script type="text/javascript"> alert({{ Session::get('message'))</script>
+  @endif
 <!-- Search Section -->
     <div class="container-fluid" id="search-section">
       <div class="row">
@@ -38,19 +41,19 @@
     <div class="container-fluid" id="services-section">
       <div class="row">
         <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-          <img src="{{ asset('dist/images/question-icon.png')}}" alt="Question icon"/>
+          <img src="{{ asset('dist/images/logo.png')}}" alt="Call icon"/>
           <a type="button" class="btn btn-default" href="{{ route('question.create')}}">Задать вопрос</a>
           <p class="statistics">50,000+</p>
           <p class="what">Отвеченных вопросов</p>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-          <img src="{{ asset('dist/images/call-icon.png')}}" alt="Question icon"/>
+          <img src="{{ asset('dist/images/call-icon.png')}}" alt="Call icon"/>
           <a type="button" class="btn btn-default" href="order-call.html">Заказать звонок</a>
           <p class="statistics">20,00,000+</p>
           <p class="what">Обратных звонков</p>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-          <img src="{{ asset('dist/images/document-icon.png')}}" class="img-responsive" alt="Question icon"/>
+          <img src="{{ asset('dist/images/document-icon.png')}}" class="img-responsive" alt="Document icon"/>
           <a type="button" class="btn btn-default" href="{{ route('document.create')}}">Заказать документ</a>
           <p class="statistics">40,000,000+</p>
           <p class="what">Cозданных документов</p>
@@ -61,7 +64,7 @@
 
 <!-- Questions Section -->
     <div class="container-fluid" id="questions-section">
-        <h2 class="text-center">Задано <span class="total">12345</span> вопроса</h2>
+        <h2 class="text-center">Задано <span class="total">{{$num_of_questions}}</span> вопроса</h2>
         <div class="questions-bg clearfix">
             <h3 class="category text-center">
                 <button class="active btn-link" id="paid-questions">Платные </button>
@@ -70,7 +73,23 @@
                 </span>
             </h3>
           <div id="paid-question-block">
-              <a href="individual-question.html" class="question clearfix">
+            @foreach($paid_question_examples as $var)
+              <a href="{{ route('web.question.show',['id' => $var->id])}}" class="question clearfix">
+                    <div class="asked-time">
+                        {{$var->created_at}}
+                    </div>
+                    <div class="total-answers">
+                        {{$var->countAnswers()}} ответов 
+                    </div>
+                    <div class="asked-question">
+                        {{$var->title}}
+                    </div>
+                    <div class="asked-price">
+                        стоимость {{$var->price}} сум
+                    </div>
+                </a>
+            @endforeach
+              <!-- <a href="individual-question.html" class="question clearfix">
                   <div class="asked-time">
                       Сегодня 18:14
                   </div>
@@ -153,10 +172,23 @@
                   <div class="asked-price">
                       стоимость 1000 сум
                   </div>
-              </a>
-          </div>
+              </a>-->
+          </div> 
           <div id="free-question-block" class="hidden">
-              <a href="#" class="question clearfix">
+            @foreach($free_question_examples as $var)
+              <a href="{{ route('web.question.show',['id' => $var->id])}}" class="question clearfix">
+                    <div class="asked-time">
+                        {{$var->created_at}}
+                    </div>
+                    <div class="total-answers">
+                        {{$var->countAnswers()}} ответов
+                    </div>
+                    <div class="asked-question">
+                        {{$var->title}}
+                    </div>
+                </a>
+            @endforeach
+              <!-- <a href="#" class="question clearfix">
                   <div class="asked-time">
                       Сегодня 04:13
                   </div>
@@ -221,7 +253,7 @@
                   <div class="asked-question">
                       Проблема не могу уснуть
                   </div>
-              </a>
+              </a> -->
           </div>
           <a type="button" class="btn btn-default btn-lg btn-block blue-button" href="{{ route('question.list')}}">Смотреть все вопросы</a>
         </div >
@@ -380,7 +412,7 @@
 
     <!-- Lawyers Section -->
       <div class="container-fluid text-center" id="lawyers-section">
-        <h2>Консультации от <span class="total">12345</span> юристов и адвокатов</h2>
+        <h2>Консультации от <span class="total">{{$num_of_lawyers}}</span> юристов и адвокатов</h2>
         <h5>Наши юристы — профессионалы, которые обладают знаниями законодательной базы и богатой судебной практикой. Поэтому, обращаясь за бесплатной юридической консультацией, вы получите грамотный и обоснованный ответ.</h5>
         <div class="row" id="gallery">
             <div id="lawyers-carousel" class="crsl-nav">
