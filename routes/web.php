@@ -1,5 +1,5 @@
 <?php
-Route::get('payment', function(){
+/*Route::get('payment', function(){
 
     $question = yuridik\Question::find(42);
     $order = new yuridik\Order;
@@ -8,10 +8,10 @@ Route::get('payment', function(){
 
     $question->order()->save($order);
 
-});
+});*/
 Route::get('card','Web\ApiController@show')->name('card.payment');
 
-Route::get('balance', function(){
+/*Route::get('balance', function(){
     $client = Auth::guard('client')->user();
     foreach ($client->user->transactions->where('state',2) as $key) {
         echo 'Transactions: '.$key->amount .'<br>';
@@ -21,7 +21,7 @@ Route::get('balance', function(){
     }
     echo 'Balance: <strong>'.$client->user->balance() .'</strong>';
     
-});
+});*/
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');

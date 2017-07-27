@@ -1,4 +1,9 @@
-@extends('layouts.app-admin')
+@extends('layouts.app')
+@section('styles')
+<link href="{{ asset('dist/css/login-regis.css')}}" rel="stylesheet">
+@endsection
+@section('body')
+@extends('layouts.body')
 
 @section('content')
 <div class="container">

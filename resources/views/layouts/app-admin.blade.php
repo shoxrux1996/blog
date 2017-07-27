@@ -1,150 +1,139 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{asset('dist/images/favicon.png')}}" type="image/png" >
+    <title>Yuridik.uz - Панель администратора</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{{asset('dist/css/bootstrap.min.css')}}" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/typography.css') }}" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="{{asset('dist/css/dashboard.css')}}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{asset('dist/fonts/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="{{asset('dist/css/morris.css')}}" rel="stylesheet">
+    <style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #2C3E50 url('dist/images/three-dots.svg') center center no-repeat;background-size:79px;}</style>
+    <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
 </head>
 <body>
+<div id="wrapper">
 
-<div id="app">
-    <!-- Header -->
-    <div class="container-fluid my-header color-white dark-blue">
-        <div class="row">
-            <div class="col-md-2 col-sm-3 col-xs-6">
-                <img class="img-responsive" src="dist/images/logo.png" alt="Logo" />
-            </div>
-            <div class="col-md-10 col-sm-9 col-xs-6 info">
-                <span>(877) 881-0947 или </span>
-                <a href="#"><img src="dist/images/help-icon.png" alt="Help Icon" /></a>
-                <a href="#"><img src="dist/images/flag-uzb.png" alt="Flag Uzbekistan" /></a><br>
-                @if (Auth::guest())
-                    <a href="{{ route('user.login') }}">Login</a>
-                    <a href="{{ route('user.register') }}">Register</a>
-                @else
-                    <a href="{{ route('admin.logout') }}"
-                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-
-                    <form id="logout-form" action="{{ route('admin.logout') }}" method="post" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                @endif
-            </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="dashboard.html">Панель администратора</a>
         </div>
-        <hr class="header-divider">
-    </div>
-    <!-- /Header -->
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Улугбек <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-user"></i> Профиль</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-gear"></i> Настройки</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                                        <a href="{{ route('admin.logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i> 
+                                            Выйти
+                                        </a>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-default">
-        <div class="container dark-blue">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <div class="collapse navbar-collapse" id="menu">
-                <ul class="nav navbar-nav">
-                    <li class="active-link"><a href="index.html">Главная</a></li>
-                    <li><a href="lawyers.html">Юристы</a></li>
-                    <li><a href="">База данных</a></li>
-                    <li><a href="">Блог</a></li>
-                    <li><a href="">Как это работает</a></li>
-                    <li><a href="login.html">Войты</a></li>
+                                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                    </li>
                 </ul>
-            </div>
+            </li>
+        </ul>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a href="{{route('admin.dashboard')}}"><i class="fa fa-fw fa-dashboard"></i> Панель</a>
+                </li>
+                <li>
+                    <a href="{{route('admin.users.index')}}"><i class="fa fa-fw fa-users"></i> Пользователи</a>
+                </li>
+                 <li>
+                    <a href=""><i class="fa fa-fw fa-address-card"></i> Модераторы</a>
+                </li>
+                <li>
+                    <a href="{{route('admin.comments.index')}}"><i class="fa fa-fw fa-comments"></i> Комментарии</a>
+                </li>
+                <li>
+                    <a href="{{route('admin.blogs')}}"><i class="fa fa-fw fa-newspaper-o"></i> Блог</a>
+                </li>
+                <li>
+                    <a href="{{route('admin.questions.index')}}"><i class="fa fa-fw fa-question-circle-o"></i> Вопросы</a>
+                </li>
+                <li>
+                    <a href="{{route('admin.documents.index')}}"><i class="fa fa-fw fa-address-card"></i> Документы</a>
+                </li>
+                <li>
+                    <a href="a{{route('admin.answers.index')}}"><i class="fa fa-fw fa-reply"></i> Ответы</a>
+                </li>
+                <li>
+                    <a href="a{{route('admin.tags.index')}}"><i class="fa fa-fw fa-reply"></i> Тэги</a>
+                </li>
+                <li>
+                    <a href="a{{route('admin.category.info')}}"><i class="fa fa-fw fa-reply"></i> Категория</a>
+                </li>
+                <li>
+                    <a href="a{{route('admin.feedbacks.index')}}"><i class="fa fa-fw fa-reply"></i> Отзывы</a>
+                </li>
+                 <li>
+                    <a href="a{{route('admin.cities.index')}}"><i class="fa fa-fw fa-reply"></i> Города</a>
+                </li>
+            </ul>
         </div>
+        <!-- /.navbar-collapse -->
     </nav>
-    <!-- /Navbar -->
 
-    @yield('content')
-</div>
-<!-- Footer -->
-<footer>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 guarantee">
-                <span>ГАРАНТИЯ 100% КАЧЕСТВА</span>
-                <p>
-                    <img src="dist/images/first-place-icon.png" alt="First place icon" />
-                    Лучшие юристы со всей Узбекистана
-                </p>
-                <p>
-                    <img src="dist/images/happy-icon.png" alt="Happy icon" />
-                    Более 123 45 довольных клиентов
-                </p>
-                <p>
-                    <img src="dist/images/money-back-icon.png" alt="Money back icon" />
-                    Мы поможем вам — или вернём деньги!
-                </p>
-                <p class="text-center"><a href="#">Все гарантии Yuridik.uz</a></p>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <span><a href="#">Yuridik.uz</a></span>
-                <p><a href="#">Задать вопрос</a></p>
-                <p><a href="#">Заказать документ</a></p>
-                <p><a href="#">Частые вопросы</a></p>
-                <p><a href="#">Наши юристы</a></p>
-                <p><a href="#">Отзывы</a></p>
-                <p><a href="#">Гарантии</a></p>
-                <p><a href="#">Журнал</a></p>
-                <p><a href="#">Вопросы</a></p>
-            </div>
-            <div class="col-md-3 col-sm-6 hidden-xxs">
-                <span><a href="#">Клиентам</a></span>
-                <p><a href="#">Задать вопрос</a></p>
-                <p><a href="#">Заказать документ</a></p>
-                <p><a href="#">Частые вопросы</a></p>
-                <p><a href="#">Наши юристы</a></p>
-                <p><a href="#">Отзывы</a></p>
-                <p><a href="#">Гарантии</a></p>
-                <p><a href="#">Журнал</a></p>
-                <p><a href="#">Вопросы</a></p>
-            </div>
-            <div class="col-md-3 col-sm-6 hidden-xxs">
-                <span><a href="#">Юристам</a></span>
-                <p><a href="#">Задать вопрос</a></p>
-                <p><a href="#">Заказать документ</a></p>
-                <p><a href="#">Частые вопросы</a></p>
-                <p><a href="#">Наши юристы</a></p>
-                <p><a href="#">Отзывы</a></p>
-            </div>
-        </div>
-        <div class="row social-link">
-          <span>
-            <i class="fa fa-twitter" aria-hidden="true"></i>
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-            <i class="fa fa-telegram" aria-hidden="true"></i>
-          </span>
+    <div id="page-wrapper">
+
+            <div class="container-fluid">
+        @yield('content')
         </div>
     </div>
-</footer>
-<!-- Footer -->
-<!-- Scripts -->
+    <!-- /#page-wrapper -->
+    
+</div>
+<!-- /#wrapper -->
 
 {!! Html::script('js/jquery-3.2.1.min.js') !!}
 {!! Html::script('js/select2.min.js') !!}
 {!! Html::script('js/bootstrap.min.js') !!}
+<!-- Morris data -->
+{!! Html::script('dist/js/raphael.min.js') !!}
+{!! Html::script('dist/js/morris.min.js') !!}
+{!! Html::script('dist/js/morris-data.js') !!}
+
+
+<script type="text/javascript">var hellopreloader = document.getElementById("hellopreloader_preload");function fadeOutnojquery(el){el.style.opacity = 1;var interhellopreloader = setInterval(function(){el.style.opacity = el.style.opacity - 0.05;if (el.style.opacity <=0.05){ clearInterval(interhellopreloader);hellopreloader.style.display = "none";}},16);}window.onload = function(){setTimeout(function(){fadeOutnojquery(hellopreloader);},1000);};</script>
+<!-- /Preloader -->
+
+<!-- Footer -->
+<!-- Scripts -->
+
+
 @yield('scripts')
 </body>
 </html>
