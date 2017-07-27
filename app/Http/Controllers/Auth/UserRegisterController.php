@@ -34,12 +34,21 @@ class UserRegisterController extends Controller
          //    'name' => 'required',
          //    ]);
         if ($usertype==="client") {
+            $messages = [
+                'required' => 'Обязательно к заполнению',
+                'string' => 'Неправильный формат',
+                'email' => 'Неправильный формат электронной почты',
+                'max' => 'Максимум 255 символов',
+                'uniqie' => 'Данный email уже используется',
+                'same' => 'Пароли не совпадают',
+                'min' => 'Минимум 6 символов',
+                ]; 
             $validator = Validator::make($request->all(), [
             'client.name' => 'required',
             'client.email' => 'required|string|email|max:255|unique:clients,email|unique:lawyers,email',
             'client.password' => 'required|string|min:6',
             'client.password_confirm' => 'same:client.password',
-            ]);  
+            ],$messages);  
 
             if($validator->fails()){
                 return view('auth.register')->withErrors($validator)->withActiveuser('client');
@@ -62,12 +71,22 @@ class UserRegisterController extends Controller
                 $client->save();     
         }
         elseif ($usertype==="lawyer") {
+            $messages = [
+                'required' => 'Обязательно к заполнению',
+                'string' => 'Неправильный формат',
+                'email' => 'Неправильный формат электронной почты',
+                'max' => 'Максимум 255 символов',
+                'uniqie' => 'Данный email уже используется',
+                'same' => 'Пароли не совпадают',
+                'min' => 'Минимум 6 символов',
+                ]; 
             $validator = Validator::make($request->all(), [
             'lawyer.email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
-            'lawyer.password' => 'required|string|min:6|confirmed',
+            'lawyer.password' => 'required|string|min:6',
+            'lawyer.password_confirm' => 'same:lawyer.password',
             'lawyer.name' => 'required',
             'lawyer.surname' => 'required',
-            ]);  
+            ],$messages);  
 
             if($validator->fails()){
                 return view('auth.register')->withErrors($validator)->withActiveuser('lawyer');
@@ -93,13 +112,23 @@ class UserRegisterController extends Controller
             
         }
         else{
+            $messages = [
+                'required' => 'Обязательно к заполнению',
+                'string' => 'Неправильный формат',
+                'email' => 'Неправильный формат электронной почты',
+                'max' => 'Максимум 255 символов',
+                'uniqie' => 'Данный email уже используется',
+                'same' => 'Пароли не совпадают',
+                'min' => 'Минимум 6 символов',
+                ]; 
             $validator = Validator::make($request->all(), [
             'company.email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
-            'company.password' => 'required|string|min:6|confirmed',
+            'company.password' => 'required|string|min:6',
+            'company.password_confirm' => 'same:company.password',
             'company.leadername' => 'required',
             'company.leadersurname' => 'required',
             'company.name' => 'required',
-            ]);  
+            ],$messages);  
 
             if($validator->fails()){
                 return view('auth.register')->withErrors($validator)->withActiveuser('company');

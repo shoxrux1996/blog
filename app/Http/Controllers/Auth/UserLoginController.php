@@ -26,24 +26,31 @@ class UserLoginController extends Controller
 		$cl= DB::select('select * from clients where email = :email', ['email'=> $request->email]);	
 			
 		if(!empty($cl)){
+			$messages = [
+                'required' => 'Обязательно к заполнению',
+                'email' => 'Неправильный формат электронной почты', 'min' => 'Минимум 6 символов',
+                ];
 		    $this->validate($request, [
 		            'email' => 'required|email',
 		            'password' => 'required|min:6'
-		            ]);
+		            ],$messages);
 		    if(Auth::guard('client')->attempt(['email' => $request->email, 'password'=> $request->password, 'confirmed'=> 1],$request->remember)){
 	        	 return redirect()->intended(route('client.dashboard'));
         		}
-         return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Entered email or password were wrong']);
+         return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Неправильный email или пароль']);
 		}
-
+			$messages = [
+                'required' => 'Обязательно к заполнению',
+                'email' => 'Неправильный формат электронной почты', 'min' => 'Минимум 6 символов',
+                ];
 	    	 $this->validate($request, [
 		            'email' => 'required|email',
 		            'password' => 'required|min:6'
-		            ]);
+		            ],$messages);
 	    	if(Auth::guard('lawyer')->attempt(['email' => $request->email, 'password'=> $request->password, 'confirmed'=> 1],$request->remember)){
 	        	 return redirect()->intended(route('lawyer.dashboard'));
         	}
-        	return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Entered email or password were wrong']);
+        	return  redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Неправильный email или пароль']);
         	
     }
 
@@ -62,16 +69,24 @@ class UserLoginController extends Controller
     public function userfinder(Request $request){
     	$cl= DB::select('select * from clients where email = :email', ['email'=> $request->email]);	
     	if(!empty($cl)){
+    		$messages = [
+                'required' => 'Обязательно к заполнению',
+                'email' => 'Неправильный формат электронной почты', 'exists' => 'Неправильный email или пароль',
+                ];
 		    $this->validate($request, [
-		            'email' => 'required|email|exists:clients',]);
+		            'email' => 'required|email|exists:clients',], $messages);
 
 
 		  app('yuridik\Http\Controllers\Auth\ClientForgotPasswordController')->sendClientResetLinkEmail($request);
 		    return redirect()->route('user.password.request');
 		}
 		else{
+			$messages = [
+                'required' => 'Обязательно к заполнению',
+                'email' => 'Неправильный формат электронной почты', 'exists' => 'Неправильный email или пароль',
+                ];
 			$this->validate($request, [
-		            'email' => 'required|email|exists:lawyers',]);
+		            'email' => 'required|email|exists:lawyers',], $messages);
 			
 			app('yuridik\Http\Controllers\Auth\LawyerForgotPasswordController')->sendLawyerResetLinkEmail($request);
 		    return redirect()->route('user.password.request');		

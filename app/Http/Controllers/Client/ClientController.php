@@ -53,7 +53,11 @@ class ClientController extends Controller
             return view('client.info')->withSettingtype('main')->withClient($client)->withCities($cities);
         }
         elseif($settingtype==="photo"){
-             
+            $messages = [
+                'image' => 'Формат не поддерживается',
+                'mimes' => 'Формат не поддерживается',
+                'max' => 'Размер слишком велик',
+                ]; 
             $validator= Validator::make($request->all(), 
                 ['image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
             if($validator->fails()){
@@ -84,9 +88,14 @@ class ClientController extends Controller
         else{
             
             if(Auth::attempt(['email'=>$client->email, 'password'=>$request->current_password])){
-
+                $messages = [
+                'required' => 'Обязательно к заполнению',
+                'string' => 'Неправильный формат',
+                'min' => 'Минимум 6 символов',
+                'confirmed' => 'Пароли не совпадают',
+                ];
                 $validator= Validator::make($request->all(), 
-                    ['new_password' => 'required|string|min:6|confirmed',]);
+                    ['new_password' => 'required|string|min:6|confirmed',], $messages);
                 if($validator->fails()){
                     return view('client.info')->withSettingtype('privacy')->withClient($client)->withCities($cities)->withErrors($validator);
                 }
@@ -97,7 +106,7 @@ class ClientController extends Controller
                 }
             }
             else
-                return view('client.info')->withSettingtype('privacy')->withClient($client)->withCities($cities)->withErrors(['wrong-attempt' => 'Wrong password']);
+                return view('client.info')->withSettingtype('privacy')->withClient($client)->withCities($cities)->withErrors(['wrong-attempt' => 'Неправильный пароль']);
         }
        
             
