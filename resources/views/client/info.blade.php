@@ -1,67 +1,18 @@
 @extends('layouts.app')
+@section('styles')
+<link href="{{ asset('dist/css/client.css')}}" rel="stylesheet">
+@endsection
 @section('body')
+@section('menu')
+  <li><a href="{{ route('home')}}">Главная</a></li>
+  <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
+  <li><a href="{{ route('question.list')}}">Вопросы</a></li>
+  <li><a href="{{ route('web.blogs')}}">Блог</a></li>
+  <li><a href="{{ route('how-works')}}">Как это работает</a></li>
+  <li><a href="{{ route('about')}}">О нас</a></li>
+@endsection
 @extends('layouts.body')
 @section('content')
-<!-- <div class="container">
-        {{Form::model($client, ['route' => ['client.update', $client->id], 'enctype' => 'multipart/form-data', 'method' => 'post', 'class' => 'form-horizontal'])}}
-         <div class="form-group">
-            {{Form::label('email', 'Email: ', ['class' => 'col-sm-1 control-labe'])}}
-            <div class="col-sm-8">
-                {{Form::text('email', $client->email, ['class'=>'form-control', 'readonly' => 'readonly'])}}
-            </div>
-        </div>
-        <div class="form-group">
-            {{Form::label('name', 'First Name: ', ['class' => 'col-sm-1 control-labe'])}}
-            <div class="col-sm-8">
-                {{Form::text('firstName', $client->user->firstName, ['class'=>'form-control', 'readonly' => 'readonly'])}}
-            </div>
-        </div>
-        <div class="form-group">
-            {{Form::label('name', 'Last Name: ', ['class' => 'col-sm-1 control-labe'])}}
-            <div class="col-sm-8">
-                {{Form::text('lastName', $client->user->lastName, ['class'=>'form-control', 'readonly' => 'readonly'])}}
-            </div>
-        </div>
-        <div class="form-group">
-            {{Form::label('gender', 'Gender: ', ['class' => 'col-sm-1 control-label'])}}
-            <div class="col-sm-6">
-               {{Form::label('Male', 'Male: ', ['class' => 'col-sm-2'])}} {{Form::radio('gender', 'M')}}
-            </div>
-            <div class="col-sm-6">
-            {{Form::label('Female', 'Female: ', ['class' => 'col-sm-2'])}} {{Form::radio('gender', 'F')}}
-            </div>
-        </div>
-        <div class="form-group">
-            {{Form::date('dateOfBirth', $client->user->dateOfBirth, array('class' => 'form-control')) }}
-        </div>
-        <div class="form-group">
-            {{Form::label('city', 'City: ', ['class' => 'col-sm-1 control-labe'])}}
-            <div class="col-sm-8">
-                {{Form::select('city', $cities, $client->user->city_id, ['class'=>'form-control'])}}
-            </div>
-        </div>
-        
-
-         <div class="form-group">
-         @if ($errors->has('image'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('image') }}</strong>
-                    </span>
-                @endif
-        @if($client->user->file != null)
-          <img src="{!!asset($client->user->file->path . $client->user->file->file)!!}" alt="..." class="img-thumbnail" style="height: 300px;">
-        @endif
-            {{Form::label('image', 'Photo: ', ['class' => 'col-sm-1 control-labe'])}}
-            <div class="col-sm-8">
-                <input class = "image" type="file" name="image" />   
-            </div>
-        </div>
-    <div></div>
-        {{Form::submit('Save Changes', ['class' => 'btn btn-success']) }}
-        {{Form::close()}}
-    
-</div> -->
-
 <!-- Content -->
 <div id="wrapper">
     <div class="container">
@@ -140,11 +91,11 @@
                             {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="surname">Фамилия</label>
-                                    <input type="text" class="form-control " id="surname" name="lastName" />
+                                    <input type="text" class="form-control " id="surname" name="surname" value="{{$client->user->lastName}}" />
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Имя</label>
-                                    <input type="text" class="form-control " id="name" name="firstName" />
+                                    <input type="text" class="form-control " id="name" name="name" value="{{$client->user->firstName}}" />
                                 </div>
                                 
                                 <div class="form-group">
@@ -178,7 +129,7 @@
                                 <img class="img-thumbnail" src="{{ asset('dist/images/avatar_large_male_client_default.jpg')}}" />
                             @endif
                             </div>
-                            <form action="{{ route('client.update',['settingtype'=>'photo'])}}" method="post">
+                            <form action="{{ route('client.update',['settingtype'=>'photo'])}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                                 <div class="form-group">
                                 @if ($errors->has('image'))
@@ -200,25 +151,36 @@
                 <div id="password" class="tab-pane fade in {{$settingtype==='privacy' ? 'active' : ''}}">
                     <div class="row">
                         <div class="col-sm-6">
-                            <form action="">
+                            <form action="{{ route('client.update',['settingtype'=>'privacy'])}}" method="post">
+                            {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control " id="email" readonly placeholder="{{$client->user->email}}" />
+                                    <input type="email" class="form-control " id="email" readonly placeholder="{{$client->email}}" />
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group{{$errors->has('wrong-attempt') ? ' has-error' : '' }}">
+                                    <label for="current-password">Текущий пароль</label>
+                                    @if ($errors->has('wrong-attempt'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('wrong-attempt') }}</strong>
+                                    </span>
+                                    @endif
+                                    <input type="password" class="form-control " id="current-password" name="current_password"/>
+                                </div>
+                                <div class="form-group{{$errors->has('new_password') ? ' has-error' : '' }}">
                                     <label for="new-password">Новый пароль</label>
-                                    <input type="password" class="form-control " id="new-password"/>
+                                    @if ($errors->has('new_password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('new_password') }}</strong>
+                                    </span>
+                                    @endif
+                                    <input type="password" class="form-control " id="new-password" name="new_password" />
                                 </div>
                                 <div class="form-group">
                                     <label for="news-password-confirm">Новый пароль еще раз</label>
-                                    <input type="password" class="form-control " id="news-password-confirm"/>
+                                    <input type="password" class="form-control " id="new-password-confirm" name="new_password_confirmation" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="current-password">Текущий пароль</label>
-                                    <input type="password" class="form-control " id="current-password"/>
-                                </div>
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-default btn-primary pull-right">Сохранить</button>
+                                    <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить</button>
                                 </div>
                             </form>
                         </div>
