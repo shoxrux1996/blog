@@ -103,7 +103,7 @@ Route::prefix('client')->group(function(){
 	Route::get('/password/reset/{token}', 'Auth\ClientResetPasswordController@showResetForm')->name('client.password.reset');
 	Route::get('/', 'Client\ClientController@index')->name('client.dashboard');
 	Route::get('/settings/info', 'Client\ClientController@info')->name('client.info');
-	Route::post('/update/{id}', 'Client\ClientController@update')->name('client.update');
+	Route::post('/update/{settingtype}', 'Client\ClientController@update')->name('client.update');
 
     Route::prefix('question')->group(function(){
         Route::get('/free/create', 'Client\ClientQuestionController@create')->name('question.create');

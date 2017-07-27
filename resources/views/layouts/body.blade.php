@@ -35,11 +35,11 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                      <a href="{{('client.dashboard')}}">
+                                      <a href="{{ route('client.dashboard')}}">
                                       Личный кабинет</a>
                                     </li>
                                     <li>
-                                      <a href="{{('client.info')}}">
+                                      <a href="{{ route('client.info')}}">
                                       Редактировать профиль</a>
                                     </li>
                                     <li>

@@ -65,7 +65,7 @@
                                 <a href="{{ route('client.info')}}">Редактировать</a>
                             </li>
                             <li>
-                                <h3>0 сум.</h3>
+                                <h3>{{$client->user->balance()}} сум.</h3>
                                 <a href="#">Управление балансом</a>
                             </li>
                         </ul>

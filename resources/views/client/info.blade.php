@@ -83,7 +83,7 @@
                                 <a href="#">Редактировать</a>
                             </li>
                             <li>
-                                <h3>0 сум.</h3>
+                                <h3>{{$client->user->balance()}} сум.</h3>
                                 <a href="#">Управление балансом</a>
                             </li>
                         </ul>
@@ -121,84 +121,89 @@
         <div class="col-sm-9 border-gray background-white">
             <h5 class="text-success"><i class="fa fa-pencil"></i> Редактирование профиля</h5>
             <ul class="nav nav-tabs">
-                <li class="active">
+                <li class="{{$settingtype==='main' ? 'active' : ''}}">
                     <a data-toggle="tab" href="#main">Основное</a>
                 </li>
-                <li>
+                <li class="{{$settingtype==='photo' ? 'active' : ''}}">
                     <a data-toggle="tab" href="#photo">Фотография</a>
                 </li>
-                <li>
+                <li class="{{$settingtype==='privacy' ? 'active' : ''}}">
                     <a data-toggle="tab" href="#password">Почта и пароль</a>
                 </li>
             </ul>
 
             <div class="tab-content">
-                <div id="main" class="tab-pane fade in active">
+                <div id="main" class="tab-pane fade in {{$settingtype==='main' ? 'active' : ''}}">
                     <div class="row">
                         <div class="col-sm-6">
-                            <form action="">
+                            <form action="{{ route('client.update',['settingtype'=>'main'])}}" method="post">
+                            {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="surname">Фамилия</label>
-                                    <input type="text" class="form-control " id="surname"/>
+                                    <input type="text" class="form-control " id="surname" name="lastName" />
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Имя</label>
-                                    <input type="text" class="form-control " id="name"/>
+                                    <input type="text" class="form-control " id="name" name="firstName" />
                                 </div>
-                                <div class="form-group">
-                                    <label for="patronymic">Отчество</label>
-                                    <input type="text" class="form-control " id="patronymic"/>
-                                </div>
+                                
                                 <div class="form-group">
                                     <label for="city">Город</label>
-                                    <input type="text" class="form-control " id="city" list="cities"/>
-                                    <datalist id="cities">
-                                        <option>Москва</option>
-                                        <option>Ташкент</option>
-                                    </datalist>
+                                     {{Form::select('city', $cities, $client->user->city_id, ['class'=>'form-control'])}}
                                 </div>
+
                                 <div class="form-group">
                                     <label for="birthday">Дата рождение</label>
-                                    <input type="date" class="form-control " id="birthday"/>
+                                    {{Form::date('dateOfBirth', $client->user->dateOfBirth, array('class' => 'form-control')) }}
                                 </div>
                                 <div class="form-group form-inline">
                                     <label>Пол </label>
-                                    <input type="radio" name="gender" checked /> Мужской
-                                    <input type="radio" name="gender"/> Женский
+                                    <input type="radio" name="gender" value="M" {{$client->gender==='M' ? 'checked' : ''}} /> Мужской
+                                    <input type="radio" name="gender" value="F" {{$client->gender==='F' ? 'checked' : ''}}/> Женский
                                 </div>
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-default btn-primary pull-right">Сохранить</button>
+                                    <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div id="photo" class="tab-pane fade">
+                <div id="photo" class="tab-pane fade in {{$settingtype==='photo' ? 'active' : ''}}">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="img-responsive">
-                                <img class="img-thumbnail" src="dist/images/avatar_large_male_client_default.jpg" />
+                            @if($client->user->file != null)
+                                <img src="{!!asset($client->user->file->path . $client->user->file->file)!!}" alt="..." class="img-thumbnail" style="height: 300px;">
+                            @else
+                                <img class="img-thumbnail" src="{{ asset('dist/images/avatar_large_male_client_default.jpg')}}" />
+                            @endif
                             </div>
-                            <form action="">
+                            <form action="{{ route('client.update',['settingtype'=>'photo'])}}" method="post">
+                            {{csrf_field()}}
                                 <div class="form-group">
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
                                     <label class="btn btn-default ">
-                                        Выбрать файл <input type="file" hidden>
+                                        Выбрать файл <input class="image" type="file" name="image" hidden>
                                     </label>
                                 </div>
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-default btn-primary">Загрузить</button>
+                                    <button type="submit" class="btn btn-default btn-primary">Загрузить</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div id="password" class="tab-pane fade">
+                <div id="password" class="tab-pane fade in {{$settingtype==='privacy' ? 'active' : ''}}">
                     <div class="row">
                         <div class="col-sm-6">
                             <form action="">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control " id="email"/>
+                                    <input type="email" class="form-control " id="email" readonly placeholder="{{$client->user->email}}" />
                                 </div>
                                 <div class="form-group">
                                     <label for="new-password">Новый пароль</label>

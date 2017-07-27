@@ -18,7 +18,8 @@ class ClientController extends Controller
 
      public function index()
     {
-        return view('client.dashboard');
+        $client = Auth::user();
+        return view('client.dashboard')->withClient($client);
     }
     
     public function info(){
@@ -29,14 +30,14 @@ class ClientController extends Controller
     		$cities[$key->id]= $key->name;
     	}
 
-    	return view('client.info')->withClient($client)->withCities($cities);
+    	return view('client.info')->withSettingtype('privacy')->withClient($client)->withCities($cities);
     }
-    public function update(Request $request, $id){
+    public function update(Request $request){
     	
         $this->validate($request, ['image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
        
             
-        $client = Client::findOrFail($id);
+        $client = Auth::user();
         $client->gender = $request->gender;
     	$client->user->dateOfBirth= $request->dateOfBirth;
         $client->user->city_id = $request->city;
