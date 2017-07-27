@@ -19,8 +19,9 @@
 
     <!-- Morris -->
     <link href="{{asset('dist/css/morris.css')}}" rel="stylesheet">
-    <style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #2C3E50 url('dist/images/three-dots.svg') center center no-repeat;background-size:79px;}</style>
+    <style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #2C3E50 url(dist/images/three-dots.svg) center center no-repeat;background-size:79px;}</style>
     <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
+    @yield('styles')
 </head>
 <body>
 <div id="wrapper">

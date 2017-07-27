@@ -72,7 +72,7 @@ Route::prefix('admin')->group(function(){
     });
     Route::prefix('comments')->group(function (){
         Route::get('/', 'Admin\AdminPostController@comments')->name('admin.comments.index');
-        Route::post('/deny/{id}','Admin\AdminPostController@commentDeny')->name('admin.comments.delete');
+        Route::post('/deny/{id}','Admin\AdminPostController@commentDeny')->name('admin.comment.delete');
     });
     Route::prefix('feedbacks')->group(function (){
         Route::get('/', 'Admin\AdminPostController@feedbacks')->name('admin.feedbacks.index');
@@ -82,6 +82,7 @@ Route::prefix('admin')->group(function(){
     Route::prefix('users')->group(function (){
         Route::get('/', 'Admin\AdminPostController@users')->name('admin.users.index');
         Route::post('client/block/{id}','Admin\AdminPostController@clientBlock')->name('admin.client.block');
+        Route::post('client/unblock/{id}','Admin\AdminPostController@clientUnblock')->name('admin.client.unblock');
         Route::post('lawyer/block/{id}','Admin\AdminPostController@lawyerBlock')->name('admin.lawyer.block');
     });
 });

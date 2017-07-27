@@ -3,6 +3,7 @@
 namespace yuridik\Http\Controllers\Admin;
 use Carbon\Carbon;
 use yuridik\Answer;
+use yuridik\Comment;
 use yuridik\Http\Controllers\Controller;
 use yuridik\Admin;
 use Illuminate\Http\Request;
@@ -36,15 +37,19 @@ class AdminPostController extends Controller
         $answer->destroy();
     }
     public function comments(){
-        return view('admin.comment.list');
+        $comments = Comment::orderBy('id', 'desc')->paginate(10);
+        return view('comment.list')->withComments($comments);
     }
-    public function commentDestroy(Request $request, $id){
+
+    public function commentDeny(Request $request, $id){
         $comment = Comment::findOrFail($id);
-        $comment->destroy();
+        $comment->delete();
+        return redirect()->back();
     }
     public function users(){
-        $clients =Client::all();
-        return view('admin.users')->withClients($clients);
+        $clients =Client::orderBy('id', 'desc')->paginate(3);
+        $lawyers = Lawyer::orderBy('id', 'desc')->paginate(3);;
+        return view('admin.users')->withClients($clients)->withLawyers($lawyers);
     }
     public function clientBlock(Request $request, $id){
 
@@ -53,6 +58,13 @@ class AdminPostController extends Controller
         $current = Carbon::now();
         $client->blockedTill = $current->addDays($request->days);
         $client->save();
+        return redirect()->back();
+    }
+    public function clientUnblock(Request $request, $id){
+        $client = Client::findOrFail($id);
+        $client->isBlocked = 0;
+        $client->save();
+        return redirect()->back();
     }
     public function lawyerBlock(Request $request, $id){
         $lawyer = Lawyer::findOrFail($id);
@@ -60,6 +72,13 @@ class AdminPostController extends Controller
         $current = Carbon::now();
         $lawyer->blockedTill = $current->addDays($request->days);
         $lawyer->save();
+        return redirect()->back();
+    }
+    public function lawyerUnblock(Request $request, $id){
+        $client = Client::findOrFail($id);
+        $client->isBlocked = 0;
+        $client->save();
+        return redirect()->back();
     }
 
 }
