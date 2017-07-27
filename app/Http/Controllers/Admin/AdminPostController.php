@@ -47,12 +47,12 @@ class AdminPostController extends Controller
         return view('admin.users')->withClients($clients);
     }
     public function clientBlock(Request $request, $id){
-        echo 'xaxa0';
-      /*  $client = Client::findOrFail($id);
+
+       $client = Client::findOrFail($id);
         $client->isBlocked = 1;
         $current = Carbon::now();
         $client->blockedTill = $current->addDays($request->days);
-        $client->save();*/
+        $client->save();
     }
     public function lawyerBlock(Request $request, $id){
         $lawyer = Lawyer::findOrFail($id);
