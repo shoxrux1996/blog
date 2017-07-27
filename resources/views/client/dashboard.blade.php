@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+<link href="{{ asset('dist/css/client.css')}}" rel="stylesheet">
+@endsection
 @section('body')
 @extends('layouts.body')
 @section('menu')
