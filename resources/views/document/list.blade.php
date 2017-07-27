@@ -5,7 +5,7 @@
 <div class="container">
 
 	@foreach($documents as $doc)
-		<a href="{{route('web.blog.show', ['id' => $blog->id])}}">
+		<a href="{{route('lawyer.document.show', $doc->id)}}">
 			<div class="bg-info col-md-8" style="margin-bottom: 20px;">
 				<div class="row">
 					<div class="col-md-12">

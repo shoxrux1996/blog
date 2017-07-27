@@ -48,9 +48,11 @@ class Lawyer extends Authenticatable
     {
         return $this->morphMany('yuridik\Comment', 'commentable');
     }
+    
     public function answers(){
         return $this->hasMany('yuridik\Answer');
     }
+
     public function feedbacks(){
         return $this->hasMany('yuridik\Feedback');
     }

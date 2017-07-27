@@ -1,0 +1,17 @@
+.sponsors{
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.sponsors img{
+    float: left;
+    margin-right: 10px;
+}
+
+.sponsors h5{
+    margin-top: 0;
+}
+
+.project-partners{
+    padding: 10px;
+}

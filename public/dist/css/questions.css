@@ -1,0 +1,12 @@
+.question-type span a{
+    font-size: 18px;
+    margin-right: 20px;
+    color: #1F2746;
+}
+
+.question-type .active-type a{
+    font-size: 24px;
+    border-bottom: 1px dashed #18BB9B;
+    font-weight: bold;
+    color: #18BB9B;
+}

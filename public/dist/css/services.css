@@ -1,0 +1,112 @@
+#ask-question{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 30px;
+    background-color: #F6F6F6;
+    color: #1F2746;
+}
+
+
+#ask-question .row:nth-child(1){
+    background-color: #F6F6F6;
+    padding: 20px;
+    color: #1F2746;
+}
+
+#adv{
+    color: #1F2746;
+    position: relative;
+    background-color: white;
+    padding: 10px;
+}
+
+#adv .col-sm-8{
+    padding: 10px;
+}
+#adv .col-sm-4{
+    padding: 10px;
+    position: absolute;
+    top: 50%; right: 0;
+    transform: translate(0%,-50%);
+}
+#adv .col-sm-8:hover, #adv .col-sm-4:hover{
+    transition: 1s;
+    box-shadow: 2px 2px 30px -4px rgba(31,39,70,0.82);
+}
+
+.best-service-img{
+    height: 64px;
+    margin: 0 auto;
+    float: left;
+    margin-right: 10px;
+}
+#how-it-works{
+    background-color: #fff;
+    margin-top: 20px;
+    color: #1F2746;
+}
+#how-it-works .col-sm-3{;
+    padding: 20px;
+}
+
+.number{
+    padding: 5px 15px;
+    background: #18BB9B;
+    border-radius: 100%;
+    color: #ffffff;
+}
+
+
+.ask-form{
+    padding: 30px;
+    margin-top: 30px;
+    color: #1F2746;
+    background-color: #fff;
+}
+
+.ask-form label{
+    color: #1F2746;
+}
+
+.asked-question{
+    background-color: #fff;
+    margin-top: 20px;
+}
+
+.price-table{
+    background-color: #fff;
+    margin-top: 30px;
+    padding: 40px;
+}
+
+.price-table button{
+    padding: 10px 20px;
+    margin-top: 20px;
+    float: right;
+}
+
+.background-white{
+    background-color: #fff;
+}
+
+.padding-30{
+    padding: 30px;
+}
+
+#order-call, #order-document{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: #F6F6F6;
+    color: #1F2746;
+}
+
+
+#order-call .package{
+    height: 400px;
+}
+
+#order-document .ask-form p{
+    color: #8B8F9C;
+    font-size: 12px;
+    margin-top: 0;
+}

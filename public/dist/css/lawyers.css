@@ -1,0 +1,155 @@
+/*Search Lawyer*/
+#search-lawyer{
+    padding: 10px 100px 0px 100px;
+    background: url("../images/lawyer-bg.jpg") no-repeat;
+    background-size: cover;
+    height: 400px;
+}
+
+#search-lawyer #form{
+    padding: 10px 100px;
+}
+
+#search-lawyer form{
+    padding: 10px;
+}
+
+#search-lawyer input{
+    border-radius: 0;
+    border: 1px solid #1F2746;
+}
+
+#search-lawyer button{
+    padding: 10px 80px;
+}
+
+/*Statistics*/
+#statistics{
+    padding: 10px;
+}
+
+#statistics .img-responsive{
+    height: 64px;
+    margin: 0 auto;
+}
+
+/*Main Section*/
+#main-section{
+    background-color: #F6F6F6;
+    padding: 30px;
+}
+
+#main-section #specialisation p{
+    margin-bottom: 0px;
+}
+
+#main-section #specialisation a{
+    color: #1F2746;
+}
+
+
+#main-section #specialisation a{
+    text-decoration: none;
+    position: relative;
+    color: #1F2746;
+}
+
+#main-section #specialisation a:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #18BB9B;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.5s ease-in-out 0s;
+}
+
+#main-section #specialisation a:hover:before{
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+#main-section #specialisation .col-md-4{
+    margin-top: 10px;
+}
+
+#main-section #specialisation button{
+    width: 70%;
+    margin-top: 20px;
+}
+
+
+/*Search cities*/
+#main-section #search-cities input{
+    width: 40%;
+    border-radius: 0;
+    border-color: #1F2746;
+    color: #1F2746;
+}
+
+#main-section #city-tags{
+    margin-top: 10px;
+}
+
+#main-section #city-tags a{
+    margin-right: 15px;
+    color: #1F2746;
+}
+
+#main-section .card .front, .card .back{
+    border-radius: 0;
+}
+
+#main-section .card .cover{
+    border-radius: 0;
+}
+
+#main-section .card .main i{
+    color: #FFD700;
+    font-size: 24px;
+}
+
+#main-section .main .rank{
+    font-size: 16px;
+}
+
+#main-section .content{
+    padding: 10px;
+}
+
+#main-section .back .social-links{
+    padding: 15px;
+}
+
+#main-section .pagination li a{
+    color: #1F2746;
+    border-radius: 0;
+}
+
+#main-section .pagination{
+    border-radius: 0;
+}
+
+/*Media Queries*/
+@media (max-width: 991px){
+    /*Search lawyer*/
+    #search-lawyer #form{
+        padding: 10px 60px;
+    }
+
+    #search-lawyer button{
+        padding: 10px 50px;
+    }
+
+    /*Best Lawyer*/
+    #main-section #specialisation button{
+        width: 50%;
+        margin-top: 20px;
+    }
+}

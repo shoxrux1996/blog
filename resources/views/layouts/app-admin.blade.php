@@ -40,7 +40,7 @@
                         Logout
                     </a>
 
-                    <form id="logout-form" action="{{ route('admin.logout') }}" method="GET" style="display: none;">
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="post" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                 @endif

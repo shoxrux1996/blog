@@ -1,0 +1,37 @@
+#are-you-lawyer{
+    background-image: url(../images/are-you-lawyer-bg.jpg);
+    background-size: cover;
+    height: 400px;
+    padding: 50px 200px;
+}
+
+.big-text{
+    font-size: 64px;
+    font-weight:bold;
+}
+
+#online-consultion{
+    padding: 30px 30px;
+    padding-bottom: 50px;
+}
+
+#online-consultion i{;
+    margin-top: 20px;
+    font-size: 72px;
+}
+
+#innovational{
+    background-color: #f7f7f7;
+    padding: 50px 100px;
+}
+
+#how-it-works{
+    padding: 20px 50px;
+    margin-bottom: 20px;
+}
+
+#how-it-works span{
+    font-size: 24px;
+    display: inline-block;
+    margin-bottom: 10px;
+}

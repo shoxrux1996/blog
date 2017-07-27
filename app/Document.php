@@ -9,7 +9,7 @@ class Document extends Model
     public function client(){
        return $this->belongsTo('yuridik\Client');
     }
-
+    protected $fillable = ['status'];
     public function category(){
         return $this->belongsTo('yuridik\Category');
     }
@@ -17,11 +17,14 @@ class Document extends Model
     {
         return $this->morphMany('yuridik\File', 'fileable');
     }
-    public function answers(){
-        return $this->hasMany('yuridik\Answer');
+    public function requests(){
+        return $this->hasMany('yuridik\Request');
     }
-    public function order()
+     public function order()
     {
         return $this->morphMany('yuridik\Order', 'typeable');
+    }
+    public function soft_requests(){
+        return $this->requests->where('status',1);
     }
 }

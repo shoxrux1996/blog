@@ -50,8 +50,7 @@ class LawyerAnswerController extends Controller
         $answer = new Answer;
         $answer->text = $request->text;
         $answer->lawyer_id = $lawyer->id;
-        $answer->question_id = $question->id;
-        $answer->save();
+        $question->answers()->save($answer);
 
         if ($request->file('files') != null) {
             $file = $request->file('files');

@@ -26,7 +26,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
-    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
     Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
@@ -115,14 +115,19 @@ Route::prefix('client')->group(function(){
     	Route::post('/send/answer/{answer_id}', 'Client\ClientFeedbackController@store')->name('feedback.create');
     });
     Route::prefix('document')->group(function(){
-	Route::get('/create', 'Client\ClientDocumentController@create')->name('document.create');
-	Route::post('/store', 'Client\ClientDocumentController@store')->name('document.store');
-});
+    	Route::get('/create', 'Client\ClientDocumentController@create')->name('document.create');
+    	Route::post('/store', 'Client\ClientDocumentController@store')->name('document.store');
 
+    });
+       Route::prefix('my')->group(function(){
+            Route::get('/documents', 'Client\ClientDocumentController@myDocs')->name('my.documents');
+            Route::get('/document/{id}', 'Client\ClientDocumentController@showDoc')->name('client.document.show');
+            Route::post('document/accept/{id}', 'Client\ClientDocumentController@acceptRequest')->name('client.document.accept');
+            Route::post('document/reject/{id}', 'Client\ClientDocumentController@rejectRequest')->name('client.document.reject');
+       });
 
     
     Route::prefix('blogs')->group(function(){
-	 	
 	 	Route::get('/show/{id}', 'Admin\AdminBlogController@show')->name('client.blog.show');
 	});
 });
@@ -135,16 +140,19 @@ Route::prefix('lawyer')->group(function(){
     Route::get('/settings/info', 'Lawyer\LawyerController@info')->name('lawyer.info');
     Route::post('/update/{id}', 'Lawyer\LawyerController@update')->name('lawyer.update');
     
-    Route::prefix('blogs')->group(function(){
+    Route::prefix('/blogs')->group(function(){
         Route::get('/insertform','Lawyer\LawyerBlogController@insertform')->name('lawyer.blog.insert');
         Route::post('/create','Lawyer\LawyerBlogController@store')->name('lawyer.blog.submit');
-        
     });
-    Route::prefix('comment')->group(function(){
+    Route::prefix('/comment')->group(function(){
         Route::post('/{blog_id}', 'Lawyer\LawyerCommentController@store')->name('lawyer.comment.store');
     });
     Route::post('answer/create/{question_id}', 'Lawyer\LawyerAnswerController@store')->name('lawyer.answer.store');
-
+    Route::prefix('document')->group(function(){
+        Route::get('/list', 'Lawyer\LawyerDocumentController@index')->name('lawyer.document.info');
+        Route::post('/submit/{id}', 'Lawyer\LawyerDocumentController@sendRequest')->name('lawyer.document.request');
+        Route::get('show/{id}', 'Lawyer\LawyerDocumentController@show')->name('lawyer.document.show');
+    });
 });
 
 Route::prefix('question_info')->group(function (){

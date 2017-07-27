@@ -12,8 +12,9 @@ use DB;
 class UserLoginController extends Controller
 {
     public function __construct(){
+    	$this->middleware('guest:lawyer', ['except'=> ['userLogout'], ['showLinkRequestForm'], ['userfinder']]);
 		$this->middleware('guest:client', ['except'=> ['userLogout'], ['showLinkRequestForm'], ['userfinder']]);
-		$this->middleware('guest:lawyer', ['except'=> ['userLogout'], ['showLinkRequestForm'], ['userfinder']]);
+		
 	}
 
     
@@ -48,8 +49,9 @@ class UserLoginController extends Controller
 
       public function userLogout()
     {
+    	  Auth::guard('lawyer')->logout();
         Auth::guard('client')->logout();
-        Auth::guard('lawyer')->logout();
+      
 
         return redirect('/');
     }
