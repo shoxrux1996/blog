@@ -121,6 +121,9 @@ Route::prefix('client')->group(function(){
     });
        Route::prefix('my')->group(function(){
             Route::get('/documents', 'Client\ClientDocumentController@myDocs')->name('my.documents');
+            Route::get('/document/{id}', 'Client\ClientDocumentController@showDoc')->name('client.document.show');
+            Route::post('document/accept/{id}', 'Client\ClientDocumentController@acceptRequest')->name('client.document.accept');
+            Route::post('document/reject/{id}', 'Client\ClientDocumentController@rejectRequest')->name('client.document.reject');
        });
 
     

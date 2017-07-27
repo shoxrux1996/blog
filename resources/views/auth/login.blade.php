@@ -13,7 +13,7 @@
   <li><a href="{{ route('about')}}">О нас</a></li>
 @endsection
 @section('content')
-<!-- <div class="container">
+<div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -87,10 +87,10 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 <!-- Login Form -->
-<div class="container">
+<!-- <div class="container">
     <div class="row" id="login-bg">
         <div class="col-md-6 col-sm-8 col-xs-12">
             <h1>Вход на Yuridik.uz</h1>
@@ -137,7 +137,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- /Login Form -->
 
 @endsection

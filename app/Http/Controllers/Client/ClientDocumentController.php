@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Session;
 use Auth;
 use Validator;
 use DB;
-
+use yuridik\Request as Reques;
+use yuridik\Order;  
 class ClientDocumentController extends Controller
 {
     public function __construct()
@@ -83,5 +84,42 @@ class ClientDocumentController extends Controller
         Session::flash('message', 'Request submitted successfully');
         return redirect()->route('client.dashboard');       
     }
-  
+     public function myDocs(){
+        $documents = Auth::guard('client')->user()->documents;
+        return view('client.documents')->withDocuments($documents);
+    }
+    public function showDoc($id){
+        $document = Document::findOrFail($id);
+       
+        
+        $document_status = true;
+        if($document->status == 1){
+            $document_status = false;
+        }
+       
+                return view('client.document_show')->withDocument($document)->withShow($document_status);
+    }
+    public function acceptRequest(Request $request, $id){
+        $reques= Reques::findOrFail($id);
+        $client = Auth::guard('client')->user();
+        if($client->user->balance() >= $reques->price){
+                $order = new Order;
+                $order->user_id = $client->user->id;
+                $order->amount = $reques->price;
+                $reques->document->update(['status' => 1]);
+                
+                $reques->document->order()->save($order);
+                Session::flash('message', 'Order created successfully');
+                return redirect()->route('client.dashboard');
+        }
+        else{
+            Session::flash('message', 'Not enough money, Please charge your balance');
+                return redirect()->route('card.payment');
+        }
+    }
+    public function rejectRequest(Request $request, $id){
+        $reques= Reques::findOrFail($id);
+        $reques->status = 0;
+        $reques->save();
+    }
 }
