@@ -20,7 +20,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::all();
+        $questions = Question::orderBy('id','desc')->paginate(5);
         return view('question.list')->withQuestions($questions);
     }
      public function show($id){
