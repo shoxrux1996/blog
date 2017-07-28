@@ -59,7 +59,7 @@ class ClientController extends Controller
                 'max' => 'Размер слишком велик',
                 ]; 
             $validator= Validator::make($request->all(), 
-                ['image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
+                ['image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',],$messages);
             if($validator->fails()){
                 return view('client.info')->withSettingtype('photo')->withClient($client)->withCities($cities)->withErrors($validator);
             }

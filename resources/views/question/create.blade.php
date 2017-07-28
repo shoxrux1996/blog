@@ -73,7 +73,7 @@
         </div>
         <!-- /How does it work? -->
 
-        <form action="POST" action="{{ route('question.insert.submit')}}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('question.insert.submit')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
             <!-- Question submit form -->
             <div class="row ask-form">
@@ -82,33 +82,39 @@
                     <div class="form-group">
                         <label>Вы задаете вопрос как*</label>
                         <label class="checkbox-inline">
-                            <input type="radio" id="inlineCheckbox1" value="option1" name="radio" checked> Частное лицо
+                            <input type="radio" id="inlineCheckbox1" value="1" name="radio" checked> Частное лицо
                         </label>
                         <label class="checkbox-inline">
-                            <input type="radio" id="inlineCheckbox2" value="option2" name="radio"> Представитель бизнеса
+                            <input type="radio" id="inlineCheckbox2" value="2" name="radio"> Представитель бизнеса
                         </label>
                     </div>
                     <div class="form-group">
                         <label for="category">Категория права</label>
-                        <input type="text" name="category" list="categories" class="form-control general-input" placeholder="Не выбрано" id="category">
-                        <datalist id="categories">
-                            <option value="Category 1"></option>
-                            <option value="Category 2"></option>
-                            <option value="Category 3"></option>    
-                        </datalist>
+                        {{Form::select('category', $categories, null , ['class'=>'form-control general-input', 'placeholder'=>'не выбрано'])}}
+                        
                     </div>
-                    <div class="form-group">
+                    <div class="form-group{{$errors->has('title') ? ' has-error' : '' }} ">
                         <label for="question">Ваш вопрос*</label>
-                        <input type="text" class="form-control general-input" id="question" placeholder="Как подать в суд, если неизвестен адрес ответчика?"/>
+                            @if ($errors->has('title'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('title') }}</strong>
+                                </span>
+                            @endif
+                        <input type="text" class="form-control general-input" id="question" placeholder="Как подать в суд, если неизвестен адрес ответчика?" name="title" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group{{$errors->has('title') ? ' has-error' : '' }}">
                         <label for="description">Подробное описание ситуации*</label>
-                        <textarea class="form-control general-input" rows="15" id="description"></textarea>
+                        @if ($errors->has('title'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('title') }}</strong>
+                            </span>
+                        @endif
+                        <textarea class="form-control general-input" rows="15" id="description" name="description"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Если нужно, прикрепите файл</label>
                         <label class="btn btn-default general-input">
-                            Выбрать файл <input type="file" hidden>
+                            Выбрать файл <input type="file" name="files[]" multiple hidden>
                         </label>
                     </div>
                 </div>
@@ -120,7 +126,7 @@
                 <div class='wrapper'>
                     <div class='package col-sm-4'>
 
-                        <input type="radio" name="price" id="standart-price"/>
+                        <input type="radio" name="type" id="standart-price" value="1" />
                         <div class='name'>
                             <label for="standart-price">Стандартная</label>
                         </div>
@@ -137,7 +143,7 @@
                         </ul>
                     </div>
                     <div class='package brilliant col-sm-4'>
-                        <input type="radio" name="price" checked id="vip-price"/>
+                        <input type="radio" name="type" checked id="vip-price" value="2" />
                         <div class='name'>
                             <label for="vip-price">VIP-консультация</label>
                         </div>
@@ -169,7 +175,7 @@
                         </ul>
                     </div>
                     <div class='package col-sm-4'>
-                        <input type="radio" name="price" id="free-price"/>
+                        <input type="radio" name="type" id="free-price" value="0" />
                         <div class='name'>
                             <label for="free-price">Бесплатная</label>
                         </div>

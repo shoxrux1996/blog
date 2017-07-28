@@ -1,6 +1,14 @@
 @extends('layouts.app')
 @section('body')
 @extends('layouts.body')
+@section('menu')
+  <li><a href="{{ route('home')}}">Главная</a></li>
+  <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
+  <li><a href="{{ route('question.list')}}">Вопросы</a></li>
+  <li><a href="{{ route('web.blogs')}}">Блог</a></li>
+  <li><a href="{{ route('how-works')}}">Как это работает</a></li>
+  <li><a href="{{ route('about')}}">О нас</a></li>
+@endsection
 @section('content')
 <div class="container">
         {{Form::open(['route' => ['document.store'], 'enctype' => 'multipart/form-data', 'method' => 'post', 'class' => 'form-horizontal'])}}
@@ -27,15 +35,7 @@
             </div>
         </div>
         
-    <script>
-        
-        var subtypes = {!!json_encode($subtypes, JSON_PRETTY_PRINT) !!}
-        console.log(subtypes)
-        
-        var parents = {!!json_encode($parents, JSON_PRETTY_PRINT) !!}
-        console.log(parents)
-
-    </script>
+    
 
         <div class="form-group">
             {{Form::label('title', 'Мне нужно', ['class' => 'col-sm-1 control-label'])}}
@@ -77,7 +77,15 @@
 
 @endsection
 @section('scripts')
+<script>
+        
+        var subtypes = {!!json_encode($subtypes, JSON_PRETTY_PRINT) !!}
+        console.log(subtypes)
+        
+        var parents = {!!json_encode($parents, JSON_PRETTY_PRINT) !!}
+        console.log(parents)
 
+    </script>
 {!! Html::script('js/document.js') !!}
 @endsection
 @endsection

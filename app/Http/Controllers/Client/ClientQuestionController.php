@@ -38,30 +38,74 @@ class ClientQuestionController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+                'required' => 'Обязательно к заполнению',
+                'string' => 'Неправильный формат',
+                'title.min' => 'Минимум 3 символов',
+                'description.min' => 'Минимум 10 символов',
+                ];
         $rules = array(
-           'title' => 'required|min:3',
-            'text' => 'required|min:10',
+           'title' => 'required|string|min:3',
+            'description' => 'required|string|min:10',
             );
 
        
         $count = count($request->file('files'))-1;
     
 
-        foreach(range(0, $count) as $i) {
-             $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
-        }
-        Validator::make($request->all(), $rules)->validate();
-        $client = Auth::guard('client')->user();
+        // foreach(range(0, $count) as $i) {
+        //      $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
+        // }
+        Validator::make($request->all(), $rules,$messages)->validate();
+        $client = Auth::user();
 
         if($request->type == 2){
-            if($client->user->balance() >= $request->price){
+            if($client->user->balance() >= 5000){
                 $question = new Question;
                 $question->title = $request->title;
-                $question->text = $request->text;
+                $question->text = $request->description;
                 $question->category_id = $request->category;
                 $question->client_id = $client->id;
-                $question->price = $request->price;
+                $question->price = 5000;
                 $question->type = 2;
+                $question->save();
+                $client->user->save();// is it possible?
+
+                if ($request->file('files') != null) {
+                    $file = $request->file('files');
+                    foreach ($file as $key) {
+                        $fil = new File;
+                        $fil->file = $key->getClientOriginalName();
+                        $upload_folder = '/questions/' . time() . '/';
+                        $fil->path = $upload_folder;
+                        $question->files()->save($fil);
+                        $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
+                    }
+                }
+
+                $order = new Order;
+                $order->user_id = $question->client->user->id;
+                $order->amount = $question->price;
+                $question->order()->save($order);
+
+                Session::flash('message', 'Question created successfully');
+                return redirect()->route('client.dashboard');
+            }
+            else
+            {
+                Session::flash('message', 'Not enough money, Please charge your balance');
+                return redirect()->route('card.payment');
+            }
+        }
+        elseif($request->type == 1){
+            if($client->user->balance() >= 1000){
+                $question = new Question;
+                $question->title = $request->title;
+                $question->text = $request->description;
+                $question->category_id = $request->category;
+                $question->client_id = $client->id;
+                $question->price = 1000;
+                $question->type = 1;
                 $question->save();
                 $client->user->save();// is it possible?
 
@@ -94,13 +138,13 @@ class ClientQuestionController extends Controller
         else{
             $question = new Question;
             $question->title = $request->title;
-            $question->text = $request->text;
+            $question->text = $request->description;
             $question->category_id = $request->category;
 
             $client=Client::where('email',$request->email)->first();
 
             $question->client_id = $client->id;
-            $question->type = 1;
+            $question->type = 0;
             $question->save();
 
             if ($request->file('files') != null) {
