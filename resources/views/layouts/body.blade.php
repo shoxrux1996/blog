@@ -1,4 +1,4 @@
-<!-- Header -->
+<!-- Header --> 
     <div class="container-fluid my-header color-white dark-blue">
       <div class="row">
         <div class="col-md-2 col-sm-3 col-xs-6">
@@ -28,7 +28,27 @@
           @if (!(Auth::guard('client')->check() || Auth::guard('lawyer')->check()))
           <a href="{{ route('user.register') }}">Зарегистрироваться</a> | <a href="{{ route('user.login') }}">Войти</a>
           @else
-          <li class="dropdown">
+          <div class="dropdown">
+                <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
+                    @if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->user->firstName }} @else {{ Auth::guard('lawyer')->user()->user->firstName }} @endif
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li class="profile"><a href="">@if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->email }} @else {{ Auth::guard('lawyer')->user()->email }} @endif</a></li>
+                    <div class="divider"></div>
+                    <li><a href="{{ route('client.dashboard')}}">Личный кабинет</a></li>
+                    <li><a href="{{ route('client.info')}}">Редактировать профиль</a></li>
+                    <li><a href="#">Партнёрская программа</a></li>
+                    <li><a href="#">Финансы</a></li>
+                    <li><a href="{{ route('user.logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Выход</a><form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                                     </li>
+                </ul>
+            </div>
+          <!-- <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                  @if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->user->firstName }} @else {{ Auth::guard('lawyer')->user()->user->firstName }} @endif <span class="caret"></span>
                                 </a>
@@ -54,7 +74,7 @@
                                         </form>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
           @endif
         </div>
       </div>
@@ -144,4 +164,4 @@
         </div>
       </div>
     </footer>
-    <!-- /Footer -->
+    <!-- /Footer

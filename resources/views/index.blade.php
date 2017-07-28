@@ -38,7 +38,7 @@
     <div class="container-fluid" id="services-section">
       <div class="row">
         <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-          <img src="{{ asset('dist/images/question-icon.png')}}" alt="Question icon"/>
+          <img src="{{( 'dist/images/question-icon.png')}}" alt="Question icon"/>
           <a type="button" class="btn btn-default" href="{{ route('question.create')}}">Задать вопрос</a>
           <p class="statistics">50,000+</p>
           <p class="what">Отвеченных вопросов</p>
@@ -86,90 +86,6 @@
                     </div>
                 </a>
             @endforeach
-              <!-- <a href="individual-question.html" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 18:14
-                  </div>
-                  <div class="total-answers">
-                      8 ответов
-                  </div>
-                  <div class="asked-question">
-                      Оформление отношений между Перевозчиком и Водителем
-                  </div>
-                  <div class="asked-price">
-                      стоимость 800 сум
-                  </div>
-              </a>
-              <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 17:16
-                  </div>
-                  <div class="total-answers">
-                      6 ответов
-                  </div>
-                  <div class="asked-question">
-                      Как перевести категорию использования части земельного участка?
-                  </div>
-                  <div class="asked-price">
-                      стоимость 1400 сум
-                  </div>
-              </a>
-              <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 15:58
-                  </div>
-                  <div class="total-answers">
-                      6 ответов
-                  </div>
-                  <div class="asked-question">
-                      Как получить в своё распоряжение участок земли недалеко от озера?
-                  </div>
-                  <div class="asked-price">
-                      стоимость 589 сум
-                  </div>
-              </a>
-              <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 15:58
-                  </div>
-                  <div class="total-answers">
-                      5 ответов
-                  </div>
-                  <div class="asked-question">
-                      Приобретение квартиры в ипотеку на имя внука (внучки)
-                  </div>
-                  <div class="asked-price">
-                      стоимость 500 сум
-                  </div>
-              </a>
-              <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 15:03
-                  </div>
-                  <div class="total-answers">
-                      3 ответов
-                  </div>
-                  <div class="asked-question">
-                      Как правильно оформить безвозмездное право использования исходного кода
-                  </div>
-                  <div class="asked-price">
-                      стоимость 800 сум
-                  </div>
-              </a>
-              <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 14:56
-                  </div>
-                  <div class="total-answers">
-                      5 ответов
-                  </div>
-                  <div class="asked-question">
-                      Составление долгосрочного договора между физлицом и юридическим лицом
-                  </div>
-                  <div class="asked-price">
-                      стоимость 1000 сум
-                  </div>
-              </a>-->
           </div> 
           <div id="free-question-block" class="hidden">
             @foreach($free_question_examples as $var)
@@ -185,72 +101,6 @@
                     </div>
                 </a>
             @endforeach
-              <!-- <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 04:13
-                  </div>
-                  <div class="total-answers">
-                      1 ответ
-                  </div>
-                  <div class="asked-question">
-                      Расторжение договорных обязательств между арендатором ООО и арендодателем ООО?
-                  </div>
-              </a>
-              <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 04:04
-                  </div>
-                  <div class="total-answers">
-                      1 ответ
-                  </div>
-                  <div class="asked-question">
-                      Как доказать отцовство и взыкать алименты
-                  </div>
-              </a>
-              <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 03:49
-                  </div>
-                  <div class="total-answers">
-                      1 ответ
-                  </div>
-                  <div class="asked-question">
-                      Имею ли я право уволиться?
-                  </div>
-              </a>
-              <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 03:45
-                  </div>
-                  <div class="total-answers">
-                      1 ответ
-                  </div>
-                  <div class="asked-question">
-                      Сосед обрезал кусты вдоль дороги, аргументируя тем, что они ему мешают при выезде с участка
-                  </div>
-              </a>
-              <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 03:09
-                  </div>
-                  <div class="total-answers">
-                      1 ответ
-                  </div>
-                  <div class="asked-question">
-                      Тонировка предписание
-                  </div>
-              </a>
-              <a href="#" class="question clearfix">
-                  <div class="asked-time">
-                      Сегодня 02:55
-                  </div>
-                  <div class="total-answers">
-                      1 ответ
-                  </div>
-                  <div class="asked-question">
-                      Проблема не могу уснуть
-                  </div>
-              </a> -->
           </div>
           <a type="button" class="btn btn-default btn-lg btn-block blue-button" href="{{ route('question.list')}}">Смотреть все вопросы</a>
         </div >
@@ -262,101 +112,20 @@
       <div class="row">
         <div class="col-md-9 col-sm-12">
             <div class="row">
+            @foreach($categories as $category)
+              @if($category->category_id===NULL)
                 <div class="col-md-4 col-sm-4 col-xs-4 categories">
                     <a href="#">
-                        <i class="fa fa-building"></i> Корпоративное право
+                        <i class="fa fa-building"></i> {{$category->name}}
                     </a>
-                    <p><a href="#">регистрация ООО</a></p>
-                    <p><a href="#">регистрация акционерного общества</a></p>
-                    <p><a href="#">регистрация некоммерческой организации</a></p>
-                    <p><a href="#">регистрация общественной организации</a></p>
+                    @foreach($categories as $subcategory)
+                      @if($subcategory->category_id===$category->id)
+                        <p><a href="#">{{$subcategory->name}}</a></p>
+                      @endif
+                    @endforeach
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                    <a href="individual-category.html">
-                        <i class="fa fa-users"></i> Гражданское право
-                    </a>
-                    <p><a href="#">договор об оказании услуг</a></p>
-                    <p><a href="#">договор аренды нежилого помещения</a></p>
-                    <p><a href="#">расторжение договора аренды</a></p>
-                    <p><a href="#">расторжение договора купли продажи</a></p>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                    <a href="#">
-                        <i class="fa fa-drivers-license"></i> Лицензирование
-                    </a>
-                    <p><a href="#">арбитражный спор</a></p>
-                    <p><a href="#">апелляционная жалоба в арбитражный суд</a></p>
-                    <p><a href="#">обжалование решения арбитражного суда</a></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                    <a href="#">
-                        <i class="fa fa-building-o"></i> Недвижимость
-                    </a>
-                    <p><a href="#">жилищные споры</a></p>
-                    <p><a href="#">доля в квартире</a></p>
-                    <p><a href="#">аварийное жилье</a></p>
-                    <p><a href="#">выписка из квартиры</a></p>
-                    <p><a href="#">выписать ребенка из квартиры</a></p>
-                    <p><a href="#">выделение доли в квартире через суд</a></p>
-                    <p><a href="#">ухудшение жилищных условий</a></p>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                    <a href="#">
-                        <i class="fa fa-buysellads"></i> Защита прав потребителя
-                    </a>
-                    <p><a href="#">возврат товара</a></p>
-                    <p><a href="#">возврат денег за товар</a></p>
-                    <p><a href="#">возврат товара без чека</a></p>
-                    <p><a href="#">возврат некачественного товара</a></p>
-                    <p><a href="#">возврат технически сложного товара</a></p>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                    <a href="#">
-                        <i class="fa fa-car"></i> Автомобильное право
-                    </a>
-                    <p><a href="#">наезд на пешехода</a></p>
-                    <p><a href="#">ДТП со смертельным исходом</a></p>
-                    <p><a href="#">ДТП с участием пешехода</a></p>
-                    <p><a href="#">оставление места ДТП</a></p>
-                    <p><a href="#">тяжкий вред здоровью при ДТП</a></p>
-                    <p><a href="#">возмещение ущерба при ДТП</a></p>
-                    <p><a href="#">жалоба на действия сотрудника ГИБДД</a></p>
-                    <p><a href="#">обжалование постановления ГИБДД</a></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                    <a href="#">
-                        <i class="fa fa-star"></i> Военное право
-                    </a>
-                    <p><a href="#">помощь военным</a></p>
-                    <p><a href="#">военная ипотека</a></p>
-                    <p><a href="#">военная травма</a></p>
-                    <p><a href="#">служебное жилье для военнослужащих</a></p>
-                    <p><a href="#">жилищный сертификат военнослужащим</a></p>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                    <a href="#">
-                        <i class="fa fa-child"></i> Семейное право
-                    </a>
-                    <p><a href="#">лишение родительских прав</a></p>
-                    <p><a href="#">установление отцовства</a></p>
-                    <p><a href="#">установление отцовства в судебном порядке</a></p>
-                    <p><a href="#">оспаривание отцовства</a></p>
-                    <p><a href="#">восстановление родительских прав</a></p>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                    <a href="#">
-                        <i class="fa fa-shield"></i> Страхование
-                    </a>
-                    <p><a href="#">задержка страховой выплаты</a></p>
-                    <p><a href="#">претензия в страховую компанию</a></p>
-                    <p><a href="#">споры со страховой компанией</a></p>
-                    <p><a href="#">расторжение договора страхования</a></p>
-                    <p><a href="#">суд со страховой компанией</a></p>
-                </div>
+              @endif  
+            @endforeach
             </div>
         </div>
         <div class="col-md-3 text-center view-all-categories">

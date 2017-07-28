@@ -119,11 +119,16 @@
                             @endif
                             <input type="text"  class="form-control" name="lawyer[email]" placeholder="Введите электронную почту">
                         </div>
-                        <div class="form-group{{ $errors->has('lawyer.password') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('lawyer.password') || $errors->has('lawyer.password_confirm') ? ' has-error' : '' }}">
                             <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> Пароль </label>
                             @if ($errors->has('lawyer.password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('lawyer.password') }}</strong>
+                                </span>
+                            @endif
+                            @if ($errors->has('lawyer.password_confirm'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('lawyer.password_confirm') }}</strong>
                                 </span>
                             @endif
                             <input type="password" class="form-control" name="lawyer[password]" placeholder="Введите новую пароль">
