@@ -52,6 +52,7 @@ class UserLoginController extends Controller
             }
             return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Entered email or password were wrong']);
         }
+
         $cl = Lawyer::where('email', $request->email)->first();
         $this->validate($request, [
             'email' => 'required|email',
@@ -69,7 +70,7 @@ class UserLoginController extends Controller
             return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'You are not confirmed email']);
         }
         $credentials = ['email' => $request->email, 'password' => $request->password];
-        if (Auth::guard('client')->attempt($credentials, $request->remember)) {
+        if (Auth::guard('lawyer')->attempt($credentials, $request->remember)) {
 
             return redirect()->intended(route('client.dashboard'));
         }

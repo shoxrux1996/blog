@@ -28,13 +28,13 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                            <form action="{{ route('admin.comment.delete', [$comment->id]) }}"
-                                                  method="post">
-                                                {{csrf_field()}}
-                                                <button type="submit" class="btn btn-danger pull-right btn-xs"
-                                                        style="height: 25px; margin-left: 20px;">Удалить
-                                                </button>
-                                            </form>
+                                        <form action="{{ route('admin.comment.delete', [$comment->id]) }}"
+                                              method="post">
+                                            {{csrf_field()}}
+                                            <button type="submit" class="btn btn-danger pull-right btn-xs"
+                                                    style="height: 25px; margin-left: 20px;">Удалить
+                                            </button>
+                                        </form>
 
                                     </td>
                                     <td>
@@ -53,4 +53,6 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 @endsection

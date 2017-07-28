@@ -18,7 +18,7 @@ class LawyerBlogController extends Controller
     public function store(Request $request)
     {
                $this->validate($request, array(
-            'title' => 'required|max:255',
+            'title' => 'required|max:200',
             'text' => 'required|min:10'));
 
         $blog = new Blog;

@@ -17,4 +17,7 @@ class Blog extends Model
      public function getRelatedIds(){
     	return $this->tags->pluck('id');
     }
+    public function lawyer(){
+         return $this->belongsTo('yuridik\Lawyer');
+    }
 }
