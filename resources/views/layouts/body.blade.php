@@ -45,36 +45,9 @@
                                                      document.getElementById('logout-form').submit();">Выход</a><form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
-                                                     </li>
+                </li>
                 </ul>
             </div>
-          <!-- <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                 @if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->user->firstName }} @else {{ Auth::guard('lawyer')->user()->user->firstName }} @endif <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                      <a href="{{ route('client.dashboard')}}">
-                                      Личный кабинет</a>
-                                    </li>
-                                    <li>
-                                      <a href="{{ route('client.info')}}">
-                                      Редактировать профиль</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('user.logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li> -->
           @endif
         </div>
       </div>
