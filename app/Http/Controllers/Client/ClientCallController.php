@@ -4,17 +4,15 @@ namespace yuridik\Http\Controllers\Client;
 use yuridik\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use yuridik\Document;
-use yuridik\Category;
+use yuridik\Call;
 use yuridik\File;
 use yuridik\Client;
 use Illuminate\Support\Facades\Session;
 use Auth;
 use Validator;
-use DB;
 use yuridik\Request as Reques;
 use yuridik\Order;  
-class ClientDocumentController extends Controller
+class ClientCallController extends Controller
 {
     public function __construct()
     {
@@ -22,32 +20,9 @@ class ClientDocumentController extends Controller
     }
 
     public function create(){
-        $type = DB::table('document_type')->get();
-        foreach ($type as $var) {
-            if($var->parent_id==NULL)
-                $types[$var->id]=$var->name;
-            else{
-                $subtypes[$var->id]=$var->name;
-                $parents[$var->id]=$var->parent_id;
-            }
-        }
-        $type_definition=array('','Комплекты документов для
-                                регистрации ООО, ИП, ТСЖ и др.','Договоры аренды, подряда, купли-продажи, займа, комиссии и др.','Документы в суд</label>
-                            <p>Исковое заявление, отзыв на
-                                исковое заявление, ходатайство,
-                                жалоба на решение суда и др.','Претензии потребителей</label>
-                            <p>Претензии на возврат денег за
-                                товар. Претензии в страховую, в
-                                банк, к ЖКХ и др.','Жалоба на чиновника</label>
-                            <p>Жалоба на действия должностного
-                                лица, судебного пристава,
-                                сотрудника ГИБДД и др.','Любой другой документ. Вы можете
-                                описать его самостоятельно.');
-        foreach ($type as $value) {
-            if($value->parent_id == 1)
-                $default_option[$value->id]=$value->name;
-        }
-        return view('document.create')->withTypes($types)->withSubtypes($subtypes)->withParents($parents)->withDefault_options($default_option)->withDefinitions($type_definition);
+        $client = Auth::user();
+        
+        return view('call.create')->withClient($client);
     }
 
 
@@ -75,31 +50,38 @@ class ClientDocumentController extends Controller
         }
         Validator::make($request->all(), $rules, $messages)->validate();
         
-        $document = new Document;
-        $document->title = $request->title;
-        $document->description = $request->description;
-        $document->sub_type_id = $request->subType;
-        $document->payment_type = $request->payment_type;
+        $call = new Call;
+        $call->title = $request->title;
+        $call->description = $request->description;
+        if($request->payment_type=="paid"){
+            if($request->price=="easy")
+                $call->cost=1000;
+            elseif($request->price=="general")
+                $call->cost=5000;
+            else
+                $call->cost=10000;
+        }
+        $call->status=0;
 
-        if($request->payment_type=="about")
-            $document->cost=$request->cost;
-
-
-        $document->client_id = $client->id;
+        $call->client_id = $client->id;
         
-        $document->save();
+        $call->save();
 
            if ($request->file('files') != null) {
             $file = $request->file('files');
             foreach ($file as $key) {
                 $fil = new File;
                 $fil->file = $key->getClientOriginalName();
-                $upload_folder = '/documents/' . time() . '/';
+                $upload_folder = '/calls/' . time() . '/';
                 $fil->path = $upload_folder;
                 $document->files()->save($fil);
                 $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
             }
         }
+        $order = new Order;
+        $order->user_id = $call->client->user->id;
+        $order->amount = $call->cost;
+        $call->order()->save($order);
         Session::flash('message', 'Request submitted successfully');
         return redirect()->route('client.dashboard');       
     }

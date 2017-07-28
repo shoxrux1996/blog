@@ -45,7 +45,7 @@
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12 text-center">
           <img src="{{ asset('dist/images/call-icon.png')}}" alt="Call icon"/>
-          <a type="button" class="btn btn-default" href="order-call.html">Заказать звонок</a>
+          <a type="button" class="btn btn-default" href="{{ route('call.create')}}">Заказать звонок</a>
           <p class="statistics">20,00,000+</p>
           <p class="what">Обратных звонков</p>
         </div>

@@ -102,11 +102,11 @@
                             @endif
                         <input type="text" class="form-control general-input" id="question" placeholder="Как подать в суд, если неизвестен адрес ответчика?" name="title" />
                     </div>
-                    <div class="form-group{{$errors->has('title') ? ' has-error' : '' }}">
+                    <div class="form-group{{$errors->has('description') ? ' has-error' : '' }}">
                         <label for="description">Подробное описание ситуации*</label>
-                        @if ($errors->has('title'))
+                        @if ($errors->has('description'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('title') }}</strong>
+                                <strong>{{ $errors->first('description') }}</strong>
                             </span>
                         @endif
                         <textarea class="form-control general-input" rows="15" id="description" name="description"></textarea>
@@ -116,6 +116,15 @@
                         <label class="btn btn-default general-input">
                             Выбрать файл <input type="file" name="files[]" multiple hidden>
                         </label>
+                        @if ($errors->any() && !($errors->has('description') || $errors->has('title')))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

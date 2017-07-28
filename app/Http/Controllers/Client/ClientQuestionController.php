@@ -43,6 +43,8 @@ class ClientQuestionController extends Controller
                 'string' => 'Неправильный формат',
                 'title.min' => 'Минимум 3 символов',
                 'description.min' => 'Минимум 10 символов',
+                'mimes' => 'Неверный формат(doc,docx,pdf)',
+                'max' => 'Файл слишком велик',
                 ];
         $rules = array(
            'title' => 'required|string|min:3',
@@ -53,9 +55,9 @@ class ClientQuestionController extends Controller
         $count = count($request->file('files'))-1;
     
 
-        // foreach(range(0, $count) as $i) {
-        //      $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
-        // }
+        foreach(range(0, $count) as $i) {
+             $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
+        }
         Validator::make($request->all(), $rules,$messages)->validate();
         $client = Auth::user();
 
