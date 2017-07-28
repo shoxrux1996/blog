@@ -107,10 +107,9 @@ Route::prefix('client')->group(function(){
 	Route::post('/update/{settingtype}', 'Client\ClientController@update')->name('client.update');
 
     Route::prefix('question')->group(function(){
-        Route::get('/free/create', 'Client\ClientQuestionController@create')->name('question.create');
-        Route::post('/free/insert', 'Client\ClientQuestionController@store')->name('question.insert.submit');
+        Route::get('/create', 'Client\ClientQuestionController@create')->name('question.create');
+        Route::post('/store', 'Client\ClientQuestionController@store')->name('question.insert.submit');
         
-        Route::post('/billable/insert', 'Client\ClientQuestionController@store')->name('question.billable.insert.submit');
     });
     Route::prefix('feedback')->group(function(){
     	Route::post('/send/answer/{answer_id}', 'Client\ClientFeedbackController@store')->name('feedback.create');
@@ -118,6 +117,11 @@ Route::prefix('client')->group(function(){
     Route::prefix('document')->group(function(){
     	Route::get('/create', 'Client\ClientDocumentController@create')->name('document.create');
     	Route::post('/store', 'Client\ClientDocumentController@store')->name('document.store');
+
+    });
+    Route::prefix('call')->group(function(){
+        Route::get('/create', 'Client\ClientCallController@create')->name('call.create');
+        Route::post('/store', 'Client\ClientCallController@store')->name('call.store');
 
     });
        Route::prefix('my')->group(function(){

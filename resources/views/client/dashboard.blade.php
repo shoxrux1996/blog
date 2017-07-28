@@ -113,7 +113,7 @@
                 <div class="col-sm-4">
                     <h4 class="text-primary">Звонок</h4>
                     <p>Оставьте номер телефона, и наш юрист свяжется с вами, чтобы проконсультировать вас по любому вопросу.</p>
-                    <a href="#" type="button" class="btn btn-default btn-primary">Заказать звонок</a>
+                    <a href="{{ route('call.create') }}" type="button" class="btn btn-default btn-primary">Заказать звонок</a>
                 </div>
                 <div class="col-sm-4">
                     <h4 class="text-warning">Документ</h4>

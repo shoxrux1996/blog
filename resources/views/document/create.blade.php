@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+<link href="{{ asset('dist/css/services.css')}}" rel="stylesheet">
+@ensection
 @section('body')
 @extends('layouts.body')
 @section('menu')
@@ -10,82 +13,132 @@
   <li><a href="{{ route('about')}}">О нас</a></li>
 @endsection
 @section('content')
-<div class="container">
-        {{Form::open(['route' => ['document.store'], 'enctype' => 'multipart/form-data', 'method' => 'post', 'class' => 'form-horizontal'])}}
-        <div class="form-group">
-            @foreach($types as $key => $value)
-            <div class="col-sm-6">
-                @if($key == 1)
-                <!-- <input type="radio" name="docType" onclick="handler(this.value)" value="1" checked="checked"> -->
-                    {{Form::radio('docType',$key, true, ['onclick' => 'handler(this.value)'])}}  {{Form::label($key, $value, ['class' => 'col-sm-3'])}}
-                 @endif
-                 @if($key != 1)
-                 <!-- <input type="radio" name="docType" onclick="handler(this.value)" value="<?php echo htmlspecialchars($key); ?>" > -->
-                    {{Form::radio('docType',$key, false, ['onclick' => 'handler(this.value)'])}}  {{Form::label($key, $value, ['class' => 'col-sm-3'])}}   
-                @endif            
-            </div>
-            @endforeach
 
+<!-- Content -->
+<div id="wrapper">
+    <div class="container" id="order-document">
+        <!-- Info -->
+        <div class="row background-white padding-30 text-center">
+            <h3>Подготовка документов</h3>
+            <h6>Вам нужно составить иск или претензию? Подготовить договор? Зарегистрировать ООО?
+                Оставьте заявку на сайте и получите предложения от юристов со всей России. Бесплатно!</h6>
+            <h4><span class="label label-primary">1</span> Заполните заявку <i class="fa fa-arrow-circle-o-right"></i> <span class="label label-info">2</span> Получите предложения <i class="fa fa-arrow-circle-o-right"></i> <span class="label label-success">3</span> Выберите юриста</h4>
         </div>
-        <div class="form-group">
-            {{Form::label('subType', 'Тип документа', ['class' => 'col-sm-1 control-label'])}}
-            <div class="col-sm-8">
-            <!-- <select class="form-control" id="subType"></select> -->
-                {{Form::select('subType', $default_options, null, ['class'=>'form-control', 'id'=>'subType'])}}
-            </div>
-        </div>
-        
-    
+        <!-- /Info -->
 
-        <div class="form-group">
-            {{Form::label('title', 'Мне нужно', ['class' => 'col-sm-1 control-label'])}}
-            <div class="col-sm-8">
-                {{Form::text('title', '', ['class'=>'form-control'])}}
-            </div>
-        </div>
-        <div class="form-group">
-            {{Form::label('description', 'Подробное описание', ['class' => 'col-sm-1 control-label'])}}
-            <div class="col-sm-8">
-                {{Form::textarea('description', '', ['class'=>'form-control'])}}
-            </div>
-        </div>
-        <div class="form-group">
-            {{Form::label('attachment', 'Прикрепите файл', ['class' => 'col-sm-1 control-label'])}}
-            <div class="col-sm-8">
-            <input type="file" name="files[]" multiple ="multiple" />
-            </div>
-        </div>
-        <div class="form-group">
-            {{Form::label('price', 'Стоимость документа', ['class' => 'col-sm-1 control-label'])}}
-            <div class="col-sm-6">
-                {{Form::radio('payment_type', 'later')}}
-                {{Form::label('later', 'По договоренности с юристом', ['class' => 'col-sm-6'])}}
-            </div>
-            <div class="col-sm-6">
-                {{Form::radio('payment_type', 'about')}}
-                {{Form::label('cost', 'Я планирую заплатить', ['class' => 'col-sm-6'])}}
-                {{Form::text('cost','',['class'=>'form-control'])}}
-            </div>
-        </div>
+        <!-- Document ask form -->
+        <div class="row ask-form">
+            <h4>Ваш вопрос</h4>
+            <div class="col-sm-7">
+                <form action="{{ route('document.store')}}" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                    <div class="row">
+                        @foreach($types as $key => $value)
+                        <div class="col-sm-5">
+                            @if($key == 1)
+                                <input type="radio" name="docType" value="{{$key}}" checked onclick="handler(this.value)"/>
+                                <label for="{{$key}}">{{$value}}</label>
+                                <p>{{$definitions[$key]}}</p>
+                             @endif
+                             @if($key != 1)
+                                <input type="radio" name="docType" value="{{$key}}" onclick="handler(this.value)"/>
+                                <label for="{{$key}}">{{$value}}</label>
+                                <p>{{$definitions[$key]}}</p>  
+                            @endif            
+                        </div>
+                        @endforeach
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="document-type">Тип документа</label>
+                        {{Form::select('subType', $default_options, null, ['class'=>'form-control general-input', 'id'=>'subType'])}}
+                    </div>
+                    <div class="form-group{{$errors->has('title') ? ' has-error' : '' }}">
+                        <label for="question">Мне нужно</label>
+                            @if ($errors->has('title'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('title') }}</strong>
+                                </span>
+                            @endif
+                        <input type="text" class="form-control general-input" id="question" name="title" />
+                    </div>
+                    <div class="form-group{{$errors->has('description') ? ' has-error' : '' }}">
+                        <label for="description">Подробное описание</label>
+                            @if ($errors->has('description'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('description') }}</strong>
+                                </span>
+                            @endif
+                        <textarea class="form-control general-input" rows="15" name="description" placeholder="Чем подробнее вы опишете требования к документу,тем точнее юристы смогут оценить его стоимость."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Если нужно, прикрепите файл</label>
+                        <label class="btn btn-default general-input">
+                            Выбрать файл <input type="file" name="files[]" multiple hidden>
+                        </label>
+                        @if ($errors->any() && !($errors->has('description') || $errors->has('title')))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label>Стоимость документа</label>
+                        <p>
+                            <input type="radio" name="payment_type" value="later" id="cost-1" checked onclick="disable()" />
+                            <label for="cost-1">По договоренности с юристом</label>
+                        </p>
+                        <p>
+                            <input type="radio" name="payment_type" value="about" id="cost-2" onclick="enable()"/>
+                            <label for="cost-2">Я планирую заплатить</label>
+                            <input type="text" name="cost" class="general-input" id="cost" disabled /> сум
+                        </p>
+                    </div>
 
-        {{Form::submit('Готова', ['class' => 'btn btn-success']) }}
-        {{Form::close()}}
-
+                    <button type="submit" class="btn btn-default blue-button pull-right">Готово</button>
+                </form>
+            </div>
+            <div class="col-sm-5">
+                <h4>3 причины оставить заявку</h4>
+                <ul class="list-unstyled">
+                    <li>
+                        <h4><i class="fa fa-check-square-o text-success"></i> Это бесплатно</h4>
+                        <p>Вы оставляете заявку абсолютно бесплатно и ничего не теряете, если никто из юристов вам не подойдет.</p>
+                    </li>
+                    <li>
+                        <h4><i class="fa fa-check-square-o text-success"></i> У вас появится выбор</h4>
+                        <p>Вы сравниваете предложения
+                            разных юристов и выбираете самые
+                            выгодные условия.</p>
+                    </li>
+                    <li>
+                        <h4><i class="fa fa-check-square-o text-success"></i> Это бесплатно</h4>
+                        <p>Если вы останетесь недовольны
+                            результатом, напишите нам, и мы
+                            вернем вам деньги!.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /Document ask form -->
+    </div>
 </div>
-
+<!-- /Content -->
 
 
 @endsection
 @section('scripts')
 <script>
-        
-        var subtypes = {!!json_encode($subtypes, JSON_PRETTY_PRINT) !!}
+    var subtypes = {!!json_encode($subtypes, JSON_PRETTY_PRINT) !!}
         console.log(subtypes)
-        
-        var parents = {!!json_encode($parents, JSON_PRETTY_PRINT) !!}
+    var parents = {!!json_encode($parents, JSON_PRETTY_PRINT) !!}
         console.log(parents)
 
-    </script>
+</script>
 {!! Html::script('js/document.js') !!}
 @endsection
 @endsection
