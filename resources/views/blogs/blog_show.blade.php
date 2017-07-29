@@ -55,38 +55,7 @@
             <hr>
         </div>
     </div>
-        @if (Auth::guard('lawyer')->check())
-            <div class="row">
-              <div id="comment-form" class="col-md-4 col-md-offset-2" style="left:0">
-                {{Form::open(['route' => ['lawyer.comment.store', $blog->id], 'method' => 'POST']) }}
-                <div class="row">
-                  <div class=".col-md-12">
-                    {{Form::label('comment', "comment: ") }}
-                    {{Form::textarea('comment', null, ['class'=>'form-control', 'rows'=>'5'])}}
 
-                  {{Form::submit('Add Comment', ['class'=> 'btn btn-success btn-block'])}}
-                  </div>
-                </div>
-                {{Form::close() }}
-              </div>
-            </div>
-        @endif
-        @if(Auth::guard('client')->check())
-            <div class="row">
-                <div id="comment-form" class="col-md-4 col-md-offset-2" style="left:0">
-                    {{Form::open(['route' => ['lawyer.comment.store', $blog->id], 'method' => 'POST']) }}
-                    <div class="row">
-                        <div class=".col-md-12">
-                            {{Form::label('comment', "comment: ") }}
-                            {{Form::textarea('comment', null, ['class'=>'form-control', 'rows'=>'5'])}}
-
-                            {{Form::submit('Add Comment', ['class'=> 'btn btn-success btn-block'])}}
-                        </div>
-                    </div>
-                    {{Form::close() }}
-                </div>
-            </div>
-        @endif
     </div>--}}
     <ul class='social'>
         <li>
@@ -122,12 +91,10 @@
 
         <!-- Blog item title -->
         <div class="row">
-            @if($blog->file != null)
-            <div class="blog-title text-center" style="background-image: url({{asset($blog->file->path.''.$blog->file->file)}});">
-                @else
-                    <div class="blog-title text-center" style="background-image: url({{ asset('dist/images/blog-img-1.jpg')}} );">
-                    @endif
-                <h6>
+            <div class="blog-title text-center"
+                 style="background-image:@if($blog->file != null) url({{asset($blog->file->path.''.$blog->file->file)}});@else url({{ asset('dist/images/blog-img-1.jpg')}} ); @endif">
+
+            <h6>
                     Блог юристов
                 </h6>
                 <h1>
@@ -231,7 +198,7 @@
                             <p>{{substr(strip_tags($bl->text),0,200)}} {{strlen(strip_tags($bl->text))>200 ? '...' : ""}}</p>
                             <p class="post-info">
                                 <span>
-                                    <i class="fa fa-eye"></i>
+                                    <i class="fa fa-eye">{{$bl->count}}</i>
                                 </span>
                                 <span class="pull-right">
                                     <i class="fa fa-comments-o"></i> {{$bl->comments->count()}}
@@ -256,66 +223,5 @@
     </div>
     <!-- /Content -->
 
-    <!-- Footer -->
-    <footer>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3 col-sm-6 guarantee">
-                    <span>ГАРАНТИЯ 100% КАЧЕСТВА</span>
-                    <p>
-                        <img src="{{asset('dist/images/first-place-icon.png')}}" alt="First place icon"/>
-                        Лучшие юристы со всей Узбекистана
-                    </p>
-                    <p>
-                        <img src="{{asset('dist/images/happy-icon.png')}}" alt="Happy icon"/>
-                        Более 123 45 довольных клиентов
-                    </p>
-                    <p>
-                        <img src="{{asset('dist/images/money-back-icon.png')}}" alt="Money back icon"/>
-                        Мы поможем вам — или вернём деньги!
-                    </p>
-                    <p class="text-center"><a href="">Все гарантии Yuridik.uz</a></p>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <span><a href="#">Yuridik.uz</a></span>
-                    <p><a href="#">Задать вопрос</a></p>
-                    <p><a href="#">Заказать документ</a></p>
-                    <p><a href="#">Частые вопросы</a></p>
-                    <p><a href="#">Наши юристы</a></p>
-                    <p><a href="#">Отзывы</a></p>
-                    <p><a href="#">Гарантии</a></p>
-                    <p><a href="#">Журнал</a></p>
-                    <p><a href="#">Вопросы</a></p>
-                </div>
-                <div class="col-md-3 col-sm-6 hidden-xxs">
-                    <span><a href="#">Клиентам</a></span>
-                    <p><a href="#">Задать вопрос</a></p>
-                    <p><a href="#">Заказать документ</a></p>
-                    <p><a href="#">Частые вопросы</a></p>
-                    <p><a href="#">Наши юристы</a></p>
-                    <p><a href="#">Отзывы</a></p>
-                    <p><a href="#">Гарантии</a></p>
-                    <p><a href="#">Журнал</a></p>
-                    <p><a href="#">Вопросы</a></p>
-                </div>
-                <div class="col-md-3 col-sm-6 hidden-xxs">
-                    <span><a href="#">Юристам</a></span>
-                    <p><a href="#">Задать вопрос</a></p>
-                    <p><a href="#">Заказать документ</a></p>
-                    <p><a href="#">Частые вопросы</a></p>
-                    <p><a href="#">Наши юристы</a></p>
-                    <p><a href="#">Отзывы</a></p>
-                </div>
-            </div>
-            <div class="row social-link">
-          <span>
-            <i class="fa fa-twitter" aria-hidden="true"></i>
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-            <i class="fa fa-telegram" aria-hidden="true"></i>
-          </span>
-            </div>
-        </div>
-    </footer>
 @endsection
 @endsection

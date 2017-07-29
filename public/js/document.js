@@ -13,4 +13,5 @@ function handler(value){
             type_option.add(option);
         }
     }
+
 }

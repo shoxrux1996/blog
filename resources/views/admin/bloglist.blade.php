@@ -1,0 +1,71 @@
+@extends('layouts.app-admin')
+@section('styles')
+    <link href="{{ asset('dist/css/blog.css')}}" rel="stylesheet">
+@endsection
+@section('content')
+    <!-- Content -->
+    <div class="container">
+        <div class="col-md-10 col-lg-offset-2">
+
+            <div class="page-header">
+                <h2>Блоги</h2>
+            </div>
+            @foreach($blogs as $blog)
+
+                <a href="{{route('admin.blog.show', $blog->id)}}">
+                    <div class="col-sm-6">
+                        <div class="blog-item">
+
+                            <div class="blog-item-img">
+                                @if($blog->file != null)
+                                    <img alt="Blog item image" src="">
+                                @else
+                                    <img alt="Blog item image" src="{{asset('dist/images/blog-img-2.jpg')}}">
+                                @endif
+                                <div class="middle">
+                                    <button class="btn btn-dark-blue text">Читать статью</button>
+                                </div>
+                            </div>
+                            <div class="blog-item-description">
+                                <h5><b>{{ $blog->title }}</b></h5>
+                                <p>{{substr(strip_tags($blog->text),0,200)}} {{strlen(strip_tags($blog->text))>200 ? '...' : ""}}</p>
+                                <p class="post-info">
+
+                                <span>
+                                    <i class="fa fa-eye"></i> {{$blog->count}}
+                                </span>
+                                    <span class="pull-right">
+                                    <i class="fa fa-comments-o"></i> {{$blog->comments->count()}}
+                                </span>
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="blog-item-footer">
+                            <span>
+                                <i class="fa fa-user"></i> {{$blog->lawyer->user->firstName}}
+                            </span>
+                                <span class="pull-right">
+                                <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($blog->created_at)->toFormattedDateString()}}
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            @endforeach
+
+            <div class="text-center col-md-12">
+
+                {!! $blogs->links('pagination') !!}
+            </div>
+        </div>
+        <!-- /Posts -->
+        <br/>
+
+
+    </div>
+    <!-- /Content -->
+
+@endsection
+
+

@@ -26,9 +26,9 @@ class AdminBlogController extends Controller
      */
     public function showBlogList(){
 
-        $blogs=Blog::orderBy('id', 'desc')->paginate(3);
+        $blogs=Blog::orderBy('id', 'desc')->paginate(12);
       
-        return view('blogs.bloglist')->with('blogs', $blogs);
+        return view('admin.bloglist')->with('blogs', $blogs);
     }
     public function destroy($id)
     {
@@ -49,9 +49,9 @@ class AdminBlogController extends Controller
         foreach ($tags as $tag) {
             $tags2[$tag->id] = $tag->name;
         }
-        return view('blogs.blog_show')->withBlog($blog)->withTags($tags2);
+        return view('admin.blog_show')->withBlog($blog)->withTags($tags2);
     }
-   /*
+
  public function edit(Request $request, $id)
     {
        $this->validate($request, array(
@@ -59,13 +59,12 @@ class AdminBlogController extends Controller
             'text' => 'required|min:10'));
         $blog = Blog::find($id);
         $blog->title= $request->title;
-        $blog->text= $request->text;
-        $blog->likes= $request->likes;
+        $blog->text = $request->text;
         $blog->save();
 
         $blog->tags()->sync($request->tags);
        Session::flash('message', 'Blog was updated successfully');
-      return redirect()->route('admin.blogs');
+      return redirect()->route('admin.blog.edit', $blog->id);
     }
     public function editform($id){
         $blog = Blog::find($id);
@@ -77,8 +76,8 @@ class AdminBlogController extends Controller
         foreach ($tags as $tag) {
           $tags2[$tag->id] = $tag->name;
         }
-        return view('blogs.blog_edit')->withBlog($blog)->with('tags', $tags2);
-    }*/
+        return view('admin.blog_edit')->withBlog($blog)->with('tags', $tags2);
+    }
 
   
 }

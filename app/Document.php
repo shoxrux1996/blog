@@ -11,7 +11,7 @@ class Document extends Model
     }
     protected $fillable = ['status'];
     public function category(){
-        return $this->belongsTo('yuridik\Category');
+        return $this->belongsTo('yuridik\Document_type','sub_type_id');
     }
     public function files()
     {

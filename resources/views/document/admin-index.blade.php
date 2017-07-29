@@ -67,12 +67,12 @@
                         <span> <a href="#">Платные</a> </span>
                         <span> <a href="#">Бесплатные</a> </span>
                     </p>
-                    @foreach($questions as $question)
+                    @foreach($documents as $document)
 
                         <div class="col-sm-12 question">
-                            @if($question->type ==2)
+                            @if($document->payment_type =="about")
                                 <span class="question-price">
-                                <b>{{$question->price}} сум</b>
+                                <b>{{$document->cost}} сум</b>
                                 <span>
                                     стоимость<br/>
                                     вопроса
@@ -80,33 +80,33 @@
                             </span>
                             @endif
                             <h4 class="title"><a
-                                        href="{{route('admin.question.show', $question->id)}}">{{$question->title}}</a>
+                                        href="{{route('admin.document.show', $document->id)}}">{{$document->title}}</a>
                             </h4>
-                            <p class="description">{{$question->text}}</p>
+                            <p class="description">{{$document->description}}</p>
                             <p>
-                                <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>
-                                <span class="number"> вопрос №{{$question->id}}</span>
-                                <span class="author">{{$question->client->user->firstName}}
-                                    , г.{{$question->client->user->city->name}} </span>
+                                <span class="date">{{Carbon\Carbon::parse($document->created_at)->toFormattedDateString()}}</span>
+                                <span class="number"> вопрос №{{$document->id}}</span>
+                                <span class="author">{{$document->client->user->firstName}}
+                                    , г.{{$document->client->user->city->name}} </span>
                             </p>
                             <hr>
                             <p>
-                                <span class="category">Категория: <a href="">{{$question->category->name}}</a></span>
-                                <a class="answers" href="{{route('admin.question.show', $question->id)}}">
-                                    {{$question->answers->count()}}
+                                <span class="category">Категория: <a href="">{{$document->category->name}}</a></span>
+                                <a class="answers" href="{{route('admin.document.show', $document->id)}}">
+                                    {{$document->requests->count()}}
                                 </a>
                             </p>
-                                <div>
-                                    @foreach($question->files as $file)
-                                        <a class="label label-default"
-                                           href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                                    @endforeach
-                                </div>
+                            <div>
+                                @foreach($document->files as $file)
+                                    <a class="label label-default"
+                                       href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                                @endforeach
+                            </div>
                         </div>
                     @endforeach
 
                     <div class="col-sm-12 text-center">
-                        {!! $questions->links('pagination') !!}
+                        {!! $documents->links('pagination') !!}
 
                     </div>
                 </div>

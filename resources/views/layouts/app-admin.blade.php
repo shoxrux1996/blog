@@ -89,19 +89,19 @@
                     <a href="{{route('admin.documents.index')}}"><i class="fa fa-fw fa-address-card"></i> Документы</a>
                 </li>
                 <li>
-                    <a href="a{{route('admin.answers.index')}}"><i class="fa fa-fw fa-reply"></i> Ответы</a>
+                    <a href="{{route('admin.answers.index')}}"><i class="fa fa-fw fa-reply"></i> Ответы</a>
                 </li>
                 <li>
-                    <a href="a{{route('admin.tags.index')}}"><i class="fa fa-fw fa-reply"></i> Тэги</a>
+                    <a href="{{route('admin.tags.index')}}"><i class="fa fa-fw fa-reply"></i> Тэги</a>
                 </li>
                 <li>
-                    <a href="a{{route('admin.category.info')}}"><i class="fa fa-fw fa-reply"></i> Категория</a>
+                    <a href="{{route('admin.category.info')}}"><i class="fa fa-fw fa-reply"></i> Категория</a>
                 </li>
                 <li>
-                    <a href="a{{route('admin.feedbacks.index')}}"><i class="fa fa-fw fa-reply"></i> Отзывы</a>
+                    <a href="{{route('admin.feedbacks.index')}}"><i class="fa fa-fw fa-reply"></i> Отзывы</a>
                 </li>
                  <li>
-                    <a href="a{{route('admin.cities.index')}}"><i class="fa fa-fw fa-reply"></i> Города</a>
+                    <a href="{{route('admin.cities.index')}}"><i class="fa fa-fw fa-reply"></i> Города</a>
                 </li>
             </ul>
         </div>

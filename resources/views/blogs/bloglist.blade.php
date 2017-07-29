@@ -44,12 +44,10 @@
                                 <h5><b>{{ $blog->title }}</b></h5>
                                 <p>{{substr(strip_tags($blog->text),0,200)}} {{strlen(strip_tags($blog->text))>200 ? '...' : ""}}</p>
                                 <p class="post-info">
-                                    <span class="pull-left">
 
-                                    </span>
-                               {{-- <span>
-                                    <i class="fa fa-eye"></i> 124
-                                </span>--}}
+                                <span>
+                                    <i class="fa fa-eye"></i> {{$blog->count}}
+                                </span>
                                 <span class="pull-right">
                                     <i class="fa fa-comments-o"></i> {{$blog->comments->count()}}
                                 </span>
@@ -129,7 +127,7 @@
                                             <img class="img-thumbnail" alt="post-mini-img" src="{{asset('dist/images/blog-img-3.jpg')}}" />
                                         @endif
                                     <span>
-                                        <b>{{$blog->title}}</b>
+                                        <b>{{substr($blog->title,0,60)}} {{strlen(($blog->title))>60 ? '...' : ""}}</b>
                                     </span>
                                     </div>
                                 </a>
@@ -139,7 +137,6 @@
                         </div>
                     </div>
                     <!-- /Last posts -->
-
                     <!-- Popular posts -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -159,11 +156,11 @@
                                             <img class="img-thumbnail" alt="post-mini-img" src="{{asset('dist/images/blog-img-6.jpg')}}" />
                                         @endif
                                         <span>
-                                            <b>{{$blog->title}}</b>
+                                            <b>{{substr($blog->title,0,60)}} {{strlen(($blog->title))>60 ? '...' : ""}}</b>
                                         </span>
-                                        {{--<span class="pull-right">
-                                            <i class="fa fa-eye"></i> 100
-                                        </span>--}}
+                                        <span class="pull-right">
+                                            <i class="fa fa-eye"></i> {{$blog->count}}
+                                        </span>
                                     </div>
                                 </a>
                                 <hr>
