@@ -52,8 +52,12 @@ class AdminPostController extends Controller
     }
 
     public function answers(){
-        $answers = Answer::all();
-        return view('admin.answer.list')->withAnswers($answers);
+        $answers = Answer::orderBy('id','desc')->paginate(10);
+        return view('answer.admin-list')->withAnswers($answers);
+    }
+    public function answerShow($id){
+
+        return view('answer.admin-show')->withAnswer(Answer::findOrFail($id));
     }
     public function answerDestroy($id){
         $answer = Answer::findOrFail($id);
@@ -78,8 +82,8 @@ class AdminPostController extends Controller
 
        $client = Client::findOrFail($id);
         $client->isBlocked = 1;
-        $current = Carbon::now();
-        $client->blockedTill = $current->addDays($request->days);
+
+        $client->blockedTill = $request->date;
         $client->save();
         return redirect()->back();
     }
@@ -93,12 +97,12 @@ class AdminPostController extends Controller
         $lawyer = Lawyer::findOrFail($id);
         $lawyer->isBlocked = 1;
         $current = Carbon::now();
-        $lawyer->blockedTill = $current->addDays($request->days);
+        $lawyer->blockedTill = $request->date;
         $lawyer->save();
         return redirect()->back();
     }
     public function lawyerUnblock(Request $request, $id){
-        $client = Client::findOrFail($id);
+        $client = Lawyer::findOrFail($id);
         $client->isBlocked = 0;
         $client->save();
         return redirect()->back();

@@ -51,7 +51,11 @@ Route::prefix('admin')->group(function(){
     });
     Route::prefix('cities')->group(function (){
         Route::get('/', 'Admin\AdminCityController@cities')->name('admin.cities.index');
-        Route::post('/deny/{id}','Admin\AdminCityController@cityDeny')->name('admin.cities.delete');
+        Route::get('/deny/{id}','Admin\AdminCityController@cityDelete')->name('admin.city.delete');
+        Route::post('/update/{id}','Admin\AdminCityController@cityUpdate')->name('admin.city.update');
+        Route::get('/edit/{id}','Admin\AdminCityController@cityEdit')->name('admin.city.edit');
+        Route::get('/insert','Admin\AdminCityController@insert')->name('admin.city.insert');
+        Route::post('/insert/submit','Admin\AdminCityController@insertSubmit')->name('admin.city.insert.submit');
     });
     Route::prefix('category')->group(function(){
 		Route::get('/info', 'Admin\AdminCategoryController@index')->name('admin.category.info');
@@ -76,6 +80,7 @@ Route::prefix('admin')->group(function(){
     Route::prefix('answers')->group(function (){
         Route::get('/', 'Admin\AdminPostController@answers')->name('admin.answers.index');
         Route::post('/deny/{id}','Admin\AdminPostController@answerDeny')->name('admin.answer.delete');
+        Route::get('/show/{id}','Admin\AdminPostController@answerShow')->name('admin.answer.show');
     });
     Route::prefix('comments')->group(function (){
         Route::get('/', 'Admin\AdminPostController@comments')->name('admin.comments.index');
@@ -91,6 +96,7 @@ Route::prefix('admin')->group(function(){
         Route::post('client/block/{id}','Admin\AdminPostController@clientBlock')->name('admin.client.block');
         Route::post('client/unblock/{id}','Admin\AdminPostController@clientUnblock')->name('admin.client.unblock');
         Route::post('lawyer/block/{id}','Admin\AdminPostController@lawyerBlock')->name('admin.lawyer.block');
+        Route::post('lawyer/unblock/{id}','Admin\AdminPostController@lawyerUnblock')->name('admin.lawyer.unblock');
     });
 });
 

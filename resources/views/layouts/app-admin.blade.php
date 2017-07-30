@@ -97,9 +97,9 @@
                 <li>
                     <a href="{{route('admin.category.info')}}"><i class="fa fa-fw fa-reply"></i> Категория</a>
                 </li>
-                <li>
-                    <a href="{{route('admin.feedbacks.index')}}"><i class="fa fa-fw fa-reply"></i> Отзывы</a>
-                </li>
+                   {{-- <li>
+                        <a href="{{route('admin.feedbacks.index')}}"><i class="fa fa-fw fa-reply"></i> Отзывы</a>
+                    </li>--}}
                  <li>
                     <a href="{{route('admin.cities.index')}}"><i class="fa fa-fw fa-reply"></i> Города</a>
                 </li>

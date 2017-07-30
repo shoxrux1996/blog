@@ -64,7 +64,7 @@
                                             <form action="{{ route('admin.client.block', [$client->id]) }}"
                                                   method="post">
                                                 {{csrf_field()}}
-                                                <input type="date" class="date"
+                                                <input type="date" class="date" name="date"
                                                        value="{{\Carbon\Carbon::now('Asia/Tashkent')->format('Y-m-d')}}">
 
                                                 <button type="submit" class="btn btn-danger pull-right btn-xs"
@@ -132,10 +132,10 @@
                                 <tr>
                                     <td>
                                         @if($client->isBlocked == false)
-                                            <form action="{{ route('admin.client.block', [$client->id]) }}"
+                                            <form action="{{ route('admin.lawyer.block', [$client->id]) }}"
                                                   method="post">
                                                 {{csrf_field()}}
-                                                <input type="date" class="date"
+                                                <input type="date" class="date" name="date"
                                                        value="{{\Carbon\Carbon::now('Asia/Tashkent')->format('Y-m-d')}}">
 
                                                 <button type="submit" class="btn btn-danger pull-right btn-xs"
@@ -143,7 +143,7 @@
                                                 </button>
                                             </form>
                                         @else
-                                            <form action="{{ route('admin.client.unblock', [$client->id]) }}"
+                                            <form action="{{ route('admin.lawyer.unblock', [$client->id]) }}"
                                                   method="post">
                                                 {{csrf_field()}}
                                                 <button type="submit" class="btn btn-success pull-right btn-xs"
