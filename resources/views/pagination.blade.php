@@ -5,9 +5,13 @@
 
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <li class="disabled"><span> Previous</span></li>
+            <li class="disabled">
+                <a href="" aria-label="Previous" >
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
         @else
-            <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev"> Previous</a></li>
+            <li><a href="{{ $paginator->previousPageUrl() }}"  aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a></li>
         @endif
         {{-- Pagination Elements --}}
         @foreach ($elements as $element)
@@ -28,9 +32,14 @@
         @endforeach
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <li><a href="{{ $paginator->nextPageUrl() }}" rel="next">Next </a></li>
+
+            <li><a href="{{ $paginator->nextPageUrl() }}"  aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a></li>
         @else
-            <li class="disabled"><span>Next </span></li>
+            <li class="disabled">
+                <a href="" aria-label="Previous" >
+                    <span aria-hidden="true" >&raquo;</span>
+                </a>
+            </li>
         @endif
     </ul>
 @endif

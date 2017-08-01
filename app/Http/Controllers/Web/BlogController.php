@@ -15,7 +15,7 @@ class BlogController extends Controller
     public function showBlogList(){
 
         $blogs=Blog::orderBy('id', 'desc')->paginate(4);
-        $blog_pop = Blog::orderBy('id', 'asc')->limit(4)->offset(4)->get();
+        $blog_pop = Blog::orderBy('count', 'desc')->limit(4)->get();
         $blog_recent = Blog::orderBy('id', 'desc')->limit(4)->get();
         $comments= Comment::orderBy('id', 'desc')->limit(4)->get();
 
@@ -23,7 +23,8 @@ class BlogController extends Controller
     }
     public function show($id){
         $blog = Blog::find($id);
-
+        $blog->count++;
+        $blog->save();
         $tags = Tag::all();
 
         $tags2 = array();

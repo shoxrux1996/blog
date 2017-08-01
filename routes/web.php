@@ -37,6 +37,8 @@ Route::prefix('admin')->group(function(){
         Route::get('/delete/{id}', 'Admin\AdminBlogController@destroy')->name('admin.blog.delete');
         Route::get('/', 'Admin\AdminBlogController@showBlogList')->name('admin.blogs');
         Route::get('/show/{id}', 'Admin\AdminBlogController@show')->name('admin.blog.show');
+        Route::get('/edit/{id}', 'Admin\AdminBlogController@editform')->name('admin.blog.edit');
+        Route::post('/edit/submit/{id}', 'Admin\AdminBlogController@edit')->name('admin.blog.edit.submit');
     });
     Route::prefix('tags')->group(function(){
         Route::get('edit/{id}', 'Admin\AdminTagController@edit')->name('admin.tag.edit');
@@ -49,26 +51,36 @@ Route::prefix('admin')->group(function(){
     });
     Route::prefix('cities')->group(function (){
         Route::get('/', 'Admin\AdminCityController@cities')->name('admin.cities.index');
-        Route::post('/deny/{id}','Admin\AdminCityController@cityDeny')->name('admin.cities.delete');
+        Route::get('/deny/{id}','Admin\AdminCityController@cityDelete')->name('admin.city.delete');
+        Route::post('/update/{id}','Admin\AdminCityController@cityUpdate')->name('admin.city.update');
+        Route::get('/edit/{id}','Admin\AdminCityController@cityEdit')->name('admin.city.edit');
+        Route::get('/insert','Admin\AdminCityController@insert')->name('admin.city.insert');
+        Route::post('/insert/submit','Admin\AdminCityController@insertSubmit')->name('admin.city.insert.submit');
     });
     Route::prefix('category')->group(function(){
 		Route::get('/info', 'Admin\AdminCategoryController@index')->name('admin.category.info');
+		Route::get('/show/{id}', 'Admin\AdminCategoryController@show')->name('admin.category.show');
 		Route::get('/insert', 'Admin\AdminCategoryController@create')->name('admin.category.insert');
 		Route::post('/insert/submit', 'Admin\AdminCategoryController@store')->name('admin.category.insert.submit');
 		Route::get('delete/{id}', 'Admin\AdminCategoryController@destroy')->name('admin.category.delete');
+        Route::get('/edit/{id}', 'Admin\AdminCategoryController@edit')->name('admin.category.edit');
+        Route::post('/edit/submit/{id}', 'Admin\AdminCategoryController@update')->name('admin.category.edit.submit');
 	});
 
    Route::prefix('questions')->group(function (){
        Route::get('/', 'Admin\AdminPostController@questions')->name('admin.questions.index');
-       Route::post('/deny/{id}','Admin\AdminPostController@questionDeny')->name('admin.question.delete');
+       Route::get('/deny/{id}','Admin\AdminPostController@questionDeny')->name('admin.question.delete');
+       Route::get('/show/{id}','Admin\AdminPostController@questionShow')->name('admin.question.show');
    });
     Route::prefix('documents')->group(function (){
         Route::get('/', 'Admin\AdminPostController@documents')->name('admin.documents.index');
-        Route::post('/deny/{id}','Admin\AdminPostController@documentDeny')->name('admin.document.delete');
+        Route::get('/deny/{id}','Admin\AdminPostController@documentDeny')->name('admin.document.delete');
+        Route::get('/show/{id}','Admin\AdminPostController@documentShow')->name('admin.document.show');
     });
     Route::prefix('answers')->group(function (){
         Route::get('/', 'Admin\AdminPostController@answers')->name('admin.answers.index');
         Route::post('/deny/{id}','Admin\AdminPostController@answerDeny')->name('admin.answer.delete');
+        Route::get('/show/{id}','Admin\AdminPostController@answerShow')->name('admin.answer.show');
     });
     Route::prefix('comments')->group(function (){
         Route::get('/', 'Admin\AdminPostController@comments')->name('admin.comments.index');
@@ -84,6 +96,7 @@ Route::prefix('admin')->group(function(){
         Route::post('client/block/{id}','Admin\AdminPostController@clientBlock')->name('admin.client.block');
         Route::post('client/unblock/{id}','Admin\AdminPostController@clientUnblock')->name('admin.client.unblock');
         Route::post('lawyer/block/{id}','Admin\AdminPostController@lawyerBlock')->name('admin.lawyer.block');
+        Route::post('lawyer/unblock/{id}','Admin\AdminPostController@lawyerUnblock')->name('admin.lawyer.unblock');
     });
 });
 

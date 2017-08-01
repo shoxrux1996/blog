@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('styles')
 <link href="{{ asset('dist/css/services.css')}}" rel="stylesheet">
-@ensection
+@endsection
 @section('body')
 @extends('layouts.body')
 @section('menu')

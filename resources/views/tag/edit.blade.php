@@ -1,6 +1,5 @@
 @extends('layouts.app-admin')
 
-@section('title', "| Edit Tag ")
 
 
 @section('content')

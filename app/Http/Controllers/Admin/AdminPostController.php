@@ -4,6 +4,7 @@ namespace yuridik\Http\Controllers\Admin;
 use Carbon\Carbon;
 use yuridik\Answer;
 use yuridik\Comment;
+use yuridik\Document;
 use yuridik\Http\Controllers\Controller;
 use yuridik\Admin;
 use Illuminate\Http\Request;
@@ -20,17 +21,43 @@ class AdminPostController extends Controller
     }
     public function questions()
     {
-        $questions = Question::where(
-            'type', 1)->orWhere('type', 2)->orderBy('id', 'desc')->get();
+        $questions = Question::orderBy('id', 'desc')->paginate(10);
         return view('question.admin-index')->withQuestions($questions);
     }
-    public function questionDeny(Request $request, $id){
+    public function questionShow($id)
+    {
         $question = Question::findOrFail($id);
-        $question->destroy();
+        return view('question.admin_show')->withQuestion($question);
     }
+    public function questionDeny($id){
+        $question = Question::findOrFail($id);
+
+        $question->delete();
+        return redirect()->route('admin.questions.index');
+    }
+    public function documents()
+    {
+        $questions = Document::orderBy('id', 'desc')->paginate(10);
+        return view('document.admin-index')->withDocuments($questions);
+    }
+    public function documentShow($id)
+    {
+        $question = Document::findOrFail($id);
+        return view('document.admin_show')->withDocument($question);
+    }
+    public function documentDeny($id){
+        $question = Document::findOrFail($id);
+        $question->delete();
+        return redirect()->route('admin.documents.index');
+    }
+
     public function answers(){
-        $answers = Answer::all();
-        return view('admin.answer.list')->withAnswers($answers);
+        $answers = Answer::orderBy('id','desc')->paginate(10);
+        return view('answer.admin-list')->withAnswers($answers);
+    }
+    public function answerShow($id){
+
+        return view('answer.admin-show')->withAnswer(Answer::findOrFail($id));
     }
     public function answerDestroy($id){
         $answer = Answer::findOrFail($id);
@@ -55,8 +82,8 @@ class AdminPostController extends Controller
 
        $client = Client::findOrFail($id);
         $client->isBlocked = 1;
-        $current = Carbon::now();
-        $client->blockedTill = $current->addDays($request->days);
+
+        $client->blockedTill = $request->date;
         $client->save();
         return redirect()->back();
     }
@@ -70,12 +97,12 @@ class AdminPostController extends Controller
         $lawyer = Lawyer::findOrFail($id);
         $lawyer->isBlocked = 1;
         $current = Carbon::now();
-        $lawyer->blockedTill = $current->addDays($request->days);
+        $lawyer->blockedTill = $request->date;
         $lawyer->save();
         return redirect()->back();
     }
     public function lawyerUnblock(Request $request, $id){
-        $client = Client::findOrFail($id);
+        $client = Lawyer::findOrFail($id);
         $client->isBlocked = 0;
         $client->save();
         return redirect()->back();
