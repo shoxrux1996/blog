@@ -21,7 +21,8 @@ class LawyerController extends Controller
 
      public function index()
     {
-        return view('lawyer.dashboard');
+        $lawyer = Auth::user();
+        return view('lawyer.dashboard')->withLawyer($lawyer);
     }
 
     public function info(){
@@ -32,9 +33,9 @@ class LawyerController extends Controller
             $cities[$key->id]= $key->name;
         }
 
-        return view('lawyer.info')->withLawyer($lawyer)->withCities($cities);
+        return view('lawyer.info')->withSettingtype('main')->withLawyer($lawyer)->withCities($cities);
     }
-    public function update(Request $request, $id){
+    public function update(Request $request, $settingtype){
         
         $this->validate($request, ['image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
        
