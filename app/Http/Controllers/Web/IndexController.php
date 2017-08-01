@@ -22,9 +22,9 @@ class IndexController extends Controller
         $num_of_questions = Question::count();
         $free_question_examples = Question::orderBy('id', 'desc')->where('type','1')->take(6)->get();
         $paid_question_examples = Question::orderBy('id', 'desc')->where('type','2')->take(6)->get();
-
+        $blogs = Blog::orderBy('count', 'desc')->take(3)->get();
         $categories = Category::all();
-
+        $lawyers = Lawyer::orderBy('id', 'desc')->take(6)->get();
         // $chosen = Chosen::all();
 
         $num_of_lawyers = Lawyer::count();
@@ -42,7 +42,7 @@ class IndexController extends Controller
         }
         //$chosen_blogs=Blog::find(Chosen::where('name','blog')->get());//alternate method*/
 
-        return view('index',compact('num_of_lawyers','num_of_questions','free_question_examples','paid_question_examples','categories'));/*,$chosen_blogs,$chosen_lawyers*/
+        return view('index',compact('num_of_lawyers','num_of_questions','free_question_examples','paid_question_examples','categories', 'blogs', 'lawyers'));/*,$chosen_blogs,$chosen_lawyers*/
     }
     
   

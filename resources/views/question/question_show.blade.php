@@ -1,103 +1,171 @@
 @extends('layouts.app')
+@section('styles')
+    <link href="{{ asset('dist/css/questions.css')}}" rel="stylesheet">
+
+@endsection
 @section('body')
-@extends('layouts.body')
+    @extends('layouts.body')
 @section('menu')
-  <li><a href="{{ route('home')}}">Главная</a></li>
-  <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-  <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-  <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-  <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-  <li><a href="{{ route('about')}}">О нас</a></li>
+    <li><a href="{{ route('home')}}">Главная</a></li>
+    <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
+    <li><a href="{{ route('question.list')}}">Вопросы</a></li>
+    <li><a href="{{ route('web.blogs')}}">Блог</a></li>
+    <li><a href="{{ route('how-works')}}">Как это работает</a></li>
+    <li><a href="{{ route('about')}}">О нас</a></li>
 @endsection
 @section('content')
-
-    <div class="container">
-        <div class="col-md-12" style="margin-bottom: 20px;">
+    <div id="wrapper">
+        <div class="container">
             <div class="row">
-                <div class="col-md-8" >
-                    <label class="col-sm-6" >{{ $question->title }}</label>
-                    <div class="tags col-md-8 ">
-                        <h4>Client:</h4> <p>{{$question->client->email}}</p>
-                        <h4>Category:</h4> <p>{{$question->category->name}}</p>
-                        <div class="tags col-md-8 ">
-                            @foreach($question->files as $file)
-                                <a class="label label-default" href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                            @endforeach
-                            <hr>
-                        </div>
+                <div class="col-sm-9">
+                    <div class="col-sm-12 question">
+                        @if($question->type ==2)
+                            <span class="question-price">
+                            <b>{{$question->price}} сум</b>
+                            <span>
+                            стоимость<br/>
+                            вопроса
+                            </span>
+                        </span>
+                        @endif
+                        <h4 class="title">{{$question->title}}</h4>
+                        <p class="description">{{$question->text}}</p>
+                        <p>
+                            <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>
+                            <span class="number"> вопрос №{{$question->id}}</span>
+                            <span class="author">{{$question->client->user->firstName}}
+                                , г.{{$question->client->user->city->name}} </span>
+                        </p>
+                        <hr>
+                        <p>
+                            <span class="category">Категория: <a href="">{{$question->category->name}}</a></span>
+                            <i class="answers">
+                                {{$question->answers->count()}}
+                            </i>
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4"><p>{{substr(strip_tags($question->text),0,250)}} {{strlen(strip_tags($question->text))>250 ? '...' : ""}}</p></div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2" style="margin: 10px;">
-                <hr>
-                    <h3><span class="glyphicon glyphicon-comment"></span> Answers</h3>
-                    @foreach($question->answers as $answer)
+                <h3>Answers</h3>
+                @foreach($question->answers as $answer)
+                    <div class="panel panel-content col-sm-9">
                         <div class="comment">
-                            <div class = "author-info">
-                                <img src="{{ "https://www.gravatar.com/avatar/" .md5(strtolower(trim($answer->lawyer->email))) . "?s=50&d=monsterid" }}" class="author-img">
-                                <div class="author-name">
-                                    <h4>{{$answer->lawyer->email}}</h4>
-                                    <p class="author-time">{{date('F n, Y - g:iA'), strtotime($answer->created_at)}}</p>
-                                </div>
-                            </div>
-                            <div class="comment-content">
-                                {{$answer->text}}
-                            </div>
-                            <div class="tags col-md-6 ">
-                                @foreach($answer->files as $file)
-                                    <a class="label label-default" href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                                @endforeach
-                                <hr>
-                                @if($answer->feedback != null)
-                                <h2>{{$answer->feedback->text}}</h2>
-                                @endif
-                            </div>
-
-                            @if (Auth::guard('client')->check() && ($answer->feedback == null))
-                                <div class="row">
-                                    <div id="comment-form" class="col-md-4 col-md-offset-2" style="left:0">
-                                        {{Form::open(['route' => ['feedback.create', $answer->id],'method' => 'POST']) }}
-                                        <div class="row">
-                                            <div class=".col-md-12">
-                                                {{Form::label('text', "Feedback: ") }}
-                                                {{Form::textarea('text', null, ['class'=>'form-control', 'rows'=>'5'])}}
-                                                {{Form::radio('helped', true)}}
-                                                {{Form::radio('helped', false)}}
-                                                {{Form::submit('Add Comment', ['class'=> 'btn btn-success btn-block'])}}
-                                            </div>
-                                        </div>
-                                        {{Form::close() }}
+                            <div class="author-info">
+                                <div class="author-name col-sm-9">
+                                    <a href="#"><h4>{{$answer->lawyer->user->firstName}}</h4></a>
+                                    <div class="comment-content">
+                                        {{$answer->text}}
+                                    </div>
+                                    <div class="tags col-md-6">
+                                        @foreach($answer->files as $file)
+                                            <a class="label label-default"
+                                               href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                                        @endforeach
                                     </div>
                                 </div>
+                                <div>
+                                    <p class="author-time">{{date('F n, Y - g:iA'), strtotime($answer->created_at)}}</p>
+                                    <img src="{{ $answer->lawyer->file != null ? asset($answer->file->path.$answer->file->file) : asset('dist/images/avatar_large_male_client_default.jpg')}}"
+                                         class="author-img col-md-3" style=" width: 200px; height: 200px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            @if(Auth::guard('client')->check() && ($answer->feedback == null))
+
+                                {{Form::open(['route' => ['feedback.create', $answer->id],'method' => 'POST']) }}
+
+                                <div class="col-md-5">
+
+                                    {{Form::label('text', "Отзыв: ") }}
+                                    {{Form::textarea('text', null, ['rows' =>'2', 'cols'=>'43'])}}
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">like {{Form::radio('helped',true,true)}}</div>
+                                        <div class="col-md-4 " style="float:right;">
+                                            dislike {{Form::radio('helped',false)}}</div>
+                                    </div>
+                                    {{Form::submit('Оставить отзыв', ['class'=> 'btn btn-success btn-block'])}}
+                                </div>
+
+                                {{Form::close() }}
                             @endif
-                    @endforeach
-                    <hr>
-                </div>
-            </div>
-        </div>
-        @if (Auth::guard('lawyer')->check())
-            <div class="row">
-                <div id="comment-form" class="col-md-4 col-md-offset-2" style="left:0">
-                    {{Form::open(['route' => ['lawyer.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
-                    <div class="row">
-                        <div class=".col-md-12">
-                            {{Form::label('text', "comment: ") }}
-                            {{Form::textarea('text', null, ['class'=>'form-control', 'rows'=>'5'])}}
-                            {{Form::file('files[]', ['multiple' => 'multiple'])}}
-                            {{Form::submit('Add Comment', ['class'=> 'btn btn-success btn-block'])}}
+                            @if($answer->feedback != null)
+                                <p style="color:rebeccapurple">{{$answer->feedback->text}}</p>
+                            @endif
                         </div>
                     </div>
-                    {{Form::close() }}
-                </div>
+
+                @endforeach
             </div>
-        @endif
+            <div class="row">
+                @if (Auth::guard('lawyer')->check() && $question->solved != true)
+                    @if($question->type == 2  && Auth::guard('lawyer')->user()->type == 2)
+
+                        {{Form::open(['route' => ['lawyer.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
+
+                        <div class="panel panel-danger col-md-10" style="padding-top: 10px;">
+                            @if ($errors->has('text'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('text') }}</strong>
+                                    </span>
+                            @endif
+                            <div>
+                                {{Form::textarea('text', null,['style' =>'width:100%;', 'placeholder'=>'Ответить'])}}
+                            </div>
+
+
+                            <div class="col-md-4" style="margin:10px;">
+                                {{Form::file('files[]', ['multiple' => 'multiple'])}}
+                            </div>
+                            <div class="col-md-2" style="float:right; margin: 10px;">
+                                {{Form::submit('Ответить', ['class'=> 'btn btn-success'])}}
+                            </div>
+
+                        </div>
+                        {{Form::close() }}
+
+                    @endif
+                    @if($question->type == 1)
+                        <div class="row">
+                            {{Form::open(['route' => ['lawyer.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
+
+                            <div class="panel panel-danger col-md-10" style="padding-top: 10px;">
+                                @if ($errors->has('text'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('text') }}</strong>
+                                    </span>
+                                @endif
+                                <div>
+                                    {{Form::textarea('text', null,['style' =>'width:100%;', 'placeholder'=>'Ответить'])}}
+                                </div>
+
+
+                                <div class="col-md-4" style="margin:10px;">
+                                    {{Form::file('files[]', ['multiple' => 'multiple'])}}
+                                </div>
+                                <div class="col-md-2" style="float:right; margin: 10px;">
+                                    {{Form::submit('Ответить', ['class'=> 'btn btn-success'])}}
+                                </div>
+
+                            </div>
+                            {{Form::close() }}
+                        </div>
+                    @endif
+
+                @endif
+            </div>
+        </div>
     </div>
-
-
 @endsection
 @endsection
+@section('scripts')
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ha04cxa9mauwibgqmd91jvlug5qd3gqfb1ihnf8s5imb73na"></script>
 
+    <script>tinymce.init({
+            selector: 'textarea',
+            plugins: 'link code',
+            height: 500,
+            toolbar: 'undo redo | cut copy paste'
+        });</script>
+@endsection

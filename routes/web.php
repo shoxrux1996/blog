@@ -22,6 +22,7 @@ Route::get('card','Web\ApiController@show')->name('card.payment');
     echo 'Balance: <strong>'.$client->user->balance() .'</strong>';
     
 });*/
+
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -161,6 +162,9 @@ Route::prefix('lawyer')->group(function(){
     Route::prefix('/blogs')->group(function(){
         Route::get('/insertform','Lawyer\LawyerBlogController@insertform')->name('lawyer.blog.insert');
         Route::post('/create','Lawyer\LawyerBlogController@store')->name('lawyer.blog.submit');
+        Route::get('/edit/{id}', 'Lawyer\lawyerBlogController@editform')->name('lawyer.blog.edit');
+        Route::post('/edit/submit/{id}', 'Lawyer\LawyerBlogController@edit')->name('lawyer.blog.edit.submit');
+
     });
     Route::prefix('/comment')->group(function(){
         Route::post('/{blog_id}', 'Lawyer\LawyerCommentController@store')->name('lawyer.comment.store');

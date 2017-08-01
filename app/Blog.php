@@ -20,4 +20,7 @@ class Blog extends Model
     public function lawyer(){
          return $this->belongsTo('yuridik\Lawyer');
     }
+    public function file(){
+        return $this->morphOne('yuridik\File', 'fileable');
+    }
 }

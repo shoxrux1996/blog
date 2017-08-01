@@ -32,7 +32,7 @@
                             <div class="ribbon"><span>Модераторы</span></div>
                             <div class="blog-item-img">
                                 @if($blog->file != null)
-                                <img alt="Blog item image" src="">
+                                <img alt="Blog item image" src="{{asset($blog->file->path.$blog->file->file)}}">
                                 @else
                                     <img alt="Blog item image" src="{{asset('dist/images/blog-img-2.jpg')}}">
                                 @endif
@@ -41,13 +41,15 @@
                                 </div>
                             </div>
                             <div class="blog-item-description">
-                                <h5><b>{{ $blog->title }}</b></h5>
-                                <p>{{substr(strip_tags($blog->text),0,200)}} {{strlen(strip_tags($blog->text))>200 ? '...' : ""}}</p>
+                                <h5><b>{{substr($blog->title,0,70)}} {{strlen($blog->title)>70 ? '...' : ""}}</b></h5>
+                                <p>{{substr(strip_tags($blog->text),0,180)}} {{strlen(strip_tags($blog->text))>180 ? '...' : ""}}</p>
                                 <p class="post-info">
-
                                 <span>
                                     <i class="fa fa-eye"></i> {{$blog->count}}
                                 </span>
+                                    @foreach($blog->tags as $tag)
+                                    <span style="margin-left:10px;"><strong >{{$tag->name}}</strong></span>
+                                    @endforeach
                                 <span class="pull-right">
                                     <i class="fa fa-comments-o"></i> {{$blog->comments->count()}}
                                 </span>
@@ -122,9 +124,9 @@
                                 <a href="{{route('web.blog.show', $blog->id)}}">
                                     <div class="post-mini">
                                         @if($blog->file != null)
-                                            <img class="img-thumbnail" alt="post-mini-img" src="" />
+                                            <img class="img-thumbnail" alt="post-mini-img" src="{{asset($blog->file->path.$blog->file->file)}}" >
                                         @else
-                                            <img class="img-thumbnail" alt="post-mini-img" src="{{asset('dist/images/blog-img-3.jpg')}}" />
+                                            <img class="img-thumbnail" alt="post-mini-img" src="{{asset('dist/images/blog-img-3.jpg')}}" >
                                         @endif
                                     <span>
                                         <b>{{substr($blog->title,0,60)}} {{strlen(($blog->title))>60 ? '...' : ""}}</b>
@@ -151,7 +153,7 @@
                                     <a href="{{route('web.blog.show', $blog->id)}}">
                                     <div class="post-mini">
                                         @if($blog->file != null)
-                                            <img class="img-thumbnail" alt="post-mini-img" src="" />
+                                            <img class="img-thumbnail" alt="post-mini-img" src="{{asset($blog->file->path.$blog->file->file)}}" />
                                         @else
                                             <img class="img-thumbnail" alt="post-mini-img" src="{{asset('dist/images/blog-img-6.jpg')}}" />
                                         @endif

@@ -16,8 +16,6 @@
 
             <div class="blog-title text-center"
                  style="background-image:@if($blog->file != null) url({{asset($blog->file->path.''.$blog->file->file)}});@else url({{ asset('dist/images/blog-img-1.jpg')}} ); @endif">
-
-
                 <h6>
                     Блог юристов
                 </h6>

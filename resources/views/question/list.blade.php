@@ -54,23 +54,6 @@
                 </div>
                 @endforeach
 
-
-                <div class="col-sm-12 question">
-                    <h4 class="title"><a href="individual-question.html">Законно ли требование бывшей супруги покинуть квартиру и отдать ей ключи?</a></h4>
-                    <p class="description">В браке состояли более 20 лет. Квартира приобретена в браке. Оформлена на жену. (по договору купли-продажи).Развод произошел в феврале 2017г. По требованию бывшей супруги (тогда еще жены) съехал из квартиры в ноябре 2016г. В квартире прописаны 4...</p>
-                    <p>
-                        <span class="date">10 Июля 2017, 02:22, </span>
-                        <span class="number"> вопрос №1691430</span>
-                        <span class="author">Тимур, г. Жуковский </span>
-                    </p>
-                    <hr>
-                    <p>
-                        <span class="category">Категория: <a href="individual-category.html">Семейное право</a></span>
-                        <a class="answers" href="individual-question.html">
-                            3 ответа
-                        </a>
-                    </p>
-                </div>
                 <div class="col-sm-12 text-center">
                     {!! $questions->links('pagination') !!}
 

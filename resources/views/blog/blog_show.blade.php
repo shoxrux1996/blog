@@ -92,9 +92,9 @@
         <!-- Blog item title -->
         <div class="row">
             <div class="blog-title text-center"
-                 style="background-image:@if($blog->file != null) url({{asset($blog->file->path.''.$blog->file->file)}});@else url({{ asset('dist/images/blog-img-1.jpg')}} ); @endif">
+                 style="background-image: url({{$blog->file != null ? asset($blog->file->path.$blog->file->file)  : asset('dist/images/blog-img-1.jpg')}})">
+                <h6>
 
-            <h6>
                     Блог юристов
                 </h6>
                 <h1>
@@ -104,7 +104,7 @@
                 <p>
                 <h6>Автор: {{$blog->lawyer->user->firstName}}</h6>
                 @php
-                   $time= Carbon\Carbon::parse($blog->created_at)->toFormattedDateString() ;
+                    $time= Carbon\Carbon::parse($blog->created_at)->toFormattedDateString() ;
                 @endphp
                 <h6>{{$time}}</h6>
                 </p>
@@ -120,7 +120,14 @@
 
             </div>
             <div class="col-sm-8 blog-text-description">
+
                 {!! $blog->text !!}
+                <div>
+                    <label>Tags: </label>
+                    @foreach($blog->tags as $tag)
+                        <i style="margin-left:10px;"><strong>{{$tag->name}}</strong></i>
+                    @endforeach
+                </div>
             </div>
 
             <div class="col-sm-2 right-sidebar advertisement">
@@ -129,41 +136,45 @@
                     <h6>
                         <b>Задайте вопрос бесплатно</b>
                     </h6>
-                    <a href="{{route('question.create')}}" class="btn btn-default center-block btn-success pulse-button" type="a">Задать вопрос
+                    <a href="{{route('question.create')}}" class="btn btn-default center-block btn-success pulse-button"
+                       type="a">Задать вопрос
                     </a>
                 </div>
-                <img class="img-responsive center-block" src="{{asset('dist/images/Sidebar-Ad-300x600-150x300@2x.png')}}"/>
+                <img class="img-responsive center-block"
+                     src="{{asset('dist/images/Sidebar-Ad-300x600-150x300@2x.png')}}"/>
                 <img class="img-responsive center-block" src="{{asset('dist/images/adver-marknewtonband-1.png')}}"/>
             </div>
         </div>
         <!-- /Blog item text -->
-                <!-- Blog comments-->
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2" style="margin: 10px;">
-                        <hr>
-                        <h3><span class=""></span> Comments</h3>
-                        @foreach($blog->comments as $comment)
-                            <div class="comment">
-                                <div class = "author-info">
-                                    <img src="{{ "https://www.gravatar.com/avatar/" .md5(strtolower(trim($comment->commentable->email))) . "?s=50&d=monsterid" }}" class="author-img">
-                                    <div class="author-name">
-                                        <h4>{{$comment->commentable->email}}</h4>
-                                        @php
-                                            $end = \Carbon\Carbon::parse($comment->created_at);
-                                            $days = \Carbon\Carbon::now()->diffInDays($end);
-                                        @endphp
-                                        <p class="author-time">{{$days}}</p>
-                                    </div>
-                                </div>
-                                <div class="comment-content">
-                                    {{$comment->comment}}
-                                </div>
+
+        <!-- Blog comments-->
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" style="margin: 10px;">
+                <hr>
+                <h3><span class=""></span> Comments</h3>
+                @foreach($blog->comments as $comment)
+                    <div class="comment">
+                        <div class="author-info">
+                            <img src="{{ "https://www.gravatar.com/avatar/" .md5(strtolower(trim($comment->commentable->email))) . "?s=50&d=monsterid" }}"
+                                 class="author-img">
+                            <div class="author-name">
+                                <h4>{{$comment->commentable->email}}</h4>
+                                @php
+                                    $end = \Carbon\Carbon::parse($comment->created_at);
+                                    $days = \Carbon\Carbon::now()->diffInDays($end);
+                                @endphp
+                                <p class="author-time">{{$days}}</p>
                             </div>
-                        @endforeach
-                        <hr>
+                        </div>
+                        <div class="comment-content">
+                            {{$comment->comment}}
+                        </div>
                     </div>
-                </div>
-                <!-- /Blog comments-->
+                @endforeach
+                <hr>
+            </div>
+        </div>
+        <!-- /Blog comments-->
         <!-- Subscribe -->
         <div class="row subscribe">
             <div class="padding-30 text-center">
@@ -182,41 +193,42 @@
         <!-- /Subcribe -->
         <div class="row padding-30" id="other-articles">
             <h3 class="text-center">Читайте также</h3>
-       @foreach($blogs as $bl)
-            <a href="{{route('web.blog.show', $bl->id)}}">
-                <div class="col-sm-4">
-                    <div class="blog-item">
-                        <div class="ribbon"><span>Юристы</span></div>
-                        <div class="blog-item-img">
-                            <img alt="Blog item image" src="{{asset('dist/images/blog-img-2.jpg')}}"/>
-                            <div class="middle">
-                                <a href="{{route('web.blog.show', $bl->id)}}" class="btn btn-dark-blue text">Читать статью</a>
+            @foreach($blogs as $bl)
+                <a href="{{route('web.blog.show', $bl->id)}}">
+                    <div class="col-sm-4">
+                        <div class="blog-item">
+                            <div class="ribbon"><span>Юристы</span></div>
+                            <div class="blog-item-img">
+                                <img alt="Blog item image" src="{{asset('dist/images/blog-img-2.jpg')}}"/>
+                                <div class="middle">
+                                    <a href="{{route('web.blog.show', $bl->id)}}" class="btn btn-dark-blue text">Читать
+                                        статью</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="blog-item-description">
-                            <h5><b>{{ $bl->title }}</b></h5>
-                            <p>{{substr(strip_tags($bl->text),0,200)}} {{strlen(strip_tags($bl->text))>200 ? '...' : ""}}</p>
-                            <p class="post-info">
+                            <div class="blog-item-description">
+                                <h5><b>{{ $bl->title }}</b></h5>
+                                <p>{{substr(strip_tags($bl->text),0,200)}} {{strlen(strip_tags($bl->text))>200 ? '...' : ""}}</p>
+                                <p class="post-info">
                                 <span>
                                     <i class="fa fa-eye">{{$bl->count}}</i>
                                 </span>
-                                <span class="pull-right">
+                                    <span class="pull-right">
                                     <i class="fa fa-comments-o"></i> {{$bl->comments->count()}}
                                 </span>
-                            </p>
-                        </div>
-                        <hr>
-                        <div class="blog-item-footer">
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="blog-item-footer">
                             <span>
                                 <i class="fa fa-user"></i> {{$bl->lawyer->user->firstName}}
                             </span>
-                            <span class="pull-right">
+                                <span class="pull-right">
                                 <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($bl->created_at)->toFormattedDateString()}}
                             </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
             @endforeach
 
         </div>

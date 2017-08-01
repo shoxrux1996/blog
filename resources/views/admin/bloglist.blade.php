@@ -27,13 +27,16 @@
                                 </div>
                             </div>
                             <div class="blog-item-description">
-                                <h5><b>{{ $blog->title }}</b></h5>
+                                <h5><b>{{substr($blog->title,0,100)}} {{strlen($blog->title)>100 ? '...' : ""}}</b></h5>
                                 <p>{{substr(strip_tags($blog->text),0,200)}} {{strlen(strip_tags($blog->text))>200 ? '...' : ""}}</p>
                                 <p class="post-info">
 
                                 <span>
                                     <i class="fa fa-eye"></i> {{$blog->count}}
                                 </span>
+                                    @foreach($blog->tags as $tag)
+                                        <span style="margin-left:10px;"><strong>{{$tag->name}}</strong></span>
+                                    @endforeach
                                     <span class="pull-right">
                                     <i class="fa fa-comments-o"></i> {{$blog->comments->count()}}
                                 </span>

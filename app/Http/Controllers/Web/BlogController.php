@@ -19,7 +19,7 @@ class BlogController extends Controller
         $blog_recent = Blog::orderBy('id', 'desc')->limit(4)->get();
         $comments= Comment::orderBy('id', 'desc')->limit(4)->get();
 
-        return view('blogs.bloglist')->with('blogs', $blogs)->withBlog_pop($blog_pop)->withBlog_recent($blog_recent)->withComments($comments);
+        return view('blog.bloglist')->with('blogs', $blogs)->withBlog_pop($blog_pop)->withBlog_recent($blog_recent)->withComments($comments);
     }
     public function show($id){
         $blog = Blog::find($id);
@@ -33,7 +33,7 @@ class BlogController extends Controller
             $tags2[$tag->id] = $tag->name;
         }
         $blogs =Blog::orderBy('id', 'desc')->limit(3)->get();
-        return view('blogs.blog_show')->withBlog($blog)->withTags($tags2)->withBlogs($blogs);
+        return view('blog.blog_show')->withBlog($blog)->withTags($tags2)->withBlogs($blogs);
     }
   
 

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use yuridik\Blog;
 use yuridik\Tag;
 use Session;
+use yuridik\File;
+use Illuminate\Support\Facades\File as LaraFile;
 class AdminBlogController extends Controller
 {
     /**
@@ -52,19 +54,37 @@ class AdminBlogController extends Controller
         return view('admin.blog_show')->withBlog($blog)->withTags($tags2);
     }
 
- public function edit(Request $request, $id)
+    public function edit(Request $request, $id)
     {
-       $this->validate($request, array(
+        $this->validate($request, array(
             'title' => 'required|max:255',
-            'text' => 'required|min:10'));
+            'text' => 'required|min:10',
+            'image' => 'image',
+        ));
         $blog = Blog::find($id);
-        $blog->title= $request->title;
+        $blog->title = $request->title;
         $blog->text = $request->text;
         $blog->save();
 
         $blog->tags()->sync($request->tags);
-       Session::flash('message', 'Blog was updated successfully');
-      return redirect()->route('admin.blog.edit', $blog->id);
+        if ($request->file('image') != null) {
+            $file = $request->file('image');
+            $file_name = $file->getClientOriginalName();
+            $upload_folder = '/blogs/' . $blog->id . '/';
+            if ($blog->file != null) {
+                LaraFile::delete(public_path() . $upload_folder . $blog->file->file);
+                $blog->file->file = $file_name;
+                $blog->file->path = $upload_folder;
+            } else {
+                $fil = new File;
+                $fil->file = $file_name;
+                $fil->path = $upload_folder;
+                $blog->file()->save($fil);
+            }
+            $file->move(public_path() . $upload_folder, $file_name);
+        }
+        Session::flash('message', 'Blog was updated successfully');
+        return redirect()->route('admin.blog.show', $blog->id);
     }
     public function editform($id){
         $blog = Blog::find($id);
