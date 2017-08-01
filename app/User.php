@@ -13,7 +13,7 @@ class User extends Model
     ];
 
     public function city(){
-    	return $this->hasOne('yuridik\City');
+    	return $this->belongsTo('yuridik\City');
     }
 
     public function file(){

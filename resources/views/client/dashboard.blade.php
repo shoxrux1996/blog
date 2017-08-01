@@ -63,8 +63,8 @@
                     <div class="panel-body">
                         <ul class="list-unstyled">
                             <li>
-                                <h6><b>Улугбек</b></h6>
-                                <p class="color-gray">г. Москва</p>
+                                <h6><b>{{$client->user->firstName}} {{$client->user->lastName}}</b></h6>
+                                <p class="color-gray">г. {{$client->user->city->name}}</p>
                                 <a href="{{ route('client.info')}}">Редактировать</a>
                             </li>
                             <li>

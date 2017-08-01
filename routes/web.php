@@ -143,7 +143,7 @@ Route::prefix('lawyer')->group(function(){
 	Route::post('/password/reset', 'Auth\LawyerResetPasswordController@reset')->name('lawyer.password.request');
 	Route::get('/password/reset/{token}', 'Auth\LawyerResetPasswordController@showResetForm')->name('lawyer.password.reset');
     Route::get('/settings/info', 'Lawyer\LawyerController@info')->name('lawyer.info');
-    Route::post('/update/{id}', 'Lawyer\LawyerController@update')->name('lawyer.update');
+    Route::post('/update/{settingtype}', 'Lawyer\LawyerController@update')->name('lawyer.update');
     
     Route::prefix('/blogs')->group(function(){
         Route::get('/insertform','Lawyer\LawyerBlogController@insertform')->name('lawyer.blog.insert');
