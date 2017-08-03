@@ -72,10 +72,10 @@
                                     <a href="#">Отзывы:</a>
                                 </p>
                                 <p>
-                                   0 положительных
+                                   {{$lawyer->countPositiveFeedbacks()}} положительных
                                 </p>
                                 <p>
-                                   0 отрицательных
+                                   {{$lawyer->countNegativeFeedbacks()}} отрицательных
                                 </p>
                             </li>
                         </ul>

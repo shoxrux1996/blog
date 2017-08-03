@@ -36,8 +36,8 @@
                 <ul class="dropdown-menu">
                     <li class="profile"><a href="">@if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->email }} @else {{ Auth::guard('lawyer')->user()->email }} @endif</a></li>
                     <div class="divider"></div>
-                    <li><a href="{{ route('client.dashboard')}}">Личный кабинет</a></li>
-                    <li><a href="{{ route('client.info')}}">Редактировать профиль</a></li>
+                    <li><a href=" {{(Auth::guard('client')->check()) ? route('client.dashboard') : route('lawyer.dashboard')}}">Личный кабинет</a></li>
+                    <li><a href="{{(Auth::guard('client')->check()) ? route('client.info') : route('lawyer.info')}}">Редактировать профиль</a></li>
                     <li><a href="#">Партнёрская программа</a></li>
                     <li><a href="#">Финансы</a></li>
                     <li><a href="{{ route('user.logout') }}"

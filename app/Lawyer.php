@@ -57,4 +57,16 @@ class Lawyer extends Authenticatable
     {
         return $this->hasManyThrough('yuridik\Feedback', 'yuridik\Answer');
     }
+    public function files()
+    {
+        return $this->morphMany('yuridik\File', 'fileable');
+    }
+    public function countPositiveFeedbacks()
+    {
+        return $this->feedbacks->where('helped', 1)->count();
+    }
+    public function countNegativeFeedbacks()
+    {
+        return $this->feedbacks->where('helped', 0)->count();
+    }
 }

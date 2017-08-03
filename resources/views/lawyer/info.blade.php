@@ -180,7 +180,7 @@
                 <li class="{{$settingtype==='main' ? 'active' : ''}}">
                     <a data-toggle="tab" href="#main">Основное</a>
                 </li>
-                <li class="{{$settingtype==='main' ? 'active' : ''}}">
+                <li class="{{$settingtype==='photo' ? 'active' : ''}}">
                     <a data-toggle="tab" href="#photo">Фотография</a>
                 </li>
                 <li class="{{$settingtype==='password' ? 'active' : ''}}">
@@ -189,9 +189,9 @@
                 <li class="{{$settingtype==='contacts' ? 'active' : ''}}">
                     <a data-toggle="tab" href="#contacts">Контакты</a>
                 </li>
-                <li class="{{$settingtype==='education' ? 'active' : ''}}">
+                <!-- <li class="{{$settingtype==='education' ? 'active' : ''}}">
                     <a data-toggle="tab" href="#education">Образование</a>
-                </li>
+                </li> -->
                 <li class="{{$settingtype==='experience' ? 'active' : ''}}">
                     <a data-toggle="tab" href="#experience">Опыть</a>
                 </li>
@@ -211,26 +211,26 @@
                             {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="surname">Фамилия</label>
-                                    <input type="text" class="form-control " id="surname" name="surname" value="$lawyer->user->lastName" />
+                                    <input type="text" class="form-control " id="surname" name="surname" value="{{$lawyer->user->lastName}}" />
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Имя</label>
-                                    <input type="text" class="form-control " id="name" name="name" value="$lawyer->user->firstName" />
+                                    <input type="text" class="form-control " id="name" name="name" value="{{$lawyer->user->firstName}}" />
                                 </div>
-                                <!-- <div class="form-group">
+                                <div class="form-group">
                                     <label for="patronymic">Отчество</label>
-                                    <input type="text" class="form-control " id="patronymic"/>
-                                </div> -->
+                                    <input type="text" class="form-control " id="patronymic" name="patronymic" value="{{$lawyer->fatherName}}"/>
+                                </div>
                                 <div class="form-group">
                                     <label for="city">Город</label>
-                                     {{Form::select('city', $cities, $client->user->city_id, ['class'=>'form-control'])}}
+                                     {{Form::select('city', $cities, $lawyer->user->city_id, ['class'=>'form-control'])}}
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Ваш статус</label>
-                                    <select class="form-control" id="status">
-                                        <option>Адвокат</option>
-                                        <option>Нотариус</option>
-                                        <option>Юрист</option>
+                                    <select class="form-control" id="status" name="job_status">
+                                        <option value="lawyer" {{$lawyer->job_status==='lawyer' ? 'selected' : ''}}>Адвокат</option>
+                                        <option value="notary" {{$lawyer->job_status==='notary' ? 'selected' : ''}}>Нотариус</option>
+                                        <option value="jurist" {{$lawyer->job_status==='jurist' ? 'selected' : ''}}>Юрист</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -253,15 +253,15 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="img-responsive">
-                                @if($client->user->file != null)
-                                    <img src="{!!asset($client->user->file->path . $client->user->file->file)!!}" alt="..." class="img-thumbnail" style="height: 300px;">
+                                @if($lawyer->user->file != null)
+                                    <img src="{!!asset($lawyer->user->file->path . $lawyer->user->file->file)!!}" alt="..." class="img-thumbnail" style="height: 300px;">
                                 @else
                                     <img class="img-thumbnail" src="{{ asset('dist/images/avatar_large_male_client_default.jpg')}}" />
                                 @endif
                             </div>
                             <form action="{{ route('lawyer.update',['settingtype'=>'photo'])}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
-                                <div class="form-group">
+                                <div class="form-group{{$errors->has('image') ? ' has-error' : '' }}">
                                 @if ($errors->has('image'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('image') }}</strong>
@@ -281,7 +281,7 @@
                 <div id="password" class="tab-pane fade in {{$settingtype==='password' ? 'active' : ''}}">
                     <div class="row">
                         <div class="col-sm-6">
-                            <form action="{{ route('lawyer.update',['settingtype'=>'privacy'])}}" method="post">
+                            <form action="{{ route('lawyer.update',['settingtype'=>'password'])}}" method="post">
                             {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="email">Email</label>
@@ -319,12 +319,18 @@
                 <div id="contacts" class="tab-pane fade in {{$settingtype==='contacts' ? 'active' : ''}}">
                     <div class="row">
                         <div class="col-sm-6">
-                            <form action="">
-                                <div class="form-group">
+                            <form action="{{ route('lawyer.update',['settingtype'=>'contacts'])}}" method="post">
+                            {{csrf_field()}}
+                                <div class="form-group{{$errors->has('phone') ? ' has-error' : '' }}">
                                     <label for="phone">Телефон</label>
-                                    <input type="text" class="form-control" id="phone"/>
+                                    @if ($errors->has('phone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                    @endif
+                                    <input type="text" class="form-control" id="phone" name="phone" value="{{$lawyer->user->phone}}" placeholder="99897-123-4567" />
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="fax">Факс</label>
                                     <input type="text" class="form-control" id="fax"/>
                                 </div>
@@ -339,15 +345,15 @@
                                 <div class="form-group">
                                     <label for="skype">Skype</label>
                                     <input type="text" class="form-control" id="skype"/>
-                                </div>
+                                </div>-->
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-default btn-primary pull-right">Сохранить</button>
-                                </div>
+                                    <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить</button>
+                                </div> 
                             </form>
                         </div>
                     </div>
                 </div>
-                <div id="education" class="tab-pane fade in {{$settingtype==='education' ? 'active' : ''}}">
+                <!-- <div id="education" class="tab-pane fade in {{$settingtype==='education' ? 'active' : ''}}">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -376,78 +382,121 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div id="experience" class="tab-pane fade in {{$settingtype==='experience' ? 'active' : ''}}">
-                    <div class="row">
-                        <p class="color-gray">Выбор специализации (можно выбрать не более пяти)</p>
-                        <div class="col-sm-6">
-                            <label class="checkbox">
-                                <input type="checkbox" value="">Конституционное право
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="">Семейное право
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="">Трудовое право
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="">Защита прав потребителей
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="">Наследство
-                            </label>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="checkbox">
-                                <input type="checkbox" value="">Гражданское право
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="">Недвижимость
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="">Уголовное право
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="">Социальное обеспечение
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="">Бухгалтерский учет
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <p class="color-gray">Текущее место работы</p>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="company">Компания</label>
-                                <input type="text" id="company" class="form-control" />
+                    <form action="{{ route('lawyer.update',['settingtype'=>'experience'])}}" method="post">
+                    {{csrf_field()}}
+                        <div class="row">
+                            <p class="color-gray">Выбор специализации (можно выбрать не более пяти)</p>
+                            <div class="col-sm-6">
+                            @foreach($categories as $category)
+                                @if($category->id%2==1)
+                                <label class="checkbox">
+                                <input type="checkbox" name="specialization[]" value="{{$category->id}}" @foreach($lawyer->categories as $var){{$var->id==$category->id ? 'checked' : ''}}@endforeach>{{$category->name}}
+                                </label>
+                                @endif
+                            @endforeach
+                                <!-- <label class="checkbox">
+                                    <input type="checkbox" value="">Конституционное право
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="">Семейное право
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="">Трудовое право
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="">Защита прав потребителей
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="">Наследство
+                                </label> -->
                             </div>
-                            <div class="form-group">
-                                <label for="position">Должность</label>
-                                <input type="text" id="position" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label for="experience-year">Юридический стаж</label>
-                                <select class="form-control" id="experience-year">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                </select>
+                            <div class="col-sm-6">
+                            @foreach($categories as $category)
+                                @if($category->id%2==0)
+                                <label class="checkbox">
+                                    <input type="checkbox" name="specialization[]" value="{{$category->id}}" @foreach($lawyer->categories as $var){{$var->id==$category->id ? 'checked' : ''}}@endforeach>{{$category->name}}
+                                </label>
+                                @endif
+                            @endforeach
+                                <!-- <label class="checkbox">
+                                    <input type="checkbox" value="">Гражданское право
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="">Недвижимость
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="">Уголовное право
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="">Социальное обеспечение
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="">Бухгалтерский учет
+                                </label> -->
                             </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <p class="color-gray">Текущее место работы</p>
+                            <div class="col-sm-6">
+                                <div class="form-group{{$errors->has('company') ? ' has-error' : '' }}">
+                                    <label for="company">Компания</label>
+                                    @if ($errors->has('company'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('company') }}</strong>
+                                    </span>
+                                    @endif
+                                    <input type="text" id="company" name="company" class="form-control" value="{{$lawyer->company}}"/>
+                                </div>
+                                <div class="form-group{{$errors->has('position') ? ' has-error' : '' }}">
+                                    <label for="position">Должность</label>
+                                    @if ($errors->has('position'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('position') }}</strong>
+                                    </span>
+                                    @endif
+                                    <input type="text" id="position" name="position" class="form-control" value="{{$lawyer->position}}" />
+                                </div>
+                                <div class="form-group{{$errors->has('experience_year') ? ' has-error' : '' }}">
+                                    <label for="experience-year">Юридический стаж</label>
+                                    @if ($errors->has('experience_year'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('experience_year') }}</strong>
+                                    </span>
+                                    @endif
+                                    <input type="text" class="form-control" id="experience-year" name="experience_year" value="{{$lawyer->experience_year}}"></input>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить</button>
+                                </div> 
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div id="additional" class="tab-pane fade in {{$settingtype==='additional' ? 'active' : ''}}">
+                <form method="post" action="{{ route('lawyer.update', ['settingtype'=>'additional'])}}">
+                {{csrf_field()}}
                     <div class="row">
                         <h6 class="color-gray"><b>Стоимость услуг в чате</b></h6>
                         <div class="col-sm-4">
-                            <div class="form-group">
+                            <div class="form-group{{$errors->has('call_price') ? ' has-error' : ''}}">
                                 <label for="phone-consultion">Телефонная консультация (сум)</label>
-                                <input type="text" id="phone-consultion" class="form-control" />
+                                @if($errors->has('call_price'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('call_price') }}</strong>
+                                    </span>
+                                @endif
+                                <input type="text" id="phone-consultion" class="form-control" name="call_price" value="{{$lawyer->call_price}}" />
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{$errors->has('doc_price') ? ' has-error' : ''}}">
                                 <label for="document-prep">Изготовление документа (сум)</label>
-                                <input type="text" id="document-prep" class="form-control" />
+                                @if($errors->has('doc_price'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('doc_price') }}</strong>
+                                    </span>
+                                @endif
+                                <input type="text" id="document-prep" class="form-control" name="doc_price" value="{{$lawyer->doc_price}}" />
                             </div>
                         </div>
                     </div>
@@ -456,18 +505,29 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="profile-shown-price">Стоимость услуг, отображаемая в профиле</label>
-                                <textarea id="profile-shown-price" cols="20" class="form-control" rows="5"></textarea>
+                                <textarea id="profile-shown-price" cols="20" class="form-control" rows="5" name="profile_shown_price">{{$lawyer->profile_shown_price}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="about-me">О себе</label>
-                                <textarea id="about-me" cols="20" class="form-control" rows="5"></textarea>
+                                <textarea id="about-me" cols="20" class="form-control" rows="5" name="about_me">{{$lawyer->about_me}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                </form>
                 <div id="awards" class="tab-pane fade in {{$settingtype==='awards' ? 'active' : ''}}">
                     <div class="row">
                         <h6><b>Награды</b></h6>
+                        @if($lawyer->files != null)
+                            @foreach($lawyer->files as $award)
+                                <div class="col-sm-3">
+                                    <img class="img-responsive img-thumbnail" src="{!!asset($award->path . $award->file)!!}" />
+                                </div>
+                            @endforeach
+                        @else    
                         <div class="col-sm-3">
                             <img class="img-responsive img-thumbnail" src="{{ asset('dist/images/exquisite-certificate-frames-with-template-vector.png')}}" />
                         </div>
@@ -480,16 +540,26 @@
                         <div class="col-sm-3">
                             <img class="img-responsive img-thumbnail" src="{{ asset('dist/images/exquisite-certificate-frames-with-template-vector.png')}}" />
                         </div>
-                        <form action="">
-
+                        @endif
+                        <form method="post" action="{{ route('lawyer.update', ['settingtype'=>'awards'])}}" enctype="multipart/form-data">
+                        {{csrf_field()}}
                             <p class="color-gray">Загрузите изображение Ваших наград или дипломов (в формате jpeg).</p>
                             <div class="form-group">
                                 <label class="btn btn-default ">
-                                    Выбрать файл <input type="file" hidden>
+                                    Выбрать файл <input type="file" name="files[]" multiple hidden>
                                 </label>
                             </div>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="form-group">
-                                <button type="button" class="btn btn-default btn-primary">Загрузить</button>
+                                <button type="submit" class="btn btn-default btn-primary">Загрузить</button>
                             </div>
                         </form>
                     </div>

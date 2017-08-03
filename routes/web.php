@@ -41,7 +41,7 @@ Route::prefix('admin')->group(function(){
         Route::get('/edit/{id}', 'Admin\AdminBlogController@editform')->name('admin.blog.edit');
         Route::post('/edit/submit/{id}', 'Admin\AdminBlogController@edit')->name('admin.blog.edit.submit');
     });
-    Route::prefix('tags')->group(function(){
+    Route::prefix('tags')->group(function(){ 
         Route::get('edit/{id}', 'Admin\AdminTagController@edit')->name('admin.tag.edit');
         Route::put('/update/{id}', 'Admin\AdminTagController@update')->name('admin.tag.update');
         Route::delete('/delete/{id}', 'Admin\AdminTagController@destroy')->name('admin.tag.delete');
