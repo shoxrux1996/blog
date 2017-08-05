@@ -22,6 +22,9 @@ Route::get('card','Web\ApiController@show')->name('card.payment');
     echo 'Balance: <strong>'.$client->user->balance() .'</strong>';
     
 });*/
+Route::any('/search/lawyers', 'Web\SearchController@searchLawyers')->name('search.lawyers');
+Route::any('/search/main', 'Web\SearchController@searchAll')->name('search.all');
+Route::get('/category/{name}', 'Web\SearchController@')->name('search.lawyers.bycategory');
 
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -177,21 +180,22 @@ Route::prefix('lawyer')->group(function(){
     });
 });
 
-Route::prefix('question_info')->group(function (){
+Route::prefix('question-info')->group(function (){
     Route::get('/list', 'Web\QuestionController@index')->name('question.list');
     Route::get('/show/{id}', 'Web\QuestionController@show')->name('web.question.show');
+    Route::get('/free', 'Web\QuestionController@freeQuestions')->name('free.questions');
+    Route::get('/service', 'Web\QuestionController@costlyQuestions')->name('costly.questions');
 });
 
-Route::prefix('lawyer_info')->group(function(){
-    Route::get('/category/{name}', 'Web\CategoryController@show')->name('search.lawyers.bycategory');
-    Route::get('/city/{name}', 'Web\CityController@show')->name('search.lawyers.bycity');
+Route::prefix('lawyer-info')->group(function(){
+
     Route::get('/', 'Web\LawyersInfoController@showLawyersList')->name('lawyers.list');
 });
-Route::prefix('blogs_info')->group(function(){
+Route::prefix('blog-info')->group(function(){
 	Route::get('/', 'Web\BlogController@showBlogList')->name('web.blogs');
     Route::get('/show/{id}', 'Web\BlogController@show')->name('web.blog.show');
 });
-Route::prefix('category_info')->group(function(){
+Route::prefix('category-info')->group(function(){
 	Route::get('/', 'Web\CategoryController@index')->name('category.list');
 });
 Route::get('/', 'Web\IndexController@index')->name('home');

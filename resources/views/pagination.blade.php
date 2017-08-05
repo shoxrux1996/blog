@@ -33,11 +33,11 @@
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
 
-            <li><a href="{{ $paginator->nextPageUrl() }}"  aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a></li>
+            <li><a href="{{ $paginator->nextPageUrl() }}"  aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a></li>
         @else
             <li class="disabled">
-                <a href="" aria-label="Previous" >
-                    <span aria-hidden="true" >&raquo;</span>
+                <a href="" aria-label="Next" >
+                    <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
         @endif
