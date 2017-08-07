@@ -113,30 +113,20 @@
     <div class="container-fluid" id="category-section">
         <div class="row">
             <div class="col-md-9 col-sm-12">
-                @php $counter=0 @endphp 
-                @foreach($categories as $category)
-                    @if($counter % 3 == 0 && $category->category_id===NULL)
-                        <div class="row">
-                    @endif
-                        @if($category->category_id===NULL)
+                @for($i=0; $i<$categories->count(); $i+=3)
+                    <div class="row">
+                        @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
                             <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                                <a href="#">
-                                    <i class=""></i> {{$category->name}}
+                                <a href="{{route('web.category.show', [$categories[$j]->name])}}">
+                                    <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name}}
                                 </a>
-                                @foreach($categories as $subcategory)
-                                    @if($subcategory->category_id===$category->id)
-                                        <p><a href="#">{{$subcategory->name}}</a></p>
-                                    @endif
+                                @foreach($categories[$j]->children as $subcategory)
+                                    <p><a href="{{route('web.category.show', [$subcategory->name])}}">{{$subcategory->name}}</a></p>
                                 @endforeach
                             </div>
-                        @endif
-                    @if($counter % 3 == 2)
-                        </div>
-                    @endif
-                    @if($category->category_id===NULL)
-                       @php $counter++ @endphp
-                    @endif
-                @endforeach
+                        @endfor
+                    </div>
+                @endfor
             </div>
             <div class="col-md-3 text-center view-all-categories">
                 <h3>ПОМОЩЬ ЛЮБОГО ЮРИДИЧЕСКОГО ВОПРОСА</h3>

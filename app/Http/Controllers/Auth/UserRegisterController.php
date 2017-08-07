@@ -4,7 +4,7 @@ namespace yuridik\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use yuridik\Http\Controllers\Controller;
-
+use yuridik\City;
 use Illuminate\Support\Facades\Mail;
 
 use yuridik\Http\Requests;
@@ -57,6 +57,16 @@ class UserRegisterController extends Controller
             $confirmation_code = str_random(30);       
             $user = new User;
             $user->firstName = $new_client['name'];
+            $city=City::where('name', ' ')->first();
+            if($city != null)
+                $user->city_id = $city->id;
+            else{
+                $cit = new City;
+                $cit->name = " ";
+                $cit->save();
+                $user->city_id = $cit->id;
+            }
+
             $user->save();
             $userID=$user->id;
             $client=new Client;
@@ -64,6 +74,8 @@ class UserRegisterController extends Controller
             $client->password=bcrypt($new_client['password']);
             $client->confirmation_code=$confirmation_code;
             $client->user_id = $userID;
+
+
             $data=array('code' =>$confirmation_code, 'email' => $new_client['email'], 'name' => $new_client['name']);
             Mail::send('email.verify', ['data' => $data], function($message) use ($data) {
             $message->to($data['email'], $data['name'])
@@ -81,7 +93,7 @@ class UserRegisterController extends Controller
                 'min' => 'Минимум 6 символов',
                 ]; 
             $validator = Validator::make($request->all(), [
-            'lawyer.email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
+            'lawyer.email' => 'required|string|email|max:255|unique:clients,email|unique:lawyers,email',
             'lawyer.password' => 'required|string|min:6',
             'lawyer.password_confirm' => 'same:lawyer.password',
             'lawyer.name' => 'required',
@@ -96,9 +108,18 @@ class UserRegisterController extends Controller
             $user = new User;
             $user->firstName = $new_lawyer['name'];
             $user->lastName = $new_lawyer['surname'];
+            $city=City::where('name', ' ')->first();
+            if($city != null)
+                $user->city_id = $city->id;
+            else{
+                $cit = new City;
+                $cit->name = " ";
+                $cit->save();
+                $user->city_id = $cit->id;
+            }
             $user->save();
             $userID=$user->id;
-            $lawyer=new lawyer;
+            $lawyer=new Lawyer;
             $lawyer->email= $new_lawyer['email'];
             $lawyer->password=bcrypt($new_lawyer['password']);
             $lawyer->confirmation_code=$confirmation_code;
@@ -138,13 +159,13 @@ class UserRegisterController extends Controller
         //     'email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
         //     'password' => 'required|string|min:6|confirmed',
         //     'name' => 'required',
-        //     ]);  
+        //     ]);
 
         // if($validator->fails())
         // {
         //     return view('auth.register')->withErrors($validator)->withActiveuser('lawyer');
-        // }   
-        // $confirmation_code = str_random(30);       
+        // }
+        // $confirmation_code = str_random(30);
         // $user = new User;
         // $user->firstName = $request->name;
         // if($request->surname!=='')
@@ -180,7 +201,7 @@ class UserRegisterController extends Controller
         // });
         //     $client->save();
         // }
-            
+
 
         Session::flash('message', 'Please confirm your account via your email');
         return redirect('/');
