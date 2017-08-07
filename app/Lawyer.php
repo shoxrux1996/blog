@@ -40,7 +40,7 @@ class Lawyer extends Authenticatable
         return $this->belongsTo('yuridik\User');
     }
    
-        public function categories() 
+    public function categories()
     {
         return $this->belongsToMany('yuridik\Category','lawyer_category');
     }

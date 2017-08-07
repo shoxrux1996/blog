@@ -10,21 +10,22 @@
                 <h3>Все категории</h3>
                 <div class="col-sm-12">
                     <div class="row">
-                        @foreach($categories as $category)
+                        @for($i=0; $i<$categories->count(); $i+=3)
+                            <div class="row">
+                                @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
+                                    <div class="col-md-4 col-sm-4 col-xs-4 categories">
+                                        <a href="{{route('admin.category.show', [$categories[$j]->id])}}">
+                                            <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name}}
+                                        </a>
+                                        @foreach($categories[$j]->children as $subcategory)
 
-                                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                                    <a href="{{route('admin.category.show', $category->id)}}">
-                                        <i class="fa fa-building"></i> {{$category->name}}
-                                    </a>
+                                                <p><a href="{{route('admin.category.show', [$subcategory->id])}}">{{$subcategory->name}}</a></p>
 
-                                    @foreach($category->children as $subcategory)
-                                            <p><a href="{{route('admin.category.show', $subcategory->id)}}">{{$subcategory->name}}</a>
-                                            </p>
-                                    @endforeach
-                                </div>
-
-                        @endforeach
-
+                                        @endforeach
+                                    </div>
+                                @endfor
+                            </div>
+                        @endfor
                     </div>
                 </div>
             </div>

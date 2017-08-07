@@ -19,14 +19,15 @@
         <div class="row">
             <div class="col-md-4">
                 <h1>Уверенность в каждом решении</h1>
-                <form action="main-search.html">
+                <form action="{{route('search.all')}}" method="post">
+                    {{csrf_field()}}
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Поиск по юристом, вопросом и документом"/>
+                        <input type="text" class="form-control" name="search" placeholder="Поиск по юристом, вопросом и документом"/>
                         <span class="input-group-btn">
-                  <a class="btn btn-default" href="main-search.html">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </a>
-                  </span>
+                      <button type="submit" class="btn btn-default" >
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </button>
+                      </span>
                     </div>
                 </form>
             </div>

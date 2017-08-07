@@ -24,6 +24,7 @@ Route::get('card','Web\ApiController@show')->name('card.payment');
     
 });*/
 
+
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -94,7 +95,8 @@ Route::prefix('admin')->group(function(){
     });
     
     Route::prefix('users')->group(function (){
-        Route::get('/', 'Admin\AdminPostController@users')->name('admin.users.index');
+        Route::get('/clients', 'Admin\AdminPostController@clients')->name('admin.clients.index');
+        Route::get('/lawyers', 'Admin\AdminPostController@lawyers')->name('admin.lawyers.index');
         Route::post('client/block/{id}','Admin\AdminPostController@clientBlock')->name('admin.client.block');
         Route::post('client/unblock/{id}','Admin\AdminPostController@clientUnblock')->name('admin.client.unblock');
         Route::post('lawyer/block/{id}','Admin\AdminPostController@lawyerBlock')->name('admin.lawyer.block');
@@ -182,23 +184,29 @@ Route::prefix('lawyer')->group(function(){
     });
 });
 
-Route::prefix('question_info')->group(function (){
+Route::prefix('question-info')->group(function (){
     Route::get('/list', 'Web\QuestionController@index')->name('question.list');
     Route::get('/show/{id}', 'Web\QuestionController@show')->name('web.question.show');
+    Route::get('/free', 'Web\QuestionController@freeQuestions')->name('free.questions');
+    Route::get('/service', 'Web\QuestionController@costlyQuestions')->name('costly.questions');
 });
 
-Route::prefix('lawyer_info')->group(function(){
-    Route::get('/category/{name}', 'Web\CategoryController@show')->name('search.lawyers.bycategory');
-    Route::get('/city/{name}', 'Web\CityController@show')->name('search.lawyers.bycity');
+Route::prefix('lawyer-info')->group(function(){
+    Route::get('/show/{id}','Web\LawyersInfoController@show')->name('web.lawyer.show');
     Route::get('/', 'Web\LawyersInfoController@showLawyersList')->name('lawyers.list');
 });
-Route::prefix('blogs_info')->group(function(){
+Route::prefix('blog-info')->group(function(){
 	Route::get('/', 'Web\BlogController@showBlogList')->name('web.blogs');
     Route::get('/show/{id}', 'Web\BlogController@show')->name('web.blog.show');
 });
-Route::prefix('category_info')->group(function(){
+Route::prefix('category-info')->group(function(){
 	Route::get('/', 'Web\CategoryController@index')->name('category.list');
+	Route::get('/show/{name}','Web\CategoryController@show')->name('web.category.show');
 });
+Route::any('/search/lawyers', 'Web\SearchController@searchLawyers')->name('search.lawyers');
+Route::any('/search/main', 'Web\SearchController@searchAll')->name('search.all');
+Route::get('/category/{name}', 'Web\SearchController@searchByCategory')->name('search.lawyers.bycategory');
+
 Route::get('/', 'Web\IndexController@index')->name('home');
 Route::get('/about', function(){
 	return view('about');
