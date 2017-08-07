@@ -40,6 +40,7 @@ class AdminCategoryController extends Controller
         $category = new Category;
         $category->name = $request->name;
         $category->text = $request->text;
+        $category->class = $request->class;
         $category->category_id =$request->parent;
         $category->save();
         return redirect()->route('admin.category.info');

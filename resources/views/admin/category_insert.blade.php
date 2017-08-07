@@ -26,6 +26,12 @@
 
                     {{Form::text('name',null, ['class'=>'form-control'])}}
                 </div>
+                <div class="form-group">
+                    <label>Class name (fonts): </label>
+
+                    {{Form::text('class',null, ['class'=>'form-control', 'placeholder'=>'fa-users'])}}
+                    <a href="{{url('http://fontawesome.io/cheatsheet/')}}">list of icons</a>
+                </div>
 
                 <div class="form-group">
                     <label>Parent: </label>
