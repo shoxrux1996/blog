@@ -118,13 +118,13 @@
                     <div class="panel-body">
                         <ul class="list-unstyled">
                             <li>
-                                <a href="">Вопросы</a>
+                                <a href="{{ route('my.answers')}}">Вопросы</a>
                             </li>
                             <li>
                                 <a href="#">Заявки</a>
                             </li>
                             <li>
-                                <a href="#">Документы</a>
+                                <a href="{{ route('my.requests')}}">Документы</a>
                             </li>
                             <li>
                                 <a href="#">Телефонные консультации</a>
@@ -156,7 +156,8 @@
                         <h4 class="text-warning">Документы</h4>
                         <p>Готовьте различные юридические
                             документы для наших клиентов</p>
-                        <button type="button" class="btn btn-default btn-warning">Перейти к документам »</button>
+                        <a type="button" href="{{ route
+                        ('lawyer.document.info')}}" class="btn btn-default btn-warning">Перейти к документам »</a>
                     </div>
                     <div class="col-sm-6">
                         <h4 class="text-danger">Заявки</h4>
@@ -169,7 +170,49 @@
             <div class="row">
                 <div class="col-sm-12 border-gray background-white" id="orders">
                     <h5 class="text-success">Моя юридическая практика</h5>
-                    <h6 class="color-gray">У вас пока нет ни одного заказа.</h6>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#answered-questions">Вопросы</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#call-consultions">Консультации по телефону</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#document-requests">Документы</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="answered-questions" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                <ul>
+                                    @foreach($lawyer->answers->unique('question_id')->reverse() as $answer)
+                                        <li><a href="{{ route('web.question.show',$answer->question->id)}}"> {{$answer->question->title}}</a></li>
+                                    @endforeach
+                                </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="call-consultions" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div id="document-requests" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul>
+                                        @foreach($lawyer->requests->unique('document_id')->reverse() as $request)
+                                            <li><a href="{{ route('lawyer.document.show',$request->document->id)}}"> {{$request->document->title}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -112,12 +112,15 @@
     <div class="container-fluid" id="category-section">
         <div class="row">
             <div class="col-md-9 col-sm-12">
-                <div class="row">
-                    @foreach($categories as $category)
+                @php $counter=0 @endphp 
+                @foreach($categories as $category)
+                    @if($counter % 3 == 0 && $category->category_id===NULL)
+                        <div class="row">
+                    @endif
                         @if($category->category_id===NULL)
                             <div class="col-md-4 col-sm-4 col-xs-4 categories">
                                 <a href="#">
-                                    <i class="fa fa-building"></i> {{$category->name}}
+                                    <i class=""></i> {{$category->name}}
                                 </a>
                                 @foreach($categories as $subcategory)
                                     @if($subcategory->category_id===$category->id)
@@ -126,8 +129,13 @@
                                 @endforeach
                             </div>
                         @endif
-                    @endforeach
-                </div>
+                    @if($counter % 3 == 2)
+                        </div>
+                    @endif
+                    @if($category->category_id===NULL)
+                       @php $counter++ @endphp
+                    @endif
+                @endforeach
             </div>
             <div class="col-md-3 text-center view-all-categories">
                 <h3>ПОМОЩЬ ЛЮБОГО ЮРИДИЧЕСКОГО ВОПРОСА</h3>

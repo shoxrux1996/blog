@@ -5,6 +5,7 @@ namespace yuridik;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use yuridik\Notifications\LawyerResetPasswordNotification;
+
 class Lawyer extends Authenticatable
 {
     use Notifiable;
@@ -51,6 +52,10 @@ class Lawyer extends Authenticatable
     
     public function answers(){
         return $this->hasMany('yuridik\Answer');
+    }
+
+    public function requests(){
+        return $this->hasMany('yuridik\Request');
     }
 
     public function feedbacks()

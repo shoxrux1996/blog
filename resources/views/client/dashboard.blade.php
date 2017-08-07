@@ -89,13 +89,13 @@
                     <div class="panel-body">
                         <ul class="list-unstyled">
                            <li>
-                               <a href="#">Вопросы юристам</a>
+                               <a href="{{ route('my.questions')}}">Вопросы юристам</a>
                            </li>
                             <li>
                                 <a href="#">Консультации по телефону</a>
                             </li>
                             <li>
-                                <a href="#">Документы</a>
+                                <a href="{{ route('my.documents')}}">Документы</a>
                             </li>
                         </ul>
                     </div>
@@ -124,7 +124,49 @@
             <div class="row">
                 <div class="col-sm-12 border-gray background-white" id="orders">
                     <h5 class="text-success">Мои заказы</h5>
-                    <h6 class="color-gray">У вас пока нет ни одного заказа.</h6>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#asked-questions">Вопросы юристам</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#call-consultions">Консультации по телефону</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#document-requests">Документы</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="asked-questions" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                <ul>
+                                @foreach($client->questions->reverse() as $question)
+                                    <li><a href="{{ route('client.question.show', ['id'=>$question->id])}}">{{$question->title}}</a></li>
+                                @endforeach
+                                </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="call-consultions" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div id="document-requests" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul>
+                                    @foreach($client->documents->reverse() as $document)
+                                        <li><a href="{{ route('client.document.show', ['id'=>$document->id])}}">{{$document->title}}</a></li>
+                                    @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
                 </div>
             </div>
         </div>

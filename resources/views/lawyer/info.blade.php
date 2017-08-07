@@ -93,7 +93,7 @@
                             <li>
                                 <h6><b>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</b></h6>
                                 <p class="color-gray">г. {{$lawyer->user->city->name}}</p>
-                                <a href="{{ route('lawyer.info')}}">Редактировать</a>
+                                <a href="{{ route('lawyer.dashboard')}}">Личный кабинет</a>
                             </li>
                             <li>
                                 <i class="fa fa-hourglass pull-left"></i>
@@ -109,10 +109,10 @@
                                     <a href="#">Отзывы:</a>
                                 </p>
                                 <p>
-                                    0 положительных
+                                    {{$lawyer->countPositiveFeedbacks()}} положительных
                                 </p>
                                 <p>
-                                    0 отрицательных
+                                    {{$lawyer->countNegativeFeedbacks()}} отрицательных
                                 </p>
                             </li>
                         </ul>

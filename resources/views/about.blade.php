@@ -34,7 +34,7 @@
         </div>
     </div>
     <p class="text-center">
-        <a href="register.html" class="btn btn-default btn-success btn-lg pulse-button">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+        <a href="{{ route('user.register') }}" class="btn btn-default btn-success btn-lg pulse-button">ЗАРЕГИСТРИРОВАТЬСЯ</a>
     </p>
 </div>
 <div class="container" id="features">
@@ -132,10 +132,10 @@
     </div>
     <div class="row">
         <div class="col-sm-6 no-padding text-center">
-            <a href="register.html" class="btn btn-default btn-lg btn-primary">ЗАДАТЬ ВОПРОС ЮРИСТАМ</a>
+            <a href="{{ route('question.create') }}" class="btn btn-default btn-lg btn-primary">ЗАДАТЬ ВОПРОС ЮРИСТАМ</a>
         </div>
         <div class="col-sm-6 no-padding text-center">
-            <a href="register.html" class="btn btn-default btn-lg btn-success">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+            <a href="{{ route('user.register') }}" class="btn btn-default btn-lg btn-success">ЗАРЕГИСТРИРОВАТЬСЯ</a>
         </div>
     </div>
     <br />

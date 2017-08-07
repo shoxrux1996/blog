@@ -17,6 +17,15 @@ class LawyerDocumentController extends Controller
     	$documents = Document::where('status',0)->paginate(3);
     	return view('document.list')->withDocuments($documents);
     }
+    public function myRequests(){
+        $id=array();
+        foreach(Auth::user()->requests->unique('document_id') as $request)
+        {
+            array_push($id, $request->document->id);
+        }    
+        $documents = Document::where('id',$id)->orderBy('id','desc')->paginate(3);
+        return view('document.list')->withDocuments($documents);
+    }
     public function show(Request $request, $id){
     	$document = Document::findOrFail($id);
     	$show = true;
