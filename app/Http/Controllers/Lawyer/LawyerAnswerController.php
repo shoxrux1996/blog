@@ -68,4 +68,14 @@ class LawyerAnswerController extends Controller
             return redirect()->route('web.question.show', ['id' => $question_id]);
 
     }
+    public function myAnswers()
+    {
+        $id=array();
+        foreach(Auth::user()->answers->unique('question_id') as $answer)
+        {
+            array_push($id, $answer->question->id);
+        }    
+        $questions = Question::where('id',$id)->orderBy('id','desc')->paginate(5);
+        return view('question.list')->withQuestions($questions);
+    }
 }

@@ -1,5 +1,17 @@
-@extends('layouts.app-admin')
-@section('title', "| Documents")
+@extends('layouts.app')
+@section('styles')
+    <!-- styles here -->
+@endsection
+@section('body')
+@extends('layouts.body')
+@section('menu')
+  <li><a href="{{ route('home')}}">Главная</a></li>
+  <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
+  <li><a href="{{ route('question.list')}}">Вопросы</a></li>
+  <li><a href="{{ route('web.blogs')}}">Блог</a></li>
+  <li><a href="{{ route('how-works')}}">Как это работает</a></li>
+  <li><a href="{{ route('about')}}">О нас</a></li>
+@endsection
 @section('content')
 
 <div class="container">
@@ -45,4 +57,4 @@
 </div>
 
 @endsection
-
+@endsection

@@ -5,6 +5,7 @@
     $order = new yuridik\Order;
     $order->user_id = $question->client->user->id;
     $order->amount = $question->price;
+    
 
     $question->order()->save($order);
 
@@ -145,6 +146,10 @@ Route::prefix('client')->group(function(){
             Route::get('/document/{id}', 'Client\ClientDocumentController@showDoc')->name('client.document.show');
             Route::post('document/accept/{id}', 'Client\ClientDocumentController@acceptRequest')->name('client.document.accept');
             Route::post('document/reject/{id}', 'Client\ClientDocumentController@rejectRequest')->name('client.document.reject');
+            Route::get('/questions', 'Client\ClientQuestionController@myQuestions')->name('my.questions');
+            Route::get('/question/{id}', 'Client\ClientQuestionController@showQuestion')->name('client.question.show');
+            Route::get('/requests', 'Lawyer\LawyerDocumentController@myRequests')->name('my.requests');
+            Route::get('/answers', 'Lawyer\LawyerAnswerController@myAnswers')->name('my.answers');
        });
 
     

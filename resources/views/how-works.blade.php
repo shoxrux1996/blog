@@ -22,7 +22,7 @@
             <h5>
                 Вопрос юристу онлайн - услуга, которую по достоинству оценило более 350 000 наших клиентов. Это быстрый и очень удобный способ узнать мнения нескольких юристов, не покидая дома или офиса.
             </h5>
-            <button class="btn btn-default btn-lg center-block btn-success pulse-button" type="button">Задать вопрос</button>
+            <a href="{{ route('question.create') }}" type="button" class="btn btn-default btn-lg btn-success pulse-button" >Задать вопрос</a>
         </div>
     </div>
     <div class="row" id="unique-services">
@@ -88,7 +88,7 @@
             <h5>
                 Зачастую промедление в решении юридического вопроса может иметь нежелательные последствия. Чтобы избежать неприятных ситуаций, доверьте решение своей проблемы нашим юристам прямо сейчас!
             </h5>
-            <button class="btn btn-default btn-lg center-block btn-success pulse-button" type="button">Задать вопрос</button>
+            <a href="{{ route('question.create') }}" class="btn btn-default btn-lg btn-success pulse-button" type="button">Задать вопрос</a>
         </div>
     </div>
 </div>

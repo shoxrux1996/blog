@@ -31,7 +31,7 @@
                             <li>
                                 <h6><b>{{$client->user->firstName}} {{$client->user->lastName}}</b></h6>
                                 <p class="color-gray">г. {{$client->user->city->name}}</p>
-                                <a href="{{ route('client.info')}}">Редактировать</a>
+                                <a href="{{ route('client.dashboard')}}">Личный кабинет</a>
                             </li>
                             <li>
                                 <h3>{{$client->user->balance()}} сум.</h3>

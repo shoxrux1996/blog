@@ -103,7 +103,7 @@ class ClientDocumentController extends Controller
         Session::flash('message', 'Request submitted successfully');
         return redirect()->route('client.dashboard');       
     }
-     public function myDocs(){
+    public function myDocs(){
         $documents = Auth::guard('client')->user()->documents;
         return view('client.documents')->withDocuments($documents);
     }

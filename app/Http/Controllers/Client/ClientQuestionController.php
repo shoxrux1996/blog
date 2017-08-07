@@ -165,5 +165,13 @@ class ClientQuestionController extends Controller
         }                
     }
 
+    public function myQuestions(){
+        $questions = Question::where('client_id',Auth::user()->id)->orderBy('id','desc')->paginate(5);
+        return view('client.questions')->withQuestions($questions);
+    }
+    public function showQuestion($id){
+        $question = Auth::user()->questions->find($id);
+        return view('client.question_show')->withQuestion($question);
+    }
 
 }

@@ -29,7 +29,7 @@ class QuestionController extends Controller
             ->withQuestions_costly($questions_costly)
             ->withQuestions_free($questions_free)->withSection(1);
     }
-     public function show($id){
+    public function show($id){
         $question = Question::find($id);
         return view('question.question_show')->withQuestion($question);
     }

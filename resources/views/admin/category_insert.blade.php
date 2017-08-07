@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <label>Parent: </label>
-                    {{Form::select('category', $categories, null,['class' => 'form-control'])}}
+                    {{Form::select('parent', $categories, null,['class' => 'form-control'])}}
                 </div>
                 @if ($errors->has('text'))
                     <span class="help-block">
@@ -43,7 +43,7 @@
                                     </span>
                 @endif
                 <label>Text: </label>
-                {{Form::textarea('text',null,['class'=>'form-control'])}}
+                {{Form::textarea('text','Кредитование — это предоставление денежных средств и прочих активов, финансовыми учреждениями физическим и юридическим лицам на определённых условиях, фиксируемых договором. Главным требованием кредиторов при этом является своевременное погашение обязательств, а неплатёжеспособность лиц в данном случае — это ключевая проблема.',['class'=>'form-control'])}}
 
                 <div class="form-group">
                     <div>
