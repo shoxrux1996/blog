@@ -35,7 +35,7 @@
                                 <ul class="list-unstyled">
                                     @if($category->children != null)
                                         @foreach($category->children as $cat)
-                                            <li><a href="{{route('web.category.show', $cat->id->name)}}">{{$cat->name}}</a>
+                                            <li><a href="{{route('web.category.show', $cat->name)}}">{{$cat->name}}</a>
                                             </li>
                                         @endforeach
                                     @endif

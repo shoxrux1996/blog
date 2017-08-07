@@ -23,7 +23,7 @@ class IndexController extends Controller
         $free_question_examples = Question::orderBy('id', 'desc')->where('type','1')->take(6)->get();
         $paid_question_examples = Question::orderBy('id', 'desc')->where('type','2')->take(6)->get();
         $blogs = Blog::orderBy('count', 'desc')->take(3)->get();
-        $categories = Category::all();
+        $categories = Category::where('category_id', null)->get();
         $lawyers = Lawyer::orderBy('id', 'desc')->take(6)->get();
         // $chosen = Chosen::all();
 

@@ -38,7 +38,7 @@
                                         {{$lawyer->user->lastName}}
                                     </div>
                                     <div class="profile-usertitle-job">
-                                         г. {{$lawyer->user->city->name}} <br/>
+                                      
                                         {{--Был в сети сегодня в 15:04--}}
                                     </div>
                                 </div>
