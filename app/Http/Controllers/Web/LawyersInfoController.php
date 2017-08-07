@@ -21,7 +21,11 @@ class LawyersInfoController extends Controller
         return view('lawyer.list')->withLawyers($lawyers)
             ->withCategories($categories)->withCities($cities)
             ->withBest_lawyers($best_lawyers);
+    }
+    public function show($id){
+        $lawyer = Lawyer::findOrFail($id);
 
+        return view('lawyer.show')->withLawyer($lawyer);
     }
 
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('scripts')
-    <link href="{{ asset('dist/css/lawyers.css')}}" rel="stylesheet">
+@section('styles')
+    <link href="{{ asset('dist/css/lawyers.css')}}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
     <link href="{{ asset('dist/css/rotating-card.css')}}" rel="stylesheet">
 @endsection
 @section('body')
@@ -75,17 +75,27 @@
         <div class="row">
             <div class="col-sm-9" id="specialisation">
                 <h3>Выбор юриста по специализации</h3>
-                <div class="row">
-                    @foreach($categories as $category)
-                        <div class="col-sm-4">
-                            <h4><i class="fa fa-users"></i><a href="#"> {{$category->name}}</a></h4>
-                            @foreach($category->children as $children)
-                                <p><a href="#">{{$children->name}}</a></p>
-                            @endforeach
-                        </div>
-                    @endforeach
-                </div>
+                @for($i=0; $i<$categories->count(); $i+=3)
+                    <div class="row">
+                        @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
+                            <div class="col-sm-4">
+                                <h4><i class="fa fa-users"></i>
+                                    <a type="submit"
+                                       href="{{route('search.lawyers.bycategory', ['name'=>$categories[$j]->name])}}"
+                                       name="category">
+                                        {{$categories[$j]->name}}</a>
+                                </h4>
 
+                                @foreach($categories[$j]->children as $children)
+                                    <p><a type="submit"
+                                          href="{{route('search.lawyers.bycategory', ['name'=>$children->name])}}"
+                                          name="category">
+                                            {{$children->name}}</a></p>
+                                @endforeach
+                            </div>
+                        @endfor
+                    </div>
+                @endfor
 
                 <div class="text-center">
                     <button type="button" class="btn btn-primary btn-lg blue-button">Показать все специализации</button>
@@ -102,7 +112,7 @@
                         <h6>
                             <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
                         </h6>
-                        <a type="button" class="btn btn-default btn-success" href="#">Посмотреть профиль</a>
+                        <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
                     </div>
                 @endforeach
 
@@ -140,11 +150,11 @@
                                 <button type="submit" class="btn-link" name="city"
                                         value="{{$city->name}}">{{$city->name}}</button>
                                 @if($index == 3)
-                                    <a class="btn-link city1" onclick="showCities()">Все города ...</a>
-                                    @endif
+                                    <a class="btn-link" onclick="showCities()">Все города ...</a>
+                                @endif
                             @else
-                                <button type="submit" class="btn-link cities"  name="city"
-                                        value="{{$city->name}}" style="display: none;">{{$city->name}}</button>
+                                <button type="submit" class="btn-link cities" name="city" value="{{$city->name}}"
+                                        style="display: none;">{{$city->name}}</button>
                             @endif
                         @endforeach
                     </form>
@@ -194,7 +204,6 @@
                                             <h4 class="text-center">Специализация</h4>
                                             <p class="text-center">@foreach($lawyer->categories as $category){{$category->name}}
                                                 . @endforeach</p>
-
                                             <div class="stats-container text-center">
                                                 <div class="stats">
                                                     <h4>{{$lawyer->experienced_year}}</h4>
@@ -209,14 +218,13 @@
                                                     </p>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="footer">
                                         <div class="social-links text-center">
-                                            <button type="button" class="btn btn-default btn-block blue-button">
+                                            <a href="{{route('web.lawyer.show', $lawyer->id)}}" type="button" class="btn btn-default btn-block blue-button">
                                                 Обратиться к юристу
-                                            </button>
+                                            </a>
                                             <span>{{$lawyer->feedbacks->count()}} отзыва от клиентов</span>
                                         </div>
                                     </div>
@@ -237,28 +245,24 @@
 
 @endsection
 @endsection
-@section('styles')
-<script>
-    var index =0;
-    function showCities() {
-        var cities = document.getElementsByClassName('cities');
+@section('scripts')
+    <script>
+        var index = 0;
+        function showCities() {
+            var cities = document.getElementsByClassName('cities');
 
-
-        if(index == 0)
-        {
-            for (var i = 0; i < cities.length; i++) {
-                cities[i].style.display = "block";
-
+            if (index === 0) {
+                for (var i = 0; i < cities.length; i++) {
+                    cities[i].style.display = "block";
+                }
+                index = 1;
             }
-            index = 1;
-        }
-        else{
-            for (var i = 0; i < cities.length; i++) {
-                cities[i].style.display = "none";
-
+            else {
+                for (var i = 0; i < cities.length; i++) {
+                    cities[i].style.display = "none";
+                }
+                index = 0;
             }
-            index =0;
         }
-    }
-</script>
+    </script>
 @endsection

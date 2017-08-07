@@ -74,7 +74,7 @@ class SearchController extends Controller
         $categories = Category::where('category_id', null)->get();
         $cities = City::orderBy('id', 'asc')->get();
         $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
-            return $query->feedbacks->count();
+            $query->feedbacks->count();
         });
 
         return view('lawyer.list')->withLawyers($lawyers)
@@ -82,4 +82,20 @@ class SearchController extends Controller
             ->withBest_lawyers($best_lawyers);
 
     }
+    public function searchByCategory($name){
+        $lawyers = Lawyer::with('categories')->whereHas('categories', function ($query) use ($name){
+            $query->where('name', 'LIKE', "%$name%");
+        })->paginate(8);
+
+        $categories = Category::where('category_id', null)->get();
+        $cities = City::orderBy('id', 'asc')->get();
+        $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+            $query->feedbacks->count();
+        });
+        return view('lawyer.list')->withLawyers($lawyers)
+            ->withCategories($categories)->withCities($cities)
+            ->withBest_lawyers($best_lawyers);
+    }
+
+
 }

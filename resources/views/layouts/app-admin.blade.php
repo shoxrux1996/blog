@@ -19,7 +19,7 @@
 
     <!-- Morris -->
     <link href="{{asset('dist/css/morris.css')}}" rel="stylesheet">
-    <style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #2C3E50 url(dist/images/three-dots.svg) center center no-repeat;background-size:79px;}</style>
+    <style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #2C3E50 url({{asset('dist/images/three-dots.svg')}}) center center no-repeat;background-size:79px;}</style>
     <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
     @yield('styles')
 </head>
@@ -71,7 +71,7 @@
                     <a href="{{route('admin.dashboard')}}"><i class="fa fa-fw fa-dashboard"></i> Панель</a>
                 </li>
                 <li>
-                    <a href="{{route('admin.users.index')}}"><i class="fa fa-fw fa-users"></i> Пользователи</a>
+                    <a href="{{route('admin.clients.index')}}"><i class="fa fa-fw fa-users"></i> Пользователи</a>
                 </li>
                  <li>
                     <a href=""><i class="fa fa-fw fa-address-card"></i> Модераторы</a>

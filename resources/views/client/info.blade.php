@@ -124,9 +124,9 @@
                         <div class="col-sm-4">
                             <div class="img-responsive">
                             @if($client->user->file != null)
-                                <img src="{!!asset($client->user->file->path . $client->user->file->file)!!}" alt="..." class="img-thumbnail" style="height: 300px;">
+                                <img id="blah" src="{!!asset($client->user->file->path . $client->user->file->file)!!}" alt="..." class="img-thumbnail" style="height: 300px;">
                             @else
-                                <img class="img-thumbnail" src="{{ asset('dist/images/avatar_large_male_client_default.jpg')}}" />
+                                <img class="img-thumbnail" id="blah" src="{{ asset('dist/images/avatar_large_male_client_default.jpg')}}" />
                             @endif
                             </div>
                             <form action="{{ route('client.update',['settingtype'=>'photo'])}}" method="post" enctype="multipart/form-data">
@@ -138,7 +138,7 @@
                                     </span>
                                 @endif
                                     <label class="btn btn-default ">
-                                        Выбрать файл <input class="image" type="file" name="image" hidden>
+                                        Выбрать файл <input class="image" type="file" onchange="readURL(this);"  name="image" hidden>
                                     </label>
                                 </div>
                                 <div class="form-group">
@@ -193,4 +193,20 @@
 <!-- /Content -->
 
 @endsection
+@endsection
+@section('scripts')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

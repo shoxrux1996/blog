@@ -73,10 +73,15 @@ class AdminPostController extends Controller
         $comment->delete();
         return redirect()->back();
     }
-    public function users(){
-        $clients =Client::orderBy('id', 'desc')->paginate(3);
-        $lawyers = Lawyer::orderBy('id', 'desc')->paginate(3);;
-        return view('admin.users')->withClients($clients)->withLawyers($lawyers);
+    public function clients(){
+        $clients =Client::orderBy('id', 'desc')->paginate(8);
+        $lawyers = Lawyer::orderBy('id', 'desc')->paginate(8);;
+        return view('admin.users')->withClients($clients)->withLawyers($lawyers)->withSection(1);
+    }
+    public function lawyers(){
+        $clients =Client::orderBy('id', 'desc')->paginate(8);
+        $lawyers = Lawyer::orderBy('id', 'desc')->paginate(8);;
+        return view('admin.users')->withClients($clients)->withLawyers($lawyers)->withSection(2);
     }
     public function clientBlock(Request $request, $id){
 

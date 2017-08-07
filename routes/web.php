@@ -22,9 +22,7 @@ Route::get('card','Web\ApiController@show')->name('card.payment');
     echo 'Balance: <strong>'.$client->user->balance() .'</strong>';
     
 });*/
-Route::any('/search/lawyers', 'Web\SearchController@searchLawyers')->name('search.lawyers');
-Route::any('/search/main', 'Web\SearchController@searchAll')->name('search.all');
-Route::get('/category/{name}', 'Web\SearchController@')->name('search.lawyers.bycategory');
+
 
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -96,7 +94,8 @@ Route::prefix('admin')->group(function(){
     });
     
     Route::prefix('users')->group(function (){
-        Route::get('/', 'Admin\AdminPostController@users')->name('admin.users.index');
+        Route::get('/clients', 'Admin\AdminPostController@clients')->name('admin.clients.index');
+        Route::get('/lawyers', 'Admin\AdminPostController@lawyers')->name('admin.lawyers.index');
         Route::post('client/block/{id}','Admin\AdminPostController@clientBlock')->name('admin.client.block');
         Route::post('client/unblock/{id}','Admin\AdminPostController@clientUnblock')->name('admin.client.unblock');
         Route::post('lawyer/block/{id}','Admin\AdminPostController@lawyerBlock')->name('admin.lawyer.block');
@@ -188,7 +187,7 @@ Route::prefix('question-info')->group(function (){
 });
 
 Route::prefix('lawyer-info')->group(function(){
-
+    Route::get('/show/{id}','Web\LawyersInfoController@show')->name('web.lawyer.show');
     Route::get('/', 'Web\LawyersInfoController@showLawyersList')->name('lawyers.list');
 });
 Route::prefix('blog-info')->group(function(){
@@ -197,7 +196,12 @@ Route::prefix('blog-info')->group(function(){
 });
 Route::prefix('category-info')->group(function(){
 	Route::get('/', 'Web\CategoryController@index')->name('category.list');
+	Route::get('/show/{name}','Web\CategoryController@show')->name('web.category.show');
 });
+Route::any('/search/lawyers', 'Web\SearchController@searchLawyers')->name('search.lawyers');
+Route::any('/search/main', 'Web\SearchController@searchAll')->name('search.all');
+Route::get('/category/{name}', 'Web\SearchController@searchByCategory')->name('search.lawyers.bycategory');
+
 Route::get('/', 'Web\IndexController@index')->name('home');
 Route::get('/about', function(){
 	return view('about');

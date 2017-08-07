@@ -5,12 +5,20 @@
 @endsection
 @section('body')
     @extends('layouts.body')
+@section('menu')
+    <li><a href="{{ route('home')}}">Главная</a></li>
+    <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
+    <li><a href="{{ route('question.list')}}">Вопросы</a></li>
+    <li><a href="{{ route('web.blogs')}}">Блог</a></li>
+    <li><a href="{{ route('how-works')}}">Как это работает</a></li>
+    <li><a href="{{ route('about')}}">О нас</a></li>
+@endsection
 @section('content')
     <div id="wrapper">
         <div class="container">
             <div class="row background-white padding-30">
                 <ol class="breadcrumb">
-                    <li><a href="{{route('web.category.info')}}">Категории</a></li>
+                    <li><a href="{{route('category.list')}}">Категории</a></li>
                     @if($category->parent == null)
                         <li class="active">{{$category->name}}</li>
                     @else
@@ -27,16 +35,16 @@
                                 <ul class="list-unstyled">
                                     @if($category->children != null)
                                         @foreach($category->children as $cat)
-                                            <li><a href="{{route('web.category.show', $cat->id)}}">{{$cat->name}}</a>
+                                            <li><a href="{{route('web.category.show', $cat->id->name)}}">{{$cat->name}}</a>
                                             </li>
                                         @endforeach
                                     @endif
                                     @if($category->parent != null)
-                                        <li><a href="{{route('web.category.show', $category->parent->id)}}">{{$category->parent->name}}</a>
+                                        <li><a href="{{route('web.category.show', $category->parent->name)}}">{{$category->parent->name}}</a>
                                         </li>
                                     @endif
                                     @foreach($cat1 as $cat)
-                                        <li><a href="{{route('web.category.show', $cat->id)}}">{{$cat->name}}</a>
+                                        <li><a href="{{route('web.category.show', $cat->name)}}">{{$cat->name}}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -44,7 +52,7 @@
                             <div class="col-sm-6">
                                 <ul class="list-unstyled">
                                     @foreach($cat2 as $cat)
-                                        <li><a href="{{route('admin.category.show', $cat->id)}}">{{$cat->name}}</a>
+                                        <li><a href="{{route('web.category.show', $cat->name)}}">{{$cat->name}}</a>
                                         </li>
                                     @endforeach
                                 </ul>
