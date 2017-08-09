@@ -23,8 +23,14 @@
 
                 <div class="form-group">
                     <label>Name: </label>
-                    {{Form::text('name',$category->name), ['class'=>'form-control']}}
-                    </div>
+                    {{Form::text('name',$category->name, ['class'=>'form-control'])}}
+                </div>
+                 <div class="form-group">
+                    <label>Class name (fonts): </label>
+
+                    {{Form::text('class',$category->class, ['class'=>'form-control', 'placeholder'=>'fa-users'])}}
+                    <a href="{{url('http://fontawesome.io/cheatsheet/')}}">list of icons</a>
+                </div>
                 <div class="form-group">
                     <label>Parent: </label>
                     {{Form::select('category', $categories, $category->parent == null ? null : $category->parent->id,['class' => 'form-control'])}}

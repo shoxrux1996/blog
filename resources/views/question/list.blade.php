@@ -30,7 +30,7 @@
                     <div id="section1" class="section" style="display: {{ $section == 1 ? "block" : "none" }};">
                         @foreach($questions as $question)
                             <div class="col-sm-12 question">
-                                @if($question->type ==2)
+                                @if($question->type == 2 || $question->type == 1)
                                     <span class="question-price">
                             <b>{{$question->price}} сум</b>
                             <span>
@@ -62,7 +62,7 @@
                     </div>
                     <div id="section2" class="section" style="display: {{ $section == 2 ? "block" : "none" }};">
                         @foreach($questions_costly as $question)
-                            @if($question->type == 2)
+                            @if($question->type == 2 || $question->type == 1 )
                             <div class="col-sm-12 question">
                                     <span class="question-price">
                             <b>{{$question->price}} сум</b>
@@ -100,7 +100,7 @@
                     </div>
                     <div id="section3" class="section" style="display: {{ $section == 3 ? "block" : "none" }};">
                         @foreach($questions_free as $question)
-                            @if($question->type == 1)
+                            @if($question->type == 0)
                                 <div class="col-sm-12 question">
                                     <h4 class="title"><a
                                                 href="{{route('web.question.show', $question->id)}}">{{$question->title}}</a>
@@ -130,44 +130,31 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 text-center">
-                    <h3>Лучшие юристы</h3>
+                 <!-- Sidebar -->
+            <div class="col-sm-3 text-center">
+                <h3>Лучшие юристы</h3>
+                @foreach($best_lawyers as $lawyer)
                     <div class="best-lawyers">
-                        <img src="{{ asset('dist/images/headshot-1.png')}}" class="img-rounded"/>
-                        <h3>Керс Олег</h3>
+                        <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}"
+                             class="img-rounded"/>
+                        <h3>{{$lawyer->user->firstName}}</h3>
                         <h6>
-                            <b>юрист, г. Калининград</b>
+                            <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
                         </h6>
-                        <a type="button" class="btn btn-default btn-success" href="individual-lawyer.html">Посмотреть
-                            профиль</a>
+                        <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
                     </div>
-                    <div class="best-lawyers">
-                        <img src="{{ asset('dist/images/headshot-1.png')}}" class="img-rounded"/>
-                        <h3>Керс Олег</h3>
-                        <h6>
-                            <b>юрист, г. Калининград</b>
-                        </h6>
-                        <a type="button" class="btn btn-default btn-success" href="individual-lawyer.html">Посмотреть
-                            профиль</a>
-                    </div>
-                    <div class="best-lawyers">
-                        <img src="{{ asset('dist/images/headshot-1.png')}}" class="img-rounded"/>
-                        <h3>Керс Олег</h3>
-                        <h6>
-                            <b>юрист, г. Калининград</b>
-                        </h6>
-                        <a type="button" class="btn btn-default btn-success" href="individual-lawyer.html">Посмотреть
-                            профиль</a>
-                    </div>
-                    <div class="ask-question-block text-center">
-                        <img class="img-responsive" src="{{ asset('dist/images/one-word-save_0')}}.png"/>
-                        <h6>
-                            <b>Задайте вопрос бесплатно</b>
-                        </h6>
-                        <a class="btn btn-default btn-success pulse-button" type="button" href="ask-question.html">Задать
-                            вопрос</a>
-                    </div>
+                @endforeach
+
+                <div class="ask-question-block text-center">
+                    <img class="img-responsive" src="{{ asset('dist/images/one-word-save_0.png')}}"/>
+                    <h6>
+                        <b>Задайте вопрос бесплатно</b>
+                    </h6>
+                    <a class="btn btn-default btn-success pulse-button" type="button"
+                       href="{{route('question.create')}}">Задать вопрос</a>
                 </div>
+            </div>
+            <!-- /Sidebar -->
             </div>
         </div>
     </div>

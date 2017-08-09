@@ -85,6 +85,7 @@ class AdminCategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->name = $request->name;
         $category->category_id =$request->category;
+        $category->class = $request->class;
         $category->text = $request->text;
         $category->save();
         return redirect()->route('admin.category.show', $id);

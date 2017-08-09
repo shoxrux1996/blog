@@ -142,9 +142,6 @@ class ClientQuestionController extends Controller
             $question->title = $request->title;
             $question->text = $request->description;
             $question->category_id = $request->category;
-
-            $client=Client::where('email',$request->email)->first();
-
             $question->client_id = $client->id;
             $question->type = 0;
             $question->save();

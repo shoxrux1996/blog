@@ -186,7 +186,7 @@
                     <figure class="crsl-item crsl-active">
                         <div class="lawyer text-center">
                             <a href="#">
-                                <img src="{{ $lawyer->file != null ? asset($lawyer->file->path.$lawyer->file->file) : asset('dist/images/headshot-1.png')}}" alt="headshot 1"
+                                <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}" alt="headshot 1"
                                      class="img-responsive center-block"/>
                                 <h4>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h4>
                                 <h5>г. {{$lawyer->user->city->name}}</h5>

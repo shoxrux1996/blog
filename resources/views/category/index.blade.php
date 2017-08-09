@@ -24,7 +24,7 @@
                             @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
                                 <div class="col-md-4 col-sm-4 col-xs-4 categories">
                                     <a href="{{route('web.category.show', ['name'=>$categories[$j]->name])}}">
-                                        <i class=""></i> {{$categories[$j]->name}}
+                                        <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name}}
                                     </a>
                                     @foreach($categories[$j]->children as $subcategory)
 

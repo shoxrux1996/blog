@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="col-sm-12 question">
-                        @if($question->type ==2)
+                        @if($question->type == 2 || $question->type == 1 )
                             <span class="question-price">
                             <b>{{$question->price}} сум</b>
                             <span>
@@ -100,7 +100,7 @@
             </div>
             <div class="row">
                 @if (Auth::guard('lawyer')->check() && $question->solved != true)
-                    @if($question->type == 2  && Auth::guard('lawyer')->user()->type == 2)
+                    @if(($question->type == 1 || $question->type == 2) && Auth::guard('lawyer')->user()->type == 2)
 
                         {{Form::open(['route' => ['lawyer.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
 
@@ -126,7 +126,7 @@
                         {{Form::close() }}
 
                     @endif
-                    @if($question->type == 1)
+                    @if($question->type == 0)
                         <div class="row">
                             {{Form::open(['route' => ['lawyer.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
 
