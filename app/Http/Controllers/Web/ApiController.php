@@ -17,17 +17,18 @@ class ApiController extends Controller
 
 
         if (Auth::guard('client')->check()) {
-            $id = Auth::guard('client')->user()->user->id;
-            $transactions = Transaction::where('user_id', $id)->where('');
+            $user = Auth::guard('client')->user()->user;
+            $id = $user->id;
         }
         elseif(Auth::guard('lawyer')->check()
         ){
-            $id = Auth::guard('lawyer')->user()->user->id;
+            $user = Auth::guard('lawyer')->user()->user;
+            $id = $user->id;
         }
         else
             return redirect()->route('user.login');
 
-        return view('card.checkout')->withMerchant_id($merchant_id['merchant_id'])->withUser_id($id);
+        return view('card.checkout')->withMerchant_id($merchant_id['merchant_id'])->withUser_id($id)->withUser($user);
     }
 
     public function getApi(Request $request)

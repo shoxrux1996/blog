@@ -21,12 +21,12 @@ class User extends Model
         return $this->morphOne('yuridik\File', 'fileable');
     }
     public function transactions(){
-        return $this->hasMany('yuridik\Transaction');
+        return $this->hasMany('yuridik\Transaction')->where('state',2)->orderBy('id','desc');
     }
     public function orders(){
-        return $this->hasMany('yuridik\Order');
+        return $this->hasMany('yuridik\Order')->orderBy('id','desc');
     }
     public function balance(){
-        return $this->transactions()->where('state',2)->sum('amount') - $this->orders()->sum('amount');
+        return $this->transactions()->sum('amount') - $this->orders()->sum('amount');
     }
 }
