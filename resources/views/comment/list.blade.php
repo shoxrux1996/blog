@@ -6,7 +6,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div id="section1" class="section" style="display: block;">
                 <div class="page-header">
-                    <h2>Клиенты</h2>
+                    <h2>Коменты</h2>
                 </div>
                 @foreach ($comments as $comment)
                     <div class="panel panel-default">
