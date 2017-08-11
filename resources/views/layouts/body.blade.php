@@ -10,18 +10,19 @@
             <span><i class="fa fa-volume-control-phone" aria-hidden="true"></i> (71) 123-45-67 или</span>
             <a href="#"><img src="{{asset('dist/images/help-icon.png')}}" alt="Help Icon"/></a>
             <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ asset('dist/images/flag-rus.jpg')}}" alt="Flag Russia"/>
+                <img src="{{ asset('dist/images/flag-'.\App::getLocale().'.png')}}" alt="Flag"/>
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="#">
-                        <img src="{{ asset('dist/images/flag-uzb.png')}}" alt="Flag Uzbekistan"/>
+                @if(\App::isLocale('ru'))
+                    <a href="{{ route('lang.switch',['locale'=>'uz']) }}">
+                        <img src="{{ asset('dist/images/flag-uz.png')}}" alt="Flag"/>
                     </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="{{ asset('dist/images/flag-usa.png')}}" alt="Flag Usa"/>
+                @else
+                    <a href="{{ route('lang.switch',['locale'=>'ru']) }}">
+                        <img src="{{ asset('dist/images/flag-ru.png')}}" alt="Flag"/>
                     </a>
+                @endif
                 </li>
             </ul>
             <br/>
