@@ -185,7 +185,7 @@
                     @foreach($lawyers as $lawyer)
                     <figure class="crsl-item crsl-active">
                         <div class="lawyer text-center">
-                            <a href="#">
+                            <a href="{{route('web.lawyer.show', $lawyer->id)}}">
                                 <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}" alt="headshot 1"
                                      class="img-responsive center-block"/>
                                 <h4>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h4>
@@ -208,11 +208,11 @@
     <!-- About Us Section -->
     <div class="container-fluid" id="about-us-section">
         <h1 class="text-center">О нас</h1>
-        <div class="row">
+        <div class="row" style="clear: both; overflow: hidden;">
             <div class="col-md-6 col-sm-6">
-                <div class="video-wrapper">
-                    <iframe class="youtube-player" type="text/html" width="600" height="385"
-                            src="" frameborder="0"></iframe>
+                <div class="video-wrapper" style="padding: 0;">
+                    <img width="100%"
+                         src="{{asset('dist/images/aboutus.jpg')}}"/>
                 </div>
             </div>
             <div class="col-md-6 col-sm-6">

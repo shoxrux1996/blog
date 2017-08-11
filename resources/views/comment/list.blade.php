@@ -16,7 +16,6 @@
                         </div>
                         <div class="panel-body">
                             <div class="media">
-
                                 <div class="media-body">
                                     <h3 class="media-heading">{{$comment->commentable->email}} </h3>
                                     <p>{{ $comment->comment }}</p>
@@ -28,7 +27,7 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                        <form action="{{ route('admin.comment.delete', [$comment->id]) }}"
+                                        <form onclick="return confirm('Вы уверены?');" action="{{ route('admin.comment.delete', [$comment->id]) }}"
                                               method="post">
                                             {{csrf_field()}}
                                             <button type="submit" class="btn btn-danger pull-right btn-xs"

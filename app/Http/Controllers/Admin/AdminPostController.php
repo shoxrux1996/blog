@@ -11,9 +11,11 @@ use Illuminate\Http\Request;
 use yuridik\Client;
 use yuridik\Lawyer;
 use yuridik\Question;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPostController extends Controller
 {
+
     public function __construct()
     {
         return $this->middleware('auth:admin');
@@ -21,6 +23,7 @@ class AdminPostController extends Controller
     }
     public function questions()
     {
+
         $questions = Question::orderBy('id', 'desc')->paginate(10);
         return view('question.admin-index')->withQuestions($questions);
     }
@@ -61,7 +64,8 @@ class AdminPostController extends Controller
     }
     public function answerDestroy($id){
         $answer = Answer::findOrFail($id);
-        $answer->destroy();
+        $answer->delete();
+        return redirect()->back();
     }
     public function comments(){
         $comments = Comment::orderBy('id', 'desc')->paginate(10);

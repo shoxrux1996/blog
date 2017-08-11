@@ -70,7 +70,7 @@
                                 <h6>
                                     <b>{{$lawyer->job_status}}, г. {{$lawyer->user->city->name}}</b>
                                 </h6>
-                                <a type="button" class="btn btn-default btn-success" href="individual-lawyer.html">Посмотреть
+                                <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть
                                     профиль</a>
                             </div>
                         @endforeach

@@ -1,29 +1,6 @@
 <?php
-/*Route::get('payment', function(){
 
-    $question = yuridik\Question::find(42);
-    $order = new yuridik\Order;
-    $order->user_id = $question->client->user->id;
-    $order->amount = $question->price;
-    
-
-    $question->order()->save($order);
-
-});*/
 Route::get('card','Web\ApiController@show')->name('card.payment');
-
-/*Route::get('balance', function(){
-    $client = Auth::guard('client')->user();
-    foreach ($client->user->transactions->where('state',2) as $key) {
-        echo 'Transactions: '.$key->amount .'<br>';
-    }
-    foreach ($client->user->orders as $key) {
-        echo 'Orders: '.$key->amount .'<br>';
-    }
-    echo 'Balance: <strong>'.$client->user->balance() .'</strong>';
-    
-});*/
-
 
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -82,7 +59,7 @@ Route::prefix('admin')->group(function(){
     });
     Route::prefix('answers')->group(function (){
         Route::get('/', 'Admin\AdminPostController@answers')->name('admin.answers.index');
-        Route::post('/deny/{id}','Admin\AdminPostController@answerDeny')->name('admin.answer.delete');
+        Route::get('/deny/{id}','Admin\AdminPostController@answerDestroy')->name('admin.answer.delete');
         Route::get('/show/{id}','Admin\AdminPostController@answerShow')->name('admin.answer.show');
     });
     Route::prefix('comments')->group(function (){

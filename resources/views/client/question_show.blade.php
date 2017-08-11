@@ -54,7 +54,7 @@
                                 <div class="author-name col-sm-9">
                                     <a href="#"><h4>{{$answer->lawyer->user->firstName}}</h4></a>
                                     <div class="comment-content">
-                                        {{$answer->text}}
+                                        {!! $answer->text !!}
                                     </div>
                                     <div class="tags col-md-6">
                                         @foreach($answer->files as $file)
@@ -72,11 +72,8 @@
                         </div>
                         <div>
                             @if(Auth::guard('client')->check() && ($answer->feedback == null))
-
                                 {{Form::open(['route' => ['feedback.create', $answer->id],'method' => 'POST']) }}
-
                                 <div class="col-md-5">
-
                                     {{Form::label('text', "Отзыв: ") }}
                                     {{Form::textarea('text', null, ['rows' =>'2', 'cols'=>'43'])}}
                                     <div class="col-md-12">
@@ -86,7 +83,6 @@
                                     </div>
                                     {{Form::submit('Оставить отзыв', ['class'=> 'btn btn-success btn-block'])}}
                                 </div>
-
                                 {{Form::close() }}
                             @endif
                             @if($answer->feedback != null)
@@ -94,7 +90,6 @@
                             @endif
                         </div>
                     </div>
-
                 @endforeach
             </div>
             <div class="row">
@@ -151,20 +146,9 @@
                             {{Form::close() }}
                         </div>
                     @endif
-
                 @endif
             </div>
         </div>
     </div>
 @endsection
-@endsection
-@section('scripts')
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ha04cxa9mauwibgqmd91jvlug5qd3gqfb1ihnf8s5imb73na"></script>
-
-    <script>tinymce.init({
-            selector: 'textarea',
-            plugins: 'link code',
-            height: 500,
-            toolbar: 'undo redo | cut copy paste'
-        });</script>
 @endsection

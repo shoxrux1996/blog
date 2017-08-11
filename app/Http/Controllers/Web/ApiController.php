@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Auth;
 use yuridik\Transaction;
 
-
 class ApiController extends Controller
 {
     public function show()

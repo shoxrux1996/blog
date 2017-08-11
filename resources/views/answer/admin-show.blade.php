@@ -74,7 +74,7 @@
                             href="{{route('admin.question.show', $answer->question->id)}}">Вопрос: {{$answer->question->title}}</a>
                 </div>
                 <a href=""><h3>Ответ <strong>#{{$answer->id}}</strong></h3></a>
-                <h4 class="description">{{$answer->text}}</h4>
+                <h4 class="description">{!! $answer->text !!}</h4>
                 <p>
                     <span class="date">{{Carbon\Carbon::parse($answer->created_at)->toFormattedDateString()}}</span>
                     <span class="number"> вопрос №{{$answer->id}}</span>
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="col-md-2 ">
-                <a href="{{route('admin.answer.delete', $answer->id)}}" class="btn btn-danger pull-right btn-block"
+                <a onclick="return confirm('Вы уверены?');" href="{{route('admin.answer.delete', $answer->id)}}" class="btn btn-danger pull-right btn-block"
                    style="margin-top: 20px">Удалить</a>
             </div>
         </div>

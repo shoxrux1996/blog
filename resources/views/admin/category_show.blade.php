@@ -24,7 +24,7 @@
                             <div >
                                 <h2>Категория
                                     <a class="btn btn-info" href="{{route('admin.category.edit', $category->id)}}">Изменить</a>
-                                    <a class="btn btn-danger" href="{{route('admin.category.delete', $category->id)}}">Удалить</a>
+                                    <a onclick="return confirm('Вы уверены?');" class="btn btn-danger" href="{{route('admin.category.delete', $category->id)}}">Удалить</a>
                                 </h2>
                             </div>
                     </div>

@@ -53,7 +53,7 @@
                             <td class="col-md-2">#{{$transaction->id}}</td>
                             <td class="col-md-4">Payme - Пополнение баланса</td>
                             <td class="col-md-3">{{$transaction->create_time}}</td>
-                            <td class="col-md-3"><span class="sign">+</span> {{$transaction->amount}}</td>
+                            <td class="col-md-3"><span class="sign">+</span> {{$transaction->amount/100}}</td>
                         </tr>
                     @endforeach
                 </table>
