@@ -34,7 +34,7 @@
                 {{ csrf_field() }}
                     <div class="row">
                         @foreach($types as $key => $value)
-                        <div class="col-sm-5">
+                        <div class="col-sm-6">
                             @if($key == 1)
                                 <input type="radio" name="docType" value="{{$key}}" checked onclick="handler(this.value)"/>
                                 <label for="{{$key}}">{{$value}}</label>

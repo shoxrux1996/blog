@@ -10,17 +10,17 @@
             <span><i class="fa fa-volume-control-phone" aria-hidden="true"></i> (71) 123-45-67 или</span>
             <a href="#"><img src="{{asset('dist/images/help-icon.png')}}" alt="Help Icon"/></a>
             <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ asset('dist/images/flag-rus.jpg')}}" alt="Flag Russia"/>
+                <img src="{{ asset('dist/images/flag-ru.png')}}" alt="Flag Russia"/>
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="#">
-                        <img src="{{ asset('dist/images/flag-uzb.png')}}" alt="Flag Uzbekistan"/>
+                    <a href="{{ route('lang.switch',['locale'=>'uz']) }}">
+                        <img src="{{ asset('dist/images/flag-uz.png')}}" alt="Flag Uzbekistan"/>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <img src="{{ asset('dist/images/flag-usa.png')}}" alt="Flag Usa"/>
+                    <a href="{{ route('lang.switch',['locale'=>'en']) }}">
+                        <img src="{{ asset('dist/images/flag-en.png')}}" alt="Flag Usa"/>
                     </a>
                 </li>
             </ul>

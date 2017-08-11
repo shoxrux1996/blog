@@ -2,7 +2,7 @@
 
 namespace yuridik\Http\Controllers\Client;
 use yuridik\Http\Controllers\Controller;
-
+use App;
 use Illuminate\Http\Request;
 use yuridik\Question;
 use yuridik\Category;

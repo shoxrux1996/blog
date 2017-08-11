@@ -39,7 +39,7 @@
     <div class="container-fluid" id="services-section">
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-                <img src="{{( 'dist/images/question-icon.png')}}" alt="Question icon"/>
+                <img src="{{ asset( 'dist/images/question-icon.png')}}" alt="Question icon"/>
                 <a type="button" class="btn btn-default" href="{{ route('question.create')}}">Задать вопрос</a>
                 <p class="statistics">50,000+</p>
                 <p class="what">Отвеченных вопросов</p>

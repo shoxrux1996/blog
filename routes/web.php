@@ -215,8 +215,12 @@ Route::get('/how-works', function(){
 	return view('how-works');
 })->name('how-works');
 
-
-
+Route::get('setlocale/{locale}', function ($locale) {
+  if (in_array($locale, \Config::get('app.locales'))) {
+    Session::put('locale', $locale);
+  }
+  return redirect()->back();
+})->name('lang.switch');
 
 //Route::get('bloglist','BlogController@blog_list');
 //Route::get('insertform','BlogController@insertform');

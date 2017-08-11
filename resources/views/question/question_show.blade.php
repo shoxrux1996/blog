@@ -55,7 +55,7 @@
                                 <div class="author-name col-sm-9">
                                     <a href="#"><h4>{{$answer->lawyer->user->firstName}}</h4></a>
                                     <div class="comment-content">
-                                        {{$answer->text}}
+                                        {!!$answer->text!!}
                                     </div>
                                     <div class="tags col-md-6">
                                         @foreach($answer->files as $file)

@@ -12,6 +12,7 @@ use yuridik\Lawyer;
 use Illuminate\Support\Facades\Session;
 use Auth;
 use Validator;
+use Illuminate\Support\Facades\App;
 class QuestionController extends Controller
 {
     /**
@@ -21,6 +22,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
+        dd(App::getLocale());
         $questions = Question::orderBy('id','desc')->paginate(5);
         $questions_costly = Question::where('type',[1,2])
             ->orderBy('id','desc')->paginate(5);
