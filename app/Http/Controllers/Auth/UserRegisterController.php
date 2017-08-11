@@ -48,7 +48,7 @@ class UserRegisterController extends Controller
             'client.email' => 'required|string|email|max:255|unique:clients,email|unique:lawyers,email',
             'client.password' => 'required|string|min:6',
             'client.password_confirm' => 'same:client.password',
-            ],$messages);  
+            ]);  
 
             if($validator->fails()){
                 return view('auth.register')->withErrors($validator)->withActiveuser('client');

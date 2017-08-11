@@ -95,7 +95,7 @@
         <div class="col-md-6 col-sm-8 col-xs-12">
             <h1>Вход на Yuridik.uz</h1>
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#menu1">Войты</a></li>
+                <li class="active"><a data-toggle="tab" href="#menu1">Войти</a></li>
                 <li><a href="{{ route('user.register')}}">Регистрация</a></li>
             </ul>
 
