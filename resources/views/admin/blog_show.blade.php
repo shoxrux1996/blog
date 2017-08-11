@@ -10,7 +10,7 @@
 
             <div class="page-header">
                 <h2>Блог</h2>
-                <a href="{{route('admin.blog.delete', $blog->id)}}" class="btn btn-danger"><span>Удалить</span></a>
+                <a onclick="return confirm('Вы уверены?');" href="{{route('admin.blog.delete', $blog->id)}}" class="btn btn-danger"><span>Удалить</span></a>
                 <a href="{{route('admin.blog.edit', $blog->id)}}" class="btn btn-danger"><span>Изменить</span></a>
             </div>
 

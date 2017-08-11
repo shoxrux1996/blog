@@ -27,6 +27,6 @@ class User extends Model
         return $this->hasMany('yuridik\Order')->orderBy('id','desc');
     }
     public function balance(){
-        return $this->transactions()->sum('amount') - $this->orders()->sum('amount');
+        return ($this->transactions()->sum('amount')/100) - ($this->orders()->sum('amount'));
     }
 }

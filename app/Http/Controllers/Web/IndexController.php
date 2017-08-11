@@ -28,19 +28,6 @@ class IndexController extends Controller
         // $chosen = Chosen::all();
 
         $num_of_lawyers = Lawyer::count();
-        /*$chosen_lawyers=array();
-        foreach ($chosen as $var) {
-            if($var->name==="lawyer")
-                array_push($chosen_lawyers, Lawyer::find($var->id));
-        }
-        //$chosen_lawyers=Lawyer::find(Chosen::where('name','lawyer')->get());//alternate method
-
-        $chosen_blogs=array();
-        foreach ($chosen as $var) {
-            if($var->name==="blog")
-                array_push($chosen_blogs, Blog::find($var->id));
-        }
-        //$chosen_blogs=Blog::find(Chosen::where('name','blog')->get());//alternate method*/
 
         return view('index',compact('num_of_lawyers','num_of_questions','free_question_examples','paid_question_examples','categories', 'blogs', 'lawyers'));/*,$chosen_blogs,$chosen_lawyers*/
     }

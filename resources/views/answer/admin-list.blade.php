@@ -1,6 +1,5 @@
 @extends('layouts.app-admin')
 
-
 @section('styles')
     <link href="{{ asset('dist/css/questions.css')}}" rel="stylesheet">
     <style>
@@ -9,7 +8,6 @@
             padding: 20px;
             margin-bottom: 20px;
         }
-
         .question .author {
             float: right;
         }
@@ -64,42 +62,45 @@
         <div class="alert alert-info">{{ Session::get('message') }}</div>
     @endif
 
-        <div class="container">
-            <div class="row">
-                @foreach($answers as $answer)
-                    <div class="col-sm-9 question">
-                        <h4 class="title">{{$answer->lawyer->email}}
-                        </h4>
-                        <div>
-                            <a
-                                    href="{{route('admin.question.show', $answer->question->id)}}">Вопрос: {{$answer->question->title}}</a>
-                        </div>
-                       <a href="{{route('admin.answer.show', $answer->id)}}"><h3>Ответ <strong>#{{$answer->id}}</strong></h3></a>
-                        <h4 class="description">{{$answer->text}}</h4>
-                        <p>
-                            <span class="date">{{Carbon\Carbon::parse($answer->created_at)->toFormattedDateString()}}</span>
-                            <span class="number"> вопрос №{{$answer->id}}</span>
-                            <span class="author">{{$answer->lawyer->user->firstName}}
-                                , г.{{$answer->lawyer->user->city->name}} </span>
-                        </p>
-                        <hr>
-                        <div>
-                            @foreach($answer->files as $file)
-                                <a class="label label-default"
-                                   href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                            @endforeach
-                        </div>
+    <div class="container">
+        <div class="row">
+            @foreach($answers as $answer)
+                <div class="col-sm-9 question">
+                    <h4 class="title">{{$answer->lawyer->email}}
+                    </h4>
+                    <div>
+                        <a href="{{route('admin.question.show', $answer->question->id)}}">Вопрос: {{$answer->question->title}}</a>
                     </div>
-                    <div class="col-md-2 ">
-                        <a href="{{route('admin.answer.delete', $answer->id)}}" class="btn btn-danger pull-right btn-block" style="margin-top: 20px">Удалить</a>
+                    <a href="{{route('admin.answer.show', $answer->id)}}"><h3>Ответ <strong>#{{$answer->id}}</strong>
+                        </h3></a>
+                    <h4 class="description">
+                        {{substr(strip_tags($answer->text),0,250)}} {{strlen(strip_tags($answer->text))>250 ? '...' : ""}}
+                    </h4>
+                    <p>
+                        <span class="date">{{Carbon\Carbon::parse($answer->created_at)->toFormattedDateString()}}</span>
+                        <span class="number"> вопрос №{{$answer->id}}</span>
+                        <span class="author">{{$answer->lawyer->user->firstName}}
+                            , г.{{$answer->lawyer->user->city->name}} </span>
+                    </p>
+                    <hr>
+                    <div>
+                        @foreach($answer->files as $file)
+                            <a class="label label-default"
+                               href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                        @endforeach
                     </div>
-                @endforeach
-                <div class="col-sm-12 text-center">
-                    {!! $answers->links('pagination') !!}
-
                 </div>
+                <div class="col-md-2 ">
+                    <a  onclick="return confirm('Вы уверены?');" href="{{route('admin.answer.delete', $answer->id)}}" class="btn btn-danger pull-right btn-block"
+                       style="margin-top: 20px">Удалить</a>
+                </div>
+            @endforeach
+            <div class="col-sm-12 text-center">
+                {!! $answers->links('pagination') !!}
+
             </div>
         </div>
+    </div>
 
 
 @endsection

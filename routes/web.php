@@ -59,7 +59,7 @@ Route::prefix('admin')->group(function(){
     });
     Route::prefix('answers')->group(function (){
         Route::get('/', 'Admin\AdminPostController@answers')->name('admin.answers.index');
-        Route::post('/deny/{id}','Admin\AdminPostController@answerDeny')->name('admin.answer.delete');
+        Route::get('/deny/{id}','Admin\AdminPostController@answerDestroy')->name('admin.answer.delete');
         Route::get('/show/{id}','Admin\AdminPostController@answerShow')->name('admin.answer.show');
     });
     Route::prefix('comments')->group(function (){

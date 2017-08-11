@@ -13,14 +13,10 @@
   <li><a href="{{ route('about')}}">О нас</a></li>
 @endsection
 @section('content')
-
-
 	<div id="wrapper">
     <div class="container">
         <div class="row">
             <div class="col-sm-9">
-
-                
                 @foreach($questions as $question)
 
                 <div class="col-sm-12 question">
@@ -57,30 +53,18 @@
             </div>
             <div class="col-sm-3 text-center">
                 <h3>Лучшие юристы</h3>
+                @foreach($best_lawyers as $lawyer)
                 <div class="best-lawyers">
-                    <img src="{{ asset('dist/images/headshot-1.png')}}" class="img-rounded" />
-                    <h3>Керс Олег</h3>
+                    <img src="{{$lawyer->user->file != null ? asset($lawyer->user->file->path.$lawyer->user->file->file) : asset('dist/images/headshot-1.png')}}"
+                         class="img-rounded"/>
+                    <h3>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h3>
                     <h6>
-                        <b>юрист, г. Калининград</b>
+                        <b>{{$lawyer->job_status}}, г. {{$lawyer->user->city->name}}</b>
                     </h6>
-                    <a type="button" class="btn btn-default btn-success" href="individual-lawyer.html">Посмотреть профиль</a>
+                    <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть
+                        профиль</a>
                 </div>
-                <div class="best-lawyers">
-                    <img src="{{ asset('dist/images/headshot-1.png')}}" class="img-rounded" />
-                    <h3>Керс Олег</h3>
-                    <h6>
-                        <b>юрист, г. Калининград</b>
-                    </h6>
-                    <a type="button" class="btn btn-default btn-success" href="individual-lawyer.html">Посмотреть профиль</a>
-                </div>
-                <div class="best-lawyers">
-                    <img src="{{ asset('dist/images/headshot-1.png')}}" class="img-rounded" />
-                    <h3>Керс Олег</h3>
-                    <h6>
-                        <b>юрист, г. Калининград</b>
-                    </h6>
-                    <a type="button" class="btn btn-default btn-success" href="individual-lawyer.html">Посмотреть профиль</a>
-                </div>
+                @endforeach
                 <div class="ask-question-block text-center">
                     <img class="img-responsive" src="{{ asset('dist/images/one-word-save_0')}}.png" />
                     <h6>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Auth;
 use Validator;
 use yuridik\Order;
+use yuridik\Lawyer;
 class ClientQuestionController extends Controller
 {
     public function __construct()
@@ -164,7 +165,10 @@ class ClientQuestionController extends Controller
 
     public function myQuestions(){
         $questions = Question::where('client_id',Auth::user()->id)->orderBy('id','desc')->paginate(5);
-        return view('client.questions')->withQuestions($questions);
+        $best_lawyers =  $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query){
+            return $query->feedbacks->count();
+        });
+        return view('client.questions')->withQuestions($questions)->withBest_lawyers($best_lawyers);
     }
     public function showQuestion($id){
         $question = Auth::user()->questions->find($id);
