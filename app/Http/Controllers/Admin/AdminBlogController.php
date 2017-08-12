@@ -1,6 +1,7 @@
 <?php
 
 namespace yuridik\Http\Controllers\Admin;
+
 use yuridik\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use yuridik\Tag;
 use Session;
 use yuridik\File;
 use Illuminate\Support\Facades\File as LaraFile;
+
 class AdminBlogController extends Controller
 {
     /**
@@ -26,22 +28,26 @@ class AdminBlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showBlogList(){
+    public function showBlogList()
+    {
 
-        $blogs=Blog::orderBy('id', 'desc')->paginate(12);
-      
+        $blogs = Blog::orderBy('id', 'desc')->paginate(12);
+
         return view('admin.bloglist')->with('blogs', $blogs);
     }
+
     public function destroy($id)
     {
         $blog = Blog::find($id);
-        $tags= $blog->tags()->detach();
+        $tags = $blog->tags()->detach();
 
         $blog->delete();
-       Session::flash('message', 'Blog was deleted successfully');
-      return redirect()->route('admin.blogs');
+        Session::flash('message', 'Blog was deleted successfully');
+        return redirect()->route('admin.blogs');
     }
-    public function show($id){
+
+    public function show($id)
+    {
         $blog = Blog::find($id);
 
         $tags = Tag::all();
@@ -86,7 +92,9 @@ class AdminBlogController extends Controller
         Session::flash('message', 'Blog was updated successfully');
         return redirect()->route('admin.blog.show', $blog->id);
     }
-    public function editform($id){
+
+    public function editform($id)
+    {
         $blog = Blog::find($id);
 
         $tags = Tag::all();
@@ -94,10 +102,10 @@ class AdminBlogController extends Controller
         $tags2 = array();
 
         foreach ($tags as $tag) {
-          $tags2[$tag->id] = $tag->name;
+            $tags2[$tag->id] = $tag->name;
         }
         return view('admin.blog_edit')->withBlog($blog)->with('tags', $tags2);
     }
 
-  
+
 }

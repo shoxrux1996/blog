@@ -1,7 +1,10 @@
 <?php
+
 namespace yuridik\Paycom;
+
 use yuridik\Paycom\PaycomException;
 use yuridik\Paycom\Request;
+
 class Response
 {
     /**

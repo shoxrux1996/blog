@@ -58,7 +58,7 @@
                             <hr>
                             <div class="blog-item-footer">
                             <span>
-                                <i class="fa fa-user"></i> {{$blog->lawyer->user->firstName}}
+                                <i class="fa fa-user"></i> {{$blog->blogable->user->firstName}}
                             </span>
                             <span class="pull-right">
                                 <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($blog->created_at)->toFormattedDateString()}}

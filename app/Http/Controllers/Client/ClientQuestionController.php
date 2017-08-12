@@ -1,6 +1,7 @@
 <?php
 
 namespace yuridik\Http\Controllers\Client;
+
 use yuridik\Http\Controllers\Controller;
 use App;
 use Illuminate\Http\Request;
@@ -13,16 +14,18 @@ use Auth;
 use Validator;
 use yuridik\Order;
 use yuridik\Lawyer;
+
 class ClientQuestionController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:client');
     }
+
     public function create()
     {
         $category = Category::all();
-        
+
         $categories = array(' ' => null);
         foreach ($category as $key) {
             $categories[$key->id] = $key->name;
@@ -34,36 +37,36 @@ class ClientQuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $messages = [
-                'required' => 'Обязательно к заполнению',
-                'string' => 'Неправильный формат',
-                'title.min' => 'Минимум 3 символов',
-                'description.min' => 'Минимум 10 символов',
-                'mimes' => 'Неверный формат(doc,docx,pdf)',
-                'max' => 'Файл слишком велик',
-                ];
+            'required' => 'Обязательно к заполнению',
+            'string' => 'Неправильный формат',
+            'title.min' => 'Минимум 3 символов',
+            'description.min' => 'Минимум 10 символов',
+            'mimes' => 'Неверный формат(doc,docx,pdf)',
+            'max' => 'Файл слишком велик',
+        ];
         $rules = array(
-           'title' => 'required|string|min:3',
+            'title' => 'required|string|min:3',
             'description' => 'required|string|min:10',
-            );
+        );
 
-       
-        $count = count($request->file('files'))-1;
-    
 
-        foreach(range(0, $count) as $i) {
-             $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
+        $count = count($request->file('files')) - 1;
+
+
+        foreach (range(0, $count) as $i) {
+            $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
         }
-        Validator::make($request->all(), $rules,$messages)->validate();
+        Validator::make($request->all(), $rules, $messages)->validate();
         $client = Auth::user();
 
-        if($request->type == 2){
-            if($client->user->balance() >= 5000){
+        if ($request->type == 2) {
+            if ($client->user->balance() >= 5000) {
                 $question = new Question;
                 $question->title = $request->title;
                 $question->text = $request->description;
@@ -93,15 +96,12 @@ class ClientQuestionController extends Controller
 
                 Session::flash('message', 'Question created successfully');
                 return redirect()->route('client.dashboard');
-            }
-            else
-            {
+            } else {
                 Session::flash('message', 'Not enough money, Please charge your balance');
                 return redirect()->route('card.payment');
             }
-        }
-        elseif($request->type == 1){
-            if($client->user->balance() >= 1000){
+        } elseif ($request->type == 1) {
+            if ($client->user->balance() >= 1000) {
                 $question = new Question;
                 $question->title = $request->title;
                 $question->text = $request->description;
@@ -131,14 +131,11 @@ class ClientQuestionController extends Controller
 
                 Session::flash('message', 'Question created successfully');
                 return redirect()->route('client.dashboard');
-            }
-            else
-            {
+            } else {
                 Session::flash('message', 'Not enough money, Please charge your balance');
                 return redirect()->route('card.payment');
             }
-        }
-        else{
+        } else {
             $question = new Question;
             $question->title = $request->title;
             $question->text = $request->description;
@@ -160,17 +157,20 @@ class ClientQuestionController extends Controller
             }
             Session::flash('message', 'Question created successfully');
             return redirect()->route('client.dashboard');
-        }                
+        }
     }
 
-    public function myQuestions(){
-        $questions = Question::where('client_id',Auth::user()->id)->orderBy('id','desc')->paginate(5);
-        $best_lawyers =  $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query){
+    public function myQuestions()
+    {
+        $questions = Question::where('client_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(5);
+        $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
         return view('client.questions')->withQuestions($questions)->withBest_lawyers($best_lawyers);
     }
-    public function showQuestion($id){
+
+    public function showQuestion($id)
+    {
         $question = Auth::user()->questions->find($id);
         return view('client.question_show')->withQuestion($question);
     }

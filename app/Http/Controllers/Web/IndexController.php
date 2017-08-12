@@ -1,6 +1,7 @@
 <?php
 
 namespace yuridik\Http\Controllers\Web;
+
 use yuridik\Http\Controllers\Controller;
 
 use yuridik\Question;
@@ -20,8 +21,8 @@ class IndexController extends Controller
     public function index()
     {
         $num_of_questions = Question::count();
-        $free_question_examples = Question::orderBy('id', 'desc')->where('type','0')->take(6)->get();
-        $paid_question_examples = Question::orderBy('id', 'desc')->where('type',['1','2'])->take(6)->get();
+        $free_question_examples = Question::orderBy('id', 'desc')->where('type', '0')->take(6)->get();
+        $paid_question_examples = Question::orderBy('id', 'desc')->where('type', ['1', '2'])->take(6)->get();
         $blogs = Blog::orderBy('count', 'desc')->take(3)->get();
         $categories = Category::where('category_id', null)->get();
         $lawyers = Lawyer::orderBy('id', 'desc')->take(6)->get();
@@ -29,9 +30,8 @@ class IndexController extends Controller
 
         $num_of_lawyers = Lawyer::count();
 
-        return view('index',compact('num_of_lawyers','num_of_questions','free_question_examples','paid_question_examples','categories', 'blogs', 'lawyers'));/*,$chosen_blogs,$chosen_lawyers*/
+        return view('index', compact('num_of_lawyers', 'num_of_questions', 'free_question_examples', 'paid_question_examples', 'categories', 'blogs', 'lawyers'));/*,$chosen_blogs,$chosen_lawyers*/
     }
-    
-  
-    
+
+
 }

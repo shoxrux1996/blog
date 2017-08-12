@@ -1,4 +1,5 @@
 <?php
+
 namespace yuridik\Paycom;
 
 class Format

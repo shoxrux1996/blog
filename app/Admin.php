@@ -5,6 +5,7 @@ namespace yuridik;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use yuridik\Notifications\AdminResetPasswordNotification;
+
 class Admin extends Authenticatable
 {
     use Notifiable;
@@ -28,6 +29,10 @@ class Admin extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function blogs()
+    {
+        return $this->morphMany('yuridik\Blog', 'blogable');
+    }
 
     public function sendPasswordResetNotification($token)
     {

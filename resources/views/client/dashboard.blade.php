@@ -108,7 +108,7 @@
                                 <div class="col-sm-6">
                                 <ul>
                                 @foreach($client->questions->reverse() as $question)
-                                    <li><a href="{{ route('client.question.show', ['id'=>$question->id])}}">{{$question->title}}</a></li>
+                                    <li><a href="{{ route('web.question.show', ['id'=>$question->id])}}">{{$question->title}}</a></li>
                                 @endforeach
                                 </ul>
                                 </div>

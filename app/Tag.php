@@ -8,10 +8,12 @@ class Tag extends Model
 {
     //
     protected $fillable = ['name'];
-    public function blogs(){
-    	return $this->belongsToMany('yuridik\Blog');
+
+    public function blogs()
+    {
+        return $this->belongsToMany('yuridik\Blog');
     }
-   
+
 
 }
 

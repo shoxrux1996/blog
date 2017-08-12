@@ -1,6 +1,9 @@
 <?php
+
 namespace yuridik\Paycom;
+
 use yuridik\Paycom\PaycomException;
+
 class Request
 {
     /** @var array decoded request payload */

@@ -1,5 +1,7 @@
 <?php
+
 namespace yuridik\Paycom;
+
 use yuridik\Paycom\PaycomException;
 use yuridik\Paycom\Request;
 use yuridik\Paycom\Response;
@@ -9,6 +11,7 @@ use yuridik\Transaction;
 
 
 use yuridik\User;
+
 class Application
 {
     public $config;
@@ -78,7 +81,7 @@ class Application
     private function CheckPerformTransaction()
     {
         $user = User::find(intval($this->request->params['account']['user_id']));
-        if(!$user) {
+        if (!$user) {
             throw new PaycomException(
                 $this->request->id,
                 'User Not Found.',
@@ -123,7 +126,7 @@ class Application
     private function CreateTransaction()
     {
         $user = User::find(intval($this->request->params['account']['user_id']));
-        if(!$user) {
+        if (!$user) {
             throw new PaycomException(
                 $this->request->id,
                 'User Not Found.',
@@ -185,7 +188,7 @@ class Application
             $transaction->save();
             $this->response->send([
                 'create_time' => $create_time,
-               'transaction' => strval($transaction->id),
+                'transaction' => strval($transaction->id),
                 'state' => $transaction->state,
                 'receivers' => null
             ]);
@@ -278,7 +281,7 @@ class Application
                 ]);
                 break;
 
-          case Transaction::STATE_COMPLETED:
+            case Transaction::STATE_COMPLETED:
                 // find order and check, whether cancelling is possible this order
 
                 if ($found) {
@@ -327,7 +330,7 @@ class Application
         $this->response->send(['success' => true]);
     }
 
-   private function GetStatement()
+    private function GetStatement()
     {
         // validate 'from'
         if (!isset($this->request->params['from'])) {

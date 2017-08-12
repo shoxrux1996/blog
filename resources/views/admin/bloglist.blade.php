@@ -18,7 +18,7 @@
 
                             <div class="blog-item-img">
                                 @if($blog->file != null)
-                                    <img alt="Blog item image" src="">
+                                    <img alt="Blog item image" src="{{asset('$blog->file->path.$blog->file->file')}}">
                                 @else
                                     <img alt="Blog item image" src="{{asset('dist/images/blog-img-2.jpg')}}">
                                 @endif
@@ -45,7 +45,7 @@
                             <hr>
                             <div class="blog-item-footer">
                             <span>
-                                <i class="fa fa-user"></i> {{$blog->lawyer->user->firstName}}
+                                <i class="fa fa-user"></i> {{$blog->blogable->user->firstName}}
                             </span>
                                 <span class="pull-right">
                                 <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($blog->created_at)->toFormattedDateString()}}

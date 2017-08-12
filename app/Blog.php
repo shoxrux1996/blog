@@ -6,21 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
-    
-  
-    public function comments(){
-    	return $this->hasMany('yuridik\Comment');
+
+    public function blogable()
+    {
+        return $this->morphTo();
     }
-    public function tags(){
-    	return $this->belongsToMany('yuridik\Tag');
+    public function comments()
+    {
+        return $this->hasMany('yuridik\Comment');
     }
-     public function getRelatedIds(){
-    	return $this->tags->pluck('id');
+
+    public function tags()
+    {
+        return $this->belongsToMany('yuridik\Tag');
     }
-    public function lawyer(){
-         return $this->belongsTo('yuridik\Lawyer');
+
+    public function getRelatedIds()
+    {
+        return $this->tags->pluck('id');
     }
-    public function file(){
+
+    public function file()
+    {
         return $this->morphOne('yuridik\File', 'fileable');
     }
 }

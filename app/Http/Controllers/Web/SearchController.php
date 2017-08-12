@@ -51,9 +51,9 @@ class SearchController extends Controller
                     $query->where('firstName', 'LIKE', "%$value%")
                         ->orWhere('lastName', 'LIKE', "%$value%");
                 }
-            })->orWhereHas('categories', function ($query) use ($search){
-                foreach ($search as $value){
-                    $query->where('name','LIKE', "%$value%");
+            })->orWhereHas('categories', function ($query) use ($search) {
+                foreach ($search as $value) {
+                    $query->where('name', 'LIKE', "%$value%");
                 }
             })->paginate(8);
 
@@ -82,8 +82,10 @@ class SearchController extends Controller
             ->withBest_lawyers($best_lawyers);
 
     }
-    public function searchByCategory($name){
-        $lawyers = Lawyer::with('categories')->whereHas('categories', function ($query) use ($name){
+
+    public function searchByCategory($name)
+    {
+        $lawyers = Lawyer::with('categories')->whereHas('categories', function ($query) use ($name) {
             $query->where('name', 'LIKE', "%$name%");
         })->paginate(8);
 

@@ -14,31 +14,7 @@
   <li><a href="{{ route('about')}}">О нас</a></li>
 @endsection
 @section('content')
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Lawyer Dashboard</div>
-                    @if (Session::has('message'))
-                        <div class="alert alert-info">{{ Session::get('message') }}</div>
-                    @endif
-                    <ul class="btn btn-default">
-                    <li><a href="{{ route('lawyer.info') }}">Info</a></li>
-                    <li><a href="{{ route('lawyer.blog.insert') }}">Написать блок</a></li>
-                    <li><a href="{{route('question.list')}}">Вопросы</a></li>
-                    <li><a href="{{route('web.blogs')}}">Блоги</a></li>
 
-                    </ul>
-                    <div class="panel-body">
-                        @component('components.who')
-                        @endcomponent
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- Content -->
 <div id="wrapper">
     <div class="container">
         <div class="col-sm-3">
@@ -98,7 +74,7 @@
                             <li>
                                 <h3>{{$lawyer->user->balance()}} сум.</h3>
                                 <h3>0 юркоинов</h3>
-                                <a href="#">Управление балансом</a>
+                                <a href="{{route('card.payment')}}">Управление балансом</a>
                             </li>
                         </ul>
                     </div>
@@ -120,8 +96,9 @@
                             <li>
                                 <a href="{{ route('my.answers')}}">Вопросы</a>
                             </li>
+
                             <li>
-                                <a href="#">Заявки</a>
+                                <a href="{{route('lawyer.blog.insert')}}">Написать Блог</a>
                             </li>
                             <li>
                                 <a href="{{ route('my.requests')}}">Документы</a>
@@ -180,6 +157,9 @@
                         <li>
                             <a data-toggle="tab" href="#document-requests">Документы</a>
                         </li>
+                        <li>
+                            <a data-toggle="tab" href="#blog-created">Блоги</a>
+                        </li>
                     </ul>
 
                     <div class="tab-content">
@@ -197,7 +177,7 @@
                         <div id="call-consultions" class="tab-pane fade">
                             <div class="row">
                                 <div class="col-sm-4">
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -208,6 +188,17 @@
                                         @foreach($lawyer->requests->unique('document_id')->reverse() as $request)
                                             <li><a href="{{ route('lawyer.document.show',$request->document->id)}}"> {{$request->document->title}}</a></li>
                                         @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="blog-created" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul>
+                                       {{-- @foreach($lawyer->blogs as $blog)
+                                            <li><a href="{{ route('lawyer.blog.show',$blog->id)}}"> {{$blog->title}}</a></li>
+                                        @endforeach--}}
                                     </ul>
                                 </div>
                             </div>

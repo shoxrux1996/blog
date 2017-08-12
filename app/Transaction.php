@@ -1,13 +1,14 @@
 <?php
 
 namespace yuridik;
+
 use yuridik\Paycom\Format;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
     public $timestamps = false;
-    
+
     const TIMEOUT = 43200000;
 
     const STATE_CREATED = 1;
@@ -28,6 +29,7 @@ class Transaction extends Model
         // for example, if transaction is active and passed TIMEOUT milliseconds after its creation, then it is expired
         return $this->state == self::STATE_CREATED && Format::datetime2timestamp($this->create_time) - time() > self::TIMEOUT;
     }
+
     public function cancel($reason)
     {
         // todo: Implement transaction cancelling on data store

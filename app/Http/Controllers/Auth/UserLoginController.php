@@ -33,11 +33,11 @@ class UserLoginController extends Controller
             $messages = [
                 'required' => 'Обязательно к заполнению',
                 'email' => 'Неправильный формат электронной почты', 'min' => 'Минимум 6 символов',
-                ];
+            ];
             $this->validate($request, [
                 'email' => 'required|email',
                 'password' => 'required|min:6',
-            ],$messages);
+            ], $messages);
             if ($cl->isBlocked == 1) {
                 if ($cl->blockedTill <= Carbon::now('Asia/Tashkent')) {
                     $cl->isBlocked = 0;
@@ -59,13 +59,13 @@ class UserLoginController extends Controller
 
         $cl = Lawyer::where('email', $request->email)->first();
         $messages = [
-                'required' => 'Обязательно к заполнению',
-                'email' => 'Неправильный формат электронной почты', 'min' => 'Минимум 6 символов',
-                ];
+            'required' => 'Обязательно к заполнению',
+            'email' => 'Неправильный формат электронной почты', 'min' => 'Минимум 6 символов',
+        ];
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|min:6'
-        ],$messages);
+        ], $messages);
         if ($cl->isBlocked == 1) {
             if ($cl->blockedTill <= Carbon::now('Asia/Tashkent')) {
                 $cl->isBlocked = 0;
@@ -106,9 +106,9 @@ class UserLoginController extends Controller
         if (!empty($cl)) {
             $messages = [
                 'email' => 'Неправильный формат электронной почты',
-                ];
+            ];
             $this->validate($request, [
-                'email' => 'required|email|exists:clients',],$messages);
+                'email' => 'required|email|exists:clients',], $messages);
 
 
             app('yuridik\Http\Controllers\Auth\ClientForgotPasswordController')->sendClientResetLinkEmail($request);
@@ -116,9 +116,9 @@ class UserLoginController extends Controller
         } else {
             $messages = [
                 'email' => 'Неправильный формат электронной почты',
-                ];
+            ];
             $this->validate($request, [
-                'email' => 'required|email|exists:lawyers',],$messages);
+                'email' => 'required|email|exists:lawyers',], $messages);
 
             app('yuridik\Http\Controllers\Auth\LawyerForgotPasswordController')->sendLawyerResetLinkEmail($request);
             return redirect()->route('user.password.request');

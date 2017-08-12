@@ -12,21 +12,29 @@ class User extends Model
         'firstName', 'lastName', 'city_id',
     ];
 
-    public function city(){
+    public function city()
+    {
 
-    	return $this->belongsTo('yuridik\City');
+        return $this->belongsTo('yuridik\City');
     }
 
-    public function file(){
+    public function file()
+    {
         return $this->morphOne('yuridik\File', 'fileable');
     }
-    public function transactions(){
-        return $this->hasMany('yuridik\Transaction')->where('state',2)->orderBy('id','desc');
+
+    public function transactions()
+    {
+        return $this->hasMany('yuridik\Transaction')->where('state', 2)->orderBy('id', 'desc');
     }
-    public function orders(){
-        return $this->hasMany('yuridik\Order')->orderBy('id','desc');
+
+    public function orders()
+    {
+        return $this->hasMany('yuridik\Order')->orderBy('id', 'desc');
     }
-    public function balance(){
-        return ($this->transactions()->sum('amount')/100) - ($this->orders()->sum('amount'));
+
+    public function balance()
+    {
+        return ($this->transactions()->sum('amount') / 100) - ($this->orders()->sum('amount'));
     }
 }

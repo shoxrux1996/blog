@@ -1,11 +1,13 @@
 <?php
 
 namespace yuridik\Http\Controllers\Admin;
+
 use yuridik\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use yuridik\Category;
 use yuridik\Blog;
+
 class AdminCategoryController extends Controller
 {
 
@@ -23,7 +25,7 @@ class AdminCategoryController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $cat= array('' => null);
+        $cat = array('' => null);
         foreach ($categories as $key) {
             $cat[$key->id] = $key->name;
         }
@@ -33,7 +35,7 @@ class AdminCategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-           'name' => 'required|unique:categories',
+            'name' => 'required|unique:categories',
             'text' => 'required|min:10',
         ]);
 
@@ -41,10 +43,11 @@ class AdminCategoryController extends Controller
         $category->name = $request->name;
         $category->text = $request->text;
         $category->class = $request->class;
-        $category->category_id =$request->parent;
+        $category->category_id = $request->parent;
         $category->save();
         return redirect()->route('admin.category.info');
     }
+
     public function destroy($id)
     {
         $category = Category::find($id);
@@ -55,36 +58,40 @@ class AdminCategoryController extends Controller
         $category->lawyers()->detach();
         $category->delete();
 
-     return redirect()->route('category.info');
+        return redirect()->route('category.info');
     }
-    public function show($id){
+
+    public function show($id)
+    {
         $category = Category::findOrFail($id);
-        $cat1 = Category::where('id','!=',$id)->orderBy('created_at','desc')->skip(0)->take(3)->get();
-        $cat2 = Category::where('id','!=',$id)->orderBy('created_at','desc')->skip(3)->take(4)->get();
+        $cat1 = Category::where('id', '!=', $id)->orderBy('created_at', 'desc')->skip(0)->take(3)->get();
+        $cat2 = Category::where('id', '!=', $id)->orderBy('created_at', 'desc')->skip(3)->take(4)->get();
 
         return view('admin.category_show')->withCategory($category)->withCat1($cat1)->withCat2($cat2);
     }
+
     public function edit($id)
     {
         $category = Category::findOrFail($id);
 
         $categories = Category::all();
-        $cat= array('' => null);
+        $cat = array('' => null);
         foreach ($categories as $key) {
             $cat[$key->id] = $key->name;
         }
         return view('admin.category_edit')->withCategory($category)->withCategories($cat);
     }
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|unique:categories,name,'.$id,
+            'name' => 'required|unique:categories,name,' . $id,
             'text' => 'required|min:10',
         ]);
 
         $category = Category::findOrFail($id);
         $category->name = $request->name;
-        $category->category_id =$request->category;
+        $category->category_id = $request->category;
         $category->class = $request->class;
         $category->text = $request->text;
         $category->save();

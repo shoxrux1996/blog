@@ -8,23 +8,27 @@ use yuridik\Feedback;
 use yuridik\Answer;
 use Session;
 use Auth;
+
 class ClientFeedbackController extends Controller
 {
-	public function __construct(){
-		$this->middleware('auth:client');
-	}
-    public function store(Request $request, $answer_id){
-    	$client = Auth::guard('client')->user();
-    	
-    	$answer = Answer::findOrFail($answer_id);
-    	$feedback = new Feedback;
-    	$feedback->text = $request->text;
-    	$feedback->helped =$request->helped;
-    	$feedback->client_id = $client->id;
-    	$feedback->answer_id = $answer->id;
-    	$feedback->save();
+    public function __construct()
+    {
+        $this->middleware('auth:client');
+    }
 
-		Session::flash('message', 'Feedback created successfully');
-    	return redirect()->back();
+    public function store(Request $request, $answer_id)
+    {
+        $client = Auth::guard('client')->user();
+
+        $answer = Answer::findOrFail($answer_id);
+        $feedback = new Feedback;
+        $feedback->text = $request->text;
+        $feedback->helped = $request->helped;
+        $feedback->client_id = $client->id;
+        $feedback->answer_id = $answer->id;
+        $feedback->save();
+
+        Session::flash('message', 'Feedback created successfully');
+        return redirect()->back();
     }
 }

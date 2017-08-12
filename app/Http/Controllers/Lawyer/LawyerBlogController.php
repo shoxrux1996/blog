@@ -10,6 +10,7 @@ use yuridik\Tag;
 use yuridik\Http\Requests;
 use Session;
 use yuridik\File;
+use Purifier;
 
 class LawyerBlogController extends Controller
 {
@@ -28,10 +29,10 @@ class LawyerBlogController extends Controller
 
         $blog = new Blog;
         $blog->title = $request->title;
-        $blog->text = $request->text;
+        $blog->text = Purifier::clean($request->text);
         $lawyer = Auth::guard('lawyer')->user();
-        $blog->lawyer_id = $lawyer->id;
-        $blog->save();
+        $lawyer->blogs()->save($blog);
+
         $blog->tags()->sync($request->tags, false);
 
         if ($request->file('image') != null) {
@@ -66,7 +67,7 @@ class LawyerBlogController extends Controller
             'image' => 'image',
         ));
         $blog = Blog::find($id);
-        $blog->title = $request->title;
+        $blog->text = Purifier::clean($request->text);
         $blog->text = $request->text;
         $blog->save();
 

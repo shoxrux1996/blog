@@ -20,12 +20,12 @@ class Lawyer extends Authenticatable
         'email', 'password',
     ];
 
-       /**
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
- protected $hidden = [
+    protected $hidden = [
         'password', 'remember_token',
     ];
 
@@ -35,26 +35,31 @@ class Lawyer extends Authenticatable
     }
 
 
-        public function user() 
+    public function user()
     {
         return $this->belongsTo('yuridik\User');
     }
-   
+    public function blogs()
+    {
+        return $this->morphMany('yuridik\Blog', 'blogable');
+    }
     public function categories()
     {
-        return $this->belongsToMany('yuridik\Category','lawyer_category');
+        return $this->belongsToMany('yuridik\Category', 'lawyer_category');
     }
 
     public function comments()
     {
         return $this->morphMany('yuridik\Comment', 'commentable');
     }
-    
-    public function answers(){
+
+    public function answers()
+    {
         return $this->hasMany('yuridik\Answer');
     }
 
-    public function requests(){
+    public function requests()
+    {
         return $this->hasMany('yuridik\Request');
     }
 
@@ -62,14 +67,17 @@ class Lawyer extends Authenticatable
     {
         return $this->hasManyThrough('yuridik\Feedback', 'yuridik\Answer');
     }
+
     public function files()
     {
         return $this->morphMany('yuridik\File', 'fileable');
     }
+
     public function countPositiveFeedbacks()
     {
         return $this->feedbacks->where('helped', 1)->count();
     }
+
     public function countNegativeFeedbacks()
     {
         return $this->feedbacks->where('helped', 0)->count();

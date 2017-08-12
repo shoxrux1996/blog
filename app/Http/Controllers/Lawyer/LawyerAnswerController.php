@@ -2,14 +2,15 @@
 
 namespace yuridik\Http\Controllers\Lawyer;
 
-    use yuridik\Http\Controllers\Controller;
-    use Illuminate\Http\Request;
-    use yuridik\Question;
-    use yuridik\Answer;
-    use Session;
-    use Auth;
-    use Validator;
-    use yuridik\File;
+use yuridik\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use yuridik\Question;
+use yuridik\Answer;
+use Session;
+use Auth;
+use Validator;
+use yuridik\File;
+
 class LawyerAnswerController extends Controller
 {
     /**
@@ -22,8 +23,6 @@ class LawyerAnswerController extends Controller
     {
         $this->middleware('auth:lawyer');
     }
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -48,7 +47,7 @@ class LawyerAnswerController extends Controller
         $lawyer = Auth::guard('lawyer')->user();
 
         $answer = new Answer;
-        $answer->text = $request->text;
+        $answer->text = Purifier::clean($request->text);
         $answer->lawyer_id = $lawyer->id;
         $question->answers()->save($answer);
 
@@ -63,19 +62,19 @@ class LawyerAnswerController extends Controller
                 $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
             }
         }
-            // $comment->blog()->associate($blog);
-            Session::flash('success', 'Answer was added');
-            return redirect()->route('web.question.show', ['id' => $question_id]);
+        // $comment->blog()->associate($blog);
+        Session::flash('success', 'Answer was added');
+        return redirect()->route('web.question.show', ['id' => $question_id]);
 
     }
+
     public function myAnswers()
     {
-        $id=array();
-        foreach(Auth::user()->answers->unique('question_id') as $answer)
-        {
+        $id = array();
+        foreach (Auth::user()->answers->unique('question_id') as $answer) {
             array_push($id, $answer->question->id);
-        }    
-        $questions = Question::where('id',$id)->orderBy('id','desc')->paginate(5);
+        }
+        $questions = Question::where('id', $id)->orderBy('id', 'desc')->paginate(5);
         return view('question.list')->withQuestions($questions);
     }
 }

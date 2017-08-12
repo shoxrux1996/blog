@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    public function lawyer(){
-    	return $this->belongsTo('yuridik\Lawyer');
+    public function lawyer()
+    {
+        return $this->belongsTo('yuridik\Lawyer');
     }
 
     public function files()
@@ -15,12 +16,15 @@ class Answer extends Model
         return $this->morphMany('yuridik\File', 'fileable');
     }
 
-    public function question(){
+    public function question()
+    {
         return $this->belongsTo('yuridik\Question');
     }
-    public function feedback(){
+
+    public function feedback()
+    {
         return $this->hasOne('yuridik\Feedback');
     }
-   
+
 
 }

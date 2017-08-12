@@ -8,7 +8,9 @@ class Document_type extends Model
 {
     protected $table = "document_type";
     public $timestamps = false;
-    public function documents(){
+
+    public function documents()
+    {
         return $this->hasMany('yuridik\Document');
     }
 }

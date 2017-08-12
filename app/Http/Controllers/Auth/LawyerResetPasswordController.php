@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Password;
 use Auth;
+
 class LawyerResetPasswordController extends Controller
 {
     /*
@@ -39,15 +40,17 @@ class LawyerResetPasswordController extends Controller
         $this->middleware('guest:lawyer');
     }
 
-    protected function guard(){
+    protected function guard()
+    {
         return Auth::guard('lawyer');
     }
-    
-    protected function broker(){
+
+    protected function broker()
+    {
         return Password::broker('lawyers');
     }
 
-     public function showResetForm(Request $request, $token = null)
+    public function showResetForm(Request $request, $token = null)
     {
         return view('auth.passwords.reset-lawyer')->with(
             ['token' => $token, 'email' => $request->email]
@@ -55,4 +58,4 @@ class LawyerResetPasswordController extends Controller
     }
 
 
- }
+}

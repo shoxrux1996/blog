@@ -4,6 +4,7 @@ namespace yuridik\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -11,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    
+
 
     /**
      * Register any application services.
@@ -22,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
     public function boot()
     {
         Schema::defaultStringLength(191);

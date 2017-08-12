@@ -43,7 +43,7 @@ class Kernel extends HttpKernel
             'bindings',
 
         ],
-        
+
     ];
 
     /**
@@ -61,6 +61,6 @@ class Kernel extends HttpKernel
         'guest' => \yuridik\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'Api' => \yuridik\Http\Middleware\Api::class,
-      
+
     ];
 }

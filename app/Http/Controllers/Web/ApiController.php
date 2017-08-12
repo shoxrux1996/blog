@@ -18,13 +18,11 @@ class ApiController extends Controller
         if (Auth::guard('client')->check()) {
             $user = Auth::guard('client')->user()->user;
             $id = $user->id;
-        }
-        elseif(Auth::guard('lawyer')->check()
-        ){
+        } elseif (Auth::guard('lawyer')->check()
+        ) {
             $user = Auth::guard('lawyer')->user()->user;
             $id = $user->id;
-        }
-        else
+        } else
             return redirect()->route('user.login');
 
         return view('card.checkout')->withMerchant_id($merchant_id['merchant_id'])->withUser_id($id)->withUser($user);

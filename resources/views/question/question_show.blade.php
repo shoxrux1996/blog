@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div>
-                            @if(Auth::guard('client')->check() && ($answer->feedback == null))
+                            @if((Auth::guard('client')->check() && Auth::guard('client')->user()->id == $answer->question->client->id) && ($answer->feedback == null))
 
                                 {{Form::open(['route' => ['feedback.create', $answer->id],'method' => 'POST']) }}
 
@@ -111,7 +111,7 @@
                                     </span>
                             @endif
                             <div>
-                                {{Form::textarea('text', null,['style' =>'width:100%;', 'placeholder'=>'Ответить'])}}
+                                {{Form::textarea('text', null,['class'=>'myTextEditor','style' =>'width:100%;', 'placeholder'=>'Ответить'])}}
                             </div>
 
 
@@ -137,7 +137,7 @@
                                     </span>
                                 @endif
                                 <div>
-                                    {{Form::textarea('text', null,['style' =>'width:100%;', 'placeholder'=>'Ответить'])}}
+                                    {{Form::textarea('text', null,['class'=>'myTextEditor','style' =>'width:100%;', 'placeholder'=>'Ответить'])}}
                                 </div>
 
 
@@ -163,9 +163,12 @@
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ha04cxa9mauwibgqmd91jvlug5qd3gqfb1ihnf8s5imb73na"></script>
 
     <script>tinymce.init({
-            selector: 'textarea',
+            mode : "specific_textareas",
+            editor_selector : "myTextEditor",
             plugins: 'link code',
             height: 500,
             toolbar: 'undo redo | cut copy paste'
-        });</script>
+        });
+
+    </script>
 @endsection

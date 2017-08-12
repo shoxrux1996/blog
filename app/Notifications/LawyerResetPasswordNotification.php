@@ -11,6 +11,7 @@ class LawyerResetPasswordNotification extends Notification
 {
     use Queueable;
     public $token;
+
     /**
      * Create a new notification instance.
      *
@@ -24,7 +25,7 @@ class LawyerResetPasswordNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -35,21 +36,21 @@ class LawyerResetPasswordNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('You are receiving this email because we received a password reset request for your accaunt')
-                    ->action('Reset Password', route('lawyer.password.reset', $this->token))
-                    ->line('If you did not request a password reset, no further actions reuqired');
+            ->line('You are receiving this email because we received a password reset request for your accaunt')
+            ->action('Reset Password', route('lawyer.password.reset', $this->token))
+            ->line('If you did not request a password reset, no further actions reuqired');
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)

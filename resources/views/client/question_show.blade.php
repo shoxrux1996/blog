@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div>
-                            @if(Auth::guard('client')->check() && ($answer->feedback == null))
+                            @if((Auth::guard('client')->check() && Auth::guard('client')->user()->id == $answer->question->client->id) && ($answer->feedback == null))
                                 {{Form::open(['route' => ['feedback.create', $answer->id],'method' => 'POST']) }}
                                 <div class="col-md-5">
                                     {{Form::label('text', "Отзыв: ") }}

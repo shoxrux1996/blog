@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Password;
 use Auth;
+
 class ClientForgotPasswordController extends Controller
 {
     /*
@@ -31,11 +32,13 @@ class ClientForgotPasswordController extends Controller
     {
         $this->middleware('guest:client');
     }
-    protected function broker(){
+
+    protected function broker()
+    {
         return Password::broker('clients');
     }
-     
-     public function sendClientResetLinkEmail(Request $request)
+
+    public function sendClientResetLinkEmail(Request $request)
     {
         $this->validateEmail($request);
 
@@ -47,8 +50,8 @@ class ClientForgotPasswordController extends Controller
         );
 
         return $response == Password::RESET_LINK_SENT
-                    ? $this->sendResetLinkResponse($response)
-                    : $this->sendResetLinkFailedResponse($request, $response);
+            ? $this->sendResetLinkResponse($response)
+            : $this->sendResetLinkFailedResponse($request, $response);
     }
 
 

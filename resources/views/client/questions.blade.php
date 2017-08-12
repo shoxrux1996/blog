@@ -29,7 +29,7 @@
                         </span>
                     </span>
                     @endif
-                    <h4 class="title"><a href="{{ route('client.question.show', $question->id)}}">{{$question->title}}</a></h4>
+                    <h4 class="title"><a href="{{ route('web.question.show', $question->id)}}">{{$question->title}}</a></h4>
                     <p class="description">{{$question->text}}</p>
                     <p>
                         <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>

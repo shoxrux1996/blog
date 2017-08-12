@@ -5,6 +5,7 @@ namespace yuridik\Http\Controllers\Auth;
 use yuridik\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -32,13 +33,15 @@ class LoginController extends Controller
      *
      * @return void
      */
-   
-    public function __construct(){
-        $this->middleware('guest', ['except'=> ['logout', 'userLogout']]);
-    }
-      public function userLogout()
+
+    public function __construct()
     {
-      Auth::guard('web')->logout();
+        $this->middleware('guest', ['except' => ['logout', 'userLogout']]);
+    }
+
+    public function userLogout()
+    {
+        Auth::guard('web')->logout();
 
         return redirect('/');
     }
