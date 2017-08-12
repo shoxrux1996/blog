@@ -429,7 +429,7 @@
                                     </span>
                                         @endif
                                         <input type="text" class="form-control" id="experience-year"
-                                               name="experience_year" value="{{$lawyer->experience_year}}"></input>
+                                               name="experience_year" value="{{$lawyer->experience_year}}">
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить
