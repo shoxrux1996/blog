@@ -1,6 +1,4 @@
 @extends('layouts.app')
-@section('body')
-@extends('layouts.body')
 @section('content')
 <div class="container">
     <div class="panel panel-default" style="margin-top: 50px;">

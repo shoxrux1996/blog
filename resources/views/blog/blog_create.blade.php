@@ -3,8 +3,6 @@
     {!! Html::style('css/select2.min.css') !!}
     <link href="{{ asset('dist/css/client.css')}}" rel="stylesheet">
 @endsection
-@section('body')
-    @extends('layouts.body')
 @section('menu')
     <li><a href="{{ route('home')}}">Главная</a></li>
     <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
@@ -78,9 +76,6 @@
         </div>
     </div>
 @endsection
-
-@endsection
-
 @section('scripts')
     {!! Html::script('js/select2.js') !!}
     <script type="text/javascript">

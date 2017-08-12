@@ -2,8 +2,7 @@
 @section('styles')
     <link href="{{ asset('dist/css/homepage.css')}}" rel="stylesheet">
 @endsection
-@section('body')
-    @extends('layouts.body')
+
 @section('menu')
     <li class="active-link"><a href="{{ route('home')}}">Главная</a></li>
     <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
@@ -237,5 +236,4 @@
 @section('scripts')
     <!-- responsiveCarousel.js -->
     <script src="{{ asset('dist/js/responsiveCarousel.min.js')}}"></script>
-@endsection
 @endsection

@@ -2,8 +2,6 @@
 @section('styles')
 <link href="{{ asset('dist/css/about.css')}}" rel="stylesheet">
 @endsection
-@section('body')
-@extends('layouts.body')
 @section('menu')
   <li><a href="{{ route('home')}}">Главная</a></li>
   <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
@@ -141,8 +139,4 @@
     <br />
 </div>
 
-@endsection
-@section('scripts')
-
-@endsection
 @endsection
