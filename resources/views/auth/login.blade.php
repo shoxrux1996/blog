@@ -2,8 +2,6 @@
 @section('styles')
 <link href="{{ asset('dist/css/login-regis.css')}}" rel="stylesheet">
 @endsection
-@section('body')
-@extends('layouts.body')
 @section('menu')
   <li><a href="{{ route('home')}}">Главная</a></li>
   <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
@@ -95,7 +93,7 @@
         <div class="col-md-6 col-sm-8 col-xs-12">
             <h1>Вход на Yuridik.uz</h1>
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#menu1">Войты</a></li>
+                <li class="active"><a data-toggle="tab" href="#menu1">Войти</a></li>
                 <li><a href="{{ route('user.register')}}">Регистрация</a></li>
             </ul>
 
@@ -140,5 +138,4 @@
 </div>
 <!-- /Login Form -->
 
-@endsection
 @endsection

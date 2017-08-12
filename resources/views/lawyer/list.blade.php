@@ -3,9 +3,6 @@
     <link href="{{ asset('dist/css/lawyers.css')}}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
     <link href="{{ asset('dist/css/rotating-card.css')}}" rel="stylesheet">
 @endsection
-@section('body')
-
-    @extends('layouts.body')
 @section('menu')
     <li><a href="{{ route('home')}}">Главная</a></li>
     <li class="active-link"><a href="{{ route('lawyers.list')}}">Юристы</a></li>
@@ -243,7 +240,6 @@
 
     <!-- /Lawyers -->
 
-@endsection
 @endsection
 @section('scripts')
     <script>

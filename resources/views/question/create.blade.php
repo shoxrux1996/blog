@@ -3,8 +3,6 @@
     <link href="{{ asset('dist/css/services.css')}}" rel="stylesheet">
     <link href="{{ asset('dist/css/become-brilliant.css')}}" rel="stylesheet">
 @endsection
-@section('body')
-@extends('layouts.body')
 @section('menu')
   <li><a href="{{ route('home')}}">Главная</a></li>
   <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
@@ -208,6 +206,4 @@
     </div>
 </div>
 <!-- /Content -->
-
-@endsection
 @endsection

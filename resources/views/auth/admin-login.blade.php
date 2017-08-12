@@ -2,9 +2,6 @@
 @section('styles')
 <link href="{{ asset('dist/css/login-regis.css')}}" rel="stylesheet">
 @endsection
-@section('body')
-@extends('layouts.body')
-
 @section('content')
 <div class="container">
     <div class="row">

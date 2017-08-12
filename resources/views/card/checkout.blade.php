@@ -2,8 +2,6 @@
 @section('styles')
 
 @endsection
-@section('body')
-    @extends('layouts.body')
 @section('menu')
     <li><a href="{{ route('home')}}">Главная</a></li>
     <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
@@ -79,7 +77,6 @@
                 </table>
         </section>
     </div>
-@endsection
 @endsection
 @section('scripts')
     <script type="text/javascript">

@@ -2,8 +2,6 @@
 @section('styles')
  <link href="dist/css/how-works.css" rel="stylesheet">
 @endsection
-@section('body')
-@extends('layouts.body')
 @section('menu')
   <li><a href="{{ route('home')}}">Главная</a></li>
   <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
@@ -94,8 +92,4 @@
 </div>
 <!-- /Content -->
 
-@endsection
-@section('scripts')
-
-@endsection
 @endsection

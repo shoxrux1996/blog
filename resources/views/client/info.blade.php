@@ -2,7 +2,6 @@
 @section('styles')
 <link href="{{ asset('dist/css/client.css')}}" rel="stylesheet">
 @endsection
-@section('body')
 @section('menu')
   <li><a href="{{ route('home')}}">Главная</a></li>
   <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
@@ -11,7 +10,6 @@
   <li><a href="{{ route('how-works')}}">Как это работает</a></li>
   <li><a href="{{ route('about')}}">О нас</a></li>
 @endsection
-@extends('layouts.body')
 @section('content')
 <!-- Content -->
 <div id="wrapper">
@@ -192,7 +190,6 @@
 </div>
 <!-- /Content -->
 
-@endsection
 @endsection
 @section('scripts')
     <script>
