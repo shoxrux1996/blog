@@ -58,7 +58,7 @@
                 </h1>
 
                 <p>
-                <h6>Автор: {{$blog->lawyer->user->firstName}}</h6>
+                <h6>Автор: {{$blog->blogable->user->firstName}}</h6>
                 @php
                     $time= Carbon\Carbon::parse($blog->created_at)->toFormattedDateString() ;
                 @endphp
@@ -176,7 +176,7 @@
                             <hr>
                             <div class="blog-item-footer">
                             <span>
-                                <i class="fa fa-user"></i> {{$bl->lawyer->user->firstName}}
+                                <i class="fa fa-user"></i> {{$bl->blogable->user->firstName}}
                             </span>
                                 <span class="pull-right">
                                 <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($bl->created_at)->toFormattedDateString()}}

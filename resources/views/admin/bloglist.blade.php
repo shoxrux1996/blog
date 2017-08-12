@@ -18,7 +18,7 @@
 
                             <div class="blog-item-img">
                                 @if($blog->file != null)
-                                    <img alt="Blog item image" src="{{asset('$blog->file->path.$blog->file->file')}}">
+                                    <img alt="Blog item image" src="{{asset($blog->file->path.$blog->file->file)}}">
                                 @else
                                     <img alt="Blog item image" src="{{asset('dist/images/blog-img-2.jpg')}}">
                                 @endif

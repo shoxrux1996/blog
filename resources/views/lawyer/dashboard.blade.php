@@ -194,9 +194,10 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <ul>
-                                       {{-- @foreach($lawyer->blogs as $blog)
-                                            <li><a href="{{ route('lawyer.blog.show',$blog->id)}}"> {{$blog->title}}</a></li>
-                                        @endforeach--}}
+                                        @foreach($lawyer->blogs as $blog)
+                                            <li><a href="{{ route('web.blog.show',$blog->id)}}"> {{$blog->title}}</a>
+                                                <a class="btn btn-info btn-xs" href="{{route('lawyer.blog.edit', $blog->id)}}">Изменить</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>

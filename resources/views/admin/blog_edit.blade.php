@@ -4,6 +4,7 @@
     <link href="{{ asset('dist/css/blog.css')}}" rel="stylesheet">
 @endsection
 
+
 @section('content')
     <div class="container-fluid">
         <div class="col-md-8 col-md-offset-2">
