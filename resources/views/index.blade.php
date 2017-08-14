@@ -45,18 +45,65 @@
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12 text-center">
                 <img src="{{ asset('dist/images/call-icon.png')}}" alt="Call icon"/>
-                <a type="button" class="btn btn-default" href="{{ route('call.create')}}">Заказать звонок</a>
+                {{--href="{{ route('call.create')}}"--}}
+                <a type="button" class="btn btn-default" data-toggle="modal" data-target="#call-function">Заказать звонок</a>
                 <p class="statistics">20,00,000+</p>
                 <p class="what">Обратных звонков</p>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12 text-center">
                 <img src="{{ asset('dist/images/document-icon.png')}}" class="img-responsive" alt="Document icon"/>
-                <a type="button" class="btn btn-default" href="{{ route('document.create')}}">Заказать документ</a>
+                {{--href="{{ route('document.create')}}"--}}
+                <a type="button" class="btn btn-default" data-toggle="modal" data-target="#document-function">Заказать документ</a>
                 <p class="statistics">40,000,000+</p>
                 <p class="what">Cозданных документов</p>
             </div>
         </div>
     </div>
+
+    <!-- Modal for call function-->
+    <div id="call-function" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Скоро!!!</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{{asset('dist/images/under-development.png')}}" alt="Under development"/>
+                    <h4>Функция "заказать звонок" в процессе разработки</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /Modal for call function-->
+
+    <!-- Modal for document function-->
+    <div id="document-function" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Скоро!!!</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{{asset('dist/images/under-development.png')}}" alt="Under development"/>
+                    <h4>Функция "заказать документ" в процессе разработки</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /Modal for document function-->
+
     <!-- /Services Section -->
 
     <!-- Questions Section -->
@@ -102,7 +149,7 @@
                     </a>
                 @endforeach
             </div>
-            <a type="button" class="btn btn-default btn-lg btn-block blue-button" href="{{ route('question.list')}}">Смотреть
+            <a type="button" class="btn btn-default btn-lg btn-block btn-dark-blue" href="{{ route('question.list')}}">Смотреть
                 все вопросы</a>
         </div>
     </div>
@@ -145,19 +192,19 @@
         <div class="row">
             @foreach($blogs as $blog)
 
-            <div class="col-md-4 col-sm-4">
-                @if($blog->file != null)
-                    <img class="img-responsive img-thumbnail" src="{{ asset($blog->file->path.$blog->file->file)}}" alt="{{$blog->title}}"/>
-                @else
-                    <img class="img-responsive img-thumbnail" src="{{ asset('dist/images/blog-img-2.jpg')}}" alt="News 2"/>
-                @endif
-                <div class="middle">
-                    <a class="btn btn-dark-blue text" href="{{route('web.blog.show', $blog->id)}}">Читать статью</a>
-                </div>
+                <div class="col-md-4 col-sm-4">
+                    @if($blog->file != null)
+                        <img class="img-responsive img-thumbnail" src="{{ asset($blog->file->path.$blog->file->file)}}" alt="{{$blog->title}}"/>
+                    @else
+                        <img class="img-responsive img-thumbnail" src="{{ asset('dist/images/blog-img-2.jpg')}}" alt="News 2"/>
+                    @endif
+                    <div class="middle">
+                        <a class="btn btn-dark-blue text" href="{{route('web.blog.show', $blog->id)}}">Читать статью</a>
+                    </div>
                     <h4><a href="{{route('web.blog.show', $blog->id)}}">{{substr($blog->title,0,100)}} {{strlen($blog->title)>100 ? '...' : ""}}</a></h4>
                     <p>{{substr(strip_tags($blog->text),0,100)}} {{strlen(strip_tags($blog->text))>100 ? '...' : ""}}</p>
 
-            </div>
+                </div>
             @endforeach
 
         </div>
@@ -182,18 +229,18 @@
             <div class="crsl-items" data-navigation="lawyers-carousel">
                 <div class="crsl-wrap">
                     @foreach($lawyers as $lawyer)
-                    <figure class="crsl-item crsl-active">
-                        <div class="lawyer text-center">
-                            <a href="{{route('web.lawyer.show', $lawyer->id)}}">
-                                <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}" alt="headshot 1"
-                                     class="img-responsive center-block"/>
-                                <h4>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h4>
-                                <h5>г. {{$lawyer->user->city->name}}</h5>
-                                <hr class="green-divider">
-                                <p><span class="total">{{$lawyer->feedbacks->count()}}</span> благодарностей</p>
-                            </a>
-                        </div>
-                    </figure>
+                        <figure class="crsl-item crsl-active">
+                            <div class="lawyer text-center">
+                                <a href="{{route('web.lawyer.show', $lawyer->id)}}">
+                                    <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}" alt="headshot 1"
+                                         class="img-responsive center-block"/>
+                                    <h4>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h4>
+                                    <h5>г. {{$lawyer->user->city->name}}</h5>
+                                    <hr class="green-divider">
+                                    <p><span class="total">{{$lawyer->feedbacks->count()}}</span> благодарностей</p>
+                                </a>
+                            </div>
+                        </figure>
                     @endforeach
 
 
@@ -209,10 +256,10 @@
         <h1 class="text-center">О нас</h1>
         <div class="row" style="clear: both; overflow: hidden;">
             <div class="col-md-6 col-sm-6">
-                <div class="video-wrapper" style="padding: 0;">
-                    <img width="100%"
-                         src="{{asset('dist/images/aboutus.jpg')}}"/>
-                </div>
+                <video width="100%" height="385" controls>
+                    <source src="{{asset('dist/videos/test-youtube-video.mp4')}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <div class="col-md-6 col-sm-6">
                 <h4>Профессиональная юридическая помощь в любой точке мира</h4>
