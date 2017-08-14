@@ -61,7 +61,7 @@ class UserLoginController extends Controller
             'email' => 'Неправильный формат электронной почты', 'min' => 'Минимум 6 символов',
         ];
         $this->validate($request, [
-            'email' => 'required|email',
+            'email' => 'required|email|exists:lawyers,email',
             'password' => 'required|min:6'
         ], $messages);
         if ($cl->isBlocked == 1) {
