@@ -14,24 +14,29 @@ use Auth;
 use Validator;
 use yuridik\Order;
 use yuridik\Lawyer;
+use DB;
 
 class ClientQuestionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:client');
+        $this->middleware('auth:client',['except' => ['create', 'store']]);
     }
 
     public function create()
-    {
+    {   
         $category = Category::all();
-
+        $clients= Client::all();
+        $emails = array();
+        foreach ($clients as $client) {
+            array_push($emails, $client->email);
+        }
         $categories = array(' ' => null);
         foreach ($category as $key) {
             $categories[$key->id] = $key->name;
         }
         $client = Auth::guard('client')->user();
-        return view('question.create')->withCategories($categories)->withClient($client);
+        return view('question.create')->withCategories($categories)->withClient($client)->withEmails($emails);
     }
 
     /**
@@ -42,6 +47,21 @@ class ClientQuestionController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::guard('client')->check()){
+            if($request->password!=null){
+                $this->validate($request, [
+                    'name' => 'required',
+                ]);
+
+            }
+            else{
+                $this->validate($request, [
+                    'name' => 'required',
+                    'email' => '',
+                    'password' => '',
+                ]);                
+            }
+        }
         $messages = [
             'required' => 'Обязательно к заполнению',
             'string' => 'Неправильный формат',

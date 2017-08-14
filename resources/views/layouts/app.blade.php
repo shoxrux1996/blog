@@ -115,56 +115,51 @@
 </nav>
 <!-- /Navbar -->
 @yield('content')
-<!-- Footer -->
-<footer>
-    <div class="container-fluid">
+<!-- /Footer -->
+    <footer>
+      <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 col-sm-6 guarantee">
-                <span>ГАРАНТИЯ 100% КАЧЕСТВА</span>
-                <p>
-                    <img src="{{ asset('dist/images/first-place-icon.png')}}" alt="First place icon"/>
-                    Лучшие юристы со всей Узбекистана
-                </p>
-                <p>
-                    <img src="{{ asset('dist/images/happy-icon.png')}}" alt="Happy icon"/>
-                    Более 123 45 довольных клиентов
-                </p>
-                <p>
-                    <img src="{{ asset('dist/images/money-back-icon.png')}}" alt="Money back icon"/>
-                    Мы поможем вам — или вернём деньги!
-                </p>
-                <p class="text-center"><a href="#">Все гарантии Yuridik.uz</a></p>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <span><a href="index.html">Yuridik.uz</a></span>
-                <p><a href="#">Задать вопрос</a></p>
-                <p><a href="#">Заказать документ</a></p>
-                <p><a href="#">Частые вопросы</a></p>
-                <p><a href="#">Наши юристы</a></p>
-                <p><a href="#">Отзывы</a></p>
-                <p><a href="#">Гарантии</a></p>
-                <p><a href="#">Журнал</a></p>
-                <p><a href="#">Вопросы</a></p>
-            </div>
-            <div class="col-md-3 col-sm-6 hidden-xxs">
-                <span><a href="#">Клиентам</a></span>
-                <p><a href="#">Задать вопрос</a></p>
-                <p><a href="#">Заказать документ</a></p>
-                <p><a href="#">Частые вопросы</a></p>
-                <p><a href="#">Наши юристы</a></p>
-                <p><a href="#">Отзывы</a></p>
-                <p><a href="#">Гарантии</a></p>
-                <p><a href="#">Журнал</a></p>
-                <p><a href="#">Вопросы</a></p>
-            </div>
-            <div class="col-md-3 col-sm-6 hidden-xxs">
-                <span><a href="#">Юристам</a></span>
-                <p><a href="#">Задать вопрос</a></p>
-                <p><a href="#">Заказать документ</a></p>
-                <p><a href="#">Частые вопросы</a></p>
-                <p><a href="#">Наши юристы</a></p>
-                <p><a href="#">Отзывы</a></p>
-            </div>
+          <div class="col-md-3 col-sm-6 guarantee">
+            <span>ГАРАНТИЯ 100% КАЧЕСТВА</span>
+            <p>
+              <img src="dist/images/first-place-icon.png" alt="First place icon" />
+              Лучшие юристы со всей Узбекистана
+            </p>
+            <p>
+              <img src="dist/images/happy-icon.png" alt="Happy icon" />
+              Более 123 45 довольных клиентов
+            </p>
+            <p>
+              <img src="dist/images/money-back-icon.png" alt="Money back icon" />
+              Мы поможем вам — или вернём деньги!
+            </p>
+            <p class="text-center"><a href="#">Все гарантии Yuridik.uz</a></p>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <span><a href="index.html">Yuridik.uz</a></span>
+            <p><a href="about.html">О проекте</a></p>
+            <p><a href="team.html">О команде</a></p>
+            <p><a href="contacts.html">Контакты</a></p>
+            <p><a href="partners.html">Наши партнёры</a></p>
+            <p><a href="all-categories.html">Категории вопросов</a></p>
+            <p><a href="blog.html">Блог</a></p>
+          </div>
+          <div class="col-md-3 col-sm-6 hidden-xxs">
+            <span><a href="#">Клиентам</a></span>
+            <p><a href="ask-question.html">Задать вопрос</a></p>
+            <p><a href="order-call.html">Заказать звонок</a></p>
+            <p><a href="order-document.html">Заказать документ</a></p>
+            <p><a href="faq.html">Частые вопросы</a></p>
+            <p><a href="lawyers.html">Наши юристы</a></p>
+            <p><a href="about.html#guarantees">Гарантии</a></p>
+            <p><a href="questions.html">Вопросы</a></p>
+          </div>
+          <div class="col-md-3 col-sm-6 hidden-xxs">
+            <span><a href="#">Юристам</a></span>
+            <p><a href="become-lawyer.html">Стать юристом проекта</a></p>
+            <span><a href="#">Партнерам</a></span>
+            <p><a href="ad.html">Рекламодателям</a></p>
+          </div>
         </div>
         <div class="row social-link">
           <span>
@@ -174,9 +169,9 @@
             <a href="http://www.telegram.me"><i class="fa fa-telegram" aria-hidden="true"></i></a>
           </span>
         </div>
-    </div>
-</footer>
-<!-- /Footer
+      </div>
+    </footer>
+    <!-- /Footer -->
 
     
     <!-- Scripts -->

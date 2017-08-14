@@ -12,34 +12,7 @@
   <li><a href="{{ route('about')}}">О нас</a></li>
 @endsection
 @section('content')
-    <!-- {{Form::open(['route' => ['question.insert.submit'], 'enctype' => 'multipart/form-data', 'method' => 'POST'])}}
-    	{{Form::label('category', 'Category: ')}}
-        {{Form::select('category', $categories, null , ['class'=>'form-control'])}}
-        {{Form::label('title', 'Your question: ')}}
-        {{Form::text('title', null, ['class'=>'form-control']) }}
-        {{Form::label('text', 'Text: ')}}
-        {{Form::textarea('text', null, ['class'=>'form-control field']) }} -->
-
-        <!-- {{Form::file('files[]', ['multiple' => 'multiple'])}} last version-->
-        <!-- <input type="file" name="files[]" multiple ="multiple" />  -->  <!--new version --> 
-           <!--  {{Form::label('email', 'Email: ', ['class' => 'col-sm-1 control-label'])}}
-               
-            {{Form::text('email', $client->email, ['class'=>'form-control', 'readonly' => 'readonly'])}}
-             
-         
-            {{Form::label('name', 'First Name: ', ['class' => 'col-sm-1 control-labe'])}}
-                
-            {{Form::text('firstName', $client->user->firstName, ['class'=>'form-control', 'readonly' => 'readonly'])}}
-            <br>
-            {{Form::label('type', 'VIP ')}}
-            {{Form::radio('type', 2, true)}}
-            {{Form::label('type', 'Free ')}}
-            {{Form::radio('type', 1)}}
-            <br>
-            {{Form::label('price', 'Price: ')}}
-            {{Form::text('price', null, ['class' => 'form-control'])}}
-        {{Form::submit('Save Changes', ['class' => 'btn btn-success', 'style' =>'margin-top:20px;']) }}
-    {{Form::close()}} -->
+    
 
 <!-- Content -->
 <div id="wrapper">
@@ -127,6 +100,43 @@
                 </div>
             </div>
             <!-- /Question submit form -->
+            
+            @if(!Auth::guard('client')->check())
+                <div class="row ask-form">
+                <h1>Как с вами связаться?</h1>
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name"><i class="fa fa-user-circle" aria-hidden="true"></i> Имя</label>
+                            @if ($errors->has('name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                            @endif
+                            <input type="text"  class="form-control" name="name" placeholder="Введите вашу имя">
+                        </div>
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="username"><i class="fa fa-envelope-o" aria-hidden="true"></i> Эл. почта</label>
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
+                            <input type="text"  class="form-control" id="email" name="email" placeholder="Введите электронную почту">
+                        </div>
+                        <div class="form-group{{ $errors->has('password')  ? ' has-error' : '' }}" id="password-div" style="display:{{ $errors->has('password')  ? ' block' : 'none' }};">
+                            <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> Пароль </label>
+                            @if ($errors->has('password'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
+                            
+                            <input type="password" class="form-control" name="password" placeholder="Введите новую пароль">
+
+                        </div>
+                       
+                        
+                </div>
+            @endif
 
             <!-- Price table -->
             <div class="row price-table">
@@ -207,3 +217,23 @@
 </div>
 <!-- /Content -->
 @endsection
+@section('scripts')
+    <script>
+
+        @php
+            echo "var emails = ". json_encode($emails) . ";\n";
+        @endphp
+        
+        $('#email').on('input', function() { 
+            for(index in emails){
+                if(emails[index] == $(this).val()){
+                    $('#password-div').css("display","block");
+                }
+            }
+
+        });
+
+
+    </script>
+@endsection
+
