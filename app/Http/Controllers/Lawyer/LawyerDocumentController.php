@@ -7,6 +7,7 @@ use yuridik\Http\Controllers\Controller;
 use yuridik\Document;
 use Auth;
 use yuridik\Lawyer;
+use yuridik\Notifications\ClientRequestNotification;
 use yuridik\Request as Reques;
 
 class LawyerDocumentController extends Controller
@@ -62,6 +63,8 @@ class LawyerDocumentController extends Controller
         $reques->until_at = $request->date;
 
         $document->requests()->save($reques);
+        $client = $document->client;
+        $client->notify(new ClientRequestNotification($reques));
         return redirect()->back();
     }
 

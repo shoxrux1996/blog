@@ -16,9 +16,7 @@ class UserLoginController extends Controller
     {
         $this->middleware('guest:lawyer', ['except' => ['userLogout'], ['showLinkRequestForm'], ['userfinder']]);
         $this->middleware('guest:client', ['except' => ['userLogout'], ['showLinkRequestForm'], ['userfinder']]);
-
     }
-
 
     public function showLoginForm()
     {

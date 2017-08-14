@@ -133,6 +133,8 @@ Route::prefix('client')->group(function(){
     Route::prefix('blogs')->group(function(){
 	 	Route::get('/show/{id}', 'Admin\AdminBlogController@show')->name('client.blog.show');
 	});
+
+    Route::get('notification/all-marked', 'Client\ClientNotificationsController@deleteNotifications')->name('client.notifications.delete');
 });
 
 Route::prefix('lawyer')->group(function(){
