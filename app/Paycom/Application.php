@@ -80,6 +80,7 @@ class Application
 
     private function CheckPerformTransaction()
     {
+
         $user = User::find(intval($this->request->params['account']['user_id']));
         if (!$user) {
             throw new PaycomException(

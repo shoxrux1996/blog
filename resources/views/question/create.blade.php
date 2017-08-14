@@ -87,7 +87,7 @@
                         <label class="btn btn-default general-input">
                             Выбрать файл <input type="file" name="files[]" multiple hidden>
                         </label>
-                        @if ($errors->any() && !($errors->has('description') || $errors->has('title')))
+                        @if ($errors->any() && !($errors->has('description') || $errors->has('title') || $errors->has('name') || $errors->has('email') || $errors->has('password') ))
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
