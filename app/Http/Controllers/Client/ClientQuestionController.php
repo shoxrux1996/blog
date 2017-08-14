@@ -47,7 +47,7 @@ class ClientQuestionController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::guard('client')->check()){
+        if(!Auth::guard('client')->check()){
             if($request->password!=null){
                 $this->validate($request, [
                     'name' => 'required',
