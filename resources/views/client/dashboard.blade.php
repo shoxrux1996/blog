@@ -33,7 +33,7 @@
                                 </li>
                                 <li>
                                     <h3>{{$client->user->balance()}} сум.</h3>
-                                    <a href="#">Управление балансом</a>
+                                    <a href="{{route('card.payment')}}">Управление балансом</a>
                                 </li>
                             </ul>
                         </div>
