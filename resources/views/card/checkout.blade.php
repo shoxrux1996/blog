@@ -28,7 +28,7 @@
                         <input type="hidden" name="account[user_id]" value={{$user_id}} >
                         <input type="number" id="amountWillConvert" class="form-control" placeholder="Введите сумму">
                         <!-- ============= Не обязательные поля ====================== -->
-                        <input type="hidden" name="callback" value="http://yuridik.uz:443/success/:transaction">
+                        <input type="hidden" name="callback" value="http://yuridik.uz:443/api/success/:transaction">
                     {{--<input type="hidden" name="callback" value="http://shoxrux19960822.000webhostapp.com/card"/>--}}
                     <!-- ================================================== -->
                         <button class="btn btn-primary">Перейти к оплате</button>
