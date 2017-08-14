@@ -83,7 +83,7 @@ class ClientQuestionController extends Controller
             $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
         }
         Validator::make($request->all(), $rules, $messages)->validate();
-        $client = Auth::user();
+        $client = Auth::guard('client')->user();
 
         if ($request->type == 2) {
             if ($client->user->balance() >= 5000) {
