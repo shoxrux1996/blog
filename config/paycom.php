@@ -2,13 +2,13 @@
 // sample configuration with fake values
 return [
     // Get it in merchant's cabinet in cashbox settings
-    'merchant_id' => '596f464de8ce8437a19678f3',
+    'merchant_id' => '59919d56e8ce8437a1967973',
 
     // Login is always "Paycom"
     'login' => 'Paycom',
 
     // File with cashbox key (key can be found in cashbox settings)
-    'keyFile' => 'uuA&rQkUgpCR7yI8TuT4rgN&VBXFz5wBWw4w',
+    'keyFile' => 'jtE2oJ3ZfXDQCsy6NcS@nZD4n?yXFgO6iBNn',
     // Your database settings
    
 ];
