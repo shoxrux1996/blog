@@ -254,10 +254,8 @@
         <h1 class="text-center">О нас</h1>
         <div class="row" style="clear: both; overflow: hidden;">
             <div class="col-md-6 col-sm-6">
-                <img width="100%" height="385" controls>
-                    <source src="{{asset('dist/images/aboutus.jpg')}}" type="video/mp4">
+                <img  src="{{asset('dist/images/aboutus.jpg')}}"  width="100%" height="385" controls>
 
-                </img>
             </div>
             <div class="col-md-6 col-sm-6">
                 <h4>Профессиональная юридическая помощь в любой точке мира</h4>
