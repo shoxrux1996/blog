@@ -50,7 +50,6 @@
             <div class="blog-title text-center"
                  style="background-image: url({{$blog->file != null ? asset($blog->file->path.$blog->file->file)  : asset('dist/images/blog-img-1.jpg')}})">
                 <h6>
-
                     Блог юристов
                 </h6>
                 <h1>

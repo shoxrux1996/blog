@@ -36,7 +36,7 @@ class BlogController extends Controller
         foreach ($tags as $tag) {
             $tags2[$tag->id] = $tag->name;
         }
-        $blogs = Blog::orderBy('id', 'desc')->limit(3)->get();
+        $blogs = Blog::orderBy('id', 'desc')->take(3)->get();
         return view('blog.blog_show')->withBlog($blog)->withTags($tags2)->withBlogs($blogs);
     }
 
