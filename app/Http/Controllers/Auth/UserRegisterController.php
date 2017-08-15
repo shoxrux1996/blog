@@ -28,12 +28,12 @@ class UserRegisterController extends Controller
     public function postRegister(Request $request, $usertype)
     {
         // $usertype = $request->route('usertype');
-         // $this->validate($request, [
-         //    'email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
-         //    'password' => 'required|string|min:6|confirmed',
-         //    'name' => 'required',
-         //    ]);
-        if ($usertype==="client") {
+        // $this->validate($request, [
+        //    'email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
+        //    'password' => 'required|string|min:6|confirmed',
+        //    'name' => 'required',
+        //    ]);
+        if ($usertype === "client") {
             $messages = [
                 'required' => 'Обязательно к заполнению',
                 'string' => 'Неправильный формат',
@@ -42,25 +42,25 @@ class UserRegisterController extends Controller
                 'uniqie' => 'Данный email уже используется',
                 'same' => 'Пароли не совпадают',
                 'min' => 'Минимум 6 символов',
-                ]; 
+            ];
             $validator = Validator::make($request->all(), [
-            'client.name' => 'required',
-            'client.email' => 'required|string|email|max:255|unique:clients,email|unique:lawyers,email',
-            'client.password' => 'required|string|min:6',
-            'client.password_confirm' => 'same:client.password',
-            ]);  
+                'client.name' => 'required',
+                'client.email' => 'required|string|email|max:255|unique:clients,email|unique:lawyers,email',
+                'client.password' => 'required|string|min:6',
+                'client.password_confirm' => 'same:client.password',
+            ]);
 
-            if($validator->fails()){
+            if ($validator->fails()) {
                 return view('auth.register')->withErrors($validator)->withActiveuser('client');
-            }   
+            }
             $new_client = $request->client;
-            $confirmation_code = str_random(30);       
+            $confirmation_code = str_random(30);
             $user = new User;
             $user->firstName = $new_client['name'];
-            $city=City::where('name', ' ')->first();
-            if($city != null)
+            $city = City::where('name', ' ')->first();
+            if ($city != null)
                 $user->city_id = $city->id;
-            else{
+            else {
                 $cit = new City;
                 $cit->name = " ";
                 $cit->save();
@@ -68,21 +68,21 @@ class UserRegisterController extends Controller
             }
 
             $user->save();
-            $userID=$user->id;
-            $client=new Client;
-            $client->email= $new_client['email'];
-            $client->password=bcrypt($new_client['password']);
-            $client->confirmation_code=$confirmation_code;
+            $userID = $user->id;
+            $client = new Client;
+            $client->email = $new_client['email'];
+            $client->password = bcrypt($new_client['password']);
+            $client->confirmation_code = $confirmation_code;
             $client->user_id = $userID;
 
 
-            $data=array('code' =>$confirmation_code, 'email' => $new_client['email'], 'name' => $new_client['name']);
-            Mail::send('email.verify', ['data' => $data], function($message) use ($data) {
-            $message->to($data['email'], $data['name'])
-                ->subject('Verify your email address');});
-                $client->save();     
-        }
-        elseif ($usertype==="lawyer") {
+            $data = array('code' => $confirmation_code, 'email' => $new_client['email'], 'name' => $new_client['name']);
+            Mail::send('email.verify', ['data' => $data], function ($message) use ($data) {
+                $message->to($data['email'], $data['name'])
+                    ->subject('Verify your email address');
+            });
+            $client->save();
+        } elseif ($usertype === "lawyer") {
             $messages = [
                 'required' => 'Обязательно к заполнению',
                 'string' => 'Неправильный формат',
@@ -91,48 +91,49 @@ class UserRegisterController extends Controller
                 'uniqie' => 'Данный email уже используется',
                 'same' => 'Пароли не совпадают',
                 'min' => 'Минимум 6 символов',
-                ]; 
+            ];
             $validator = Validator::make($request->all(), [
-            'lawyer.email' => 'required|string|email|max:255|unique:clients,email|unique:lawyers,email',
-            'lawyer.password' => 'required|string|min:6',
-            'lawyer.password_confirm' => 'same:lawyer.password',
-            'lawyer.name' => 'required',
-            'lawyer.surname' => 'required',
-            ],$messages);  
+                'lawyer.email' => 'required|string|email|max:255|unique:clients,email|unique:lawyers,email',
+                'lawyer.password' => 'required|string|min:6',
+                'lawyer.password_confirm' => 'same:lawyer.password',
+                'lawyer.name' => 'required',
+                'lawyer.surname' => 'required',
+            ], $messages);
 
-            if($validator->fails()){
+            if ($validator->fails()) {
                 return view('auth.register')->withErrors($validator)->withActiveuser('lawyer');
-            }  
-            $new_lawyer = $request->lawyer; 
-            $confirmation_code = str_random(30);       
+            }
+            $new_lawyer = $request->lawyer;
+            $confirmation_code = str_random(30);
             $user = new User;
             $user->firstName = $new_lawyer['name'];
             $user->lastName = $new_lawyer['surname'];
-            $city=City::where('name', ' ')->first();
-            if($city != null)
+            $city = City::where('name', ' ')->first();
+            if ($city != null)
                 $user->city_id = $city->id;
-            else{
+            else {
                 $cit = new City;
                 $cit->name = " ";
                 $cit->save();
                 $user->city_id = $cit->id;
             }
             $user->save();
-            $userID=$user->id;
-            $lawyer=new Lawyer;
-            $lawyer->email= $new_lawyer['email'];
-            $lawyer->password=bcrypt($new_lawyer['password']);
-            $lawyer->confirmation_code=$confirmation_code;
+            $userID = $user->id;
+            $lawyer = new Lawyer;
+            $lawyer->email = $new_lawyer['email'];
+            $lawyer->password = bcrypt($new_lawyer['password']);
+            $lawyer->confirmation_code = $confirmation_code;
             $lawyer->user_id = $userID;
 
-            $data=array('code' =>$confirmation_code, 'email' => $new_lawyer['email'], 'name' => $new_lawyer['name']);
-            Mail::send('email.verify', ['data' => $data], function($message) use ($data) {
-            $message->to($data['email'], $data['name'])
-                ->subject('Verify your email address');});
-             $lawyer->save();
-            
-        }
-        else{
+            $data = array('code' => $confirmation_code, 'email' => $new_lawyer['email'], 'name' => $new_lawyer['name']);
+
+            Mail::send('email.verify', ['data' => $data], function ($message) use ($data) {
+                $message->to($data['email'], $data['name'])
+                    ->subject('Verify your email address');
+            });
+            $lawyer->save();
+
+        } else {
             $messages = [
                 'required' => 'Обязательно к заполнению',
                 'string' => 'Неправильный формат',
@@ -141,70 +142,24 @@ class UserRegisterController extends Controller
                 'uniqie' => 'Данный email уже используется',
                 'same' => 'Пароли не совпадают',
                 'min' => 'Минимум 6 символов',
-                ]; 
+            ];
             $validator = Validator::make($request->all(), [
-            'company.email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
-            'company.password' => 'required|string|min:6',
-            'company.password_confirm' => 'same:company.password',
-            'company.leadername' => 'required',
-            'company.leadersurname' => 'required',
-            'company.name' => 'required',
-            ],$messages);  
+                'company.email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
+                'company.password' => 'required|string|min:6',
+                'company.password_confirm' => 'same:company.password',
+                'company.leadername' => 'required',
+                'company.leadersurname' => 'required',
+                'company.name' => 'required',
+            ], $messages);
 
-            if($validator->fails()){
+            if ($validator->fails()) {
                 return view('auth.register')->withErrors($validator)->withActiveuser('company');
             }
         }
-        // $validator = Validator::make($request->all(), [
-        //     'email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
-        //     'password' => 'required|string|min:6|confirmed',
-        //     'name' => 'required',
-        //     ]);
-
-        // if($validator->fails())
-        // {
-        //     return view('auth.register')->withErrors($validator)->withActiveuser('lawyer');
-        // }
-        // $confirmation_code = str_random(30);
-        // $user = new User;
-        // $user->firstName = $request->name;
-        // if($request->surname!=='')
-        //     $user->lastName = $request->surname;
-        // $user->save();
-        // $userID=$user->id;
-
-        // if($usertype === "lawyer"){
-
-        //     $lawyer=new lawyer;
-        //     $lawyer->email= $request->email;
-        //     $lawyer->password=bcrypt($request->password);
-        //     $lawyer->confirmation_code=$confirmation_code;
-        //     $lawyer->user_id = $userID;
-
-        //     $data=array('code' =>$confirmation_code, 'email' =>$request->email, 'name' => $request->name);
-        //     Mail::send('email.verify', ['data' => $data], function($message) use ($data) {
-        //         $message->to($data['email'], $data['name'])
-        //                 ->subject('Verify your email address');
-        //     });
-        //      $lawyer->save();
-        // }
-        // elseif($usertype==="client"){
-        //     $client=new Client;
-        //     $client->email= $request->email;
-        //     $client->password=bcrypt($request->password);
-        //     $client->confirmation_code=$confirmation_code;
-        //     $client->user_id = $userID;
-        //     $data=array('code' =>$confirmation_code, 'email' =>$request->email, 'name' => $request->name);
-        //     Mail::send('email.verify', ['data' => $data], function($message) use ($data) {
-        //     $message->to($data['email'], $data['name'])
-        //         ->subject('Verify your email address');
-        // });
-        //     $client->save();
-        // }
-
 
         Session::flash('message', 'Please confirm your account via your email');
-        return redirect('/');
+        $credentials = ['email' => $request->email, 'password' => $request->password];
+
     }
     public function confirm($code){
         if( !$code)

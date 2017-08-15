@@ -122,15 +122,15 @@
           <div class="col-md-3 col-sm-6 guarantee">
             <span>ГАРАНТИЯ 100% КАЧЕСТВА</span>
             <p>
-              <img src="dist/images/first-place-icon.png" alt="First place icon" />
+              <img src="{{asset('dist/images/first-place-icon.png')}}" alt="First place icon" />
               Лучшие юристы со всей Узбекистана
             </p>
             <p>
-              <img src="dist/images/happy-icon.png" alt="Happy icon" />
+              <img src="{{asset('dist/images/happy-icon.png')}}" alt="Happy icon" />
               Более 123 45 довольных клиентов
             </p>
             <p>
-              <img src="dist/images/money-back-icon.png" alt="Money back icon" />
+              <img src="{{asset('dist/images/money-back-icon.png')}}" alt="Money back icon" />
               Мы поможем вам — или вернём деньги!
             </p>
             <p class="text-center"><a href="#">Все гарантии Yuridik.uz</a></p>
