@@ -36,7 +36,7 @@
                     <div class="col-sm-9">
                         @foreach($questions as $question)
                             <div class="col-sm-12 question">
-                                <h4 class="title"><a href="{{route('web.question.show', $quetion->id)}}">{{$question->title}}</a></h4>
+                                <h4 class="title"><a href="{{route('web.question.show', $question->id)}}">{{$question->title}}</a></h4>
                                 <p class="description">{{substr($question->text,0,250)}} {{strlen($question->text)>250 ? '...' : ""}}</p>
                                 <p>
                                     <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}} </span>
@@ -47,8 +47,8 @@
                                 <hr>
                                 <p>
                                     <span class="category">Категория: <a
-                                                href="{{route('web.question.show', $quetion->id)}}">{{$question->category->name}}</a></span>
-                                    <a class="answers" href="{{route('web.question.show', $quetion->id)}}">
+                                                href="{{route('web.question.show', $question->id)}}">{{$question->category->name}}</a></span>
+                                    <a class="answers" href="{{route('web.question.show', $question->id)}}">
                                         {{$question->answers->count()}} ответа
                                     </a>
                                 </p>
