@@ -200,8 +200,8 @@
                     <div class="middle">
                         <a class="btn btn-dark-blue text" href="{{route('web.blog.show', $blog->id)}}">Читать статью</a>
                     </div>
-                    <h4><a href="{{route('web.blog.show', $blog->id)}}">{{substr($blog->title,0,50)}} {{strlen($blog->title) > 50 ? '...' : ""}}</a></h4>
-                    <p>{{substr(strip_tags($blog->text),0,80)}} {{strlen(strip_tags($blog->text))>80 ? '...' : ""}}</p>
+                    <h4><a href="{{route('web.blog.show', $blog->id)}}">{{mb_substr($blog->title,0,50)}} {{strlen($blog->title) > 50 ? '...' : ""}}</a></h4>
+                    <p>{{substr(strip_tags($blog->text),0,80)}} {{strlen(strip_tags($blog->text)) > 80 ? '...' : ""}}</p>
                 </div>
             @endforeach
 
