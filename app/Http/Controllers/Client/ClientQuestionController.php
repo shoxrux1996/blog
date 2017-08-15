@@ -46,13 +46,27 @@ class ClientQuestionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         if(!Auth::guard('client')->check()){
             if($request->password!=null){
-                $this->validate($request, [
-                    'name' => 'required',
-                ]);
+                $cl = Client::where('email', $request->email)->first();
+                if ($cl->isBlocked == 1) {
+                    if ($cl->blockedTill <= Carbon::now('Asia/Tashkent')) {
+                        $cl->isBlocked = 0;
+                        $cl->save();
+                    } 
+                    else {
+                        return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Вы заблокированы']);
+                    }
+                }
+                if ($cl->confirmed == 0) {
+                    return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => ' Подтвердите адрес электронной почты']);
+                }
+                $credentials = ['email' => $request->email, 'password' => $request->password];
+                if (!Auth::guard('client')->attempt($credentials, $request->remember)) {
 
+                    return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Неправильный email или пароль']);
+                }
             }
             else{
                 $this->validate($request, [

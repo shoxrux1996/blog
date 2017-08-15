@@ -87,7 +87,7 @@
                         <label class="btn btn-default general-input">
                             Выбрать файл <input type="file" name="files[]" multiple hidden>
                         </label>
-                        @if ($errors->any() && !($errors->has('description') || $errors->has('title') || $errors->has('name') || $errors->has('email') || $errors->has('password') ))
+                        @if ($errors->any() && !($errors->has('description') || $errors->has('title') || $errors->has('name') || $errors->has('email') || $errors->has('password') || $errors->has('wrong-attempt') ))
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -104,7 +104,7 @@
             @if(!Auth::guard('client')->check())
                 <div class="row ask-form">
                 <h1>Как с вами связаться?</h1>
-                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}" id="name-div" style="display:{{ $errors->has('name')  ? 'block' : '' }};">
                             <label for="name"><i class="fa fa-user-circle" aria-hidden="true"></i> Имя</label>
                             @if ($errors->has('name'))
                                 <span class="help-block">
@@ -113,7 +113,7 @@
                             @endif
                             <input type="text"  class="form-control" name="name" placeholder="Введите вашу имя">
                         </div>
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('email') || $errors->has('wrong-attempt') ? ' has-error' : '' }}">
                             <label for="username"><i class="fa fa-envelope-o" aria-hidden="true"></i> Эл. почта</label>
                             @if ($errors->has('email'))
                                 <span class="help-block">
@@ -122,12 +122,16 @@
                             @endif
                             <input type="text"  class="form-control" id="email" name="email" placeholder="Введите электронную почту">
                         </div>
-                        <div class="form-group{{ $errors->has('password')  ? ' has-error' : '' }}" id="password-div" style="display:{{ $errors->has('password')  ? ' block' : 'none' }};">
+                        <div class="form-group{{ $errors->has('password') || $errors->has('wrong-attempt') ? ' has-error' : '' }}" id="password-div" style="display:{{ $errors->has('password') || $errors->has('wrong-attempt') ? 'block' : 'none' }};">
                             <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> Пароль </label>
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
                                 </span>
+                            @elseif ($errors->has('wrong-attempt'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('wrong-attempt') }}</strong>
+                                </span>    
                             @endif
                             
                             <input type="password" class="form-control" name="password" placeholder="Введите новую пароль">
@@ -228,6 +232,13 @@
             for(index in emails){
                 if(emails[index] == $(this).val()){
                     $('#password-div').css("display","block");
+                    $('#name-div').css("display","none");
+                    break;
+                }
+                if(emails[index] != $(this).val()){
+                    $('#password-div').css("display","none");
+                    $('#name-div').css("display","block");
+                    break;
                 }
             }
 
