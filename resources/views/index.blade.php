@@ -191,7 +191,6 @@
         <h1 class="text-center">Блоги</h1>
         <div class="row">
             @foreach($blogs as $blog)
-
                 <div class="col-md-4 col-sm-4">
                     @if($blog->file != null)
                         <img class="img-responsive img-thumbnail" src="{{ asset($blog->file->path.$blog->file->file)}}" alt="{{$blog->title}}"/>
@@ -201,9 +200,8 @@
                     <div class="middle">
                         <a class="btn btn-dark-blue text" href="{{route('web.blog.show', $blog->id)}}">Читать статью</a>
                     </div>
-                    <h4><a href="{{route('web.blog.show', $blog->id)}}">{{substr($blog->title,0,100)}} {{strlen($blog->title)>100 ? '...' : ""}}</a></h4>
-                    <p>{{substr(strip_tags($blog->text),0,100)}} {{strlen(strip_tags($blog->text))>100 ? '...' : ""}}</p>
-
+                    <h4><a href="{{route('web.blog.show', $blog->id)}}">{{substr($blog->title,0,80)}} {{strlen($blog->title)>80 ? '...' : " "}}</a></h4>
+                    <p>{{substr(strip_tags($blog->text),0,80)}} {{strlen(strip_tags($blog->text))>80 ? '...' : ""}}</p>
                 </div>
             @endforeach
 

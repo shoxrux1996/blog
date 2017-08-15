@@ -162,7 +162,7 @@
                             </div>
                             <div class="blog-item-description">
                                 <h5><b>{{ $bl->title }}</b></h5>
-                                <p>{{substr(strip_tags($bl->text),0,200)}} {{strlen(strip_tags($bl->text))>200 ? '...' : ""}}</p>
+                                <p>{{substr(strip_tags($bl->text),0,100)}} {{strlen(strip_tags($bl->text))>100 ? '...' : ""}}</p>
                                 <p class="post-info">
                                 <span>
                                     <i class="fa fa-eye">{{$bl->count}}</i>
