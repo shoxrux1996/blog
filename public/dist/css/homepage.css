@@ -28,6 +28,10 @@
     padding-left: 30px;
 }
 
+#search-section .btn:hover{
+    color: #18BB9B;
+}
+
 /*Services Section*/
 #services-section{
     padding: 50px 100px;
@@ -205,22 +209,8 @@
     transform: scaleX(1);
 }
 
-.btn-dark-blue{
-    margin-bottom: 10px;
-    background-color: #1F2746;
-    color: #ffffff;
-    border: none;
-    /* Rectangle 16: */
-    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
-    border-radius: 0px;
-    padding: 10px;
-}
-
-.btn-dark-blue:hover{
-    color: #18BB9B;
-}
 #category-section .view-all-categories{
-    margin-top: 200px;
+    margin-top: 50px;
 }
 
 
@@ -283,9 +273,6 @@
     padding: 16px 32px;
 }
 
-#news-section .btn-dark-blue:hover{
-    color: #18BB9B;
-}
 
 /*Lawyers-Section*/
 #lawyers-section{
@@ -542,9 +529,17 @@
         margin-top: 0px;
     }
 
+    #news-section .img-responsive{
+        height: 230px;
+    }
+
     /*!*About us Section*/
     #about-us-section h4{
         margin-top: 10px;
+    }
+
+    #about-us-section video{
+        margin-top: -60px;
     }
 }
 

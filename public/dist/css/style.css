@@ -166,6 +166,22 @@ body *{
     color: #fff;
 }
 
+.btn-dark-blue{
+    margin-bottom: 10px;
+    background-color: #1F2746;
+    color: #ffffff;
+    border: none;
+    /* Rectangle 16: */
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+    border-radius: 0px;
+    padding: 10px;
+}
+
+.btn-dark-blue:hover{
+    color: #18BB9B!important;
+    background-color: #1F2746;
+}
+
 .background-white{
     background-color: #fff;
 }
@@ -392,6 +408,18 @@ footer .social-link i:hover{
     color: #18BB9B;
 }
 
+/* Modal style */
+.modal-content{
+    border-radius: 0;
+    text-align: center;
+}
+
+.modal-content img{
+    height: 150px;
+}
+
+
+
 /*Media Queries Medium Screen*/
 @media (max-width: 1199px){
     /*Footer*/
@@ -447,6 +475,10 @@ footer .social-link i:hover{
 
     footer .guarantee p{
         text-align: center;
+    }
+
+    .modal{
+        top: 20%;
     }
 }
 
