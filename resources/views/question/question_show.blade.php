@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="row">
-                <h3>Answers</h3>
+                <h3>Ответы</h3>
                 @foreach($question->answers as $answer)
                     <div class="panel panel-content col-sm-9">
                         <div class="comment">
