@@ -10,6 +10,7 @@ use Session;
 use Auth;
 use Validator;
 use yuridik\File;
+use Purifier;
 
 class LawyerAnswerController extends Controller
 {
