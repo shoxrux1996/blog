@@ -21,8 +21,8 @@ class IndexController extends Controller
     public function index()
     {
         $num_of_questions = Question::count();
-        $free_question_examples = Question::orderBy('id', 'desc')->where('type', 0)->take(6)->get();
-        $paid_question_examples = Question::orderBy('id', 'desc')->where('type', [1, 2])->take(6)->get();
+        $free_question_examples = Question::where('type', 0)->orderBy('id', 'desc')->take(6)->get();
+        $paid_question_examples = Question::where('type',1)->orWhere('type', 2)->orderBy('id', 'desc')->take(6)->get();
         $blogs = Blog::orderBy('count', 'desc')->take(3)->get();
         $categories = Category::where('category_id', null)->get();
         $lawyers = Lawyer::orderBy('id', 'desc')->take(6)->get();

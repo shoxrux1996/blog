@@ -60,7 +60,7 @@
                     </div>
                     <div id="section2" class="section" style="display: {{ $section == 2 ? "block" : "none" }};">
                         @foreach($questions_costly as $question)
-                            @if($question->type == 2 || $question->type == 1 )
+
                             <div class="col-sm-12 question">
                                     <span class="question-price">
                             <b>{{$question->price}} сум</b>
@@ -89,7 +89,7 @@
                                     </a>
                                 </p>
                             </div>
-                            @endif
+
                         @endforeach
                             <div class="col-sm-12 text-center">
                                 {!! $questions_costly->links('pagination') !!}
@@ -98,7 +98,7 @@
                     </div>
                     <div id="section3" class="section" style="display: {{ $section == 3 ? "block" : "none" }};">
                         @foreach($questions_free as $question)
-                            @if($question->type == 0)
+
                                 <div class="col-sm-12 question">
                                     <h4 class="title"><a
                                                 href="{{route('web.question.show', $question->id)}}">{{$question->title}}</a>
@@ -119,7 +119,7 @@
                                         </a>
                                     </p>
                                 </div>
-                            @endif
+
                         @endforeach
                             <div class="col-sm-12 text-center">
                                 {!! $questions_free->links('pagination') !!}
