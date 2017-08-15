@@ -17,6 +17,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-9">
+                    <!-- Search -->
+                    <div class="input-group" id="search">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Все темы <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Корпоративное право</a></li>
+                                <li><a href="#">Гражданское право</a></li>
+                                <li><a href="#">Лицензирование</a></li>
+                                <li><a href="#">Недвижимость</a></li>
+                                <li><a href="#">Защита прав потребителя</a></li>
+                                <li><a href="#">Автомобильное право</a></li>
+                                <li><a href="#">Военное право</a></li>
+                                <li><a href="#">Семейное право</a></li>
+                                <li><a href="#">Страхование</a></li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                        <input type="text" class="form-control" aria-label="...">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default">
+                                Искать
+                            </button>
+                        </div>
+                    </div><!-- /input-group -->
+                    <!-- /Search -->
                     <p class="question-type">
                         <span class="{{ $section == 1 ? "active-type" : "" }}"><a href="{{route('question.list')}}"
                                                                              >Все</a> </span>
