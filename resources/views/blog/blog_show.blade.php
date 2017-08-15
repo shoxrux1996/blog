@@ -154,7 +154,7 @@
                         <div class="blog-item">
                             <div class="ribbon"><span>Юристы</span></div>
                             <div class="blog-item-img">
-                                <img alt="Blog item image" src="{{$blog->file != null ? asset($blog->file->path.$blog->file->file) : asset('dist/images/blog-img-2.jpg')}}"/>
+                                <img alt="Blog item image" src="{{$bl->file != null ? asset($bl->file->path.$bl->file->file) : asset('dist/images/blog-img-2.jpg')}}"/>
                                 <div class="middle">
                                     <a href="{{route('web.blog.show', $bl->id)}}" class="btn btn-dark-blue text">Читать
                                         статью</a>
