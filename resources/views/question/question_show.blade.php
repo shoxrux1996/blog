@@ -65,7 +65,7 @@
                                 <div>
                                     <p class="author-time">{{date('F n, Y - g:iA'), strtotime($answer->created_at)}}</p>
                                     <img src="{{ $answer->lawyer->user->file != null ? asset($answer->lawyer->user->file->path.$answer->lawyer->user->file->file) : asset('dist/images/avatar_large_male_client_default.jpg')}}"
-                                         class="author-img col-md-3" style=" width: 200px; height: 200px;">
+                                         class="author-img col-md-3" style=" width: 200px; height: 150px; margin-bottom: 20px;">
                                 </div>
                             </div>
                         </div>
