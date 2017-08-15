@@ -59,7 +59,7 @@
                         <div class="row text-center">
                             <div class="col-sm-4">
                                 <h1>10,0</h1>
-                                <h6><b>Рейтинг Правовед.ru</b></h6>
+                                <h6><b>Рейтинг Yuridik.uz</b></h6>
                                 <p>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
