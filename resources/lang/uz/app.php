@@ -1,5 +1,44 @@
 <?php
 
 return [
-    'home' => 'Home'
+    'or' => "yoki",
+    'registration' => "Ro'yxatdan o'tish",
+    'login' => "Kirish",
+    'dashboard' => "",
+    'edit' => "",
+    'partners' => "",
+    'finance' => "",
+    'logout' => "",
+    'attention' => "",
+    'thank' => "",
+    'yourname' => "",
+    'error' => "",
+    'cancel' => "",
+    'send' => "",
+    'qualityguarantee' => "Sifatga 100 foiz kafolat",
+    'bestlawyers' => "Butun O'zbekistondan eng yaxshi yuristlar",
+    'satisfiedclients' => "Bizning xizmatlarimizdan mamnun mijozlar",
+    'moneyback' => "Sizga yordam beramiz - yoki pulingini qaytarib beramiz",
+    'allguarantees' => "yuridik.uz ning barcha kafolatlari",
+    'aboutproject' => "Loyiha haqida",
+    'aboutus' => "Jamoa haqida",
+    'contacts' => "Biz bilan bog'lanish",
+    'ourpartners' => "Hamkorlarimiz",
+    'categories' => "Sohalar bo'yicha savolar ",
+    'blog' => "Maqolalar",
+    'toclients' => "Mijozlar uchun",
+    'askquestion' => "Savol berish",
+    'ordercall' => "Qo'ng'iroq buyurtma qilish",
+    'orderdocument' => "Hujjat buyurtma qilish",
+    'faqs' => "Ko'p so'raladigan savollar",
+    'ourlawyers' => "Bizning yuristlarimiz",
+    'guarantees' => "Kafolatlar",
+    'questions' => "Savollar",
+    'tolawyers' => "Yuristlar uchun",
+    'becomelawyer' => "Loyiha yuristi bo'lish",
+    'topartners' => "Hamkorlar uchun",
+    'toadvertisers' => "Reklama beruvchilar uchun",
+   
+
+
 ];

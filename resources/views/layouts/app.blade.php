@@ -9,7 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="shortcut icon" href="{{ asset('dist/images/favicon.png')}}" type="image/png">
-    <title>Юридическая консультация онлайн - бесплатная помощь юристов и адвокатов 24 часа в сутки</title>
+    @if(\App::isLocale('ru'))
+        <title>Юридическая консультация онлайн - бесплатная помощь юристов и адвокатов 24 часа в сутки</title>
+    @else
+        <title>Onlayn Yuridik konsultatsiya - bepul yuristlar yordami 24 soat</title>
+    @endif
 
     <!-- Styles -->
     <!-- Bootstrap Core -->
@@ -30,63 +34,13 @@
 <!-- Header -->
 <div class="container-fluid my-header color-white dark-blue">
     <div class="row">
-        <div class="col-sm-12 text-center">
-            <a href="#" data-toggle="modal" data-target="#beta-version"">
-                <i>Внимание! Веб-сайт работает в тестовом режиме. Если нашли ошибку, пожалуйста нажмите на эту ссылку.</i>
-            </a>
-
-            <!-- Modal -->
-            <div id="beta-version" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-
-                    <div class="modal-content">
-                        <form action="#">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Спасибо за помощь!!!</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="name">Ваше имя</label>
-                                    <input type="text" class="form-control" id="name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="error">Ошибка:</label>
-                                    <textarea class="form-control" rows="7" id="error"></textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Отмена</button>
-                                <button type="submit" class="btn btn-default btn-success">Отправить</button>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /Modal content -->
-
-                    <!-- Style -->
-                    <style>
-                        #beta-version .modal-body label{
-                            color: #1F2746;
-                            float: left;
-                        }
-                    </style>
-                    <!-- /Style -->
-
-                </div>
-            </div>
-            <!-- /Modal -->
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-2 col-sm-3 col-xs-6">
             <a href="{{ route('home')}}">
                 <img class="img-responsive" src="{{ asset('dist/images/logo.png')}}" alt="Logo"/>
             </a>
         </div>
         <div class="col-md-10 col-sm-9 col-xs-6 info">
-            <span><i class="fa fa-volume-control-phone" aria-hidden="true"></i> (71) 123-45-67 или</span>
+            <span><i class="fa fa-volume-control-phone" aria-hidden="true"></i> (71) 123-45-67 @lang('app.or')</span>
             <a href="#"><img src="{{asset('dist/images/help-icon.png')}}" alt="Help Icon"/></a>
             <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown">
                 <img src="{{ asset('dist/images/flag-'.\App::getLocale().'.png')}}" alt="Flag"/>
@@ -106,7 +60,7 @@
             </ul>
             <br/>
             @if (!(Auth::guard('client')->check() || Auth::guard('lawyer')->check()))
-                <a href="{{ route('user.register') }}">Зарегистрироваться</a> | <a href="{{ route('user.login') }}">Войти</a>
+                <a href="{{ route('user.register') }}">@lang('app.registration')</a> | <a href="{{ route('user.login') }}">@lang('app.login')</a>
             @else
                 <div class="dropdown">
                     <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
@@ -119,16 +73,14 @@
                         </li>
                         <div class="divider"></div>
                         <li>
-                            <a href=" {{(Auth::guard('client')->check()) ? route('client.dashboard') : route('lawyer.dashboard')}}">Личный
-                                кабинет</a></li>
+                            <a href=" {{(Auth::guard('client')->check()) ? route('client.dashboard') : route('lawyer.dashboard')}}">@lang('app.dashboard')</a></li>
                         <li>
-                            <a href="{{(Auth::guard('client')->check()) ? route('client.info') : route('lawyer.info')}}">Редактировать
-                                профиль</a></li>
-                        <li><a href="#">Партнёрская программа</a></li>
-                        <li><a href="#">Финансы</a></li>
+                            <a href="{{(Auth::guard('client')->check()) ? route('client.info') : route('lawyer.info')}}">@lang('app.edit')</a></li>
+                        <li><a href="#">@lang('app.partners')</a></li>
+                        <li><a href="#">@lang('app.finance')</a></li>
                         <li><a href="{{ route('user.logout') }}"
                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">Выход</a>
+                                                     document.getElementById('logout-form').submit();">@lang('app.logout')</a>
                             <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
                                   style="display: none;">
                                 {{ csrf_field() }}
@@ -170,45 +122,45 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3 col-sm-6 guarantee">
-                <span>ГАРАНТИЯ 100% КАЧЕСТВА</span>
+                <span>@lang('app.qualityguarantee')</span>
                 <p>
                     <img src="{{asset('dist/images/first-place-icon.png')}}" alt="First place icon" />
-                    Лучшие юристы со всей Узбекистана
+                    @lang('app.bestlawyers')
                 </p>
                 <p>
                     <img src="{{asset('dist/images/happy-icon.png')}}" alt="Happy icon" />
-                    Более 123 45 довольных клиентов
+                    @lang('app.satisfiedclients')
                 </p>
                 <p>
                     <img src="{{asset('dist/images/money-back-icon.png')}}" alt="Money back icon" />
-                    Мы поможем вам — или вернём деньги!
+                    @lang('app.moneyback')
                 </p>
-                <p class="text-center"><a href="#">Все гарантии Yuridik.uz</a></p>
+                <p class="text-center"><a href="#">@lang('app.allguarantees')</a></p>
             </div>
             <div class="col-md-3 col-sm-6">
                 <span><a href="index.html">Yuridik.uz</a></span>
-                <p><a href="about.html">О проекте</a></p>
-                <p><a href="team.html">О команде</a></p>
-                <p><a href="contacts.html">Контакты</a></p>
-                <p><a href="partners.html">Наши партнёры</a></p>
-                <p><a href="all-categories.html">Категории вопросов</a></p>
-                <p><a href="blog.html">Блог</a></p>
+                <p><a href="about.html">@lang('app.aboutproject')</a></p>
+                <p><a href="team.html">@lang('app.aboutus')</a></p>
+                <p><a href="contacts.html">@lang('app.contacts')</a></p>
+                <p><a href="partners.html">@lang('app.ourpartners')</a></p>
+                <p><a href="all-categories.html">@lang('app.categories')</a></p>
+                <p><a href="blog.html">@lang('app.blog')</a></p>
             </div>
             <div class="col-md-3 col-sm-6 hidden-xxs">
-                <span><a href="#">Клиентам</a></span>
-                <p><a href="ask-question.html">Задать вопрос</a></p>
-                <p><a href="order-call.html">Заказать звонок</a></p>
-                <p><a href="order-document.html">Заказать документ</a></p>
-                <p><a href="faq.html">Частые вопросы</a></p>
-                <p><a href="lawyers.html">Наши юристы</a></p>
-                <p><a href="about.html#guarantees">Гарантии</a></p>
-                <p><a href="questions.html">Вопросы</a></p>
+                <span><a href="#">@lang('app.toclients')</a></span>
+                <p><a href="ask-question.html">@lang('app.askquestion')</a></p>
+                <p><a href="order-call.html">@lang('app.ordercall')</a></p>
+                <p><a href="order-document.html">@lang('app.orderdocument')</a></p>
+                <p><a href="faq.html">@lang('app.faqs')</a></p>
+                <p><a href="lawyers.html">@lang('app.ourlawyers')</a></p>
+                <p><a href="about.html#guarantees">@lang('app.guarantees')</a></p>
+                <p><a href="questions.html">@lang('app.questions')</a></p>
             </div>
             <div class="col-md-3 col-sm-6 hidden-xxs">
-                <span><a href="#">Юристам</a></span>
-                <p><a href="become-lawyer.html">Стать юристом проекта</a></p>
-                <span><a href="#">Партнерам</a></span>
-                <p><a href="ad.html">Рекламодателям</a></p>
+                <span><a href="#">@lang('app.tolawyers')</a></span>
+                <p><a href="become-lawyer.html">@lang('app.becomelawyer')</a></p>
+                <span><a href="#">@lang('app.topartners')</a></span>
+                <p><a href="ad.html">@lang('app.toadvertisers')</a></p>
             </div>
         </div>
         <div class="row social-link">
