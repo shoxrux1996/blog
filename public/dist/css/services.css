@@ -110,3 +110,9 @@
     font-size: 12px;
     margin-top: 0;
 }
+
+@media (max-width: 767px) {
+    .ask-form{
+        padding: 10px;
+    }
+}
