@@ -86,7 +86,9 @@
         </div>
     </div>
 </div> -->
-
+@if(Session::has('message'))
+    <h6>{{ Session::get('message') }}</h6>
+@endif
 <!-- Login Form -->
 <div class="container">
     <div class="row" id="login-bg">

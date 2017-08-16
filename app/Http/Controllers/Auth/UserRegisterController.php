@@ -158,7 +158,7 @@ class UserRegisterController extends Controller
         }
 
         Session::flash('message', 'Please confirm your account via your email');
-        $credentials = ['email' => $request->email, 'password' => $request->password];
+        return redirect()->route('user.login');
 
     }
     public function confirm($code){
