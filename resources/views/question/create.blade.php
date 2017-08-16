@@ -122,20 +122,26 @@
                             @endif
                             <input type="text"  class="form-control" id="email" name="email" placeholder="Введите электронную почту">
                         </div>
-                        <div class="form-group{{ $errors->has('password') || $errors->has('wrong-attempt') ? ' has-error' : '' }}" id="password-div" style="display:{{ $errors->has('password') || $errors->has('wrong-attempt') ? 'block' : 'none' }};">
+                        <div class="form-group{{ $errors->has('password') || $errors->has('wrong-attempt') || $errors->has('password_confirmation') ? ' has-error' : '' }}">
                             <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> Пароль </label>
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
                                 </span>
+                            @elseif ($errors->has('password_confirmation'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                </span>
                             @elseif ($errors->has('wrong-attempt'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('wrong-attempt') }}</strong>
-                                </span>    
+                                </span>
                             @endif
-                            
                             <input type="password" class="form-control" name="password" placeholder="Введите новую пароль">
-
+                        </div>
+                        <div class="form-group" id="password-confirm-div">
+                            <label for="password-confirm"><i class="fa fa-lock" aria-hidden="true"></i> Повторите пароль </label>
+                            <input type="password" class="form-control" name="password_confirmation" placeholder="Введите заново новую пароль">
                         </div>
                        
                         
@@ -231,14 +237,14 @@
         $('#email').on('input', function() { 
             for(index in emails){
                 if(emails[index] == $(this).val()){
-                    $('#password-div').css("display","block");
+                    $('#password-confirm-div').css("display","none");
                     $('#name-div').css("display","none");
                     break;
                 }
                 if(emails[index] != $(this).val()){
-                    $('#password-div').css("display","none");
+                    $('#password-confirm-div').css("display","block");
                     $('#name-div').css("display","block");
-                    break;
+                    continue;
                 }
             }
 
