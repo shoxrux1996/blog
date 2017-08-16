@@ -171,7 +171,7 @@
             <!-- /Lawyers -->
 
             <!-- News and articles -->
-            <div id="news">
+            <div id="news" class="tab-pane fade">
                 <div class="row">
                     <a href="individual-blog.html">
                         <div class="col-sm-4">
