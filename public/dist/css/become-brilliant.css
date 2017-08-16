@@ -6,13 +6,13 @@
  * https://opensource.org/licenses/MIT
  */
 .wrapper {
+  display: flex;
   color: #9f9f9f;
   font-size: 15px;
   margin: 0 auto;
 }
 .package {
   box-sizing: border-box;
-  height: 500px;
   border: 3px solid #e8e8e8;
   border-radius: 0;
   padding: 24px;

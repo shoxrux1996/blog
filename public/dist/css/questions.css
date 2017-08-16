@@ -37,3 +37,22 @@
 #search .dropdown-menu li a{
     padding: 10px;
 }
+
+@media (max-width: 767px){
+
+    #wrapper{
+        padding: 10px;
+    }
+
+    .question{
+        padding: 10px;
+    }
+
+    .question-type a{
+        font-size: 16px;
+    }
+
+    .question-type .active-type a{
+        font-size: 22px;
+    }
+}
