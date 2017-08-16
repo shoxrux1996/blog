@@ -34,6 +34,56 @@
 <!-- Header -->
 <div class="container-fluid my-header color-white dark-blue">
     <div class="row">
+        <div class="col-sm-12 text-center">
+            <a href="#" data-toggle="modal" data-target="#beta-version"">
+            <i>Внимание! Веб-сайт работает в тестовом режиме. Если нашли ошибку, пожалуйста нажмите на эту ссылку.</i>
+            </a>
+
+            <!-- Modal -->
+            <div id="beta-version" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+
+                    <div class="modal-content">
+                        <form action="#">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Спасибо за помощь!!!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="name">Ваше имя</label>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="error">Ошибка:</label>
+                                    <textarea class="form-control" rows="7" id="error"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Отмена</button>
+                                <button type="submit" class="btn btn-default btn-success">Отправить</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /Modal content -->
+
+                    <!-- Style -->
+                    <style>
+                        #beta-version .modal-body label{
+                            color: #1F2746;
+                            float: left;
+                        }
+                    </style>
+                    <!-- /Style -->
+
+                </div>
+            </div>
+            <!-- /Modal -->
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-2 col-sm-3 col-xs-6">
             <a href="{{ route('home')}}">
                 <img class="img-responsive" src="{{ asset('dist/images/logo.png')}}" alt="Logo"/>
