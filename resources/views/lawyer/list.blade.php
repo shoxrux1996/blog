@@ -75,7 +75,7 @@
                 @for($i=0; $i<$categories->count(); $i+=3)
                     <div class="row">
                         @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 col-xs-6">
                                 <h4><i class="fa fa-users"></i>
                                     <a type="submit"
                                        href="{{route('search.lawyers.bycategory', ['name'=>$categories[$j]->name])}}"
@@ -104,7 +104,7 @@
                 @foreach($best_lawyers as $lawyer)
                     <div class="best-lawyers">
                         <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}"
-                             class="img-rounded"/>
+                             class="img-circle"/>
                         <h3>{{$lawyer->user->firstName}}</h3>
                         <h6>
                             <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
@@ -224,6 +224,9 @@
                                             </a>
                                             <span>{{$lawyer->feedbacks->count()}} отзыва от клиентов</span>
                                         </div>
+                                        {{--<button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)" id="rotate-back-button">--}}
+                                            {{--<i class="fa fa-reply"></i> Back--}}
+                                        {{--</button>--}}
                                     </div>
                                 </div> <!-- end back panel -->
                             </div> <!-- end card -->
@@ -260,5 +263,17 @@
                 index = 0;
             }
         }
+
+
+        function rotateCard(btn){
+            var $card = $(btn).closest('.card-container');
+            console.log($card);
+            if($card.hasClass('hover')){
+                $card.removeClass('hover');
+            } else {
+                $card.addClass('hover');
+            }
+        }
+
     </script>
 @endsection

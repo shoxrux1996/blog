@@ -153,3 +153,29 @@
         margin-top: 20px;
     }
 }
+
+@media (max-width: 767px){
+    #search-lawyer{
+        height: 320px;
+    }
+
+    #search-lawyer #form{
+        padding: 10px 10px;
+    }
+
+    #main-section{
+        padding: 10px;
+    }
+
+    #specialisation > h3{
+        text-align: center;
+    }
+
+    #main-section #specialisation button{
+        width: 80%;
+    }
+
+    #main-section #search-cities input{
+        width: 80%;
+    }
+}

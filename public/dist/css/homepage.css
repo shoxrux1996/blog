@@ -593,7 +593,11 @@
     }
 
     #questions-section button{
-        font-size: 9px;
+        font-size: 17px;
+    }
+
+    #questions-section .category span button{
+        font-size: 12px;
     }
 
 
