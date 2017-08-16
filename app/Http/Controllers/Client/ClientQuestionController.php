@@ -14,13 +14,16 @@ use Auth;
 use Validator;
 use yuridik\Order;
 use yuridik\Lawyer;
+use yuridik\User;
+use yuridik\City;
+use Illuminate\Support\Facades\Mail;
 use DB;
 
 class ClientQuestionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:client',['except' => ['create', 'store']]);
+        $this->middleware('auth:client',['except' => ['create', 'store','questionCreate','questionCreateEloquent']]);
     }
 
     public function create()
@@ -48,8 +51,9 @@ class ClientQuestionController extends Controller
     public function store(Request $request)
     {   
         if(!Auth::guard('client')->check()){
-            if($request->password!=null){
-                $cl = Client::where('email', $request->email)->first();
+            $cl = Client::where('email', $request->email)->first();
+            if(!empty($cl)){
+                
                 if ($cl->isBlocked == 1) {
                     if ($cl->blockedTill <= Carbon::now('Asia/Tashkent')) {
                         $cl->isBlocked = 0;
@@ -67,131 +71,48 @@ class ClientQuestionController extends Controller
 
                     return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Неправильный email или пароль']);
                 }
+                return $this->questionCreate($request,Auth::guard('client')->user());    
             }
             else{
                 $this->validate($request, [
                     'name' => 'required',
-                    'email' => '',
-                    'password' => '',
-                ]);                
-            }
-        }
-        $messages = [
-            'required' => 'Обязательно к заполнению',
-            'string' => 'Неправильный формат',
-            'title.min' => 'Минимум 3 символов',
-            'description.min' => 'Минимум 10 символов',
-            'mimes' => 'Неверный формат(doc,docx,pdf)',
-            'max' => 'Файл слишком велик',
-        ];
-        $rules = array(
-            'title' => 'required|string|min:3',
-            'description' => 'required|string|min:10',
-        );
-
-
-        $count = count($request->file('files')) - 1;
-
-
-        foreach (range(0, $count) as $i) {
-            $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
-        }
-        Validator::make($request->all(), $rules, $messages)->validate();
-        $client = Auth::guard('client')->user();
-
-        if ($request->type == 2) {
-            if ($client->user->balance() >= 5000) {
-                $question = new Question;
-                $question->title = $request->title;
-                $question->text = $request->description;
-                $question->category_id = $request->category;
-                $question->client_id = $client->id;
-                $question->price = 5000;
-                $question->type = 2;
-                $question->save();
-                $client->user->save();// is it possible?
-
-                if ($request->file('files') != null) {
-                    $file = $request->file('files');
-                    foreach ($file as $key) {
-                        $fil = new File;
-                        $fil->file = $key->getClientOriginalName();
-                        $upload_folder = '/questions/' . time() . '/';
-                        $fil->path = $upload_folder;
-                        $question->files()->save($fil);
-                        $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
-                    }
+                    'email' => 'required|string|email|max:255|unique:clients,email|unique:lawyers,email',
+                    'password' => 'required|string|min:6|confirmed',
+                ]);
+                $confirmation_code = str_random(30);
+                $user = new User;
+                $user->firstName = $request['name'];
+                $city = City::where('name', ' ')->first();
+                if ($city != null)
+                    $user->city_id = $city->id;
+                else {
+                    $cit = new City;
+                    $cit->name = " ";
+                    $cit->save();
+                    $user->city_id = $cit->id;
                 }
 
-                $order = new Order;
-                $order->user_id = $question->client->user->id;
-                $order->amount = $question->price;
-                $question->order()->save($order);
+                $user->save();
+                $userID = $user->id;
+                $client = new Client;
+                $client->email = $request['email'];
+                $client->password = bcrypt($request['password']);
+                $client->confirmation_code = $confirmation_code;
+                $client->user_id = $userID;
 
-                Session::flash('message', 'Question created successfully');
-                return redirect()->route('client.dashboard');
-            } else {
-                Session::flash('message', 'Not enough money, Please charge your balance');
-                return redirect()->route('card.payment');
+
+                $data = array('code' => $client->confirmation_code, 'email' => $client->email, 'name' => $client->name);
+                Mail::send('email.verify', ['data' => $data], function ($message) use ($data) {
+                    $message->to($data['email'], $data['name'])
+                        ->subject('Verify your email address');
+                });
+                $client->save();   
+                return $this->questionCreate($request,$client);            
             }
-        } elseif ($request->type == 1) {
-            if ($client->user->balance() >= 1000) {
-                $question = new Question;
-                $question->title = $request->title;
-                $question->text = $request->description;
-                $question->category_id = $request->category;
-                $question->client_id = $client->id;
-                $question->price = 1000;
-                $question->type = 1;
-                $question->save();
-                $client->user->save();// is it possible?
-
-                if ($request->file('files') != null) {
-                    $file = $request->file('files');
-                    foreach ($file as $key) {
-                        $fil = new File;
-                        $fil->file = $key->getClientOriginalName();
-                        $upload_folder = '/questions/' . time() . '/';
-                        $fil->path = $upload_folder;
-                        $question->files()->save($fil);
-                        $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
-                    }
-                }
-
-                $order = new Order;
-                $order->user_id = $question->client->user->id;
-                $order->amount = $question->price;
-                $question->order()->save($order);
-
-                Session::flash('message', 'Question created successfully');
-                return redirect()->route('client.dashboard');
-            } else {
-                Session::flash('message', 'Not enough money, Please charge your balance');
-                return redirect()->route('card.payment');
-            }
-        } else {
-            $question = new Question;
-            $question->title = $request->title;
-            $question->text = $request->description;
-            $question->category_id = $request->category;
-            $question->client_id = $client->id;
-            $question->type = 0;
-            $question->save();
-
-            if ($request->file('files') != null) {
-                $file = $request->file('files');
-                foreach ($file as $key) {
-                    $fil = new File;
-                    $fil->file = $key->getClientOriginalName();
-                    $upload_folder = '/questions/' . time() . '/';
-                    $fil->path = $upload_folder;
-                    $question->files()->save($fil);
-                    $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
-                }
-            }
-            Session::flash('message', 'Question created successfully');
-            return redirect()->route('client.dashboard');
         }
+        else{
+            return $this->questionCreate($request,Auth::guard('client')->user());
+        }        
     }
 
     public function myQuestions()
@@ -209,4 +130,93 @@ class ClientQuestionController extends Controller
         return view('client.question_show')->withQuestion($question);
     }
 
+    private function questionCreate(Request $request,$client)
+    {
+
+            $messages = [
+                'required' => 'Обязательно к заполнению',
+                'string' => 'Неправильный формат',
+                'title.min' => 'Минимум 3 символов',
+                'description.min' => 'Минимум 10 символов',
+                'mimes' => 'Неверный формат(doc,docx,pdf)',
+                'max' => 'Файл слишком велик',
+            ];
+            $rules = array(
+                'title' => 'required|string|min:3',
+                'description' => 'required|string|min:10',
+            );
+
+
+            $count = count($request->file('files')) - 1;
+
+
+            foreach (range(0, $count) as $i) {
+                $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
+            }
+            Validator::make($request->all(), $rules, $messages)->validate();
+
+            if ($request->type == 2) {
+                if ($client->user->balance() >= 5000) {
+                    return $this->questionCreateEloquent($request,$client,2);    
+                } else {
+                    Session::flash('message', 'Not enough money, Please charge your balance');
+                    return redirect()->route('card.payment');
+                }
+            } elseif ($request->type == 1) {
+                if ($client->user->balance() >= 1000) {
+                    return $this->questionCreateEloquent($request,$client,1);
+                } else {
+                    Session::flash('message', 'Not enough money, Please charge your balance');
+                    return redirect()->route('card.payment');
+                }
+            } 
+            else {
+                return $this->questionCreateEloquent($request,$client,0);
+        }
+    }
+
+    private function questionCreateEloquent(Request $request,$client,$usertype){
+        $question = new Question;
+        $question->title = $request->title;
+        $question->text = $request->description;
+        $question->category_id = $request->category;
+        $question->client_id = $client->id;
+        switch ($usertype) {
+            case 0:
+                $question->price = 0;
+                $question->type = 0;
+                break;
+            case 1:
+                $question->price = 1000;
+                $question->type = 1;
+                break;
+            case 2:
+                $question->price = 5000;
+                $question->type = 2;
+                break;
+        }
+        $question->save();
+        $client->user->save();// is it possible?
+
+        if ($request->file('files') != null) {
+            $file = $request->file('files');
+            foreach ($file as $key) {
+                $fil = new File;
+                $fil->file = $key->getClientOriginalName();
+                $upload_folder = '/questions/' . time() . '/';
+                $fil->path = $upload_folder;
+                $question->files()->save($fil);
+                $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
+            }
+        }
+        if($question->price!=0){
+            $order = new Order;
+            $order->user_id = $question->client->user->id;
+            $order->amount = $question->price;
+            $question->order()->save($order);
+        }
+        Session::flash('message', 'Question created successfully');
+        return redirect()->route('client.dashboard');    
+    }
 }
+
