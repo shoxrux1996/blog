@@ -21,7 +21,7 @@
                 <form action="{{route('search.all')}}" method="post">
                     {{csrf_field()}}
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="{{ __('search') }}"/>
+                        <input type="text" class="form-control" name="search" placeholder="{{ __('Поиск по вопросам, юристам и новостям') }}"/>
                         <span class="input-group-btn">
                       <button type="submit" class="btn btn-default" >
                         <i class="fa fa-search" aria-hidden="true"></i>

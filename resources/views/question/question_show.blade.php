@@ -46,6 +46,29 @@
             </div>
             <div class="row">
                 <h3>Ответы</h3>
+
+                <!-- Comment news style -->
+                <div class="col-sm-9 answer">
+                    <div class="answer-header">
+                        <img class="img-thumbnail" src="{{asset("dist/images/headshot-1.png")}}" alt="Lawyer 1" />
+                        <h4 class="lawyer-name">Hamidulla</h4>
+                        <h6 class="lawyer-type">Юрист</h6>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="answer-content">
+                        <p>Ўзбекистон Республикаси Вазирлар Маҳкамасининг 2006 йил 14 июлдаги 138-сон қарори билан тасдиқланган «Автомобиль транспортида йўловчиларни ҳамда юкларни шаҳарда, шаҳар атрофида, шаҳарлараро ва халқаро йўналишлар бўйича ташиш фаолиятини лицензиялаш тўғрисида»ги Низомнинг (кейинги ўринларда - Низом деб юритилади) 3-банди 2-хатбошида: «Тижорат асосида йўловчиларни ҳамда юкларни шаҳарда, шаҳар атрофида, шаҳарлараро ва халқаро йўналишлар бўйича ташиш фаолияти фақат юридик шахслар томонидан амалга оширилади», деб белгиланган.</p>
+                    </div>
+                    <div class="answer-footer">
+                        <span class="pull-right answered-time">
+                            August 8, 2017 - 3:44PM
+                        </span>
+                    </div>
+                </div>
+                <!-- /Comment new style -->
+
                 @foreach($question->answers as $answer)
                     <div class="panel panel-content col-sm-9">
                         <div class="comment">
@@ -95,6 +118,7 @@
                     </div>
 
                 @endforeach
+
             </div>
             <div class="row">
                 @if (Auth::guard('lawyer')->check() && $question->solved != true)
