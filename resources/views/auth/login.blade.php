@@ -86,9 +86,32 @@
         </div>
     </div>
 </div> -->
-@if(Session::has('message'))
-    <h6>{{ Session::get('message') }}</h6>
-@endif
+
+<!-- Modal for message-->
+    <div id="confirm-email-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">@lang('auth.modaltitle')</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{{asset('dist/images/email-send.jpg')}}" alt="Email send"/>
+                    <h4>@lang('auth.modalbody1')</h4>
+                    @if(Session::has('question-create'))
+                        <h6>@lang('auth.modalbody2')</h6>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /Modal for message-->
+
 <!-- Login Form -->
 <div class="container">
     <div class="row" id="login-bg">
@@ -141,3 +164,10 @@
 <!-- /Login Form -->
 
 @endsection
+@if(Session::has('confirm-email') || Session::has('question-create'))
+    @section('scripts')
+        <script type="text/javascript">
+            $("#confirm-email-modal").modal();
+        </script>
+    @endsection
+@endif

@@ -15,5 +15,8 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'modaltitle' => "Xush kelibsiz",
+    'modalbody1' => "Iltimos, elektron manzilingizni tasdiqlang!",
+    'modalbody2' => "Savol muvaffaqiyatli yaratildi",
 
 ];
