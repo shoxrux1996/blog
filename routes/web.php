@@ -1,7 +1,13 @@
 <?php
 
 Route::get('card','Web\ApiController@show')->name('card.payment');
-
+Route::post('error/post', function (\Illuminate\Http\Request $request){
+    $error = new \yuridik\Error;
+    $error->name = $request->name;
+    $error->error = $request->error;
+    $error->save();
+    $error->notify(new \yuridik\Notifications\RequestWebsite());
+})->name('error.find');
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
