@@ -189,29 +189,29 @@
                 <p class="text-center"><a href="#">@lang('app.allguarantees')</a></p>
             </div>
             <div class="col-md-3 col-sm-6">
-                <span><a href="index.html">Yuridik.uz</a></span>
-                <p><a href="about.html">@lang('app.aboutproject')</a></p>
-                <p><a href="team.html">@lang('app.aboutus')</a></p>
-                <p><a href="contacts.html">@lang('app.contacts')</a></p>
-                <p><a href="partners.html">@lang('app.ourpartners')</a></p>
-                <p><a href="all-categories.html">@lang('app.categories')</a></p>
-                <p><a href="blog.html">@lang('app.blog')</a></p>
+                <span><a href="{{ route('home') }}">Yuridik.uz</a></span>
+                <p><a href="{{ route('about') }}">@lang('app.aboutproject')</a></p>
+                <p><a href="{{ route('team') }}">@lang('app.aboutus')</a></p>
+                <p><a href="{{ route('contacts') }}">@lang('app.contacts')</a></p>
+                <p><a href="{{ route('partners') }}">@lang('app.ourpartners')</a></p>
+                <p><a href="{{ route('category.list') }}">@lang('app.categories')</a></p>
+                <p><a href="{{ route('web.blogs') }}">@lang('app.blog')</a></p>
             </div>
             <div class="col-md-3 col-sm-6 hidden-xxs">
                 <span><a href="#">@lang('app.toclients')</a></span>
-                <p><a href="ask-question.html">@lang('app.askquestion')</a></p>
-                <p><a href="order-call.html">@lang('app.ordercall')</a></p>
-                <p><a href="order-document.html">@lang('app.orderdocument')</a></p>
-                <p><a href="faq.html">@lang('app.faqs')</a></p>
-                <p><a href="lawyers.html">@lang('app.ourlawyers')</a></p>
-                <p><a href="about.html#guarantees">@lang('app.guarantees')</a></p>
-                <p><a href="questions.html">@lang('app.questions')</a></p>
+                <p><a href="{{ route('question.create') }}">@lang('app.askquestion')</a></p>
+                <p><a href="{{ route('call.create') }}">@lang('app.ordercall')</a></p>
+                <p><a href="{{ route('document.create') }}">@lang('app.orderdocument')</a></p>
+                <p><a href="{{ route('faq') }}">@lang('app.faqs')</a></p>
+                <p><a href="{{ route('lawyers.list') }}">@lang('app.ourlawyers')</a></p>
+                <p><a href="{{ route('about') }}">@lang('app.guarantees')</a></p>
+                <p><a href="{{ route('question.list') }}">@lang('app.questions')</a></p>
             </div>
             <div class="col-md-3 col-sm-6 hidden-xxs">
                 <span><a href="#">@lang('app.tolawyers')</a></span>
-                <p><a href="become-lawyer.html">@lang('app.becomelawyer')</a></p>
+                <p><a href="{{ route('become-lawyer') }}">@lang('app.becomelawyer')</a></p>
                 <span><a href="#">@lang('app.topartners')</a></span>
-                <p><a href="ad.html">@lang('app.toadvertisers')</a></p>
+                <p><a href="{{ route('ad') }}">@lang('app.toadvertisers')</a></p>
             </div>
         </div>
         <div class="row social-link">

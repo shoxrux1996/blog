@@ -71,7 +71,15 @@ class ClientQuestionController extends Controller
 
                     return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Неправильный email или пароль']);
                 }
-                return $this->questionCreate($request,Auth::guard('client')->user());    
+                $this->questionCreate($request,Auth::guard('client')->user());
+                if(Session::has('question-create')) {
+                    Session::reflash();   
+                    return redirect()->route('client.dashboard');
+                }
+                elseif (Session::has('message')) {
+                    Session::reflash();  
+                    return redirect()->route('card.payment');
+                }    
             }
             else{
                 $this->validate($request, [
@@ -107,11 +115,28 @@ class ClientQuestionController extends Controller
                         ->subject('Verify your email address');
                 });
                 $client->save();   
-                return $this->questionCreate($request,$client);            
+
+                $this->questionCreate($request,$client);
+                if(Session::has('question-create')) {
+                    Session::reflash();   
+                    return redirect()->route('client.dashboard');
+                }
+                elseif (Session::has('message')) {
+                    Session::reflash();  
+                    return redirect()->route('card.payment');
+                }
             }
         }
         else{
-            return $this->questionCreate($request,Auth::guard('client')->user());
+            $this->questionCreate($request,Auth::guard('client')->user());
+            if(Session::has('question-create')) {
+                Session::reflash();   
+                return redirect()->route('user.login');
+            }
+            elseif (Session::has('message')) {
+                Session::reflash();  
+                return redirect()->route('card.payment');
+            }
         }        
     }
 
@@ -157,6 +182,8 @@ class ClientQuestionController extends Controller
 
             if ($request->type == 2) {
                 if ($client->user->balance() >= 5000) {
+
+                    Session::flash('question-create', 'Question created successfully');
                     return $this->questionCreateEloquent($request,$client,2);    
                 } else {
                     Session::flash('message', 'Not enough money, Please charge your balance');
@@ -164,6 +191,7 @@ class ClientQuestionController extends Controller
                 }
             } elseif ($request->type == 1) {
                 if ($client->user->balance() >= 1000) {
+                    Session::flash('question-create', 'Question created successfully');
                     return $this->questionCreateEloquent($request,$client,1);
                 } else {
                     Session::flash('message', 'Not enough money, Please charge your balance');
@@ -171,6 +199,8 @@ class ClientQuestionController extends Controller
                 }
             } 
             else {
+
+                Session::flash('question-create', 'Question created successfully');
                 return $this->questionCreateEloquent($request,$client,0);
         }
     }
@@ -215,8 +245,7 @@ class ClientQuestionController extends Controller
             $order->amount = $question->price;
             $question->order()->save($order);
         }
-        Session::flash('message', 'Question created successfully');
-        return redirect()->route('client.dashboard');    
+        return true;    
     }
 }
 

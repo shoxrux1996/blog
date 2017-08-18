@@ -200,6 +200,24 @@ Route::get('/about', function(){
 Route::get('/how-works', function(){
 	return view('how-works');
 })->name('how-works');
+Route::get('/partners', function(){
+    return view('partners');
+})->name('partners');
+Route::get('/ad', function(){
+    return view('ad');
+})->name('ad');
+Route::get('/become-lawyer', function(){
+    return view('become-lawyer');
+})->name('become-lawyer');
+Route::get('/team', function(){
+    return view('team');
+})->name('team');
+Route::get('/contacts', function(){
+    return view('contacts');
+})->name('contacts');
+Route::get('/faq', function(){
+    return view('faq');
+})->name('faq');
 
 Route::get('setlocale/{locale}', function ($locale) {
   if (in_array($locale, \Config::get('app.locales'))) {
