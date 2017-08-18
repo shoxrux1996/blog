@@ -37,3 +37,51 @@
 #search .dropdown-menu li a{
     padding: 10px;
 }
+
+.answer{
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    margin-bottom: 20px;
+}
+
+.answer .answer-header img{
+    width: 128px;
+    float: left;
+    margin-right: 10px;
+}
+
+.answer .answer-content{
+    padding: 10px;
+}
+
+
+
+.answer hr{
+    margin: 10px 0;
+    margin-bottom: 0;
+}
+
+.answer .answered-time{
+    font-weight: 600;
+    color: #5e5d5d;
+}
+
+@media (max-width: 767px){
+
+    #wrapper{
+        padding: 10px;
+    }
+
+    .question{
+        padding: 10px;
+    }
+
+    .question-type a{
+        font-size: 16px;
+    }
+
+    .question-type .active-type a{
+        font-size: 22px;
+    }
+}

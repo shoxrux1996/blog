@@ -111,7 +111,7 @@
                                     <strong>{{ $errors->first('name') }}</strong>
                                 </span>
                             @endif
-                            <input type="text"  class="form-control" name="name" placeholder="Введите вашу имя">
+                            <input type="text"  class="form-control general-input" name="name" placeholder="Введите вашу имя">
                         </div>
                         <div class="form-group{{ $errors->has('email') || $errors->has('wrong-attempt') ? ' has-error' : '' }}">
                             <label for="username"><i class="fa fa-envelope-o" aria-hidden="true"></i> Эл. почта</label>
@@ -120,7 +120,7 @@
                                     <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                             @endif
-                            <input type="text"  class="form-control" id="email" name="email" placeholder="Введите электронную почту">
+                            <input type="text"  class="form-control general-input" id="email" name="email" placeholder="Введите электронную почту">
                         </div>
                         <div class="form-group{{ $errors->has('password') || $errors->has('wrong-attempt') || $errors->has('password_confirmation') ? ' has-error' : '' }}">
                             <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> Пароль </label>
@@ -137,11 +137,11 @@
                                     <strong>{{ $errors->first('wrong-attempt') }}</strong>
                                 </span>
                             @endif
-                            <input type="password" class="form-control" name="password" placeholder="Введите новую пароль">
+                            <input type="password" class="form-control general-input" name="password" placeholder="Введите новую пароль">
                         </div>
                         <div class="form-group" id="password-confirm-div">
                             <label for="password-confirm"><i class="fa fa-lock" aria-hidden="true"></i> Повторите пароль </label>
-                            <input type="password" class="form-control" name="password_confirmation" placeholder="Введите заново новую пароль">
+                            <input type="password" class="form-control general-input" name="password_confirmation" placeholder="Введите заново новую пароль">
                         </div>
                        
                         

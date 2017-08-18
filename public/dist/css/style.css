@@ -203,10 +203,14 @@ body *{
 }
 
 .best-lawyers{
-    border: 1px solid #1F2746;
-    border-radius: 2px;
     padding: 10px;
     margin-bottom: 10px;
+    background-color: white;
+    border: 2px solid #DDDDDD;
+}
+
+.best-lawyers a{
+    border-radius: 0;
 }
 
 .best-lawyers h3{
@@ -223,8 +227,8 @@ body *{
 }
 
 .ask-question-block{
-    border-radius: 2px;
-    border: 1px solid #8B8F9C;
+    background-color: white;
+    border: 2px solid #DDDDDD;
 }
 
 .ask-question-block{
@@ -237,6 +241,10 @@ body *{
     height: 53px;
     width: 63px;
     margin-top: 5px;
+}
+
+.ask-question-block a{
+    border-radius: 0;
 }
 
 .ask-question-block h6{
@@ -430,17 +438,17 @@ footer .social-link i:hover{
 
 @media (max-width: 991px) {
 
-   .best-lawyers img{
+    .best-lawyers img{
         height: 72px;
         display: block;
         float: left;
         margin-right: 5px;
     }
 
-   .best-lawyers{
+    .best-lawyers{
         margin-top: 10px;
-        border: 1px solid #1F2746;
         padding: 5px;
+        border: 2px solid #DDDDDD;
     }
 
     .best-lawyers a{
@@ -489,6 +497,15 @@ footer .social-link i:hover{
 
     .navbar .navbar-header{
         padding: 0 10px;
+    }
+
+
+    .ask-question-block h6{
+        font-size: 16px;
+    }
+
+    #main-section #search-cities input{
+        width: 70%;
     }
 
     /*Footer*/

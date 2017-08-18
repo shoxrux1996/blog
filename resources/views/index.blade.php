@@ -4,12 +4,12 @@
 @endsection
 
 @section('menu')
-    <li class="active-link"><a href="{{ route('home')}}">Главная</a></li>
-    <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-    <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-    <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-    <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-    <li><a href="{{ route('about')}}">О нас</a></li>
+    <li class="active-link"><a href="{{ route('home')}}">@lang('index.home')</a></li>
+    <li><a href="{{ route('lawyers.list')}}">@lang('index.lawyers')</a></li>
+    <li><a href="{{ route('question.list')}}">@lang('index.questions')</a></li>
+    <li><a href="{{ route('web.blogs')}}">@lang('index.blog')</a></li>
+    <li><a href="{{ route('how-works')}}">@lang('index.howworks')</a></li>
+    <li><a href="{{ route('about')}}">@lang('index.aboutus')</a></li>
 @endsection
 @section('content')
 
@@ -17,11 +17,11 @@
     <div class="container-fluid" id="search-section">
         <div class="row">
             <div class="col-md-4">
-                <h1>Уверенность в каждом решении</h1>
+                <h1>@lang('index.confidence')</h1>
                 <form action="{{route('search.all')}}" method="post">
                     {{csrf_field()}}
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Поиск по юристом, вопросом и документом"/>
+                        <input type="text" class="form-control" name="search" placeholder="{{ __('Поиск по вопросам, юристам и новостям') }}"/>
                         <span class="input-group-btn">
                       <button type="submit" class="btn btn-default" >
                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -39,23 +39,23 @@
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12 text-center">
                 <img src="{{ asset( 'dist/images/question-icon.png')}}" alt="Question icon"/>
-                <a type="button" class="btn btn-default" href="{{ route('question.create')}}">Задать вопрос</a>
+                <a type="button" class="btn btn-default" href="{{ route('question.create')}}">@lang('index.askquestion')</a>
                 <p class="statistics">50,000+</p>
-                <p class="what">Отвеченных вопросов</p>
+                <p class="what">@lang('index.answeredquestions')</p>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12 text-center">
                 <img src="{{ asset('dist/images/call-icon.png')}}" alt="Call icon"/>
                 {{--href="{{ route('call.create')}}"--}}
-                <a type="button" class="btn btn-default" data-toggle="modal" data-target="#call-function">Заказать звонок</a>
+                <a type="button" class="btn btn-default" data-toggle="modal" data-target="#call-function">@lang('index.ordercall')</a>
                 <p class="statistics">20,00,000+</p>
-                <p class="what">Обратных звонков</p>
+                <p class="what">@lang('index.callback')</p>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12 text-center">
                 <img src="{{ asset('dist/images/document-icon.png')}}" class="img-responsive" alt="Document icon"/>
                 {{--href="{{ route('document.create')}}"--}}
-                <a type="button" class="btn btn-default" data-toggle="modal" data-target="#document-function">Заказать документ</a>
+                <a type="button" class="btn btn-default" data-toggle="modal" data-target="#document-function">@lang('index.orderdocument')</a>
                 <p class="statistics">40,000,000+</p>
-                <p class="what">Cозданных документов</p>
+                <p class="what">@lang('index.madedocuments')</p>
             </div>
         </div>
     </div>
@@ -67,14 +67,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Скоро!!!</h4>
+                    <h4 class="modal-title">@lang('index.soon')!!!</h4>
                 </div>
                 <div class="modal-body">
                     <img src="{{asset('dist/images/under-development.png')}}" alt="Under development"/>
-                    <h4>Функция "заказать звонок" в процессе разработки</h4>
+                    <h4>@lang('index.callinprocess')</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
                 </div>
             </div>
 
@@ -89,14 +89,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Скоро!!!</h4>
+                    <h4 class="modal-title">@lang('index.soon')!!!</h4>
                 </div>
                 <div class="modal-body">
                     <img src="{{asset('dist/images/under-development.png')}}" alt="Under development"/>
-                    <h4>Функция "заказать документ" в процессе разработки</h4>
+                    <h4>@lang('index.documentinprocess')</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
                 </div>
             </div>
 
@@ -108,12 +108,12 @@
 
     <!-- Questions Section -->
     <div class="container-fluid" id="questions-section">
-        <h2 class="text-center">Задано <span class="total">{{$num_of_questions}}</span> вопроса</h2>
+        <h2 class="text-center">@lang('index.asked') <span class="total">{{$num_of_questions}}</span> @lang('index.#questions')</h2>
         <div class="questions-bg clearfix">
             <h3 class="category text-center">
-                <button class="active btn-link" id="paid-questions">Платные</button>
+                <button class="active btn-link" id="paid-questions">@lang('index.paid')</button>
                 <span>
-                     <button class="not-active btn-link" id="free-questions">Бесплатные</button>
+                     <button class="not-active btn-link" id="free-questions">@lang('index.free')</button>
                 </span>
             </h3>
             <div id="paid-question-block">
@@ -123,13 +123,13 @@
                             {{$var->created_at}}
                         </div>
                         <div class="total-answers">
-                            {{$var->countAnswers()}} ответов
+                            {{$var->countAnswers()}} @lang('index.answers')
                         </div>
                         <div class="asked-question">
                             {{$var->title}}
                         </div>
                         <div class="asked-price">
-                            стоимость {{$var->price}} сум
+                            @lang('index.price') {{$var->price}} @lang('index.sum')
                         </div>
                     </a>
                 @endforeach
@@ -141,7 +141,7 @@
                             {{$var->created_at}}
                         </div>
                         <div class="total-answers">
-                            {{$var->countAnswers()}} ответов
+                            {{$var->countAnswers()}} @lang('index.answers')
                         </div>
                         <div class="asked-question">
                             {{$var->title}}
@@ -149,8 +149,7 @@
                     </a>
                 @endforeach
             </div>
-            <a type="button" class="btn btn-default btn-lg btn-block btn-dark-blue" href="{{ route('question.list')}}">Смотреть
-                все вопросы</a>
+            <a type="button" class="btn btn-default btn-lg btn-block btn-dark-blue" href="{{ route('question.list')}}">@lang('index.allquestions')</a>
         </div>
     </div>
     <!-- /Questions -->
@@ -175,12 +174,9 @@
                 @endfor
             </div>
             <div class="col-md-3 text-center view-all-categories">
-                <h3>ПОМОЩЬ ЛЮБОГО ЮРИДИЧЕСКОГО ВОПРОСА</h3>
-                <p>Наши юристы дают вам
-                    представление и рекомендации по тысячам
-                    юридических вопросов.</p>
-                <a type="button" class="btn  btn-dark-blue" href="{{ route('category.list')}}">Просмотреть все
-                    категории</a>
+                <h3>@lang('index.helpforanyquestion')</h3>
+                <p>@lang('index.helpforanyquestionbody')</p>
+                <a type="button" class="btn  btn-dark-blue" href="{{ route('category.list')}}">@lang('index.allcategories')</a>
             </div>
         </div>
     </div>
@@ -188,7 +184,7 @@
 
     <!-- News Section -->
     <div class="container-fluid" id="news-section">
-        <h1 class="text-center">Блоги</h1>
+        <h1 class="text-center">@lang('index.blogs')</h1>
         <div class="row">
             @foreach($blogs as $blog)
                 <div class="col-md-4 col-sm-4">
@@ -198,7 +194,7 @@
                         <img class="img-responsive img-thumbnail" src="{{ asset('dist/images/blog-img-2.jpg')}}" alt="News 2"/>
                     @endif
                     <div class="middle">
-                        <a class="btn btn-dark-blue text" href="{{route('web.blog.show', $blog->id)}}">Читать статью</a>
+                        <a class="btn btn-dark-blue text" href="{{route('web.blog.show', $blog->id)}}">@lang('readblog')</a>
                     </div>
                     <h4><a href="{{route('web.blog.show', $blog->id)}}">{{mb_substr($blog->title,0,50)}} {{strlen($blog->title) > 50 ? '...' : ""}}</a></h4>
                     <p>{{substr(strip_tags($blog->text),0,80)}} {{strlen(strip_tags($blog->text)) > 80 ? '...' : ""}}</p>
@@ -208,17 +204,15 @@
         </div>
         <div class="row text-center">
             <a type="button" class="btn  btn-dark-blue" href="{{route('web.blogs')}}">
-                <i class="fa fa-book" aria-hidden="false"></i> Все статьи
-            </a>
+                <i class="fa fa-book" aria-hidden="false"></i> @lang('index.allblogs')</a>
         </div>
     </div>
     <!-- /News Section -->
 
     <!-- Lawyers Section -->
     <div class="container-fluid text-center" id="lawyers-section">
-        <h2>Консультации от <span class="total">{{$num_of_lawyers}}</span> юристов и адвокатов</h2>
-        <h5>Наши юристы — профессионалы, которые обладают знаниями законодательной базы и богатой судебной практикой.
-            Поэтому, обращаясь за бесплатной юридической консультацией, вы получите грамотный и обоснованный ответ.</h5>
+        <h2>@lang('index.consultionfrom') <span class="total">{{$num_of_lawyers}}</span> @lang('index.lawyers&jurists')</h2>
+        <h5>@lang('index.ourlawyers-...')</h5>
         <div class="row" id="gallery">
             <div id="lawyers-carousel" class="crsl-nav">
                 <a href="#" class="previous">Previous</a>
@@ -235,7 +229,7 @@
                                     <h4>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h4>
                                     <h5>г. {{$lawyer->user->city->name}}</h5>
                                     <hr class="green-divider">
-                                    <p><span class="total">{{$lawyer->feedbacks->count()}}</span> благодарностей</p>
+                                    <p><span class="total">{{$lawyer->feedbacks->count()}}</span> @lang('index.feedbacks')</p>
                                 </a>
                             </div>
                         </figure>
@@ -245,32 +239,23 @@
                 </div>
             </div>
         </div>
-        <a type="button" class="btn  btn-dark-blue" href="{{ route('lawyers.list')}}">Все юристы проекта</a>
+        <a type="button" class="btn  btn-dark-blue" href="{{ route('lawyers.list')}}">@lang('index.allprojectlawyers')</a>
     </div>
     <!-- Lawyers Section -->
 
     <!-- About Us Section -->
     <div class="container-fluid" id="about-us-section">
-        <h1 class="text-center">О нас</h1>
+        <h1 class="text-center">@lang('index.aboutus')</h1>
         <div class="row" style="clear: both; overflow: hidden;">
             <div class="col-md-6 col-sm-6">
                 <img  src="{{asset('dist/images/aboutus.jpg')}}"  width="100%" height="auto" controls>
 
             </div>
             <div class="col-md-6 col-sm-6">
-                <h4>Профессиональная юридическая помощь в любой точке мира</h4>
-                <p>У вас возникла необходимость в квалифицированной правовой поддержке? Не знаете, где получить
-                    консультацию юриста, и нет времени для посещения адвокатских контор? Вы пытались самостоятельно
-                    изучать законодательство, искать ответы на юридические вопросы, но понимаете, что велика вероятность
-                    ошибок и вам нужна помощь?</p>
-                <p>У вас возникла необходимость в квалифицированной правовой поддержке? Не знаете, где получить
-                    консультацию юриста, и нет времени для посещения адвокатских контор? Вы пытались самостоятельно
-                    изучать законодательство, искать ответы на юридические вопросы, но понимаете, что велика вероятность
-                    ошибок и вам нужна помощь?</p>
-                <p>У вас возникла необходимость в квалифицированной правовой поддержке? Не знаете, где получить
-                    консультацию юриста, и нет времени для посещения адвокатских контор? Вы пытались самостоятельно
-                    изучать законодательство, искать ответы на юридические вопросы, но понимаете, что велика вероятность
-                    ошибок и вам нужна помощь?</p>
+                <h4>@lang('index.aboutustitle')</h4>
+                <p>@lang('index.aboutusbody1')</p>
+                <p>@lang('index.aboutusbody2')</p>
+                <p>@lang('index.aboutusbody3')</p>
             </div>
         </div>
     </div>
