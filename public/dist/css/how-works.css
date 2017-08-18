@@ -31,3 +31,23 @@
     color: #fff;
 }
 
+.btn{
+    border-radius: 0;
+}
+
+@media (max-width: 767px) {
+    #ask-question{
+        padding: 20px;
+        height: 200px;
+    }
+
+    #unique-services, #how-it-works, #we-guarantee, #ask-question{
+        padding: 10px;
+    }
+
+    #ask-question-now{
+        height: 200px;
+        padding: 20px;
+    }
+}
+
