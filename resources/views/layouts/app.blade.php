@@ -218,8 +218,8 @@
           <span>
             <a href="http://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             <a href="http://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            <a href="http://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="http://www.telegram.me"><i class="fa fa-telegram" aria-hidden="true"></i></a>
+            <a href="https://www.facebook.com/yuridik"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://t.me/yuridikuz"><i class="fa fa-telegram" aria-hidden="true"></i></a>
           </span>
         </div>
     </div>
