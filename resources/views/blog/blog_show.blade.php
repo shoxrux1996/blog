@@ -110,7 +110,9 @@
                 @foreach($blog->comments as $comment)
                     <div class="comment">
                         <div class="author-info">
-                            <img src="{{ "https://www.gravatar.com/avatar/" .md5(strtolower(trim($comment->commentable->email))) . "?s=50&d=monsterid" }}"
+                            <img src="{{ $comment->comentable->user->file != null
+                             ? asset($comment->commentable->user->file.$comment->commentable->user->file) :
+                              asset('dist/images/headshot-1.png')}}"
                                  class="author-img">
                             <div class="author-name">
                                 <h4>{{$comment->commentable->email}}</h4>
