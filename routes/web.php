@@ -7,6 +7,7 @@ Route::post('error/post', function (\Illuminate\Http\Request $request){
     $error->error = $request->error;
     $error->save();
     $error->notify(new \yuridik\Notifications\RequestWebsite());
+    return redirect()->back();
 })->name('error.find');
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');

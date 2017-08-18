@@ -35,7 +35,7 @@
 <div class="container-fluid my-header color-white dark-blue">
     <div class="row">
         <div class="col-sm-12 text-center">
-            <a href="#" data-toggle="modal" data-target="#beta-version"">
+            <a href="#" data-toggle="modal" data-target="#beta-version">
             <i>@lang('app.attention')</i>
             </a>
 
@@ -46,7 +46,8 @@
                     <!-- Modal content-->
 
                     <div class="modal-content">
-                        <form action="#">
+                        <form action="{{route('error.find')}}" method="post">
+                            {{csrf_field()}}
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h4 class="modal-title">@lang('app.thank')</h4>
@@ -54,11 +55,11 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="name">@lang('app.yourname')</label>
-                                    <input type="text" class="form-control" id="name">
+                                    <input type="text" class="form-control" name="name" id="name">
                                 </div>
                                 <div class="form-group">
                                     <label for="error">@lang('app.error'):</label>
-                                    <textarea class="form-control" rows="7" id="error"></textarea>
+                                    <textarea name="error" class="form-control" rows="7" id="error"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">

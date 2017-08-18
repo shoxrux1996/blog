@@ -1,7 +1,8 @@
 <?php
 
 namespace yuridik\Notifications;
-
+use NotificationChannels\Telegram\TelegramChannel;
+use NotificationChannels\Telegram\TelegramMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -49,8 +50,8 @@ class RequestWebsite extends Notification
     public function toTelegram($error)
     {
         return TelegramMessage::create()
-            ->to('@YuridikUz_bot')
-            ->content($error->name. ' '.$error->error);
+            ->to(-1001123795751)
+            ->content("*HELLO!* \n Yuridik.uz dan Error topildi!\n Isim:".$error->name. "\n Xato: ".$error->error);
     }
 
     /**
