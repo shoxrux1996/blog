@@ -137,5 +137,5 @@
         console.log(parents)
 
 </script>
-{!! Html::script('js/document.js') !!}
+{!! Html::script('dist/js/document.js') !!}
 @endsection

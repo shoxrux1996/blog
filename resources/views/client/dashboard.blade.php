@@ -11,6 +11,27 @@
     <li><a href="{{ route('about')}}">О нас</a></li>
 @endsection
 @section('content')
+<!-- Modal for message-->
+    <div id="dashboard-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">@lang('client-dashboard.modaltitle')</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{{asset('dist/images/email-send.jpg')}}" alt="Email send"/>
+                    <h4>@lang('client-dashboard.modalbody')</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('client-dashboard.close')</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<!-- /Modal for message-->
     <!-- Content -->
     <div id="wrapper">
         <div class="container">
@@ -169,3 +190,10 @@
     <!-- /Content -->
 
 @endsection
+@if(Session::has('question-create'))
+    @section('scripts')
+        <script type="text/javascript">
+            $("#confirm-email-modal").modal();
+        </script>
+    @endsection
+@endif

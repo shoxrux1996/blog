@@ -169,7 +169,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class='package brilliant col-sm-4'>
+                    <div class='package brilliant col-sm-4' >
                         <input type="radio" name="type" checked id="vip-price" value="2" />
                         <div class='name'>
                             <label for="vip-price">VIP-консультация</label>
@@ -201,7 +201,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class='package col-sm-4'>
+                    <div class='package col-sm-4' >
                         <input type="radio" name="type" id="free-price" value="0" />
                         <div class='name'>
                             <label for="free-price">Бесплатная</label>
@@ -249,7 +249,6 @@
             }
 
         });
-
 
     </script>
 @endsection

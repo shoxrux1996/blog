@@ -104,13 +104,13 @@
                     @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
+                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('auth.close')</button>
                 </div>
             </div>
 
         </div>
     </div>
-    <!-- /Modal for message-->
+<!-- /Modal for message-->
 
 <!-- Login Form -->
 <div class="container">
