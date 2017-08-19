@@ -71,36 +71,12 @@
                 @endforeach
                 <!-- /Comment new style -->
             </div>
+
             <div class="row">
-                @if (Auth::guard('lawyer')->check() && $question->solved != true)
-                    @if(($question->type == 1 || $question->type == 2) && Auth::guard('lawyer')->user()->type == 2)
+                <div class="col-sm-9">
+                    @if (Auth::guard('lawyer')->check() && $question->solved != true)
+                        @if(($question->type == 1 || $question->type == 2) && Auth::guard('lawyer')->user()->type == 2)
 
-                        {{Form::open(['route' => ['lawyer.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
-
-                        <div class="panel panel-danger col-md-10" style="padding-top: 10px;">
-                            @if ($errors->has('text'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('text') }}</strong>
-                                    </span>
-                            @endif
-                            <div>
-                                {{Form::textarea('text', null,['class'=>'myTextEditor','style' =>'width:100%;', 'placeholder'=>'Ответить'])}}
-                            </div>
-
-
-                            <div class="col-md-4" style="margin:10px;">
-                                {{Form::file('files[]', ['multiple' => 'multiple'])}}
-                            </div>
-                            <div class="col-md-2" style="float:right; margin: 10px;">
-                                {{Form::submit('Ответить', ['class'=> 'btn btn-success'])}}
-                            </div>
-
-                        </div>
-                        {{Form::close() }}
-
-                    @endif
-                    @if($question->type == 0)
-                        <div class="row">
                             {{Form::open(['route' => ['lawyer.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
 
                             <div class="panel panel-danger col-md-10" style="padding-top: 10px;">
@@ -123,11 +99,39 @@
 
                             </div>
                             {{Form::close() }}
-                        </div>
-                    @endif
 
-                @endif
+                        @endif
+                        @if($question->type == 0)
+                            <div class="row">
+                                {{Form::open(['route' => ['lawyer.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
+
+                                <div>
+                                    @if ($errors->has('text'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('text') }}</strong>
+                                    </span>
+                                    @endif
+                                    <div>
+                                        {{Form::textarea('text', null,['class'=>'myTextEditor','style' =>'width:100%;', 'placeholder'=>'Ответить'])}}
+                                    </div>
+
+
+                                    <div class="col-md-4" style="margin:10px;">
+                                        {{Form::file('files[]', ['multiple' => 'multiple'])}}
+                                    </div>
+                                    <div class="col-md-2" style="float: right; text-align:right; margin: 10px 0;">
+                                        {{Form::submit('Ответить', ['class'=> 'btn btn-success'])}}
+                                    </div>
+
+                                </div>
+                                {{Form::close() }}
+                            </div>
+                        @endif
+
+                    @endif
+                </div>
             </div>
+
         </div>
     </div>
 @endsection
@@ -138,7 +142,7 @@
             mode : "specific_textareas",
             editor_selector : "myTextEditor",
             plugins: 'link code',
-            height: 500,
+            height: 300,
             toolbar: 'undo redo | cut copy paste'
         });
 
