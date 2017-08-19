@@ -50,6 +50,9 @@
     font-style: normal;
 }
 
+html *{
+    font-family: "Open Sans";
+}
 h1{
     font-size: 36px;
     font-weight: bold;

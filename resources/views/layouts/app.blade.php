@@ -127,8 +127,8 @@
                             <a href=" {{(Auth::guard('client')->check()) ? route('client.dashboard') : route('lawyer.dashboard')}}">@lang('app.dashboard')</a></li>
                         <li>
                             <a href="{{(Auth::guard('client')->check()) ? route('client.info') : route('lawyer.info')}}">@lang('app.edit')</a></li>
-                        <li><a href="#">@lang('app.partners')</a></li>
-                        <li><a href="#">@lang('app.finance')</a></li>
+                        {{--<li><a href="#">@lang('app.partners')</a></li>--}}
+                        {{--<li><a href="#">@lang('app.finance')</a></li>--}}
                         <li><a href="{{ route('user.logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">@lang('app.logout')</a>
@@ -216,8 +216,8 @@
         </div>
         <div class="row social-link">
           <span>
-            <a href="http://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="http://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
             <a href="https://www.facebook.com/yuridik"><i class="fa fa-facebook" aria-hidden="true"></i></a>
             <a href="https://t.me/yuridikuz"><i class="fa fa-telegram" aria-hidden="true"></i></a>
           </span>
