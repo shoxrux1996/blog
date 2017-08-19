@@ -17,7 +17,7 @@
 <!-- Content -->
 <div id="wrapper">
     <div class="container">
-        <h4><b>Задайте свой вопрос юристу</b></h4>
+        <h3><b>Задайте свой вопрос юристу</b></h3>
 
         <!-- How does it work ? -->
         <div class="row" id="how-it-works">
