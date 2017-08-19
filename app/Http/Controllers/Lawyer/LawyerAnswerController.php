@@ -34,7 +34,7 @@ class LawyerAnswerController extends Controller
     {
 
         $rules = array(
-            'text' => 'required|min:5|max:2000'
+            'text' => 'required|min:5|max:10000'
         );
         $count = count($request->file('files')) - 1;
 

@@ -48,77 +48,28 @@
                 <h3>Ответы</h3>
 
                 <!-- Comment news style -->
+                @foreach($question->answers as $answer)
                 <div class="col-sm-9 answer">
                     <div class="answer-header">
-                        <img class="img-thumbnail" src="{{asset("dist/images/headshot-1.png")}}" alt="Lawyer 1" />
-                        <h4 class="lawyer-name">Hamidulla</h4>
-                        <h6 class="lawyer-type">Юрист</h6>
+                        <img class="img-thumbnail" src="{{$answer->lawyer->user->file != null ? asset($answer->lawyer->user->file->path.$answer->lawyer->user->file->file) : asset("dist/images/headshot-1.png")}}" alt="Lawyer 1" />
+                        <h4 class="lawyer-name">{{$answer->lawyer->firstName}}</h4>
+                        <h6 class="lawyer-type">{{$answer->lawyer->job_status}}</h6>
                     </div>
                     <div class="clearfix"></div>
                     <div>
                         <hr>
                     </div>
                     <div class="answer-content">
-                        <p>Ўзбекистон Республикаси Вазирлар Маҳкамасининг 2006 йил 14 июлдаги 138-сон қарори билан тасдиқланган «Автомобиль транспортида йўловчиларни ҳамда юкларни шаҳарда, шаҳар атрофида, шаҳарлараро ва халқаро йўналишлар бўйича ташиш фаолиятини лицензиялаш тўғрисида»ги Низомнинг (кейинги ўринларда - Низом деб юритилади) 3-банди 2-хатбошида: «Тижорат асосида йўловчиларни ҳамда юкларни шаҳарда, шаҳар атрофида, шаҳарлараро ва халқаро йўналишлар бўйича ташиш фаолияти фақат юридик шахслар томонидан амалга оширилади», деб белгиланган.</p>
+                    {!! $answer->text !!}
                     </div>
                     <div class="answer-footer">
                         <span class="pull-right answered-time">
-                            August 8, 2017 - 3:44PM
+                            {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
                         </span>
                     </div>
                 </div>
-                <!-- /Comment new style -->
-
-                @foreach($question->answers as $answer)
-                    <div class="panel panel-content col-sm-9">
-                        <div class="comment">
-                            <div class="author-info">
-                                <div class="author-name col-sm-9">
-                                    <a href="#"><h4>{{$answer->lawyer->user->firstName}}</h4></a>
-                                    <div class="comment-content">
-                                        {!!$answer->text!!}
-                                    </div>
-                                    <div class="tags col-md-6">
-                                        @foreach($answer->files as $file)
-                                            <a class="label label-default"
-                                               href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="author-time">{{date('F n, Y - g:iA'), strtotime($answer->created_at)}}</p>
-                                    <img src="{{ $answer->lawyer->user->file != null ? asset($answer->lawyer->user->file->path.$answer->lawyer->user->file->file) : asset('dist/images/avatar_large_male_client_default.jpg')}}"
-                                         class="author-img col-md-3" style=" width: 200px; height: 150px; margin-bottom: 20px;">
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            @if((Auth::guard('client')->check() && Auth::guard('client')->user()->id == $answer->question->client->id) && ($answer->feedback == null))
-
-                                {{Form::open(['route' => ['feedback.create', $answer->id],'method' => 'POST']) }}
-
-                                <div class="col-md-5">
-
-                                    {{Form::label('text', "Отзыв: ") }}
-                                    {{Form::textarea('text', null, ['rows' =>'2', 'cols'=>'43'])}}
-                                    <div class="col-md-12">
-                                        <div class="col-md-6">like {{Form::radio('helped',true,true)}}</div>
-                                        <div class="col-md-4 " style="float:right;">
-                                            dislike {{Form::radio('helped',false)}}</div>
-                                    </div>
-                                    {{Form::submit('Оставить отзыв', ['class'=> 'btn btn-success btn-block'])}}
-                                </div>
-
-                                {{Form::close() }}
-                            @endif
-                            @if($answer->feedback != null)
-                                <p style="color:rebeccapurple">{{$answer->feedback->text}}</p>
-                            @endif
-                        </div>
-                    </div>
-
                 @endforeach
-
+                <!-- /Comment new style -->
             </div>
             <div class="row">
                 @if (Auth::guard('lawyer')->check() && $question->solved != true)

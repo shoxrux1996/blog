@@ -51,7 +51,7 @@ class RequestWebsite extends Notification
     {
         return TelegramMessage::create()
             ->to(-1001123795751)
-            ->content("*HELLO!* \n Yuridik.uz dan Error topildi!\n Isim:".$error->name. "\n Xato: ".$error->error);
+            ->content("*HELLO!* \n Yuridik.uz dan Error topildi!\n Ism:".$error->name. "\n Xato: ".$error->error);
     }
 
     /**
