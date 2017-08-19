@@ -53,5 +53,12 @@ jQuery(document).ready(function($){
 
     $('.price-table .package').click(function () {
         $(this).children('input').prop('checked', true);
-    })
+    });
+
+    //404.html page script
+    $('.comment-list .row').hide();
+    var childrens = $('.comment-list').children('.row');
+    childrens.each(function (i) {
+        $(this).delay(2000 * i).fadeIn(2000);
+    });
 });
