@@ -119,3 +119,26 @@
     padding: 0 30px;
     background-color: transparent;
 }
+
+/* Media queries */
+@media (max-width: 767px) {
+    #wrapper{
+        padding: 0;
+    }
+
+    #wrapper .profile{
+        margin: 0;
+    }
+
+    #wrapper .profile .col-md-3{
+        padding: 0;
+    }
+
+    #wrapper .profile .tab-content{
+        margin-top: 10px;
+    }
+
+    #wrapper .profile #category-section{
+        padding: 0;
+    }
+}

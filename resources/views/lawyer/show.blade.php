@@ -13,7 +13,7 @@
 @endsection
 @section('content')
     <div id="wrapper">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row profile">
                 <div class="col-md-3">
                     <div class="profile-sidebar">
