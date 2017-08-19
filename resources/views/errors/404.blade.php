@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('styles')
-    <link href="{{ asset('4040.css')}}" rel="stylesheet">
+    
 @endsection
 @section('menu')
     <li><a href="{{ route('home')}}">Главная</a></li>
