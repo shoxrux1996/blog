@@ -115,4 +115,26 @@
     .ask-form{
         padding: 10px;
     }
+
+    #wrapper{
+        padding: 10px;
+    }
+
+    #wrapper .container:first-child > h3{
+        text-align: center;
+    }
+
+    #how-it-works .col-sm-3{
+        padding: 5px;
+        text-align: center;
+    }
+
+    #how-it-works .col-sm-3 h5{
+        font-weight: bold;
+    }
+
+    .ask-form .checkbox-inline{
+        margin-left: 0;
+        font-weight: bold;
+    }
 }
