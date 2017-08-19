@@ -218,6 +218,9 @@ Route::get('/contacts', function(){
 Route::get('/faq', function(){
     return view('faq');
 })->name('faq');
+Route::get('/guarantees', function(){
+    return view('guarantees');
+})->name('guarantees');
 
 Route::get('setlocale/{locale}', function ($locale) {
   if (in_array($locale, \Config::get('app.locales'))) {
