@@ -104,92 +104,149 @@
 
         <!-- Blog comments-->
         <div class="row">
-            <div class="col-md-8 col-md-offset-2" style="margin: 10px;">
+            <div class="col-md-8 col-md-offset-2">
                 <hr>
-                <h3><span class=""></span> Comments</h3>
-                @foreach($blog->comments as $comment)
-                    <div class="comment">
-                        <div class="author-info">
-                            <img src="{{ $comment->comentable->user->file != null
-                             ? asset($comment->commentable->user->file.$comment->commentable->user->file) :
-                              asset('dist/images/headshot-1.png')}}"
-                                 class="author-img">
-                            <div class="author-name">
-                                <h4>{{$comment->commentable->email}}</h4>
-                                @php
-                                    $end = \Carbon\Carbon::parse($comment->created_at);
-                                    $days = \Carbon\Carbon::now()->diffInDays($end);
-                                @endphp
-                                <p class="author-time">{{$days}}</p>
-                            </div>
-                        </div>
-                        <div class="comment-content">
-                            {{$comment->comment}}
-                        </div>
+                <h3><span class="">2</span> комментарии</h3>
+            {{--@foreach($blog->comments as $comment)--}}
+            {{--<div class="comment">--}}
+            {{--<div class="author-info">--}}
+            {{--<img src="{{ $comment->comentable->user->file != null--}}
+            {{--? asset($comment->commentable->user->file.$comment->commentable->user->file) :--}}
+            {{--asset('dist/images/headshot-1.png')}}"--}}
+            {{--class="author-img">--}}
+            {{--<div class="author-name">--}}
+            {{--<h4>{{$comment->commentable->email}}</h4>--}}
+            {{--@php--}}
+            {{--$end = \Carbon\Carbon::parse($comment->created_at);--}}
+            {{--$days = \Carbon\Carbon::now()->diffInDays($end);--}}
+            {{--@endphp--}}
+            {{--<p class="author-time">{{$days}}</p>--}}
+            {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="comment-content">--}}
+            {{--{{$comment->comment}}--}}
+            {{--</div>--}}
+            {{--</div>--}}
+            {{--@endforeach--}}
+
+            <!-- Comments -->
+                <div class="row">
+                    <div class="comments-container">
+
+                        <ul id="comments-list" class="comments-list">
+                            <li>
+                                <div class="comment-main-level">
+                                    <!-- Avatar -->
+                                    <div class="comment-avatar"><img src="{{asset("dist/images/headshot-2.jpg")}}" alt=""></div>
+                                    <div class="comment-box">
+                                        <div class="comment-head">
+                                            <h6 class="comment-name"><a href="#">Alice</a></h6>
+                                            <span>20 минут назад</span>
+                                        </div>
+                                        <div class="comment-content">
+                                            Идейные соображения высшего порядка, а также дальнейшее развитие различных форм деятельности позволяет оценить значение системы обучения кадров, соответствует насущным потребностям. Не следует, однако забывать, что укрепление и развитие структуры способствует подготовки и реализации системы обучения кадров, соответствует насущным потребностям.
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="comment-main-level">
+                                    <!-- Avatar -->
+                                    <div class="comment-avatar"><img src="{{asset("dist/images/headshot-3.jpg")}}" alt=""></div>
+                                    <div class="comment-box">
+                                        <div class="comment-head">
+                                            <h6 class="comment-name"><a href="#">Bob</a></h6>
+                                            <span>30 минут назад</span>
+                                        </div>
+                                        <div class="comment-content">
+                                            Повседневная практика показывает, что реализация намеченных плановых заданий влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям. Повседневная практика показывает, что новая модель организационной деятельности влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям.
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                @endforeach
+                </div>
+                <!-- /Comments -->
+
+                <!-- Leave your comment -->
+                <div class="row">
+                    <h3>Оставь свою комментарию</h3>
+                    <div class="widget-area no-padding blank">
+                        <div class="status-upload">
+                            <form>
+                                <textarea placeholder="Ваше сообщение" ></textarea>
+                                <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Опубликовать</button>
+                            </form>
+                        </div><!-- Status Upload  -->
+                    </div><!-- Widget Area -->
+                </div>
+                <!-- /Leave your comment -->
+
                 <hr>
             </div>
         </div>
         <!-- /Blog comments-->
-        <!-- Subscribe -->
-        <div class="row subscribe">
-            <div class="padding-30 text-center">
-                <h2>Нравится журнал? Подпишись!</h2>
-                <h4>Самое интересное 2 раза в месяц на ваш e-mail</h4>
-                <div class="col-sm-offset-3 col-sm-4">
-                    <div class="form-group">
-                        <input type="text" class="form-control general-input" placeholder="Введите ваш email"/>
+
+                <!-- Subscribe -->
+                <div class="row subscribe">
+                    <div class="padding-30 text-center">
+                        <h2>Нравится журнал? Подпишись!</h2>
+                        <h4>Самое интересное 2 раза в месяц на ваш e-mail</h4>
+                        <div class="col-sm-offset-3 col-sm-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control general-input" placeholder="Введите ваш email"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="button" class="btn btn-default dark-blue">Подписаться</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-1">
-                    <button type="button" class="btn btn-default dark-blue">Подписаться</button>
-                </div>
-            </div>
-        </div>
-        <!-- /Subcribe -->
-        <div class="row padding-30" id="other-articles">
-            <h3 class="text-center">Читайте также</h3>
-            @foreach($blogs as $bl)
-                <a href="{{route('web.blog.show', $bl->id)}}">
-                    <div class="col-sm-4">
-                        <div class="blog-item">
-                            <div class="ribbon"><span>Юристы</span></div>
-                            <div class="blog-item-img">
-                                <img alt="Blog item image" src="{{$bl->file != null ? asset($bl->file->path.$bl->file->file) : asset('dist/images/blog-img-2.jpg')}}"/>
-                                <div class="middle">
-                                    <a href="{{route('web.blog.show', $bl->id)}}" class="btn btn-dark-blue text">Читать
-                                        статью</a>
-                                </div>
-                            </div>
-                            <div class="blog-item-description">
-                                <h5><b>{{ $bl->title }}</b></h5>
-                                <p>{{substr(strip_tags($bl->text),0,100)}} {{strlen(strip_tags($bl->text))>100 ? '...' : ""}}</p>
-                                <p class="post-info">
+                <!-- /Subcribe -->
+                <div class="row padding-30" id="other-articles">
+                    <h3 class="text-center">Читайте также</h3>
+                    @foreach($blogs as $bl)
+                        <a href="{{route('web.blog.show', $bl->id)}}">
+                            <div class="col-sm-4">
+                                <div class="blog-item">
+                                    <div class="ribbon"><span>Юристы</span></div>
+                                    <div class="blog-item-img">
+                                        <img alt="Blog item image" src="{{$bl->file != null ? asset($bl->file->path.$bl->file->file) : asset('dist/images/blog-img-2.jpg')}}"/>
+                                        <div class="middle">
+                                            <a href="{{route('web.blog.show', $bl->id)}}" class="btn btn-dark-blue text">Читать
+                                                статью</a>
+                                        </div>
+                                    </div>
+                                    <div class="blog-item-description">
+                                        <h5><b>{{ $bl->title }}</b></h5>
+                                        <p>{{substr(strip_tags($bl->text),0,100)}} {{strlen(strip_tags($bl->text))>100 ? '...' : ""}}</p>
+                                        <p class="post-info">
                                 <span>
                                     <i class="fa fa-eye">{{$bl->count}}</i>
                                 </span>
                                     <span class="pull-right">
                                     <i class="fa fa-comments-o"></i> {{$bl->comments->count()}}
                                 </span>
-                                </p>
-                            </div>
-                            <hr>
-                            <div class="blog-item-footer">
+                                        </p>
+                                    </div>
+                                    <hr>
+                                    <div class="blog-item-footer">
                             <span>
                                 <i class="fa fa-user"></i> {{$bl->blogable->user->firstName}}
                             </span>
                                 <span class="pull-right">
                                 <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($bl->created_at)->toFormattedDateString()}}
                             </span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
+                        </a>
+                    @endforeach
 
-        </div>
-    </div>
-    <!-- /Content -->
+                </div>
+            </div>
+            <!-- /Content -->
 
 @endsection

@@ -50,4 +50,8 @@ jQuery(document).ready(function($){
         $(index).siblings('.active').removeClass("active");
         $(index).addClass("active");
     });
+
+    $('.price-table .package').click(function () {
+        $(this).children('input').prop('checked', true);
+    })
 });
