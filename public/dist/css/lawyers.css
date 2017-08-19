@@ -155,6 +155,15 @@
 }
 
 @media (max-width: 767px){
+    #wrapper{
+        padding: 10px 0;
+    }
+
+    .nav-tabs li a{
+        font-size: 12px;
+    }
+
+
     #search-lawyer{
         height: 320px;
     }

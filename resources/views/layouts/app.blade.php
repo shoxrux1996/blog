@@ -191,20 +191,21 @@
             <div class="col-md-3 col-sm-6">
                 <span><a href="{{ route('home') }}">Yuridik.uz</a></span>
                 <p><a href="{{ route('about') }}">@lang('app.aboutproject')</a></p>
-                <p><a href="{{ route('team') }}">@lang('app.aboutus')</a></p>
+                {{--<p><a href="{{ route('team') }}">@lang('app.aboutus')</a></p>--}}
                 <p><a href="{{ route('contacts') }}">@lang('app.contacts')</a></p>
-                <p><a href="{{ route('partners') }}">@lang('app.ourpartners')</a></p>
-                <p><a href="{{ route('category.list') }}">@lang('app.categories')</a></p>
-                <p><a href="{{ route('web.blogs') }}">@lang('app.blog')</a></p>
+                <p><a href="{{ route('faq') }}">@lang('app.faqs')</a></p>
+                <p><a href="#">Лицензионное соглашение</a></p>
+                <p><a href="{{ route('guarantees') }}">@lang('app.guarantees')</a></p>
+                {{--<p><a href="{{ route('partners') }}">@lang('app.ourpartners')</a></p>--}}
+                {{--<p><a href="{{ route('category.list') }}">@lang('app.categories')</a></p>--}}
+                {{--<p><a href="{{ route('web.blogs') }}">@lang('app.blog')</a></p>--}}
             </div>
             <div class="col-md-3 col-sm-6 hidden-xxs">
                 <span><a href="#">@lang('app.toclients')</a></span>
                 <p><a href="{{ route('question.create') }}">@lang('app.askquestion')</a></p>
                 <p><a href="{{ route('call.create') }}">@lang('app.ordercall')</a></p>
                 <p><a href="{{ route('document.create') }}">@lang('app.orderdocument')</a></p>
-                <p><a href="{{ route('faq') }}">@lang('app.faqs')</a></p>
                 <p><a href="{{ route('lawyers.list') }}">@lang('app.ourlawyers')</a></p>
-                <p><a href="{{ route('guarantees') }}">@lang('app.guarantees')</a></p>
                 <p><a href="{{ route('question.list') }}">@lang('app.questions')</a></p>
             </div>
             <div class="col-md-3 col-sm-6 hidden-xxs">

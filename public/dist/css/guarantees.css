@@ -1,0 +1,37 @@
+body{
+    background-color: #F6F6F6;
+}
+
+.client-protection, .best-of-the-best, .money-back, .confidentiality, .support, .dear-friends{
+    margin-top: 20px;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+
+.best-of-the-best{
+    background-color: #F3F3FF;
+}
+
+.client-protection h4, .best-of-the-best h4{
+    font-weight: bold;
+}
+
+.flex-row{
+    display: flex;
+}
+
+.flex-row .col-sm-6{
+    padding: 20px;
+    display: inline-flex;
+}
+
+.believe-us{
+    text-align: center;
+    background-color: #D9E5CD;
+    padding: 10px 10px;
+}
+
+.believe-us h2{
+    color: #889A75;
+}
