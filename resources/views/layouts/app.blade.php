@@ -191,20 +191,21 @@
             <div class="col-md-3 col-sm-6">
                 <span><a href="{{ route('home') }}">Yuridik.uz</a></span>
                 <p><a href="{{ route('about') }}">@lang('app.aboutproject')</a></p>
-                <p><a href="{{ route('team') }}">@lang('app.aboutus')</a></p>
+                {{--<p><a href="{{ route('team') }}">@lang('app.aboutus')</a></p>--}}
                 <p><a href="{{ route('contacts') }}">@lang('app.contacts')</a></p>
-                <p><a href="{{ route('partners') }}">@lang('app.ourpartners')</a></p>
-                <p><a href="{{ route('category.list') }}">@lang('app.categories')</a></p>
-                <p><a href="{{ route('web.blogs') }}">@lang('app.blog')</a></p>
+                <p><a href="{{ route('faq') }}">@lang('app.faqs')</a></p>
+                <p><a href="#">Лицензионное соглашение</a></p>
+                <p><a href="{{ route('guarantees') }}">@lang('app.guarantees')</a></p>
+                {{--<p><a href="{{ route('partners') }}">@lang('app.ourpartners')</a></p>--}}
+                {{--<p><a href="{{ route('category.list') }}">@lang('app.categories')</a></p>--}}
+                {{--<p><a href="{{ route('web.blogs') }}">@lang('app.blog')</a></p>--}}
             </div>
             <div class="col-md-3 col-sm-6 hidden-xxs">
                 <span><a href="#">@lang('app.toclients')</a></span>
                 <p><a href="{{ route('question.create') }}">@lang('app.askquestion')</a></p>
                 <p><a href="{{ route('call.create') }}">@lang('app.ordercall')</a></p>
                 <p><a href="{{ route('document.create') }}">@lang('app.orderdocument')</a></p>
-                <p><a href="{{ route('faq') }}">@lang('app.faqs')</a></p>
                 <p><a href="{{ route('lawyers.list') }}">@lang('app.ourlawyers')</a></p>
-                <p><a href="{{ route('about') }}">@lang('app.guarantees')</a></p>
                 <p><a href="{{ route('question.list') }}">@lang('app.questions')</a></p>
             </div>
             <div class="col-md-3 col-sm-6 hidden-xxs">
@@ -234,11 +235,12 @@
 <!-- Bootstrap Core JS -->
 <script src="{{ asset('dist/js/bootstrap.min.js')}}"></script>
 
-<!-- Custom JS -->
-<script src="{{ asset('dist/js/script.js')}}"></script>
+
+
 
 @yield('scripts')
-
+<!-- Custom JS -->
+<script src="{{ asset('dist/js/script.js')}}"></script>
 <!-- Preloader -->
 <style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #2C3E50 url("{{ asset('dist/images/puff.svg')}}" ) center center no-repeat;background-size:79px;}</style>
 <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
