@@ -97,8 +97,7 @@
             }
         }
     </script>
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ha04cxa9mauwibgqmd91jvlug5qd3gqfb1ihnf8s5imb73na"></script>
-
+    <script src={{asset('js/tinymce/tinymce.min.js')}}></script>
     <script>tinymce.init({
             selector: 'textarea',
             plugins: 'link code',

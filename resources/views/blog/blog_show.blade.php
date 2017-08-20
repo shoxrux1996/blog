@@ -134,22 +134,29 @@
                     <div class="comments-container">
 
                         <ul id="comments-list" class="comments-list">
+                            @foreach($blog->comments as $comment)
                             <li>
                                 <div class="comment-main-level">
                                     <!-- Avatar -->
-                                    <div class="comment-avatar"><img src="{{asset("dist/images/headshot-2.jpg")}}" alt=""></div>
+                                    <div class="comment-avatar"><img src="{{$comment->commentable->user->file != null
+                                     ? asset($comment->commentable->user->file->path.$comment->commentable->user->file->file)
+                                     : asset("dist/images/headshot-2.jpg")}}" alt=""></div>
                                     <div class="comment-box">
                                         <div class="comment-head">
-                                            <h6 class="comment-name"><a href="#">Alice</a></h6>
-                                            <span>20 минут назад</span>
+                                            <h6 class="comment-name"><a href="{{route('web.lawyer.show', $comment->commentable->id)}}">{{$comment->commentable->user->firstName}}</a></h6>
+                                            @php
+                                                $end = \Carbon\Carbon::parse($comment->created_at);
+                                                $now = \Carbon\Carbon::now();
+                                            @endphp
+                                            <span>{{$end->diffForHumans($now)}}</span>
                                         </div>
                                         <div class="comment-content">
-                                            Идейные соображения высшего порядка, а также дальнейшее развитие различных форм деятельности позволяет оценить значение системы обучения кадров, соответствует насущным потребностям. Не следует, однако забывать, что укрепление и развитие структуры способствует подготовки и реализации системы обучения кадров, соответствует насущным потребностям.
+                                            {{$comment->comment}}
                                         </div>
                                     </div>
                                 </div>
                             </li>
-
+                            @endforeach
                             <li>
                                 <div class="comment-main-level">
                                     <!-- Avatar -->
@@ -171,17 +178,20 @@
                 <!-- /Comments -->
 
                 <!-- Leave your comment -->
+                @if(Auth::guard('lawyer')->check())
                 <div class="row">
                     <h3>Оставь свою комментарию</h3>
                     <div class="widget-area no-padding blank">
                         <div class="status-upload">
-                            <form>
-                                <textarea placeholder="Ваше сообщение" ></textarea>
+                            <form method="post" action="{{route('lawyer.comment.store', $blog->id)}}">
+                                {{csrf_field()}}
+                                <textarea name="comment" placeholder="Ваше сообщение" ></textarea>
                                 <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Опубликовать</button>
                             </form>
                         </div><!-- Status Upload  -->
                     </div><!-- Widget Area -->
                 </div>
+                @endif
                 <!-- /Leave your comment -->
 
                 <hr>
