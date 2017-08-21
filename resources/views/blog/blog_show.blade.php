@@ -106,30 +106,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <hr>
-                <h3><span class="">2</span> комментарии</h3>
-            {{--@foreach($blog->comments as $comment)--}}
-            {{--<div class="comment">--}}
-            {{--<div class="author-info">--}}
-            {{--<img src="{{ $comment->comentable->user->file != null--}}
-            {{--? asset($comment->commentable->user->file.$comment->commentable->user->file) :--}}
-            {{--asset('dist/images/headshot-1.png')}}"--}}
-            {{--class="author-img">--}}
-            {{--<div class="author-name">--}}
-            {{--<h4>{{$comment->commentable->email}}</h4>--}}
-            {{--@php--}}
-            {{--$end = \Carbon\Carbon::parse($comment->created_at);--}}
-            {{--$days = \Carbon\Carbon::now()->diffInDays($end);--}}
-            {{--@endphp--}}
-            {{--<p class="author-time">{{$days}}</p>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="comment-content">--}}
-            {{--{{$comment->comment}}--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--@endforeach--}}
-
-            <!-- Comments -->
+                <h3><span class="">{{$blog->comments->count()}}</span> комментарии</h3>
                 <div class="row">
                     <div class="comments-container">
 
@@ -157,21 +134,6 @@
                                 </div>
                             </li>
                             @endforeach
-                            <li>
-                                <div class="comment-main-level">
-                                    <!-- Avatar -->
-                                    <div class="comment-avatar"><img src="{{asset("dist/images/headshot-3.jpg")}}" alt=""></div>
-                                    <div class="comment-box">
-                                        <div class="comment-head">
-                                            <h6 class="comment-name"><a href="#">Bob</a></h6>
-                                            <span>30 минут назад</span>
-                                        </div>
-                                        <div class="comment-content">
-                                            Повседневная практика показывает, что реализация намеченных плановых заданий влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям. Повседневная практика показывает, что новая модель организационной деятельности влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям.
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
