@@ -35,3 +35,28 @@
     display: inline-block;
     margin-bottom: 10px;
 }
+
+@media (max-width: 767px){
+    #are-you-lawyer{
+        height: 300px;
+        padding: 40px;
+    }
+
+    .big-text{
+        font-size: 30px;
+    }
+
+    #online-consultion{
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    #innovational{
+        text-align: center;
+        padding: 20px;
+    }
+
+    #how-it-works{
+        padding: 20px;
+    }
+}

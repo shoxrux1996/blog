@@ -19,7 +19,7 @@ return [
     'bestlawyers' => "Butun O'zbekistondan eng yaxshi yuristlar",
     'satisfiedclients' => "Bizning xizmatlarimizdan mamnun mijozlar",
     'moneyback' => "Sizga yordam beramiz - yoki pulingini qaytarib beramiz",
-    'allguarantees' => "yuridik.uz ning barcha kafolatlari",
+    'allguarantees' => "Yuridik.uz ning barcha kafolatlari",
     'aboutproject' => "Loyiha haqida",
     'aboutus' => "Jamoa haqida",
     'contacts' => "Biz bilan bog'lanish",

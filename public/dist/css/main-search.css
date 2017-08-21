@@ -54,3 +54,17 @@
     color: #18BB9B;
     text-decoration: underline;
 }
+
+@media (max-width: 767px) {
+    #search-tab{
+        padding: 0;
+    }
+
+    #search-tab .tab-content{
+        padding: 10px;
+    }
+
+    #search-tab .blog-item{
+        margin-bottom: 20px;
+    }
+}

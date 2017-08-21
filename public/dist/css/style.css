@@ -192,6 +192,7 @@
     padding: 30px;
 }
 
+
 .best-lawyers img{
     height: 84px;
     display: block;
@@ -374,13 +375,16 @@ footer .guarantee p{
     margin-top: 10px;
     text-align: right;
     color: #ffffff;
+    line-height: 0.5;
 }
+
 
 footer a{
     text-decoration: none;
     position: relative;
     color: white;
 }
+
 
 footer a:hover{
     text-decoration: none;
@@ -488,6 +492,10 @@ footer .social-link i:hover{
 
     .modal{
         top: 20%;
+    }
+
+    #wrapper{
+        padding: 10px;
     }
 }
 

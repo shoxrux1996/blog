@@ -17,7 +17,7 @@
         <h4 class="text-center">ПРАВОВЕД.RU – ЮРИДИЧЕСКИЕ КОНСУЛЬТАЦИИ ОНЛАЙН</h4>
         <div class="col-sm-6">
             <div class="video-wrapper">
-                <iframe class="youtube-player" type="text/html" width="550" height="385" src="https://www.youtube.com/embed/lUIx9i63y8M" frameborder="0"> </iframe>
+                <iframe class="youtube-player" type="text/html" width="100%" height="385" src="https://www.youtube.com/embed/lUIx9i63y8M" frameborder="0"> </iframe>
             </div>
         </div>
         <div class="col-sm-6">
@@ -37,10 +37,10 @@
 </div>
 <div class="container" id="features">
     <div class="row text-center">
-        <div class="col-sm-6 no-padding">
+        <div class="col-xs-6 no-padding hidden-xs">
             <h4 class="text-primary">Правовед.RU для клиента</h4>
         </div>
-        <div class="col-sm-6 no-padding">
+        <div class="col-xs-6 no-padding hidden-xs">
             <h4 class="text-success">Правовед.RU для юриста</h4>
         </div>
     </div>
