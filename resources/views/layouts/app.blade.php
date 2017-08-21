@@ -186,7 +186,7 @@
                     <img src="{{asset('dist/images/money-back-icon.png')}}" alt="Money back icon" />
                     @lang('app.moneyback')
                 </p>
-                <p class="text-center"><a href="#">@lang('app.allguarantees')</a></p>
+                <p class="text-center"><a href="{{route('guarantees')}}">@lang('app.allguarantees')</a></p>
             </div>
             <div class="col-md-3 col-sm-6">
                 <span><a href="{{ route('home') }}">Yuridik.uz</a></span>

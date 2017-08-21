@@ -374,13 +374,16 @@ footer .guarantee p{
     margin-top: 10px;
     text-align: right;
     color: #ffffff;
+    line-height: 0.5;
 }
+
 
 footer a{
     text-decoration: none;
     position: relative;
     color: white;
 }
+
 
 footer a:hover{
     text-decoration: none;
