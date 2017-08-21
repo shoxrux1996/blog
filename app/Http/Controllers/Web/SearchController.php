@@ -99,5 +99,53 @@ class SearchController extends Controller
             ->withBest_lawyers($best_lawyers);
     }
 
+    public function searchQuestionsByCategory(Request $request)
+    {
+        $name = $request->name;
+        $questions = Question::with('category', 'client')
+            ->whereHas('category', function ($query) use ($name) {
+                $query->where('name', 'LIKE', "%$name%");
+            })->orWhereHas('client', function ($query) use ($name) {
+                $query->with('user')->whereHas('user', function ($query) use ($name) {
+                    $query->where('firstName', 'LIKE', "%$name%")->orWhere('lastName', 'LIKE', "%$name%");
+                });
+            })->orWhere('title', 'LIKE', "%$name%")
+            ->orWhere('text', 'LIKE', "%$name%")->orderBy('id', 'desc')
+            ->paginate(5, ['*'], 'all');
+
+        $questions_costly = Question::with('category', 'client')
+            ->whereHas('category', function ($query) use ($name) {
+                $query->where('name', 'LIKE', "%$name%");
+            })->orWhereHas('client', function ($query) use ($name) {
+                $query->with('user')->whereHas('user', function ($query) use ($name) {
+                    $query->where('firstName', 'LIKE', "%$name%")->orWhere('lastName', 'LIKE', "%$name%");
+                });
+            })->orWhere('title', 'LIKE', "%$name%")
+            ->orWhere('text', 'LIKE', "%$name%")->orderBy('id', 'desc')
+            ->where('type', 1)->orWhere('type', 2)
+            ->orderBy('id', 'desc')->paginate(5, ['*'], 'costly');
+
+        $questions_free = Question::with('category', 'client')
+            ->whereHas('category', function ($query) use ($name) {
+                $query->where('name', 'LIKE', "%$name%");
+            })->orWhereHas('client', function ($query) use ($name) {
+                $query->with('user')->whereHas('user', function ($query) use ($name) {
+                    $query->where('firstName', 'LIKE', "%$name%")->orWhere('lastName', 'LIKE', "%$name%");
+                });
+            })->orWhere('title', 'LIKE', "%$name%")
+            ->orWhere('text', 'LIKE', "%$name%")->orderBy('id', 'desc')
+            ->where('type', 0)
+            ->orderBy('id', 'desc')->paginate(5, ['*'], 'free');
+        $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+            return $query->feedbacks->count();
+        });
+
+        return view('question.list')
+            ->withBest_lawyers($best_lawyers)
+            ->withQuestions($questions)
+            ->withQuestions_free($questions_free)
+            ->withQuestions_costly($questions_costly)
+            ->withSection(1);
+    }
 
 }

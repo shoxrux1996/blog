@@ -30,7 +30,7 @@ class QuestionController extends Controller
 
         $questions_free = Question::where('type', 0)
             ->orderBy('id', 'desc')->paginate(5);
-        $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+        $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
         return view('question.list')->withQuestions($questions)

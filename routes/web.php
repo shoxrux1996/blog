@@ -188,10 +188,13 @@ Route::prefix('blog-info')->group(function(){
 Route::prefix('category-info')->group(function(){
 	Route::get('/', 'Web\CategoryController@index')->name('category.list');
 	Route::get('/show/{name}','Web\CategoryController@show')->name('web.category.show');
+    Route::get('show/{name}/free', 'Web\CategoryController@freeQuestions')->name('category.free.questions');
+    Route::get('show/{name}/service', 'Web\CategoryController@costlyQuestions')->name('category.costly.questions');
 });
 Route::get('/search/lawyers', 'Web\SearchController@searchLawyers')->name('search.lawyers');
 Route::get('/search/main', 'Web\SearchController@searchAll')->name('search.all');
-Route::get('/category/{name}', 'Web\SearchController@searchByCategory')->name('search.lawyers.bycategory');
+Route::get('/category/{name}/lawyers', 'Web\SearchController@searchByCategory')->name('search.lawyers.bycategory');
+Route::get('/search/questions', 'Web\SearchController@searchQuestionsByCategory')->name('search.questions.bycategory');
 
 Route::get('/', 'Web\IndexController@index')->name('home');
 Route::get('/about', function(){

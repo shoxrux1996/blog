@@ -21,7 +21,9 @@
                     @if($category->parent == null)
                         <li class="active">{{$category->name}}</li>
                     @else
-                        <li class=""><a href="{{route('web.category.show', $category->parent->id)}}">{{$category->parent->name}}</a> </li>
+                        <li class=""><a
+                                    href="{{route('web.category.show', $category->parent->id)}}">{{$category->parent->name}}</a>
+                        </li>
                         <li class="active">{{$category->name}}</li>
                     @endif
                 </ol>
@@ -39,7 +41,8 @@
                                         @endforeach
                                     @endif
                                     @if($category->parent != null)
-                                        <li><a href="{{route('web.category.show', $category->parent->name)}}">{{$category->parent->name}}</a>
+                                        <li>
+                                            <a href="{{route('web.category.show', $category->parent->name)}}">{{$category->parent->name}}</a>
                                         </li>
                                     @endif
                                     @foreach($cat1 as $cat)
@@ -70,39 +73,42 @@
         <!-- Questions related to category -->
         <div class="container">
             <div class="row">
-                <h3>Последние вопросы по теме «договор аренды нежилого помещения»</h3>
+                <h3>Последние вопросы по теме «{{$category->name}}»</h3>
                 <div class="col-sm-9">
                     <!-- Search -->
-                    <div class="input-group" id="search">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Все темы <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Корпоративное право</a></li>
-                                <li><a href="#">Гражданское право</a></li>
-                                <li><a href="#">Лицензирование</a></li>
-                                <li><a href="#">Недвижимость</a></li>
-                                <li><a href="#">Защита прав потребителя</a></li>
-                                <li><a href="#">Автомобильное право</a></li>
-                                <li><a href="#">Военное право</a></li>
-                                <li><a href="#">Семейное право</a></li>
-                                <li><a href="#">Страхование</a></li>
-                            </ul>
-                        </div><!-- /btn-group -->
-                        <input type="text" class="form-control" aria-label="...">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default">
-                                Искать
-                            </button>
-                        </div>
-                    </div><!-- /input-group -->
+                    <form method="GET" action="{{route('search.questions.bycategory')}}">
+                        <div class="input-group" id="search">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">Все темы <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{route('search.questions.bycategory', $category->name)}}">{{$category->name}}</a>
+                                    </li>
+                                </ul>
+                            </div><!-- /btn-group -->
+
+                            <input type="text" class="form-control" name="name" aria-label="...">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default">
+                                    Искать
+                                </button>
+                            </div>
+
+                        </div><!-- /input-group -->
+                    </form>
                     <!-- /Search -->
                     <p class="question-type">
-                        <span class="{{ $section == 1 ? "active-type" : "" }}"><a href="{{route('question.list')}}"
+                        <span class="{{ $section == 1 ? "active-type" : "" }}"><a
+                                    href="{{route('web.category.show', $category->name)}}"
                             >Все</a> </span>
-                        <span class="{{ $section == 2 ? "active-type" : "" }}"> <a href="{{route('costly.questions')}}"
-                                                                                   onclick="switchSection('section2')">Платные</a> </span>
-                        <span class="{{ $section == 3 ? "active-type" : "" }}"> <a href="{{route('free.questions')}}"
-                                                                                   onclick="switchSection('section3')">Бесплатные</a> </span>
+                        <span class="{{ $section == 2 ? "active-type" : "" }}"> <a
+                                    href="{{route('category.costly.questions', $category->name)}}"
+                                    onclick="switchSection('section2')">Платные</a> </span>
+                        <span class="{{ $section == 3 ? "active-type" : "" }}"> <a
+                                    href="{{route('category.free.questions', $category->name)}}"
+                                    onclick="switchSection('section3')">Бесплатные</a> </span>
                     </p>
                     <div id="section1" class="section" style="display: {{ $section == 1 ? "block" : "none" }};">
                         @foreach($questions as $question)
@@ -136,10 +142,12 @@
                                 </p>
                             </div>
                         @endforeach
+                        <div class="col-sm-12 text-center">
+                            {!! $questions->links('pagination') !!}
+                        </div>
                     </div>
                     <div id="section2" class="section" style="display: {{ $section == 2 ? "block" : "none" }};">
                         @foreach($questions_costly as $question)
-
                             <div class="col-sm-12 question">
                                     <span class="question-price">
                             <b>{{$question->price}} сум</b>
@@ -168,16 +176,13 @@
                                     </a>
                                 </p>
                             </div>
-
                         @endforeach
                         <div class="col-sm-12 text-center">
                             {!! $questions_costly->links('pagination') !!}
-
                         </div>
                     </div>
                     <div id="section3" class="section" style="display: {{ $section == 3 ? "block" : "none" }};">
                         @foreach($questions_free as $question)
-
                             <div class="col-sm-12 question">
                                 <h4 class="title"><a
                                             href="{{route('web.question.show', $question->id)}}">{{$question->title}}</a>
@@ -186,8 +191,8 @@
                                 <p>
                                     <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>
                                     <span class="number"> вопрос №{{$question->id}}</span>
-                                        <span class="author">{{$question->client->user->firstName}}
-                                            , г.{{$question->client->user->city->name}} </span>
+                                    <span class="author">{{$question->client->user->firstName}}
+                                        , г.{{$question->client->user->city->name}} </span>
                                 </p>
                                 <hr>
                                 <p>
@@ -198,11 +203,9 @@
                                     </a>
                                 </p>
                             </div>
-
                         @endforeach
                         <div class="col-sm-12 text-center">
                             {!! $questions_free->links('pagination') !!}
-
                         </div>
                     </div>
 
@@ -218,7 +221,8 @@
                             <h6>
                                 <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
                             </h6>
-                            <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
+                            <a type="button" class="btn btn-default btn-success"
+                               href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
                         </div>
                     @endforeach
 
