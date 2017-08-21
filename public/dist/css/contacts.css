@@ -9,3 +9,16 @@
     padding: 30px;
     padding-bottom: 10px;
 }
+
+.map iframe{
+    width: 100%;
+}
+@media (max-width: 767px) {
+    #wrapper{
+        padding: 0;
+    }
+
+    .map iframe{
+        height: 250px;
+    }
+}

@@ -39,9 +39,9 @@
                     <div id="client" class="tab-pane fade in active">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab-container">
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 bhoechie-tab-container">
                                     <!-- Tab menu -->
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 bhoechie-tab-menu">
                                         <div class="list-group">
                                             <a href="#accordion-client-1" class="list-group-item active text-center">
                                                 Регистрация и Вход
@@ -66,7 +66,7 @@
                                     <!-- /Tab menu -->
 
                                     <!-- Tab items -->
-                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 bhoechie-tab">
 
                                         <!-- Menu 1 -->
                                         <div class="bhoechie-tab-content active" id="accordion-client-1">
@@ -430,9 +430,9 @@
                     <div id="lawyer" class="tab-pane fade">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab-container">
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 bhoechie-tab-container">
                                     <!-- Tab menu -->
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 bhoechie-tab-menu">
                                         <div class="list-group">
                                             <a href="#accordion-lawyer-1" class="list-group-item active text-center">
                                                 Регистрация и Вход
@@ -466,7 +466,7 @@
                                     <!-- /Tab menu -->
 
                                     <!-- Tab items -->
-                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 bhoechie-tab">
 
                                         <!-- Menu 1 -->
                                         <div class="bhoechie-tab-content active"  id="accordion-lawyer-1">

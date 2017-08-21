@@ -11,8 +11,9 @@
 }
 
 .col-sm-6{
-    padding: 30px;
+    padding: 30px 10px;
 }
+
 
 .feature{
     padding: 20px;
@@ -31,4 +32,15 @@
 
 .no-padding{
     padding: 0;
+}
+
+@media (max-width: 767px) {
+
+    .video-wrapper iframe{
+        height: 250px;
+    }
+
+    .col-sm-6{
+        padding: 10px;
+    }
 }

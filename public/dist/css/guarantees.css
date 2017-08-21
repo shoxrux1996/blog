@@ -35,3 +35,22 @@ body{
 .believe-us h2{
     color: #889A75;
 }
+
+@media (max-width: 767px){
+    .flex-row{
+        display: block;
+    }
+
+    .flex-row .col-sm-6{
+        display: block;
+        padding: 0 15px;
+    }
+
+   .believe-us{
+        margin-top: 20px;
+    }
+
+   .dear-friends{
+       margin-bottom: 20px;
+   }
+}

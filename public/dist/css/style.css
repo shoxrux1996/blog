@@ -192,6 +192,7 @@
     padding: 30px;
 }
 
+
 .best-lawyers img{
     height: 84px;
     display: block;
@@ -491,6 +492,10 @@ footer .social-link i:hover{
 
     .modal{
         top: 20%;
+    }
+
+    #wrapper{
+        padding: 10px;
     }
 }
 

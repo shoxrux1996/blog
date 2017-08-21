@@ -24,10 +24,10 @@
                 <br />
                 <h6><b>По вопросам размещения рекламы обращайтесь:</b></h6>
                 <div class="col-sm-3 card">
-                    <h3>Сергей Андреев</h3>
+                    <h3>Hamidulla Ziyoev</h3>
                     <span>Директор по развитию</span>
-                    <p><b>Эл. почта:</b> andreev@pravoved.ru</p>
-                    <p><b>Телефон:</b> +7 (921) 999-70-54</p>
+                    <p><b>Эл. почта:</b> hamidulla@yuridik.uz</p>
+                    <p><b>Телефон:</b> +(97) 765-43-21</p>
                 </div>
             </div>
         </div>
