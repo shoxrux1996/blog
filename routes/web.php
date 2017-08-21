@@ -189,8 +189,8 @@ Route::prefix('category-info')->group(function(){
 	Route::get('/', 'Web\CategoryController@index')->name('category.list');
 	Route::get('/show/{name}','Web\CategoryController@show')->name('web.category.show');
 });
-Route::any('/search/lawyers', 'Web\SearchController@searchLawyers')->name('search.lawyers');
-Route::any('/search/main', 'Web\SearchController@searchAll')->name('search.all');
+Route::get('/search/lawyers', 'Web\SearchController@searchLawyers')->name('search.lawyers');
+Route::get('/search/main', 'Web\SearchController@searchAll')->name('search.all');
 Route::get('/category/{name}', 'Web\SearchController@searchByCategory')->name('search.lawyers.bycategory');
 
 Route::get('/', 'Web\IndexController@index')->name('home');

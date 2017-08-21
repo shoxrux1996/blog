@@ -18,8 +18,7 @@
         <div class="row">
             <div class="col-md-4">
                 <h1>@lang('index.confidence')</h1>
-                <form action="{{route('search.all')}}" method="post">
-                    {{csrf_field()}}
+                <form action="{{route('search.all')}}" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" placeholder="{{ __('index.search') }}"/>
                         <span class="input-group-btn">

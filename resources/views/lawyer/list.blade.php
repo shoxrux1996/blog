@@ -19,8 +19,7 @@
         <div class="row">
             <div class="col-sm-6 text-center" id="form">
                 <h1>Поиск по юристов и адвокатов</h1>
-                <form action="{{route('search.lawyers')}}" method="post">
-                    {{ csrf_field() }}
+                <form action="{{route('search.lawyers')}}" method="get">
                     <div class="form-group text-left">
                         <label for="name"><i class="fa fa-address-card"></i> Имя или специализация</label>
                         <input id="name" name="search" list="names" type="text" class="form-control"
@@ -127,8 +126,7 @@
         <div class="row">
             <div class="col-md-9" id="search-cities">
                 <h3>Выбор юриста по городу</h3>
-                <form action="{{route('search.lawyers')}}" method="post">
-                    {{ csrf_field() }}
+                <form action="{{route('search.lawyers')}}" method="get">
                     <input type="text" name="city" list="cities" class="form-control"
                            placeholder="Начните вводить название">
                 </form>
@@ -140,8 +138,7 @@
                 </datalist>
 
                 <div id="city-tags">
-                    <form action="{{route('search.lawyers')}}" method="post">
-                        {{csrf_field()}}
+                    <form action="{{route('search.lawyers')}}" method="get">
                         @foreach($cities as $index => $city)
                             @if($index <= 3)
                                 <button type="submit" class="btn-link" name="city"
@@ -160,7 +157,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h3>Последние добавленные юристы</h3>
+                <h3>Найденные юристы</h3>
                 @foreach($lawyers as $lawyer)
                     <div class="col-sm-3">
                         <div class="card-container">
