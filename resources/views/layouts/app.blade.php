@@ -31,6 +31,10 @@
     <![endif]-->
 </head>
 <body>
+
+<!-- Return to Top -->
+<a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
+
 <!-- Header -->
 <div class="container-fluid my-header color-white dark-blue">
     <div class="row">
