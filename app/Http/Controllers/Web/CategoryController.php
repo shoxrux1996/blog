@@ -6,7 +6,7 @@ use yuridik\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use yuridik\Category;
 use yuridik\Question;
-use yuridik\lawyer;
+use yuridik\Lawyer;
 use yuridik\ItemsHelper;
 
 class CategoryController extends Controller
