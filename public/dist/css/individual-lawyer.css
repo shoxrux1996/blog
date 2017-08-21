@@ -120,6 +120,16 @@
     background-color: transparent;
 }
 
+.tab-content #answers, .tab-content #articles{
+    background-color: #F6F6F6;
+    padding: 0;
+}
+
+.tab-content #answers > .col-sm-12{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 /* Media queries */
 @media (max-width: 767px) {
     #wrapper{
