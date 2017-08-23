@@ -37,11 +37,15 @@ class AdminCategoryController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:categories',
             'text' => 'required|min:10',
+            'name_ru' => 'required|unique:categories',
+            'text_ru' => 'required|min:10',
         ]);
 
         $category = new Category;
         $category->name = $request->name;
         $category->text = $request->text;
+        $category->name_ru = $request->name_ru;
+        $category->text_ru = $request->text_ru;
         $category->class = $request->class;
         $category->category_id = $request->parent;
         $category->save();
