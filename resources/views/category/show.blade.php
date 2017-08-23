@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('styles')
+    <link href="{{ asset('dist/css/lawyers.css')}}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
     <link href="{{ asset('dist/css/homepage.css')}}" rel="stylesheet">
     <link href="{{ asset('dist/css/individual-category.css')}}" rel="stylesheet">
+
 @endsection
 @section('menu')
     <li><a href="{{ route('home')}}">Главная</a></li>
@@ -254,83 +256,80 @@
                 <div id="lawyers" class="tab-pane fade">
                     <!-- Lawyers -->
                     <div class="row background-white padding-30">
-                        <h3>Юристы по теме «договор аренды нежилого помещения»</h3>
-                        {{--@foreach($lawyers as $lawyer)--}}
-                        {{--<div class="col-sm-3">--}}
-                        {{--<div class="card-container">--}}
-                        {{--<div class="card">--}}
-                        {{--<div class="front">--}}
-                        {{--<div class="cover">--}}
-                        {{--<img src="{{asset('dist/images/rotating-card-cover.png')}}"/>--}}
-                        {{--</div>--}}
-                        {{--<div class="user">--}}
-                        {{--<img class="img-circle"--}}
-                        {{--src="{{$lawyer->file != null ? asset($lawyer->file->path.$lawyer->file->file) : asset('dist/images/headshot-3.jpg')}}"/>--}}
-                        {{--</div>--}}
-                        {{--<div class="content">--}}
-                        {{--<div class="main">--}}
-                        {{--<h2 class="name">{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h2>--}}
-                        {{--<p class="profession">{{$lawyer->job_status}},--}}
-                        {{--г. {{$lawyer->user->city->name}}</p>--}}
-                        {{--<p class="text-center">--}}
-                        {{--<i class="fa fa-star"></i>--}}
-                        {{--<i class="fa fa-star"></i>--}}
-                        {{--<i class="fa fa-star"></i>--}}
-                        {{--<i class="fa fa-star"></i>--}}
-                        {{--<i class="fa fa-star"></i>--}}
-                        {{--<i class="fa fa-star"></i>--}}
-                        {{--<i class="fa fa-star"></i>--}}
-                        {{--<i class="fa fa-star"></i>--}}
-                        {{--</p>--}}
-                        {{--<p class="text-center rank">8,0 Рейтинг</p>--}}
-                        {{--</div>--}}
-                        {{--<div class="footer">--}}
-                        {{--<i class="fa fa-mail-forward"></i> Перевернуть--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--</div> <!-- end front panel -->--}}
-                        {{--<div class="back">--}}
-                        {{--<div class="content">--}}
-                        {{--<div class="main">--}}
-                        {{--<h4 class="text-center">Специализация</h4>--}}
-                        {{--<p class="text-center">@foreach($lawyer->categories as $category){{$category->name}}--}}
-                        {{--. @endforeach</p>--}}
+                        <h3>Юристы по теме «{{$category->name}}»</h3>
+                        @foreach($lawyers as $lawyer)
+                            <div class="col-sm-3">
+                                <div class="card-container">
+                                    <div class="card">
+                                        <div class="front">
+                                            <div class="cover">
+                                                <img src="{{asset('dist/images/rotating-card-cover.png')}}"/>
+                                            </div>
+                                            <div class="user">
+                                                <img class="img-circle"
+                                                     src="{{$lawyer->file != null ? asset($lawyer->file->path.$lawyer->file->file) : asset('dist/images/headshot-3.jpg')}}"/>
+                                            </div>
+                                            <div class="content">
+                                                <div class="main">
+                                                    <h2 class="name">{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h2>
+                                                    <p class="profession">{{$lawyer->job_status}},
+                                                        г. {{$lawyer->user->city->name}}</p>
+                                                    <p class="text-center">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </p>
+                                                    <p class="text-center rank">8,0 Рейтинг</p>
+                                                </div>
+                                                <div class="footer">
+                                                    <i class="fa fa-mail-forward"></i> Перевернуть
+                                                </div>
+                                            </div>
+                                        </div> <!-- end front panel -->
+                                        <div class="back">
+                                            <div class="content">
+                                                <div class="main">
+                                                    <h4 class="text-center">Специализация</h4>
+                                                    <p class="text-center">@foreach($lawyer->categories as $category){{$category->name}}
+                                                        . @endforeach</p>
 
-                        {{--<div class="stats-container text-center">--}}
-                        {{--<div class="stats">--}}
-                        {{--<h4>{{$lawyer->experience_year}}</h4>--}}
-                        {{--<p>--}}
-                        {{--лет стажа--}}
-                        {{--</p>--}}
-                        {{--</div>--}}
-                        {{--<div class="stats">--}}
-                        {{--<h4>{{$lawyer->categories->count()}}</h4>--}}
-                        {{--<p>--}}
-                        {{--специализаций--}}
-                        {{--</p>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
+                                                    <div class="stats-container text-center">
+                                                        <div class="stats">
+                                                            <h4>{{$lawyer->experience_year}}</h4>
+                                                            <p>
+                                                                лет стажа
+                                                            </p>
+                                                        </div>
+                                                        <div class="stats">
+                                                            <h4>{{$lawyer->categories->count()}}</h4>
+                                                            <p>
+                                                                специализаций
+                                                            </p>
+                                                        </div>
+                                                    </div>
 
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="footer">--}}
-                        {{--<div class="social-links text-center">--}}
-                        {{--<a type="button" class="btn btn-default btn-block blue-button" href="#">Обратиться--}}
-                        {{--к юристу</a>--}}
-                        {{--<span>{{$lawyer->countPositiveFeedbacks()}} отзыва от клиентов</span>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--</div> <!-- end back panel -->--}}
-                        {{--</div> <!-- end card -->--}}
-                        {{--</div> <!-- end card-container -->--}}
-                        {{--</div>--}}
-                        {{--@endforeach--}}
+                                                </div>
+                                            </div>
+                                            <div class="footer">
+                                                <div class="social-links text-center">
+                                                    <a type="button" class="btn btn-default btn-block blue-button"
+                                                       href="#">Обратиться
+                                                        к юристу</a>
+                                                    <span>{{$lawyer->countPositiveFeedbacks()}}
+                                                        отзыва от клиентов</span>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end back panel -->
+                                    </div> <!-- end card -->
+                                </div> <!-- end card-container -->
+                            </div>
+                        @endforeach
 
-
-                        {{--<div class="col-sm-12 text-center">--}}
-                        {{--{{$lawyers->fragment('lawyers')->links('pagination')}}--}}
-
-                        {{--</div>--}}
                     </div>
                     <!-- /Lawyers -->
                 </div>
@@ -340,4 +339,37 @@
 
     </div>
 
+@endsection
+@section('scripts')
+    <script>
+        var index = 0;
+        function showCities() {
+            var cities = document.getElementsByClassName('cities');
+
+            if (index === 0) {
+                for (var i = 0; i < cities.length; i++) {
+                    cities[i].style.display = "block";
+                }
+                index = 1;
+            }
+            else {
+                for (var i = 0; i < cities.length; i++) {
+                    cities[i].style.display = "none";
+                }
+                index = 0;
+            }
+        }
+
+
+        function rotateCard(btn){
+            var $card = $(btn).closest('.card-container');
+            console.log($card);
+            if($card.hasClass('hover')){
+                $card.removeClass('hover');
+            } else {
+                $card.addClass('hover');
+            }
+        }
+
+    </script>
 @endsection

@@ -147,6 +147,7 @@ class SearchController extends Controller
             ->withQuestions_free($questions_free)
             ->withQuestions_costly($questions_costly)
             ->withCategories($categories)
+
             ->withSection(1);
     }
 
