@@ -97,7 +97,7 @@
                     <h4 class="modal-title">@lang('auth.modaltitle')</h4>
                 </div>
                 <div class="modal-body">
-                    <img src="{{asset('dist/images/email-send.jpg')}}" alt="Email send"/>
+                    <img src="{{asset('dist/images/email-send.png')}}" alt="Email send"/>
                     <h4>@lang('auth.modalbody1')</h4>
                     @if(Session::has('question-create'))
                         <h6>@lang('auth.modalbody2')</h6>
@@ -116,6 +116,9 @@
 <div class="container">
     <div class="row" id="login-bg">
         <div class="col-md-6 col-sm-8 col-xs-12">
+        @if(Session::has('confirm-email') || Session::has('question-create'))
+            <h6>test</h6>
+        @endif
             <h1>Вход на Yuridik.uz</h1>
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#menu1">Войти</a></li>

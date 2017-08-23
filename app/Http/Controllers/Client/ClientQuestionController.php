@@ -28,7 +28,7 @@ class ClientQuestionController extends Controller
 
     public function create()
     {   
-        $category = Category::all();
+        $category = Category::where('category_id',null)->get();
         $clients= Client::all();
         $emails = array();
         foreach ($clients as $client) {
@@ -119,7 +119,7 @@ class ClientQuestionController extends Controller
                 $this->questionCreate($request,$client);
                 if(Session::has('question-create')) {
                     Session::reflash();   
-                    return redirect()->route('client.dashboard');
+                    return redirect()->route('user.login');
                 }
                 elseif (Session::has('message')) {
                     Session::reflash();  
@@ -131,7 +131,7 @@ class ClientQuestionController extends Controller
             $this->questionCreate($request,Auth::guard('client')->user());
             if(Session::has('question-create')) {
                 Session::reflash();   
-                return redirect()->route('user.login');
+                return redirect()->route('client.dashboard');
             }
             elseif (Session::has('message')) {
                 Session::reflash();  
