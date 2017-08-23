@@ -22,9 +22,20 @@
                 @endif
 
                 <div class="form-group">
-                    <label>Name: </label>
+                    <label>Name(ru): </label>
 
                     {{Form::text('name',null, ['class'=>'form-control'])}}
+                </div>
+                @if ($errors->has('name_uz'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('name_uz') }}</strong>
+                    </span>
+                @endif
+
+                <div class="form-group">
+                    <label>Name(uz): </label>
+
+                    {{Form::text('name_uz',null, ['class'=>'form-control'])}}
                 </div>
                 <div class="form-group">
                     <label>Class name (fonts): </label>
@@ -42,9 +53,15 @@
                                         <strong>{{ $errors->first('text') }}</strong>
                                     </span>
                 @endif
-                <label>Text: </label>
-                {{Form::textarea('text','Кредитование — это предоставление денежных средств и прочих активов, финансовыми учреждениями физическим и юридическим лицам на определённых условиях, фиксируемых договором. Главным требованием кредиторов при этом является своевременное погашение обязательств, а неплатёжеспособность лиц в данном случае — это ключевая проблема.',['class'=>'form-control'])}}
-
+                <label>Text(ru): </label>
+                {{Form::textarea('text','',['class'=>'form-control'])}}
+                @if ($errors->has('text_uz'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('text_uz') }}</strong>
+                                    </span>
+                @endif
+                <label>Text(uz): </label>
+                {{Form::textarea('text_uz','',['class'=>'form-control'])}}
                 <div class="form-group">
                     <div>
                         <input type='submit' value="Добавить" class="btn btn-success col-md-12"

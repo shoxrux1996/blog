@@ -21,34 +21,34 @@
                 <ol class="breadcrumb">
                     <li><a href="{{route('category.list')}}">Категории</a></li>
                     @if($category->parent == null)
-                        <li class="active">{{$category->name}}</li>
+                        <li class="active">{{\App::isLocale('ru') ? $category->name : $category->name_uz}}</li>
                     @else
                         <li class=""><a
                                     href="{{route('web.category.show', $category->parent->id)}}">{{$category->parent->name}}</a>
                         </li>
-                        <li class="active">{{$category->name}}</li>
+                        <li class="active">{{\App::isLocale('ru') ? $category->name : $category->name_uz}}</li>
                     @endif
                 </ol>
                 <div class="col-sm-9">
                     <div class="category-description">
-                        {!! $category->text !!}
+                        {!! \App::isLocale('ru') ? $category->text : $category->text_uz !!}
                         <h5>Популярные темы в этой категории</h5>
                         <div class="row">
                             <div class="col-sm-6">
                                 <ul class="list-unstyled">
                                     @if($category->children != null)
                                         @foreach($category->children as $cat)
-                                            <li><a href="{{route('web.category.show', $cat->name)}}">{{$cat->name}}</a>
+                                            <li><a href="{{route('web.category.show', $cat->name)}}">{{\App::isLocale('ru') ? $cat->name : $cat->name_uz}}</a>
                                             </li>
                                         @endforeach
                                     @endif
                                     @if($category->parent != null)
                                         <li>
-                                            <a href="{{route('web.category.show', $category->parent->name)}}">{{$category->parent->name}}</a>
+                                            <a href="{{route('web.category.show', $category->parent->name)}}">{{\App::isLocale('ru') ? $category->parent->name : $category->parent->name_uz}}</a>
                                         </li>
                                     @endif
                                     @foreach($cat1 as $cat)
-                                        <li><a href="{{route('web.category.show', $cat->name)}}">{{$cat->name}}</a>
+                                        <li><a href="{{route('web.category.show', $cat->name)}}">{{\App::isLocale('ru') ? $cat->name : $cat->name_uz}}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -56,7 +56,7 @@
                             <div class="col-sm-6">
                                 <ul class="list-unstyled">
                                     @foreach($cat2 as $cat)
-                                        <li><a href="{{route('web.category.show', $cat->name)}}">{{$cat->name}}</a>
+                                        <li><a href="{{route('web.category.show', $cat->name)}}">{{\App::isLocale('ru') ? $cat->name : $cat->name_uz}}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -83,7 +83,7 @@
                 <div id="questions" class="tab-pane fade in active">
                     <!-- Questions -->
                     <div class="row">
-                        <h3>Последние вопросы по теме «{{$category->name}}»</h3>
+                        <h3>Последние вопросы по теме «{{\App::isLocale('ru') ? $category->name : $category->name_uz}}»</h3>
                         <div class="col-sm-9">
                             <!-- Search -->
                             <form method="GET" action="{{route('search.questions.bycategory')}}">
@@ -97,7 +97,7 @@
                                         <ul class="dropdown-menu">
                                             @foreach($categories as $category2)
                                             <li>
-                                                <a href="{{route('search.questions.bycategory', $category2->name)}}">{{$category2->name}}</a>
+                                                <a href="{{route('search.questions.bycategory', $category2->name)}}">{{\App::isLocale('ru') ? $category2->name : $category2->name_uz}}</a>
                                             </li>
                                             @endforeach
                                         </ul>
@@ -184,7 +184,7 @@
                                         <hr>
                                         <p>
                                     <span class="category">Категория: <a
-                                                href="">{{$question->category->name}}</a></span>
+                                                href="">{{\App::isLocale('ru') ? $question->category->name : $question->category->name_uz}}</a></span>
                                             <a class="answers" href="{{route('web.question.show', $question->id)}}">
                                                 {{$question->answers->count()}}
                                             </a>
@@ -211,7 +211,7 @@
                                         <hr>
                                         <p>
                                     <span class="category">Категория: <a
-                                                href="">{{$question->category->name}}</a></span>
+                                                href="">{{\App::isLocale('ru') ? $question->category->name : $question->category->name_uz}}</a></span>
                                             <a class="answers" href="{{route('web.question.show', $question->id)}}">
                                                 {{$question->answers->count()}}
                                             </a>

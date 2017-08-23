@@ -22,8 +22,18 @@
                 @endif
 
                 <div class="form-group">
-                    <label>Name: </label>
+                    <label>Name(ru): </label>
                     {{Form::text('name',$category->name, ['class'=>'form-control'])}}
+                </div>
+                @if ($errors->has('name_uz'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('name_uz') }}</strong>
+                    </span>
+                @endif
+
+                <div class="form-group">
+                    <label>Name(uz): </label>
+                    {{Form::text('name_uz',$category->name_uz, ['class'=>'form-control'])}}
                 </div>
                  <div class="form-group">
                     <label>Class name (fonts): </label>
@@ -40,9 +50,15 @@
                                         <strong>{{ $errors->first('text') }}</strong>
                                     </span>
                 @endif
-                <label>Text: </label>
+                <label>Text(ru): </label>
                 {{Form::textarea('text',$category->text,['class'=>'form-control'])}}
-
+                @if ($errors->has('text_uz'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('text_uz') }}</strong>
+                                    </span>
+                @endif
+                <label>Text(uz): </label>
+                {{Form::textarea('text_uz',$category->text_uz,['class'=>'form-control'])}}
                 <div class="form-group">
                     <div>
                         <input type='submit' value="Изменить" class="btn btn-success col-md-12"
