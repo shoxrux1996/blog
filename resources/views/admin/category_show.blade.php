@@ -1,10 +1,6 @@
-@extends('layouts.app')
-@section('styles')
-    <link href="{{ asset('dist/css/homepage.css')}}" rel="stylesheet">
-    <link href="{{ asset('dist/css/individual-category.css')}}" rel="stylesheet">
-@endsection
-@section('body')
-    @extends('layouts.body')
+@extends('layouts.app-admin')
+
+
 @section('content')
     <div id="wrapper">
         <div class="container">
@@ -62,9 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <img class="img-responsive" src="{{asset('dist/images/sidebar-ad.png')}}"/>
-                </div>
+            
             </div>
         </div>
     </div>

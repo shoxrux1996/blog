@@ -22,20 +22,20 @@
                 @endif
 
                 <div class="form-group">
-                    <label>Name(uzb): </label>
+                    <label>Name(ru): </label>
 
                     {{Form::text('name',null, ['class'=>'form-control'])}}
                 </div>
-                @if ($errors->has('name_ru'))
+                @if ($errors->has('name_uz'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('name_ru') }}</strong>
+                        <strong>{{ $errors->first('name_uz') }}</strong>
                     </span>
                 @endif
 
                 <div class="form-group">
-                    <label>Name(ru): </label>
+                    <label>Name(uz): </label>
 
-                    {{Form::text('name_ru',null, ['class'=>'form-control'])}}
+                    {{Form::text('name_uz',null, ['class'=>'form-control'])}}
                 </div>
                 <div class="form-group">
                     <label>Class name (fonts): </label>
@@ -53,15 +53,15 @@
                                         <strong>{{ $errors->first('text') }}</strong>
                                     </span>
                 @endif
-                <label>Text(uzb): </label>
+                <label>Text(ru): </label>
                 {{Form::textarea('text','',['class'=>'form-control'])}}
-                @if ($errors->has('text_ru'))
+                @if ($errors->has('text_uz'))
                     <span class="help-block">
-                                        <strong>{{ $errors->first('text_ru') }}</strong>
+                                        <strong>{{ $errors->first('text_uz') }}</strong>
                                     </span>
                 @endif
-                <label>Text(ru): </label>
-                {{Form::textarea('text_ru','',['class'=>'form-control'])}}
+                <label>Text(uz): </label>
+                {{Form::textarea('text_uz','',['class'=>'form-control'])}}
                 <div class="form-group">
                     <div>
                         <input type='submit' value="Добавить" class="btn btn-success col-md-12"

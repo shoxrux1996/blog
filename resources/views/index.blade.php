@@ -157,20 +157,37 @@
     <div class="container-fluid" id="category-section">
         <div class="row">
             <div class="col-md-9 col-sm-12">
-                @for($i=0; $i<$categories->count(); $i+=3)
-                    <div class="row">
-                        @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
-                            <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                                <a href="{{route('web.category.show', [$categories[$j]->name])}}">
-                                    <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name}}
-                                </a>
-                                @foreach($categories[$j]->children as $subcategory)
-                                    <p><a href="{{route('web.category.show', [$subcategory->name])}}">{{$subcategory->name}}</a></p>
-                                @endforeach
-                            </div>
-                        @endfor
-                    </div>
-                @endfor
+                @if(\App::isLocale('ru'))
+                    @for($i=0; $i<$categories->count(); $i+=3)
+                        <div class="row">
+                            @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
+                                <div class="col-md-4 col-sm-4 col-xs-4 categories">
+                                    <a href="{{route('web.category.show', [$categories[$j]->name])}}">
+                                        <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name}}
+                                    </a>
+                                    @foreach($categories[$j]->children as $subcategory)
+                                        <p><a href="{{route('web.category.show', [$subcategory->name])}}">{{$subcategory->name}}</a></p>
+                                    @endforeach
+                                </div>
+                            @endfor
+                        </div>
+                    @endfor
+                @else
+                    @for($i=0; $i<$categories->count(); $i+=3)
+                        <div class="row">
+                            @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
+                                <div class="col-md-4 col-sm-4 col-xs-4 categories">
+                                    <a href="{{route('web.category.show', [$categories[$j]->name])}}">
+                                        <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name_uz}}
+                                    </a>
+                                    @foreach($categories[$j]->children as $subcategory)
+                                        <p><a href="{{route('web.category.show', [$subcategory->name])}}">{{$subcategory->name_uz}}</a></p>
+                                    @endforeach
+                                </div>
+                            @endfor
+                        </div>
+                    @endfor
+                @endif
             </div>
             <div class="col-md-3 text-center view-all-categories">
                 <h3>@lang('index.helpforanyquestion')</h3>

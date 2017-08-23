@@ -37,15 +37,15 @@ class AdminCategoryController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:categories',
             'text' => 'required|min:10',
-            'name_ru' => 'required|unique:categories',
-            'text_ru' => 'required|min:10',
+            'name_uz' => 'required|unique:categories',
+            'text_uz' => 'required|min:10',
         ]);
 
         $category = new Category;
         $category->name = $request->name;
         $category->text = $request->text;
-        $category->name_ru = $request->name_ru;
-        $category->text_ru = $request->text_ru;
+        $category->name_uz = $request->name_uz;
+        $category->text_uz = $request->text_uz;
         $category->class = $request->class;
         $category->category_id = $request->parent;
         $category->save();
@@ -91,13 +91,17 @@ class AdminCategoryController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:categories,name,' . $id,
             'text' => 'required|min:10',
+            'name_uz' => 'required|unique:categories,name,' . $id,
+            'text_uz' => 'required|min:10',
         ]);
 
         $category = Category::findOrFail($id);
         $category->name = $request->name;
+        $category->name_uz = $request->name_uz;
         $category->category_id = $request->category;
         $category->class = $request->class;
         $category->text = $request->text;
+        $category->text_uz = $request->text_uz;
         $category->save();
         return redirect()->route('admin.category.show', $id);
     }
