@@ -87,13 +87,17 @@
                             <form method="GET" action="{{route('search.questions.bycategory')}}">
                                 <div class="input-group" id="search">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">Все темы <span class="caret"></span>
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">Все темы <span
+                                                    class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu">
+                                            @foreach($categories as $category2)
                                             <li>
-                                                <a href="{{route('search.questions.bycategory', $category->name)}}">{{$category->name}}</a>
+                                                <a href="{{route('search.questions.bycategory', $category2->name)}}">{{$category2->name}}</a>
                                             </li>
+                                            @endforeach
                                         </ul>
                                     </div><!-- /btn-group -->
 
@@ -111,12 +115,12 @@
                         <span class="{{ $section == 1 ? "active-type" : "" }}"><a
                                     href="{{route('web.category.show', $category->name)}}"
                             >Все</a> </span>
-                        <span class="{{ $section == 2 ? "active-type" : "" }}"> <a
-                                    href="{{route('category.costly.questions', $category->name)}}"
-                                    onclick="switchSection('section2')">Платные</a> </span>
-                        <span class="{{ $section == 3 ? "active-type" : "" }}"> <a
-                                    href="{{route('category.free.questions', $category->name)}}"
-                                    onclick="switchSection('section3')">Бесплатные</a> </span>
+                                <span class="{{ $section == 2 ? "active-type" : "" }}"> <a
+                                            href="{{route('category.costly.questions', $category->name)}}"
+                                            onclick="switchSection('section2')">Платные</a> </span>
+                                <span class="{{ $section == 3 ? "active-type" : "" }}"> <a
+                                            href="{{route('category.free.questions', $category->name)}}"
+                                            onclick="switchSection('section3')">Бесплатные</a> </span>
                             </p>
                             <div id="section1" class="section" style="display: {{ $section == 1 ? "block" : "none" }};">
                                 @foreach($questions as $question)
@@ -137,8 +141,8 @@
                                         <p>
                                             <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>
                                             <span class="number"> вопрос №{{$question->id}}</span>
-                                    <span class="author">{{$question->client->user->firstName}}
-                                        , г.{{$question->client->user->city->name}} </span>
+                                            <span class="author">{{$question->client->user->firstName}}
+                                                , г.{{$question->client->user->city->name}} </span>
                                         </p>
                                         <hr>
                                         <p>
@@ -172,8 +176,8 @@
                                         <p>
                                             <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>
                                             <span class="number"> вопрос №{{$question->id}}</span>
-                                    <span class="author">{{$question->client->user->firstName}}
-                                        , г.{{$question->client->user->city->name}} </span>
+                                            <span class="author">{{$question->client->user->firstName}}
+                                                , г.{{$question->client->user->city->name}} </span>
                                         </p>
                                         <hr>
                                         <p>
@@ -199,8 +203,8 @@
                                         <p>
                                             <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>
                                             <span class="number"> вопрос №{{$question->id}}</span>
-                                    <span class="author">{{$question->client->user->firstName}}
-                                        , г.{{$question->client->user->city->name}} </span>
+                                            <span class="author">{{$question->client->user->firstName}}
+                                                , г.{{$question->client->user->city->name}} </span>
                                         </p>
                                         <hr>
                                         <p>

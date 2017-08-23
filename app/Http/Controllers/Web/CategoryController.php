@@ -45,7 +45,7 @@ class CategoryController extends Controller
         $category = Category::where('name', $name)->first();
         $cat1 = Category::where('id', '!=', $category->id)->orderBy('created_at', 'desc')->skip(0)->take(3)->get();
         $cat2 = Category::where('id', '!=', $category->id)->orderBy('created_at', 'desc')->skip(3)->take(4)->get();
-
+        $categories = Category::where('category_id', null)->get();
         return view('category.show')
             ->withCategory($category)
             ->withCat1($cat1)
@@ -54,6 +54,7 @@ class CategoryController extends Controller
             ->withQuestions($questions)
             ->withQuestions_free($questions_free)
             ->withQuestions_costly($questions_costly)
+            ->withCategories($categories)
             ->withSection(1);
     }
     public function freeQuestions($name)
@@ -76,6 +77,7 @@ class CategoryController extends Controller
         $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
+        $categories = Category::where('category_id', null)->get();
         return view('category.show')
             ->withCategory($category)
             ->withCat1($cat1)
@@ -84,6 +86,7 @@ class CategoryController extends Controller
             ->withQuestions($questions)
             ->withQuestions_free($questions_free)
             ->withQuestions_costly($questions_costly)
+            ->withCategories($categories)
             ->withSection(2);
     }
 
@@ -106,6 +109,7 @@ class CategoryController extends Controller
         $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
+        $categories = Category::where('category_id', null)->get();
         return view('category.show')
             ->withCategory($category)
             ->withCat1($cat1)
@@ -114,6 +118,7 @@ class CategoryController extends Controller
             ->withQuestions($questions)
             ->withQuestions_free($questions_free)
             ->withQuestions_costly($questions_costly)
+            ->withCategories($categories)
             ->withSection(3);
     }
 

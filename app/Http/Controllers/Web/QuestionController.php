@@ -33,9 +33,11 @@ class QuestionController extends Controller
         $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
+        $categories = Category::where('category_id', null)->get();
+
         return view('question.list')->withQuestions($questions)
             ->withQuestions_costly($questions_costly)->withBest_lawyers($best_lawyers)
-            ->withQuestions_free($questions_free)->withSection(1);
+            ->withQuestions_free($questions_free)->withCategories($categories)->withSection(1);
     }
 
     public function show($id)
@@ -46,6 +48,8 @@ class QuestionController extends Controller
 
     public function freeQuestions()
     {
+        $categories = Category::where('category_id', null)->get();
+
         $questions = Question::orderBy('id', 'desc')->paginate(5);
         $questions_costly = Question::where('type', [1, 2])
             ->orderBy('id', 'desc')->paginate(5);
@@ -56,11 +60,15 @@ class QuestionController extends Controller
         });
         return view('question.list')->withQuestions($questions)
             ->withQuestions_costly($questions_costly)->withBest_lawyers($best_lawyers)
-            ->withQuestions_free($questions_free)->withSection(3);
+            ->withQuestions_free($questions_free)
+            ->withCategories($categories)
+            ->withSection(3);
     }
 
     public function costlyQuestions()
     {
+        $categories = Category::where('category_id', null)->get();
+
         $questions = Question::orderBy('id', 'desc')->paginate(5);
         $questions_costly = Question::where('type', 1)->orWhere('type',2)->orderBy('id', 'desc')->paginate(5);
         $questions_free = Question::where('type', 0)
@@ -70,7 +78,7 @@ class QuestionController extends Controller
         });
         return view('question.list')->withQuestions($questions)
             ->withQuestions_costly($questions_costly)->withBest_lawyers($best_lawyers)
-            ->withQuestions_free($questions_free)->withSection(2);
+            ->withQuestions_free($questions_free)->withSection(2)->withCategories($categories);
     }
 
 

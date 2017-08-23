@@ -23,7 +23,11 @@
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Все темы <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Корпоративное право</a></li>
+                                @foreach($categories as $category2)
+                                    <li>
+                                        <a href="{{route('search.questions.bycategory', $category2->name)}}">{{$category2->name}}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div><!-- /btn-group -->
                         <input type="text" name="name" class="form-control" aria-label="...">
