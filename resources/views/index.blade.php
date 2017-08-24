@@ -237,7 +237,7 @@
             <div class="crsl-items" data-navigation="lawyers-carousel">
                 <div class="crsl-wrap">
                     @foreach($lawyers as $lawyer)
-                        <figure class="crsl-item crsl-active">
+                        <figure class="crsl-item">
                             <div class="lawyer text-center">
                                 <a href="{{route('web.lawyer.show', $lawyer->id)}}">
                                     <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}" alt="headshot 1"
