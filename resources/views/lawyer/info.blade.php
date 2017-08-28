@@ -486,8 +486,9 @@
                                     </div>
                                 </div>
                             </div>
-
+                        
                         </form>
+                        </div>
                         <div id="awards" class="tab-pane fade in {{$settingtype==='awards' ? 'active' : ''}}">
                             <div class="row">
                                 <h6><b>Награды</b></h6>
@@ -539,7 +540,7 @@
                                         <button type="submit" class="btn btn-default btn-primary">Загрузить</button>
                                     </div>
                                 </form>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

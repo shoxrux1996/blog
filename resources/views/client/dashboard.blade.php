@@ -32,6 +32,49 @@
         </div>
     </div>
 <!-- /Modal for message-->
+    <!-- Modal for call function-->
+    <div id="call-function" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">@lang('index.soon')!!!</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{{asset('dist/images/under-development.png')}}" alt="Under development"/>
+                    <h4>@lang('index.callinprocess')</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /Modal for call function-->
+
+    <!-- Modal for document function-->
+    <div id="document-function" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">@lang('index.soon')!!!</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{{asset('dist/images/under-development.png')}}" alt="Under development"/>
+                    <h4>@lang('index.documentinprocess')</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /Modal for document function-->
     <!-- Content -->
     <div id="wrapper">
         <div class="container">
@@ -100,13 +143,13 @@
                         <h4 class="text-primary">Звонок</h4>
                         <p>Оставьте номер телефона, и наш юрист свяжется с вами, чтобы проконсультировать вас по любому
                             вопросу.</p>
-                        <a href="{{ route('call.create') }}" type="button" class="btn btn-default btn-primary">Заказать
+                        <a data-toggle="modal" data-target="#call-function" type="button" class="btn btn-default btn-primary">Заказать
                             звонок</a>
                     </div>
                     <div class="col-sm-4">
                         <h4 class="text-warning">Документ</h4>
                         <p>Закажите документ, после чего наш юрист свяжется с вами, уточнит детали и подготовит его.</p>
-                        <a href="{{ route('document.create') }}" type="button" class="btn btn-default btn-warning">Заказать
+                        <a data-toggle="modal" data-target="#document-function" type="button" class="btn btn-default btn-warning">Заказать
                             документ</a>
                     </div>
                 </div>
