@@ -74,8 +74,8 @@
 
             <div class="row">
                 <div class="col-sm-9">
-                    @if (Auth::guard('lawyer')->check() && $question->solved != true)
-                        @if(($question->type == 1 || $question->type == 2) && Auth::guard('lawyer')->user()->type == 2)
+                    @if (Auth::guard('lawyer')->check() && $question->solved != true && Auth::guard('lawyer')->user()->type == 2)
+                        @if(($question->type == 1 || $question->type == 2))
 
                             {{Form::open(['route' => ['lawyer.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
 

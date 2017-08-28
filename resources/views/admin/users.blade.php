@@ -270,6 +270,21 @@
                             </div>
                         </div>
                         <div class="row">
+                            @if($lawyer->type==1)
+                                <form action="{{ route('admin.lawyer.confirm',[$lawyer->id]) }}" method="post">
+                                    {{csrf_field()}}
+                                    <button type="submit" class="btn btn-success pull-right btn-sm"
+                                            style="margin:5px 0 0 40px;">Confirm
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('admin.lawyer.confirm',[$lawyer->id]) }}" method="post">
+                                    {{csrf_field()}}
+                                    <button type="submit" class="btn btn-success pull-right btn-sm"
+                                            style="margin:5px 0 0 40px;">Unconfirm
+                                    </button>
+                                </form>
+                            @endif
                             @if($lawyer->isBlocked == false)
                                 <form action="{{ route('admin.lawyer.block', [$lawyer->id]) }}"
                                       method="post">

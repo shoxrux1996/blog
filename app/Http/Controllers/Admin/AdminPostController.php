@@ -145,5 +145,15 @@ class AdminPostController extends Controller
         $client->save();
         return redirect()->back();
     }
+    public function lawyerConfirm(Request $request, $id)
+    {
+        $lawyer = Lawyer::findOrFail($id);
+        if($lawyer->type==1)
+            $lawyer->type = 2;
+        else
+            $lawyer->type = 1;
+        $lawyer->save();
+        return redirect()->back();
+    }
 
 }

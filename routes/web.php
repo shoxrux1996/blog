@@ -85,6 +85,7 @@ Route::prefix('admin')->group(function(){
         Route::post('client/unblock/{id}','Admin\AdminPostController@clientUnblock')->name('admin.client.unblock');
         Route::post('lawyer/block/{id}','Admin\AdminPostController@lawyerBlock')->name('admin.lawyer.block');
         Route::post('lawyer/unblock/{id}','Admin\AdminPostController@lawyerUnblock')->name('admin.lawyer.unblock');
+        Route::post('lawyer/confirm/{id}','Admin\AdminPostController@lawyerConfirm')->name('admin.lawyer.confirm');
     });
 });
 
