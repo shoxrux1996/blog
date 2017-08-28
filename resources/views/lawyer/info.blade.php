@@ -136,7 +136,7 @@
                         <a data-toggle="tab" href="#additional">Дополнительно</a>
                     </li>
                     <li class="{{$settingtype==='awards' ? 'active' : ''}}">
-                        <a data-toggle="tab" href="#awards">Награды</a>
+                        <a data-toggle="tab" href="#awards">Сертификаты</a>
                     </li>
                 </ul>
 
@@ -499,28 +499,11 @@
                                                  src="{!!asset($award->path . $award->file)!!}"/>
                                         </div>
                                     @endforeach
-                                @else
-                                    <div class="col-sm-3">
-                                        <img class="img-responsive img-thumbnail"
-                                             src="{{ asset('dist/images/exquisite-certificate-frames-with-template-vector.png')}}"/>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <img class="img-responsive img-thumbnail"
-                                             src="{{ asset('dist/images/exquisite-certificate-frames-with-template-vector.png')}}"/>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <img class="img-responsive img-thumbnail"
-                                             src="{{ asset('dist/images/exquisite-certificate-frames-with-template-vector.png')}}"/>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <img class="img-responsive img-thumbnail"
-                                             src="{{ asset('dist/images/exquisite-certificate-frames-with-template-vector.png')}}"/>
-                                    </div>
                                 @endif
                                 <form method="post" action="{{ route('lawyer.update', ['settingtype'=>'awards'])}}"
                                       enctype="multipart/form-data">
                                     {{csrf_field()}}
-                                    <p class="color-gray">Загрузите изображение Ваших наград или дипломов (в формате
+                                    <p class="color-gray">Загрузите изображение Ваших сертификатов или дипломов (в формате
                                         jpeg).</p>
                                     <div class="form-group">
                                         <label class="btn btn-default ">
