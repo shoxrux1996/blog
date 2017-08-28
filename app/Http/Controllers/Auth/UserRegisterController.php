@@ -78,6 +78,7 @@ class UserRegisterController extends Controller
 
             $data = array('code' => $confirmation_code, 'email' => $new_client['email'], 'name' => $new_client['name']);
             Mail::send('email.verify', ['data' => $data], function ($message) use ($data) {
+
                 $message->to($data['email'], $data['name'])
                     ->subject('Verify your email address');
             });
