@@ -19,5 +19,4 @@ return [
     'modalbody1' => "Iltimos, elektron manzilingizni tasdiqlang!",
     'modalbody2' => "Savol muvaffaqiyatli yaratildi",
     'close' => "Yopish",
-
 ];

@@ -4,13 +4,12 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>Verify Your Email Address</h2>
+        <h2>{{ __('email.email_confirm') }}</h2>
 
         <div>
-            Thanks for creating an account with the verification demo app.
-            Please follow the link below to verify your email address
-            
-            <a href="{{route('user.register.confirm', ['code' => $data['code']]) }}">Verify Your Email</a><br/>
+            {{ __('email.email_confirm_div') }}
+            <a class="btn btn-default btn-lg" href="{{route('user.register.confirm', ['code' => $data['code']]) }}">
+                {{ __('email.confirm_email_button') }}</a><br/>
         </div>
 
     </body>
