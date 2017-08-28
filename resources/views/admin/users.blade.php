@@ -166,6 +166,8 @@
                                                 Специализация</a></li>
                                         <li><a data-toggle="tab" href="#education"><i class="fa fa-graduation-cap"></i>
                                                 Образование</a></li>
+                                        <li><a data-toggle="tab" href="#awards"><i class="fa fa-graduation-cap"></i>
+                                                Сертификаты</a></li>
                                     </ul>
                                 </div>
                                 <!-- END MENU -->
@@ -266,6 +268,19 @@
                                             <li><h6><span class="color-gray">Год выпуска:</span> 2013</h6></li>
                                         </ul>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 tab-pane fade profile-content" id="awards">
+                                <div class="row">
+                                    <h6><b>Награды</b></h6>
+                                    @if($lawyer->files != null)
+                                        @foreach($lawyer->files as $award)
+                                            <div class="col-sm-3">
+                                                <img class="img-responsive img-thumbnail"
+                                                     src="{!!asset($award->path . $award->file)!!}"/>
+                                            </div>
+                                        @endforeach
+                                @endif
                                 </div>
                             </div>
                         </div>
