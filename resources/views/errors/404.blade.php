@@ -17,7 +17,7 @@
         <div class="text-center">
             <h3>Ошибка 404</h3>
             <h5>
-                <a href="#">Назад к главной страницу</a>
+                <a href="{{ route('home') }}">Назад к главной страницу</a>
             </h5>
         </div>
         <div class="col-md-8 col-md-offset-2">
@@ -27,7 +27,7 @@
                 <article class="row">
                     <div class="col-md-2 col-sm-2 hidden-xs">
                         <figure class="thumbnail">
-                            <img class="img-responsive" src="dist/images/headshot-2.jpg" />
+                            <img class="img-responsive" src="{{ asset('dist/images/headshot-2.jpg') }}" />
                             <figcaption class="text-center">Alice</figcaption>
                         </figure>
                     </div>
@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-2 col-sm-2 hidden-xs">
                         <figure class="thumbnail">
-                            <img class="img-responsive" src="dist/images/headshot-3.jpg" />
+                            <img class="img-responsive" src="{{ asset('dist/images/headshot-3.jpg') }}" />
                             <figcaption class="text-center">Bob</figcaption>
                         </figure>
                     </div>
@@ -75,7 +75,7 @@
                 <article class="row">
                     <div class="col-md-2 col-sm-2 hidden-xs">
                         <figure class="thumbnail">
-                            <img class="img-responsive" src="dist/images/headshot-2.jpg" />
+                            <img class="img-responsive" src="{{ asset('dist/images/headshot-2.jpg') }}" />
                             <figcaption class="text-center">Alice</figcaption>
                         </figure>
                     </div>
@@ -113,7 +113,7 @@
                     </div>
                     <div class="col-md-2 col-sm-2 hidden-xs">
                         <figure class="thumbnail">
-                            <img class="img-responsive" src="dist/images/headshot-3.jpg" />
+                            <img class="img-responsive" src="{{ asset('dist/images/headshot-3.jpg') }}" />
                             <figcaption class="text-center">Bob</figcaption>
                         </figure>
                     </div>

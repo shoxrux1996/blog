@@ -92,14 +92,14 @@
                     <div class="panel-body">
                         <ul class="list-unstyled">
                             <li>
-                                <a href="{{ route('my.answers')}}">Вопросы</a>
+                                <a href="#">Вопросы</a>
                             </li>
 
                             <li>
                                 <a href="{{route('lawyer.blog.insert')}}">Написать Блог</a>
                             </li>
                             <li>
-                                <a href="{{ route('my.requests')}}">Документы</a>
+                                <a href="#">Документы</a>
                             </li>
                             <li>
                                 <a href="#">Телефонные консультации</a>
