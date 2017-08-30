@@ -3,6 +3,7 @@
 namespace yuridik\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 use yuridik\Http\Controllers\Controller;
 use yuridik\City;
 use Illuminate\Support\Facades\Mail;
@@ -80,7 +81,7 @@ class UserRegisterController extends Controller
             Mail::send('email.verify', ['data' => $data], function ($message) use ($data) {
 
                 $message->to($data['email'], $data['name'])
-                    ->subject('Verify your email address');
+                    ->subject(__('mail.email_confirm'));
             });
             $client->save();
         } elseif ($usertype === "lawyer") {
