@@ -11,6 +11,7 @@ use yuridik\Http\Requests;
 use Session;
 use yuridik\File;
 use Purifier;
+use Illuminate\Support\Facades\File as LaraFile;
 
 class LawyerBlogController extends Controller
 {
@@ -68,7 +69,7 @@ class LawyerBlogController extends Controller
         ));
         $blog = Blog::find($id);
         $blog->text = Purifier::clean($request->text);
-        $blog->text = $request->text;
+        $blog->title = $request->title;
         $blog->save();
 
         $blog->tags()->sync($request->tags);
@@ -77,7 +78,7 @@ class LawyerBlogController extends Controller
             $file_name = $file->getClientOriginalName();
             $upload_folder = '/blogs/' . $blog->id . '/';
             if ($blog->file != null) {
-                LaraFile::delete(public_path() . $upload_folder . $blog->file->file);
+                LaraFile::delete(public_path() . $blog->file->path. $blog->file->file);
                 $blog->file->file = $file_name;
                 $blog->file->path = $upload_folder;
             } else {
@@ -89,7 +90,7 @@ class LawyerBlogController extends Controller
             $file->move(public_path() . $upload_folder, $file_name);
         }
         Session::flash('message', 'Blog was updated successfully');
-        return redirect()->route('lawyer.blog.blog_show', $blog->id);
+        return redirect()->route('web.blog.show', $blog->id);
     }
 
     public function editform($id)

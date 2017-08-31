@@ -71,7 +71,7 @@ class AdminBlogController extends Controller
         ));
         $blog = Blog::find($id);
         $blog->title = $request->title;
-        $blog->text = $request->text;
+        $blog->text = Purifier::clean($request->text);
         $blog->save();
 
         $blog->tags()->sync($request->tags);

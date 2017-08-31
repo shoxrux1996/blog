@@ -183,7 +183,7 @@
                         <a href="{{route('web.blog.show', $bl->id)}}">
                             <div class="col-sm-4">
                                 <div class="blog-item">
-                                    <div class="ribbon"><span>Юристы</span></div>
+                                    <div class="ribbon"><span>{{$blog->blogable_type != 'yuridik\Admin' ? 'Юрист' : 'Модератор'}}</span></div>
                                     <div class="blog-item-img">
                                         <img alt="Blog item image" src="{{$bl->file != null ? asset($bl->file->path.$bl->file->file) : asset('dist/images/blog-img-2.jpg')}}"/>
                                         <div class="middle">

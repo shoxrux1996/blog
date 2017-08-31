@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <img id="blah" src="{{asset($blog->file->path.$blog->file->file)}}" alt="your image" style="width: 500px; height: 200px;"/>
+                        <img id="blah" src="{{$blog->file != null ? asset($blog->file->path.$blog->file->file) : ''}}" alt="" style="width: 500px; height: 200px;"/>
                     </div>
                 </div>
                 @if ($errors->has('text'))
