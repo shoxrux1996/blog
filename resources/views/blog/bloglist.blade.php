@@ -56,7 +56,7 @@
                             <hr>
                             <div class="blog-item-footer">
                             <span>
-                                <i class="fa fa-user"></i> {{$blog->blogable->user->firstName}}
+                                <i class="fa fa-user"></i> {{$blog->blogable->user != null ? $blog->blogable->user->firstName : $blog->blogable->name}}
                             </span>
                             <span class="pull-right">
                                 <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($blog->created_at)->toFormattedDateString()}}
@@ -70,7 +70,6 @@
                 <div class="text-center col-md-12">
 
                         {!! $blogs->links('pagination') !!}
-
                     {{--<button type="button" class="btn btn-default btn-lg blue-button show-others">Показать еще</button>--}}
                 </div>
             </div>

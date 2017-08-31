@@ -23,7 +23,7 @@
         <ul class="nav nav-tabs">
             <li id= "q" class="active"><a data-toggle="tab" href="#questions">Вопросы <span class="badge">{{$questions->total()}}</span></a></li>
             <li id = "l"><a data-toggle="tab" href="#lawyers">Юристы <span class="badge">{{$lawyers->total()}}</span></a></li>
-            <li id = "n"><a data-toggle="tab" href="#news">Новости и статьи <span class="badge">0</span></a></li>
+            <li id = "n"><a data-toggle="tab" href="#news">Новости и статьи <span class="badge">{{$blogs->total()}}</span></a></li>
             {{-- <li><a data-toggle="tab" href="#documents">Документы</a></li>--}}
         </ul>
         <!-- /Tab navigation -->
@@ -173,108 +173,54 @@
             <!-- News and articles -->
             <div id="news" class="tab-pane fade">
                 <div class="row">
-                    <a href="individual-blog.html">
-                        <div class="col-sm-4">
-                            <div class="blog-item">
-                                <div class="ribbon"><span>Модераторы</span></div>
-                                <div class="blog-item-img">
-                                    <img alt="Blog item image" src="{{asset('dist/images/blog-img-3.jpg')}}"/>
-                                    <div class="middle">
-                                        <button class="btn btn-dark-blue text">Читать статью</button>
+                    @foreach($blogs as $blog)
+                        <a href="{{route('web.blog.show', $blog->id)}}">
+                            <div class="col-sm-6">
+                                <div class="blog-item">
+                                    <div class="ribbon"><span>Модераторы</span></div>
+                                    <div class="blog-item-img">
+                                        @if($blog->file != null)
+                                            <img alt="Blog item image" src="{{asset($blog->file->path.$blog->file->file)}}">
+                                        @else
+                                            <img alt="Blog item image" src="{{asset('dist/images/blog-img-2.jpg')}}">
+                                        @endif
+                                        <div class="middle">
+                                            <button class="btn btn-dark-blue text">Читать статью</button>
+                                        </div>
+                                    </div>
+                                    <div class="blog-item-description">
+                                        <h5><b>{{substr($blog->title,0,70)}} {{strlen($blog->title)>70 ? '...' : ""}}</b></h5>
+                                        <p>{{substr(strip_tags($blog->text),0,180)}} {{strlen(strip_tags($blog->text))>180 ? '...' : ""}}</p>
+                                        <p class="post-info">
+                                <span>
+                                    <i class="fa fa-eye"></i> {{$blog->count}}
+                                </span>
+                                            @foreach($blog->tags as $tag)
+                                                <span style="margin-left:10px;"><strong >{{$tag->name}}</strong></span>
+                                            @endforeach
+                                            <span class="pull-right">
+                                    <i class="fa fa-comments-o"></i> {{$blog->comments->count()}}
+                                </span>
+                                        </p>
+                                    </div>
+                                    <hr>
+                                    <div class="blog-item-footer">
+                            <span>
+                                <i class="fa fa-user"></i> {{$blog->blogable->user != null ? $blog->blogable->user->firstName : $blog->blogable->name}}
+                            </span>
+                                        <span class="pull-right">
+                                <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($blog->created_at)->toFormattedDateString()}}
+                            </span>
                                     </div>
                                 </div>
-                                <div class="blog-item-description">
-                                    <h5><b>Как работать, если подписал договор ГПХ вместо трудового</b></h5>
-                                    <p>В чем сложности, идет ли стаж, можно ли работать из дома — и другие детали.</p>
-                                    <p class="post-info">
-                                <span>
-                                    <i class="fa fa-eye"></i> 124
-                                </span>
-                                <span class="pull-right">
-                                    <i class="fa fa-comments-o"></i> 24
-                                </span>
-                                    </p>
-                                </div>
-                                <hr>
-                                <div class="blog-item-footer">
-                            <span>
-                                <i class="fa fa-user"></i> Улугбек
-                            </span>
-                            <span class="pull-right">
-                                <i class="fa fa-calendar"></i> 10 Июль, 2017
-                            </span>
-                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="col-sm-4">
-                            <div class="blog-item">
-                                <div class="ribbon"><span>Модераторы</span></div>
-                                <div class="blog-item-img">
-                                    <img alt="Blog item image" src="{{asset('dist/images/blog-img-1.jpg')}}"/>
-                                    <div class="middle">
-                                        <button class="btn btn-dark-blue text">Читать статью</button>
-                                    </div>
-                                </div>
-                                <div class="blog-item-description">
-                                    <h5><b>Как работать, если подписал договор ГПХ вместо трудового</b></h5>
-                                    <p>В чем сложности, идет ли стаж, можно ли работать из дома — и другие детали.</p>
-                                    <p class="post-info">
-                                <span>
-                                    <i class="fa fa-eye"></i> 124
-                                </span>
-                                <span class="pull-right">
-                                    <i class="fa fa-comments-o"></i> 24
-                                </span>
-                                    </p>
-                                </div>
-                                <hr>
-                                <div class="blog-item-footer">
-                            <span>
-                                <i class="fa fa-user"></i> Улугбек
-                            </span>
-                            <span class="pull-right">
-                                <i class="fa fa-calendar"></i> 10 Июль, 2017
-                            </span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="col-sm-4">
-                            <div class="blog-item">
-                                <div class="ribbon"><span>Модераторы</span></div>
-                                <div class="blog-item-img">
-                                    <img alt="Blog item image" src="{{asset('dist/images/blog-img-2.jpg')}}"/>
-                                    <div class="middle">
-                                        <button class="btn btn-dark-blue text">Читать статью</button>
-                                    </div>
-                                </div>
-                                <div class="blog-item-description">
-                                    <h5><b>Как работать, если подписал договор ГПХ вместо трудового</b></h5>
-                                    <p>В чем сложности, идет ли стаж, можно ли работать из дома — и другие детали.</p>
-                                    <p class="post-info">
-                                <span>
-                                    <i class="fa fa-eye"></i> 124
-                                </span>
-                                <span class="pull-right">
-                                    <i class="fa fa-comments-o"></i> 24
-                                </span>
-                                    </p>
-                                </div>
-                                <hr>
-                                <div class="blog-item-footer">
-                            <span>
-                                <i class="fa fa-user"></i> Улугбек
-                            </span>
-                            <span class="pull-right">
-                                <i class="fa fa-calendar"></i> 10 Июль, 2017
-                            </span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    @endforeach
+
+                    <div class="text-center col-md-12">
+                        {!! $blogs->links('pagination') !!}
+                        {{--<button type="button" class="btn btn-default btn-lg blue-button show-others">Показать еще</button>--}}
+                    </div>
                 </div>
             </div>
             <!-- /News and articles -->

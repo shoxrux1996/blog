@@ -45,7 +45,7 @@
                             <hr>
                             <div class="blog-item-footer">
                             <span>
-                                <i class="fa fa-user"></i> {{$blog->blogable->user->firstName}}
+                                <i class="fa fa-user"></i> {{$blog->blogable->user != null ? $blog->blogable->user->firstName : $blog->blogable->name}}
                             </span>
                                 <span class="pull-right">
                                 <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($blog->created_at)->toFormattedDateString()}}
@@ -58,7 +58,6 @@
             @endforeach
 
             <div class="text-center col-md-12">
-
                 {!! $blogs->links('pagination') !!}
             </div>
         </div>
@@ -68,6 +67,9 @@
 
     </div>
     <!-- /Content -->
+    <div class="col-md-12 col-lg-offset-2">
+        <a href="{{route('admin.blog.insert')}}" class="btn btn-info col-md-2">Добавить</a>
+    </div>
 
 @endsection
 

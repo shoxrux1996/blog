@@ -26,6 +26,8 @@ Route::prefix('admin')->group(function(){
         Route::get('/show/{id}', 'Admin\AdminBlogController@show')->name('admin.blog.show');
         Route::get('/edit/{id}', 'Admin\AdminBlogController@editform')->name('admin.blog.edit');
         Route::post('/edit/submit/{id}', 'Admin\AdminBlogController@edit')->name('admin.blog.edit.submit');
+        Route::get('/insertform','Admin\AdminBlogController@insertform')->name('admin.blog.insert');
+        Route::post('/create','Admin\AdminBlogController@store')->name('admin.blog.submit');
     });
     Route::prefix('tags')->group(function(){ 
         Route::get('edit/{id}', 'Admin\AdminTagController@edit')->name('admin.tag.edit');

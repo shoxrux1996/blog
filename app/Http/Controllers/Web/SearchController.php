@@ -3,6 +3,7 @@
 namespace yuridik\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
+use yuridik\Blog;
 use yuridik\Document;
 use yuridik\Http\Controllers\Controller;
 use yuridik\Lawyer;
@@ -16,27 +17,47 @@ class SearchController extends Controller
     public function searchAll(Request $request)
     {
 
-        $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+        $best_lawyers = Lawyer::with('feedbacks')
+            ->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
         if ($request->search != "") {
-            $lawyers = Lawyer::with('user')->whereHas('user', function ($query) use ($request) {
+            $lawyers = Lawyer::with('user')
+                ->whereHas('user', function ($query) use ($request) {
                 $query->where('firstName', 'LIKE', "%$request->search%")
                     ->orWhere('lastName', 'LIKE', "%$request->search%");
-            })->orWhere('email', 'LIKE', "%$request->search%")->orderBy('created_at', 'desc')->paginate(8);
+            })->orWhere('email', 'LIKE', "%$request->search%")
+                ->orderBy('created_at', 'desc')->paginate(8,['*'], 'lawyers');
 
-            $questions = Question::with('category')->whereHas('category', function ($query) use ($request) {
+            $questions = Question::with('category')
+                ->whereHas('category', function ($query) use ($request) {
                 $query->where('name', 'LIKE', "%$request->search%");
             })->orWhere('title', 'LIKE', "%$request->search%")
-                ->orWhere('text', 'LIKE', "%$request->search%")->orderBy('created_at', 'desc')->paginate(8);
+                ->orWhere('text', 'LIKE', "%$request->search%")
+                ->orderBy('created_at', 'desc')
+                ->paginate(8,['*'], 'questions');
 
-
-            return view('main-search')->withLawyers($lawyers)->withQuestions($questions)->withBest_lawyers($best_lawyers);
+            $blogs = Blog::where('title', 'LIKE', "%$request->search%")
+                ->orWhere('text', 'LIKE', "%$request->search%")
+                ->orderBy('count', 'desc')
+                ->paginate(8,['*'], 'blogs');
+            return view('main-search')
+                ->withLawyers($lawyers)
+                ->withQuestions($questions)
+                ->withBlogs($blogs)
+                ->withBest_lawyers($best_lawyers);
         } else {
-            $lawyers = Lawyer::where('isBlocked', 0)->where('confirmed', 1)->paginate(2);
-            $questions = Question::orderBy('created_at', 'desc')->paginate(4);
-
-            return view('main-search')->withLawyers($lawyers)->withQuestions($questions)->withBest_lawyers($best_lawyers);
+            $lawyers = Lawyer::where('isBlocked', 0)
+                ->where('confirmed', 1)
+                ->paginate(4,['*'], 'lawyers');
+            $questions = Question::orderBy('created_at', 'desc')
+                ->paginate(4,['*'], 'questions');
+            $blogs = Blog::orderBy('count','desc')
+                ->paginate(4,['*'],'blogs');
+            return view('main-search')->withLawyers($lawyers)
+                ->withQuestions($questions)
+                ->withBest_lawyers($best_lawyers)
+                ->withBlogs($blogs);
         }
 
     }
