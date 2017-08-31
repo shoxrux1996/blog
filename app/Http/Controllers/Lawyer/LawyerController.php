@@ -67,11 +67,9 @@ class LawyerController extends Controller
         } elseif ($settingtype === "photo") {
             $messages = [
                 'image' => 'Формат не поддерживается',
-                'mimes' => 'Формат не поддерживается',
-                'max' => 'Размер слишком велик',
             ];
             $validator = Validator::make($request->all(),
-                ['image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',], $messages);
+                ['image' => 'image'], $messages);
             if ($validator->fails()) {
                 return view('lawyer.info')->withSettingtype('photo')->withLawyer($lawyer)->withCities($cities)->withCategories($categories)->withErrors($validator);
             }
@@ -192,15 +190,13 @@ class LawyerController extends Controller
         } elseif ($settingtype === 'awards') {
             $messages = [
                 'image' => 'Неверный формат',
-                'mimes' => 'Неверный формат',
-                'max' => 'Файл слишком велик',
+
             ];
             $rules = array();
             $count = count($request->file('files')) - 1;
 
-
             foreach (range(0, $count) as $i) {
-                $rules['files.' . $i] = 'image|mimes:jpeg|max:3000';
+                $rules['files.' . $i] = 'image';
             }
             $validator = Validator::make($request->all(), $rules, $messages);
             if ($validator->fails()) {
