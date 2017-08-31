@@ -78,11 +78,12 @@ class AdminBlogController extends Controller
         if ($request->file('image') != null) {
             $file = $request->file('image');
             $file_name = $file->getClientOriginalName();
-            $upload_folder = '/blogs/' . $blog->id . '/';
+            $upload_folder = '/moderator_blogs/' . $blog->id . '/';
             if ($blog->file != null) {
-                LaraFile::delete(public_path() . $upload_folder . $blog->file->file);
+                LaraFile::delete(public_path().$blog->file->path.$blog->file->file);
                 $blog->file->file = $file_name;
                 $blog->file->path = $upload_folder;
+                $blog->file->save();
             } else {
                 $fil = new File;
                 $fil->file = $file_name;
@@ -139,7 +140,7 @@ class AdminBlogController extends Controller
         }
         Session::flash('message', 'Blog was inserted successfully');
 
-        return redirect()->route('web.blogs');
+        return redirect()->route('admin.blogs');
     }
     public function insertform()
     {

@@ -24,7 +24,7 @@
                 </h1>
 
                 <p>
-                <h6>Автор: {{$blog->blogable->user->firstName}}</h6>
+                <h6>Автор: {{$blog->blogable_type !="yuridik\Admin" ? $blog->blogable->user->firstName : $blog->blogable->name}}</h6>
                 @php
                     $time= Carbon\Carbon::parse($blog->created_at)->toFormattedDateString() ;
                 @endphp

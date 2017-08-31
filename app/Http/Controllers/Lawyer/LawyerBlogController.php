@@ -81,6 +81,7 @@ class LawyerBlogController extends Controller
                 LaraFile::delete(public_path() . $blog->file->path. $blog->file->file);
                 $blog->file->file = $file_name;
                 $blog->file->path = $upload_folder;
+                $blog->file->save();
             } else {
                 $fil = new File;
                 $fil->file = $file_name;
