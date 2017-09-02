@@ -19,7 +19,7 @@ class LawyersInfoController extends Controller
         $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
-        $cities = City::orderBy('id', 'asc')->get();
+        $cities = City::orderBy('name', 'asc')->get();
 
         return view('lawyer.list')->withLawyers($lawyers)
             ->withCategories($categories)->withCities($cities)
