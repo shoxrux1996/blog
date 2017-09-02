@@ -95,7 +95,7 @@
             </a>
         </div>
         <div class="col-md-10 col-sm-9 col-xs-6 info">
-            <span><i class="fa fa-volume-control-phone" aria-hidden="true"></i> (71) 123-45-67 @lang('app.or')</span>
+            <span><i class="fa fa-volume-control-phone" aria-hidden="true"></i> (99) 8373777 @lang('app.or')</span>
             <a href="{{ route('faq') }}"><img src="{{asset('dist/images/help-icon.png')}}" alt="Help Icon"/></a>
             <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown">
                 <img src="{{ asset('dist/images/flag-'.\App::getLocale().'.png')}}" alt="Flag"/>
