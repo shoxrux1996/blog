@@ -3,7 +3,7 @@
     <link href="{{ asset('dist/css/partners.css')}}" rel="stylesheet">
 @endsection
 @section('menu')
-    <li class="active-link"><a href="{{ route('home')}}">@lang('index.home')</a></li>
+    <li><a href="{{ route('home')}}">@lang('index.home')</a></li>
     <li><a href="{{ route('lawyers.list')}}">@lang('index.lawyers')</a></li>
     <li><a href="{{ route('question.list')}}">@lang('index.questions')</a></li>
     <li><a href="{{ route('web.blogs')}}">@lang('index.blog')</a></li>
