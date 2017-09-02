@@ -1,0 +1,24 @@
+#timer {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+
+.timer-container{
+    margin-bottom: 30px;
+}
+.advantages{
+    padding: 10px 40px;
+}
+
+.advantages .col-sm-4, .advantages .col-sm-6{
+    padding: 30px;
+}
+
+.advantages i{
+    font-size: 64px;
+}
+
+.money-back{
+    padding: 50px;
+    background-color: #E3EED8;
+}
