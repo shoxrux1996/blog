@@ -52,12 +52,12 @@
                             <div class="col-sm-12 question">
                                 @if($question->type == 2 || $question->type == 1)
                                     <span class="question-price">
-                            <b>{{$question->price}} сум</b>
-                            <span>
-                                стоимость<br/>
-                                вопроса
-                            </span>
-                        </span>
+                                        <b>{{$question->price}} сум</b>
+                                        <span>
+                                            стоимость<br/>
+                                            вопроса
+                                        </span>
+                                    </span>
                                 @endif
                                 <h4 class="title"><a
                                             href="{{route('web.question.show', $question->id)}}">{{$question->title}}</a>
@@ -154,7 +154,7 @@
                     <div class="best-lawyers">
                         <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}"
                              class="img-rounded"/>
-                        <h3>{{$lawyer->user->firstName}}</h3>
+                        <h3>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h3>
                         <h6>
                             <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
                         </h6>

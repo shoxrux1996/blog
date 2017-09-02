@@ -26,9 +26,7 @@
                                             <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name}}
                                         </a>
                                         @foreach($categories[$j]->children as $subcategory)
-
                                                 <p><a href="{{route('web.category.show', ['name'=>$categories[$j]->name])}}">{{$subcategory->name}}</a></p>
-
                                         @endforeach
                                     </div>
                                 @endfor

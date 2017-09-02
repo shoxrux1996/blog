@@ -104,7 +104,7 @@
                     <div class="best-lawyers">
                         <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}"
                              class="img-circle"/>
-                        <h3>{{$lawyer->user->firstName}}</h3>
+                        <h3>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h3>
                         <h6>
                             <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
                         </h6>
