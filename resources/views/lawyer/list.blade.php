@@ -175,7 +175,7 @@
                                     </div>
                                     <div class="content">
                                         <div class="main">
-                                            <h2 class="name">{{$lawyer->user->firstName}}</h2>
+                                            <h2 class="name">{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h2>
                                             <p class="profession">{{$lawyer->job_status}},
                                                 г. {{$lawyer->user->city->name}}</p>
                                             <p class="text-center">
