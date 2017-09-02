@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use yuridik\Category;
 use yuridik\Blog;
-
+use Purifier;
 class AdminCategoryController extends Controller
 {
 
@@ -43,9 +43,9 @@ class AdminCategoryController extends Controller
 
         $category = new Category;
         $category->name = $request->name;
-        $category->text = $request->text;
+        $category->text = Purifier::clean($request->text);
         $category->name_uz = $request->name_uz;
-        $category->text_uz = $request->text_uz;
+        $category->text_uz = $Purifier::clean($request->text_uz);
         $category->class = $request->class;
         $category->category_id = $request->parent;
         $category->save();
@@ -100,8 +100,8 @@ class AdminCategoryController extends Controller
         $category->name_uz = $request->name_uz;
         $category->category_id = $request->category;
         $category->class = $request->class;
-        $category->text = $request->text;
-        $category->text_uz = $request->text_uz;
+        $category->text = Purifier::clean($request->text);;
+        $category->text_uz = Purifier::clean($request->text_uz);;
         $category->save();
         return redirect()->route('admin.category.show', $id);
     }
