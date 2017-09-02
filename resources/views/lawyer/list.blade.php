@@ -139,16 +139,19 @@
 
                 <div id="city-tags">
                     <form action="{{route('search.lawyers')}}" method="get">
+                        <?php $i = 0; $count = count($cities); ?>
                         @foreach($cities as $index => $city)
-                            @if($index <= 3)
+                            <?php if($city->name == " ") continue ?>
+                            @if($index <= 5)
                                 <button type="submit" class="btn-link" name="city"
                                         value="{{$city->name}}">{{$city->name}}</button>
-                                @if($index == 3)
-                                    <a class="btn-link" onclick="showCities()">Все города ...</a>
+                                @if($index == 5)
+                                    <a class="btn-link" onclick="showCities()" id="show-cities">Все города ...</a>
                                 @endif
                             @else
-                                <button type="submit" class="btn-link cities" name="city" value="{{$city->name}}"
-                                        style="display: none;">{{$city->name}}</button>
+                                <?php if($i % 5 == 0) echo "<p style=\"margin-bottom: 0; \">" ?>
+                                <button type="submit" class="btn-link cities" name="city" value="{{$city->name}}" style="display: none;">{{$city->name}}</button>
+                                <?php $i++; if($i % 5 == 0 || $count == $index) echo "</p>" ?>
                             @endif
                         @endforeach
                     </form>
@@ -222,7 +225,7 @@
                                             <span>{{$lawyer->feedbacks->count()}} отзыва от клиентов</span>
                                         </div>
                                         {{--<button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)" id="rotate-back-button">--}}
-                                            {{--<i class="fa fa-reply"></i> Back--}}
+                                        {{--<i class="fa fa-reply"></i> Back--}}
                                         {{--</button>--}}
                                     </div>
                                 </div> <!-- end back panel -->
@@ -245,11 +248,13 @@
     <script>
         var index = 0;
         function showCities() {
+            var showCityButton = $('#show-cities');
+            showCityButton.css('display', 'none');
             var cities = document.getElementsByClassName('cities');
 
             if (index === 0) {
                 for (var i = 0; i < cities.length; i++) {
-                    cities[i].style.display = "block";
+                    cities[i].style.display = "inline";
                 }
                 index = 1;
             }
