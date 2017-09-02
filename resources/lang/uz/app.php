@@ -38,7 +38,8 @@ return [
     'becomelawyer' => "Loyiha yuristi bo'lish",
     'topartners' => "Hamkorlar uchun",
     'toadvertisers' => "Reklama beruvchilar uchun",
-    'Лицензионное соглашение' => 'Litsenziya shartnomasi'
+    'Лицензионное соглашение' => 'Litsenziya shartnomasi',
+    'Все специализации' => 'Barcha sohalar',
 
 
 ];
