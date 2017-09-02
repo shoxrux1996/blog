@@ -64,11 +64,11 @@
         <!-- /Blog item title -->
         <!-- Blog item text -->
         <div class="row padding-30">
-            <div class="col-sm-2 advertisement left-sidebar">
+            <div class="col-sm-2 advertisement left-sidebar hidden-xs">
                 <img class="img-responsive center-block" src="{{asset('dist/images/sidebar-ad.png')}}"/>
                 <img class="img-responsive center-block" src="{{asset('dist/images/Sidebar-ad1.jpg')}}"/>
             </div>
-            <div class="col-sm-8 blog-text-description">
+            <div class="col-sm-8 col-xs-12 blog-text-description">
                 {!! $blog->text !!}
                 <div>
                     <label>Tags: </label>
@@ -77,7 +77,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-sm-2 right-sidebar advertisement">
+            <div class="col-sm-2 right-sidebar advertisement hidden-xs">
                 <div class="ask-question-block">
                     <img class="img-responsive" src="{{asset('dist/images/one-word-save_0.png')}}"/>
                     <h6>
