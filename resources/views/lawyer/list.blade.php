@@ -203,7 +203,7 @@
                                                 . @endforeach</p>
                                             <div class="stats-container text-center">
                                                 <div class="stats">
-                                                    <h4>{{$lawyer->experienced_year}}</h4>
+                                                    <h4>{{$lawyer->experience_year}}</h4>
                                                     <p>
                                                         лет стажа
                                                     </p>
