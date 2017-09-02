@@ -70,17 +70,17 @@ return [
             /*
              * The number of days for which all backups must be kept.
              */
-            'keepAllBackupsForDays' => 7,
+            'keepAllBackupsForDays' => 3,
 
             /*
              * The number of days for which all daily backups must be kept.
              */
-            'keepDailyBackupsForDays' => 16,
+            'keepDailyBackupsForDays' => 3,
 
             /*
              * The number of weeks for which all one weekly backup must be kept.
              */
-            'keepWeeklyBackupsForWeeks' => 8,
+            'keepWeeklyBackupsForWeeks' => 3,
 
             /*
              * The number of months for which one monthly backup must be kept.
