@@ -45,7 +45,7 @@ class AdminCategoryController extends Controller
         $category->name = $request->name;
         $category->text = Purifier::clean($request->text);
         $category->name_uz = $request->name_uz;
-        $category->text_uz = $Purifier::clean($request->text_uz);
+        $category->text_uz = Purifier::clean($request->text_uz);
         $category->class = $request->class;
         $category->category_id = $request->parent;
         $category->save();
