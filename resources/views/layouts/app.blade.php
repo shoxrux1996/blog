@@ -198,7 +198,7 @@
                 {{--<p><a href="{{ route('team') }}">@lang('app.aboutus')</a></p>--}}
                 <p><a href="{{ route('contacts') }}">@lang('app.contacts')</a></p>
                 <p><a href="{{ route('faq') }}">@lang('app.faqs')</a></p>
-                <p><a href="#">Лицензионное соглашение</a></p>
+                <p><a href="{{ route('license') }}">@lang('app.Лицензионное соглашение')</a></p>
                 <p><a href="{{ route('guarantees') }}">@lang('app.guarantees')</a></p>
                 {{--<p><a href="{{ route('partners') }}">@lang('app.ourpartners')</a></p>--}}
                 {{--<p><a href="{{ route('category.list') }}">@lang('app.categories')</a></p>--}}

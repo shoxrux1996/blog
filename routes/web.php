@@ -201,6 +201,7 @@ Route::get('/search/questions', 'Web\SearchController@searchQuestionsByCategory'
 
 Route::get('/', 'Web\IndexController@index')->name('home');
 Route::get('/about', function(){
+
 	return view('about');
 })->name('about');
 Route::get('/how-works', function(){
@@ -227,14 +228,16 @@ Route::get('/faq', function(){
 Route::get('/guarantees', function(){
     return view('guarantees');
 })->name('guarantees');
-
+Route::get('/license', function(){
+    return view('license');
+})->name('license');
 Route::get('setlocale/{locale}', function ($locale) {
   if (in_array($locale, \Config::get('app.locales'))) {
-    Session::put('locale', $locale);
+    // Session::put('locale', $locale);
+  
   }
-  return redirect()->back();
+  return redirect()->back()->withCookie(cookie()->forever('language', $locale));
 })->name('lang.switch');
-
 //Route::get('bloglist','BlogController@blog_list');
 //Route::get('insertform','BlogController@insertform');
 //Route::post('create','BlogController@store');

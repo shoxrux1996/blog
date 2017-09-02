@@ -3,32 +3,31 @@
     <link href="{{ asset('dist/css/404.css')}}" rel="stylesheet">
 @endsection
 @section('menu')
-    <li><a href="{{ route('home')}}">Главная</a></li>
-    <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-    <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-    <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-    <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-    <li class="active-link"><a href="{{ route('about')}}">О нас</a></li>
+    <li><a href="{{ route('home')}}">@lang('404.Главная')</a></li>
+    <li><a href="{{ route('lawyers.list')}}">@lang('404.Юристы')</a></li>
+    <li><a href="{{ route('question.list')}}">@lang('404.Вопросы')</a></li>
+    <li><a href="{{ route('web.blogs')}}">@lang('404.Блог')</a></li>
+    <li><a href="{{ route('how-works')}}">@lang('404.Как это работает')</a></li>
+    <li><a href="{{ route('about')}}">@lang('404.О нас')</a></li>
 @endsection
 @section('content')
-
     <div class="container">
     <div class="row">
         <div class="text-center">
-            <h3>Ошибка 404</h3>
+      
+            <h3>@lang('404.Ошибка 404')</h3>
             <h5>
-                <a href="{{ route('home') }}">Назад к главной страницу</a>
+                <a href="{{ route('home') }}">@lang('404.Назад к главной страницу')</a>
             </h5>
         </div>
         <div class="col-md-8 col-md-offset-2">
             <section class="comment-list">
-
                 <!-- Alice -->
                 <article class="row">
                     <div class="col-md-2 col-sm-2 hidden-xs">
                         <figure class="thumbnail">
                             <img class="img-responsive" src="{{ asset('dist/images/headshot-2.jpg') }}" />
-                            <figcaption class="text-center">Alice</figcaption>
+                            <figcaption class="text-center">@lang('404.Alice')</figcaption>
                         </figure>
                     </div>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -39,7 +38,7 @@
                                 </header>
                                 <div class="comment-post">
                                     <p>
-                                        Здравствуйте, такой страницы не существует. Могу ли я вам чем-нибудь помочь?
+                                        @lang('404.Здравствуйте, такой страницы не существует. Могу ли я вам чем-нибудь помочь?')
                                     </p>
                                 </div>
                             </div>
@@ -57,7 +56,7 @@
                                 </header>
                                 <div class="comment-post">
                                     <p>
-                                        Здравствуйте. Мне необходимо получить консультацию юриста.
+                                        @lang('404.Здравствуйте. Мне необходимо получить консультацию юриста.')
                                     </p>
                                 </div>
                             </div>
@@ -66,7 +65,7 @@
                     <div class="col-md-2 col-sm-2 hidden-xs">
                         <figure class="thumbnail">
                             <img class="img-responsive" src="{{ asset('dist/images/headshot-3.jpg') }}" />
-                            <figcaption class="text-center">Bob</figcaption>
+                            <figcaption class="text-center">@lang('404.Bob')</figcaption>
                         </figure>
                     </div>
                 </article>
@@ -76,7 +75,7 @@
                     <div class="col-md-2 col-sm-2 hidden-xs">
                         <figure class="thumbnail">
                             <img class="img-responsive" src="{{ asset('dist/images/headshot-2.jpg') }}" />
-                            <figcaption class="text-center">Alice</figcaption>
+                            <figcaption class="text-center">@lang('404.Alice')</figcaption>
                         </figure>
                     </div>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -87,7 +86,7 @@
                                 </header>
                                 <div class="comment-post">
                                     <p>
-                                        Вы можете <a href="{{route('question.create')}}">задать вопрос</a> через нашу форму.
+                                        @lang('404.Вы можете') <a href="{{route('question.create')}}">@lang('404.задать вопрос')</a> @lang('404.через нашу форму.')
                                     </p>
                                 </div>
                             </div>
@@ -105,7 +104,7 @@
                                 </header>
                                 <div class="comment-post">
                                     <p>
-                                        Понятно. Спасибо))
+                                       @lang('404.Понятно. Спасибо')
                                     </p>
                                 </div>
                             </div>
@@ -114,7 +113,7 @@
                     <div class="col-md-2 col-sm-2 hidden-xs">
                         <figure class="thumbnail">
                             <img class="img-responsive" src="{{ asset('dist/images/headshot-3.jpg') }}" />
-                            <figcaption class="text-center">Bob</figcaption>
+                            <figcaption class="text-center">@lang('404.Bob')</figcaption>
                         </figure>
                     </div>
                 </article>

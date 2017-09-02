@@ -5,7 +5,6 @@ namespace yuridik\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
 class Handler extends ExceptionHandler
 {
     /**
@@ -44,7 +43,20 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        if($request->hasCookie('language')) {
+        // Get cookie
+        $cookie = $request->cookie('language');
+        // Check if cookie is already decrypted if not decrypt
+        $cookie = strlen($cookie) > 2 ? decrypt($cookie) : $cookie;
+        // Set locale
+        app()->setLocale($cookie);
+    }
+
+    if($exception instanceof NotFoundHttpException) {
+        return response()->view('errors.404', [], 404);
+    }
+
+    return parent::render($request, $exception);
     }
 
     /**

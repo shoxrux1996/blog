@@ -14,16 +14,19 @@ class Language
 {
     public function handle($request, Closure $next)
     {
-        $raw_locale = Session::get('locale');
-        if (in_array($raw_locale, Config::get('app.locales'))) {
-            $locale = $raw_locale;
-        } else $locale = Config::get('app.locale');
+        if($request->hasCookie('language')) {
+            $cookie = $request->cookie('language');
+            if (in_array($cookie, Config::get('app.locales'))) {
+	            $locale = $cookie;
+	        } else $locale = Config::get('app.locale');
+            app()->setLocale($locale);
 
-
-        App::setLocale($locale);
-
-
-        return $next($request);
+            return $next($request);
+        } else {
+            $response = $next($request);
+            $response->withCookie(cookie()->forever('language', Config::get('app.locale')));
+            return $response;
+        }
     }
 
 }
