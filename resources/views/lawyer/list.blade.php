@@ -75,7 +75,7 @@
                     <div class="row">
                         @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
                             <div class="col-sm-4 col-xs-6">
-                                <h4><i class="fa fa-users"></i>
+                                <h4><i class="fa {{$categories[$j]->class}}"></i>
                                     <a type="submit"
                                        href="{{route('search.lawyers.bycategory', ['name'=>$categories[$j]->name])}}"
                                        name="category">
