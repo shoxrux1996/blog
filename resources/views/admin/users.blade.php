@@ -36,9 +36,9 @@
                                     <div class="profile-usertitle-name">
                                         {{$lawyer->user->firstName}}
                                         {{$lawyer->user->lastName}}
+
                                     </div>
                                     <div class="profile-usertitle-job">
-                                      
                                         {{--Был в сети сегодня в 15:04--}}
                                     </div>
                                 </div>
@@ -92,15 +92,28 @@
                                         <h4>
                                             <i class="fa fa-building"></i> О себе
                                         </h4>
-                                        <p></p>
-
-                                        <p><span class="color-gray">На проекте:</span>
-                                            с {{Carbon\Carbon::parse($lawyer->created_at)->toFormattedDateString()}}</p>
+                                        <p>
+                                            {{$lawyer->user->description}}
+                                        </p>
+                                        <p><span class="color-gray">Почта: <strong>{{$lawyer->email}}</strong> </span></p>
+                                        <p><span class="color-gray">Дата рождения: </span>
+                                           <strong>
+                                                {{Carbon\Carbon::parse($lawyer->user->dateOfBirth)->toFormattedDateString()}}
+                                           </strong>
+                                        </p>
+                                        <p><span class="color-gray">город: </span> <strong>{{$lawyer->user->city->name}} </strong>
+                                        </p>
+                                        <p><span class="color-gray">тел: </span><strong>{{$lawyer->user->phone}} </strong></p>
+                                        <p>
+                                            <span class="color-gray">На проекте:</span>
+                                            <strong>
+                                                с {{Carbon\Carbon::parse($lawyer->created_at)->toFormattedDateString()}}
+                                            </strong>
+                                        </p>
                                     </div>
 
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             @if($lawyer->isBlocked == false)
