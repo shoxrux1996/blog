@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('styles')
     <link href="{{ asset('dist/css/questions.css')}}" rel="stylesheet">
-
 @endsection
 @section('menu')
     <li><a href="{{ route('home')}}">Главная</a></li>
@@ -41,6 +40,12 @@
                                 {{$question->answers->count()}}
                             </i>
                         </p>
+                        <div>
+                            @foreach($question->files as $file)
+                                <a class="label label-default"
+                                   href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,7 +62,9 @@
                             <h4 class="lawyer-name">{{$answer->lawyer->firstName}}</h4>
                             <h6 class="lawyer-type">{{$answer->lawyer->job_status}}</h6>
                         </div>
-                        <div class="clearfix"></div>
+                        <div class="clearfix">
+
+                        </div>
                         <div>
                             <hr>
                         </div>
@@ -65,12 +72,18 @@
                             {!! $answer->text !!}
                         </div>
                         <div class="answer-footer">
-                        <span class="pull-right answered-time">
-                            {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
-                        </span>
+                            <span class="pull-right answered-time">
+                                {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
+                            </span>
+                            <div>
+                                @foreach($answer->files as $file)
+                                    <a class="label label-default"
+                                       href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-            @endforeach
+                @endforeach
             <!-- /Comment new style -->
             </div>
 
@@ -135,6 +148,5 @@
             height: 300,
             toolbar: 'undo redo | cut copy paste'
         });
-
     </script>
 @endsection

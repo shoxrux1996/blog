@@ -34,7 +34,7 @@ class ClientQuestionController extends Controller
         foreach ($clients as $client) {
             array_push($emails, $client->email);
         }
-        $categories = array(' ' => null);
+        $categories = array();
         foreach ($category as $key) {
             $categories[$key->id] = $key->name;
         }
@@ -157,7 +157,6 @@ class ClientQuestionController extends Controller
 
     private function questionCreate(Request $request,$client)
     {
-
             $messages = [
                 'required' => 'Обязательно к заполнению',
                 'string' => 'Неправильный формат',
@@ -165,16 +164,14 @@ class ClientQuestionController extends Controller
                 'description.min' => 'Минимум 10 символов',
                 'mimes' => 'Неверный формат(doc,docx,pdf)',
                 'max' => 'Файл слишком велик',
+
             ];
             $rules = array(
                 'title' => 'required|string|min:3',
                 'description' => 'required|string|min:10',
+                'category' => 'required',
             );
-
-
             $count = count($request->file('files')) - 1;
-
-
             foreach (range(0, $count) as $i) {
                 $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
             }
@@ -182,7 +179,6 @@ class ClientQuestionController extends Controller
 
             if ($request->type == 2) {
                 if ($client->user->balance() >= 5000) {
-
                     Session::flash('question-create', 'Question created successfully');
                     return $this->questionCreateEloquent($request,$client,2);    
                 } else {

@@ -62,7 +62,7 @@ class AdminCategoryController extends Controller
         $category->lawyers()->detach();
         $category->delete();
 
-        return redirect()->route('category.info');
+        return redirect()->route('admin.category.info');
     }
 
     public function show($id)

@@ -54,10 +54,14 @@
                             <input type="radio" id="inlineCheckbox2" value="2" name="radio"> @lang('question.Представитель бизнеса')
                         </label>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group{{$errors->has('category') ? ' has-error' : '' }} ">
                         <label for="category">@lang('question.Категория права')</label>
+                        @if ($errors->has('category'))
+                            <span class="help-block">
+                                    <strong>{{ $errors->first('category') }}</strong>
+                                </span>
+                        @endif
                         {{Form::select('category', $categories, null , ['class'=>'form-control general-input', 'placeholder'=>''])}}
-                        
                     </div>
                     <div class="form-group{{$errors->has('title') ? ' has-error' : '' }} ">
                         <label for="question">@lang('question.Ваш вопрос*')</label>
