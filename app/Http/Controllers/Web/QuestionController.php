@@ -30,7 +30,7 @@ class QuestionController extends Controller
 
         $questions_free = Question::where('type', 0)
             ->orderBy('id', 'desc')->paginate(5);
-        $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+        $best_lawyers = Lawyer::where('type', 2)->with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
         $categories = Category::where('category_id', null)->get();
@@ -55,7 +55,7 @@ class QuestionController extends Controller
             ->orderBy('id', 'desc')->paginate(5);
         $questions_free = Question::where('type', 0)
             ->orderBy('id', 'desc')->paginate(5);
-        $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+        $best_lawyers = $best_lawyers = Lawyer::where('type', 2)->with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
 
@@ -74,7 +74,7 @@ class QuestionController extends Controller
         $questions_costly = Question::where('type', 1)->orWhere('type',2)->orderBy('id', 'desc')->paginate(5);
         $questions_free = Question::where('type', 0)
             ->orderBy('id', 'desc')->paginate(5);
-        $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+        $best_lawyers = $best_lawyers = Lawyer::where('type', 2)->with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
         return view('question.list')->withQuestions($questions)

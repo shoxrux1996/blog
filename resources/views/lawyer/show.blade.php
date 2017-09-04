@@ -62,7 +62,6 @@
                                                     data-dismiss="modal">@lang('index.close')</button>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <!-- /Modal for refer lawyer function-->

@@ -25,7 +25,7 @@ class IndexController extends Controller
         $paid_question_examples = Question::where('type',1)->orWhere('type', 2)->orderBy('id', 'desc')->take(6)->get();
         $blogs = Blog::orderBy('count', 'desc')->take(3)->get();
         $categories = Category::where('category_id', null)->get();
-        $lawyers = Lawyer::orderBy('id', 'desc')->take(6)->get();
+        $lawyers = Lawyer::where('type', 2)->orderBy('id', 'desc')->take(6)->get();
         // $chosen = Chosen::all();
 
         $num_of_lawyers = Lawyer::count();
