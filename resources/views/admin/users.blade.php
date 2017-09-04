@@ -57,12 +57,14 @@
                                         </li>
                                         <li>
                                             <a data-toggle="tab" href="#questions-client-{{$lawyer->id}}">
-                                                <i class="fa fa-user"></i>Вопросы <span class="badge">{{$lawyer->questions->count()}}</span>
+                                                <i class="fa fa-user"></i>Вопросы <span
+                                                        class="badge">{{$lawyer->questions->count()}}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a data-toggle="tab" href="#documents-client-{{$lawyer->id}}">
-                                                <i class="fa fa-user"></i>Документы <span class="badge">{{$lawyer->documents->count()}}</span>
+                                                <i class="fa fa-user"></i>Документы <span
+                                                        class="badge">{{$lawyer->documents->count()}}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -97,15 +99,19 @@
                                         <p>
                                             {{$lawyer->user->description}}
                                         </p>
-                                        <p><span class="color-gray">Почта: <strong>{{$lawyer->email}}</strong> </span></p>
+                                        <p><span class="color-gray">Почта: <strong>{{$lawyer->email}}</strong> </span>
+                                        </p>
                                         <p><span class="color-gray">Дата рождения: </span>
                                             <strong>
                                                 {{Carbon\Carbon::parse($lawyer->user->dateOfBirth)->toFormattedDateString()}}
                                             </strong>
                                         </p>
-                                        <p><span class="color-gray">город: </span> <strong>{{$lawyer->user->city->name}} </strong>
+                                        <p><span class="color-gray">город: </span>
+                                            <strong>{{$lawyer->user->city->name}} </strong>
                                         </p>
-                                        <p><span class="color-gray">тел: </span><strong>{{$lawyer->user->phone}} </strong></p>
+                                        <p>
+                                            <span class="color-gray">тел: </span><strong>{{$lawyer->user->phone}} </strong>
+                                        </p>
                                         <p>
                                             <span class="color-gray">На проекте:</span>
                                             <strong>
@@ -202,12 +208,24 @@
                                         <li class="active"><a data-toggle="tab" href="#profile-{{$lawyer->id}}"><i
                                                         class="fa fa-user"></i>
                                                 Профиль</a></li>
-                                        <li><a data-toggle="tab" href="#specialisation-{{$lawyer->id}}"><i class="fa fa-tasks"></i>
-                                                Специализация</a></li>
-                                        <li><a data-toggle="tab" href="#education-{{$lawyer->id}}"><i class="fa fa-graduation-cap"></i>
+                                        <li>
+                                            <a data-toggle="tab" href="#specialisation-{{$lawyer->id}}"><i
+                                                        class="fa fa-tasks"></i>
+                                                Специализация</a>
+                                        </li>
+                                        <li><a data-toggle="tab" href="#education-{{$lawyer->id}}"><i
+                                                        class="fa fa-graduation-cap"></i>
                                                 Образование</a></li>
-                                        <li><a data-toggle="tab" href="#awards-{{$lawyer->id}}"><i class="fa fa-graduation-cap"></i>
+                                        <li><a data-toggle="tab" href="#awards-{{$lawyer->id}}"><i
+                                                        class="fa fa-graduation-cap"></i>
                                                 Сертификаты</a></li>
+                                        <li><a data-toggle="tab" href="#answers-{{$lawyer->id}}"><i
+                                                        class="fa fa-reply"></i>
+                                                Отвеченные вопросы <span
+                                                        class="badge">{{$lawyer->questions()->count()}}</span></a></li>
+                                        <li><a data-toggle="tab" href="#articles-{{$lawyer->id}}"><i
+                                                        class="fa fa-newspaper-o"></i>
+                                                Статьи <span class="badge">{{$lawyer->blogs->count()}}</span></a></li>
                                     </ul>
                                 </div>
                                 <!-- /SIDEBAR MENU -->
@@ -273,7 +291,8 @@
                                     <h3>Специализация</h3>
                                     <h6 class="color-gray"><b>Всего {{$lawyer->answers->count()}} ответа</b></h6>
                                     <hr>
-                                    <h6 class="color-gray"><b>Специализируется в {{$lawyer->categories->count()}} категориях:</b></h6>
+                                    <h6 class="color-gray"><b>Специализируется в {{$lawyer->categories->count()}}
+                                            категориях:</b></h6>
                                     <div class="row">
                                         @foreach($lawyer->categories as $category)
                                             <div class="col-md-4 col-sm-4 col-xs-4 categories">
@@ -315,6 +334,8 @@
                                 </div>
                             </div>
                             <div class="col-md-9 tab-pane fade profile-content" id="awards-{{$lawyer->id}}">
+                                <!-- Lawyer answered questions -->
+
                                 <div class="row">
                                     <h6><b>Награды</b></h6>
                                     @if($lawyer->files != null)
@@ -327,6 +348,98 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="col-md-9 tab-pane fade profile-content" id="answers-{{$lawyer->id}}">
+                                <div class="col-sm-12">
+                                    @foreach($lawyer->questions() as $question)
+                                        <div class="col-sm-12 question">
+                                            @if($question->type == 2 || $question->type == 1)
+                                                <span class="question-price">
+                                        <b>{{$question->price}} сум</b>
+                                        <span>
+                                            стоимость<br/>
+                                            вопроса
+                                        </span>
+                                    </span>
+                                            @endif
+                                            <h4 class="title"><a
+                                                        href="{{route('web.question.show', $question->id)}}">{{$question->title}}</a>
+                                            </h4>
+                                            <p class="description">{{$question->text}}</p>
+                                            <p>
+                                                <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>
+                                                <span class="number"> вопрос №{{$question->id}}</span>
+                                                <span class="author">{{$question->client->user->firstName}}
+                                                    , г.{{$question->client->user->city->name}} </span>
+                                            </p>
+                                            <hr>
+                                            <p>
+                                        <span class="category">Категория: <a
+                                                    href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
+                                                <a class="answers"
+                                                   href="{{route('web.question.show', $question->id)}}">
+                                                    {{$question->answers->count()}}
+                                                </a>
+                                            </p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="col-md-9 tab-pane fade profile-content" id="articles-{{$lawyer->id}}">
+                                <div class="row">
+                                    @foreach($lawyer->blogs as $blog)
+                                        <a href="{{route('web.blog.show', $blog->id)}}">
+                                            <div class="col-sm-6">
+                                                <div class="blog-item">
+                                                    <div class="ribbon">
+                                                        <span>{{$blog->blogable_type != 'yuridik\Admin' ? 'Юрист' : 'Модератор'}}</span>
+                                                    </div>
+                                                    <div class="blog-item-img">
+                                                        @if($blog->file != null)
+                                                            <img alt="Blog item image"
+                                                                 src="{{asset($blog->file->path.$blog->file->file)}}">
+                                                        @else
+                                                            <img alt="Blog item image"
+                                                                 src="{{asset('dist/images/blog-img-2.jpg')}}">
+                                                        @endif
+                                                        <div class="middle">
+                                                            <button class="btn btn-dark-blue text">Читать статью
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="blog-item-description">
+                                                        <h5>
+                                                            <b>{{substr($blog->title,0,70)}} {{strlen($blog->title)>70 ? '...' : ""}}</b>
+                                                        </h5>
+                                                        <p>{{substr(strip_tags($blog->text),0,180)}} {{strlen(strip_tags($blog->text))>180 ? '...' : ""}}</p>
+                                                        <p class="post-info">
+                                            <span>
+                                                <i class="fa fa-eye"></i> {{$blog->count}}
+                                            </span>
+                                                            @foreach($blog->tags as $tag)
+                                                                <span style="margin-left:10px;"><strong>{{$tag->name}}</strong></span>
+                                                            @endforeach
+                                                            <span class="pull-right">
+                                                <i class="fa fa-comments-o"></i> {{$blog->comments->count()}}
+                                            </span>
+                                                        </p>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="blog-item-footer">
+                                            <span>
+                                                <i class="fa fa-user"></i> {{$blog->blogable->user != null ? $blog->blogable->user->firstName : $blog->blogable->name}}
+                                            </span>
+                                                        <span class="pull-right">
+                                            <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($blog->created_at)->toFormattedDateString()}}
+                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @endforeach
+
+                                </div>
+                            </div>
                         </div>
 
 
@@ -336,13 +449,15 @@
                                 @if($lawyer->type==1)
                                     <form action="{{ route('admin.lawyer.confirm',[$lawyer->id]) }}" method="post">
                                         {{csrf_field()}}
-                                        <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 10px;">Принять
+                                        <button type="submit" class="btn btn-success btn-sm pull-right"
+                                                style="margin-right: 10px;">Принять
                                         </button>
                                     </form>
                                 @else
                                     <form action="{{ route('admin.lawyer.confirm',[$lawyer->id]) }}" method="post">
                                         {{csrf_field()}}
-                                        <button type="submit" class="btn btn-success btn-sm pull-right"  style="margin-right: 10px;">Отказать
+                                        <button type="submit" class="btn btn-success btn-sm pull-right"
+                                                style="margin-right: 10px;">Отказать
                                         </button>
                                     </form>
                                 @endif
@@ -359,7 +474,8 @@
                                     <form action="{{ route('admin.lawyer.unblock', [$lawyer->id]) }}"
                                           method="post">
                                         {{csrf_field()}}
-                                        <button type="submit" class="btn btn-success btn-sm" style="margin-left: 10px;">Разблокировать
+                                        <button type="submit" class="btn btn-success btn-sm" style="margin-left: 10px;">
+                                            Разблокировать
                                         </button>
                                     </form>
                                 @endif

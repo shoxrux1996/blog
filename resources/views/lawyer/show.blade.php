@@ -2,8 +2,9 @@
 @section('styles')
     <link href="{{asset('dist/css/homepage.css')}}" rel="stylesheet">
     <link href="{{asset('dist/css/style.css')}}" rel="stylesheet">
-    <link href="{{asset('dist/css/blog.css')}}" rel="stylesheet">
     <link href="{{asset('dist/css/individual-lawyer.css')}}" rel="stylesheet">
+    <link href="{{asset('dist/css/blog.css')}}" rel="stylesheet">
+
 @endsection
 @section('menu')
     <li><a href="{{ route('home')}}">Главная</a></li>
