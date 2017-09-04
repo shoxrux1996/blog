@@ -13,7 +13,7 @@ return [
     'Как это работает' => "Bu qanday ishlaydi",
     'О нас' => "Jamoa haqida",
     'Вы — юрист?' => "Huquqshunosmisiz?",
-    'Нам нужны лучшие из лучших!' => "Нам нужны лучшие из лучших!",
+    'Нам нужны лучшие из лучших!' => "Unda ushbu sayt siz uchun!",
     'это сервис юридических консультаций онлайн, которым пользуются более 300 000 человек!' => "bu onlayn huquqiy konsultatsiya xizmati bo‘lib, ushbu xizmatdan 10 000 dan ortiq kishi muntazam foydalanadi!",
     'Станьте нашим экспертом' => "Yuridik.uz ekperti bo‘ling",
     'чтобы оценить преимущества дистанционной работы.' => "va masofadan xizmat ko‘rsatish qanday afzalliklarga ega ekanligiga guvoh bo‘ling.",
