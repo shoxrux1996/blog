@@ -17,7 +17,7 @@ class SearchController extends Controller
     public function searchAll(Request $request)
     {
 
-        $best_lawyers = Lawyer::with('feedbacks')
+        $best_lawyers = Lawyer::where('type', 2)->with('feedbacks')
             ->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
@@ -94,7 +94,7 @@ class SearchController extends Controller
 
         $categories = Category::where('category_id', null)->get();
         $cities = City::orderBy('id', 'asc')->get();
-        $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+        $best_lawyers = $best_lawyers = Lawyer::where('type', 2)->with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             $query->feedbacks->count();
         });
 
@@ -112,7 +112,7 @@ class SearchController extends Controller
 
         $categories = Category::where('category_id', null)->get();
         $cities = City::orderBy('id', 'asc')->get();
-        $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+        $best_lawyers = $best_lawyers = Lawyer::where('type', 2)->with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             $query->feedbacks->count();
         });
         return view('lawyer.list')->withLawyers($lawyers)
@@ -157,7 +157,7 @@ class SearchController extends Controller
             ->orWhere('text', 'LIKE', "%$name%")->orderBy('id', 'desc')
             ->where('type', 0)
             ->orderBy('id', 'desc')->paginate(5, ['*'], 'free');
-        $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+        $best_lawyers = Lawyer::where('type', 2)->with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
         $categories = Category::where('category_id', null)->get();
