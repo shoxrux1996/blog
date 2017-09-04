@@ -78,7 +78,7 @@
                             @endif
                             <input type="text"  class="form-control" name="company[name]" placeholder="{{ __('register.Введите имя вашего компанию') }}">
                         </div>
-                        <span class="green-text">@lang('Нажимая кнопку «Зарегистрироваться», я принимаю условия') <a href="#">@lang('register.Пользовательского соглашени')</a> @lang('и условия') <a href="#">@lang('register.Политики конфиденциальности')</a>.</span>
+                        <span class="green-text">@lang('Нажимая кнопку «Зарегистрироваться», я принимаю условия') <a href="#">@lang('register.Пользовательского соглашени')</a> @lang('и условия') <a href="#">@lang('register.Политики конфиденциальности')</a>@lang('register.end')</span>
                         <div class="clearfix"></div>
                         
                         <button type="submit" class="btn btn-primary pull-right green-button register">@lang('register.Зарегистрироваться')</button>
@@ -135,7 +135,7 @@
                             <label for="password-confirm"><i class="fa fa-lock" aria-hidden="true"></i> @lang('register.Повторите пароль')</label>
                             <input type="password" class="form-control" name="lawyer[password-confirm]" placeholder="{{ __('register.Введите заново новую пароль') }}">
                         </div>
-                        <span class="green-text">@lang('Нажимая кнопку «Зарегистрироваться», я принимаю условия') <a href="#">@lang('register.Пользовательского соглашени')</a> @lang('и условия') <a href="#">@lang('register.Политики конфиденциальности')</a>.</span>
+                        <span class="green-text">@lang('Нажимая кнопку «Зарегистрироваться», я принимаю условия') <a href="#">@lang('register.Пользовательского соглашени')</a> @lang('и условия') <a href="#">@lang('register.Политики конфиденциальности')</a>@lang('register.end')</span>
                         <div class="clearfix"></div>
                                                 <button type="submit" class="btn btn-primary pull-right green-button register">@lang('register.Зарегистрироваться')</button>
                         <div class="clearfix"></div>
@@ -182,7 +182,7 @@
                             <label for="password-confirm"><i class="fa fa-lock" aria-hidden="true"></i> @lang('register.Повторите пароль')</label>
                             <input type="password" class="form-control" name="client[password_confirm]" placeholder="{{ __('register.Введите заново новую пароль') }}">
                         </div>
-                        <span class="green-text">@lang('Нажимая кнопку «Зарегистрироваться», я принимаю условия') <a href="#">@lang('register.Пользовательского соглашени')</a> @lang('и условия') <a href="#">@lang('register.Политики конфиденциальности')</a>.</span>
+                        <span class="green-text">@lang('Нажимая кнопку «Зарегистрироваться», я принимаю условия') <a href="#">@lang('register.Пользовательского соглашени')</a> @lang('и условия') <a href="#">@lang('register.Политики конфиденциальности')</a>@lang('register.end')</span>
                         <div class="clearfix"></div>
                                                 <button type="submit" class="btn btn-primary pull-right green-button register">@lang('register.Зарегистрироваться')</button>
                         <div class="clearfix"></div>
