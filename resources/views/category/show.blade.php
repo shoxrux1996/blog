@@ -96,9 +96,9 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             @foreach($categories as $category2)
-                                            <li>
-                                                <a href="{{route('search.questions.bycategory', $category2->name)}}">{{\App::isLocale('ru') ? $category2->name : $category2->name_uz}}</a>
-                                            </li>
+                                                <li>
+                                                    <a href="{{route('search.questions.bycategory', $category2->name)}}">{{\App::isLocale('ru') ? $category2->name : $category2->name_uz}}</a>
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </div><!-- /btn-group -->
@@ -231,7 +231,7 @@
                                 <div class="best-lawyers">
                                     <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}"
                                          class="img-rounded"/>
-                                    <h3>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h3>
+                                    <h5>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h5>
                                     <h6>
                                         <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
                                     </h6>
