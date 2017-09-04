@@ -5,7 +5,7 @@ namespace yuridik;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use yuridik\Notifications\LawyerResetPasswordNotification;
-
+use Illuminate\Database\Eloquent\Collection;
 class Lawyer extends Authenticatable
 {
     use Notifiable;
@@ -58,7 +58,11 @@ class Lawyer extends Authenticatable
         return $this->hasMany('yuridik\Answer');
     }
     public function questions(){
-        return $this->answers->question;
+        $collections = collect();
+
+        foreach($this->answers as $answer)
+         $collections->push($answer->question);
+        return $collections;
     }
     public function requests()
     {

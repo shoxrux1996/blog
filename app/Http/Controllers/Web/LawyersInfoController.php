@@ -12,6 +12,7 @@ use yuridik\Client;
 use yuridik\City;
 use yuridik\Question;
 use yuridik\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class LawyersInfoController extends Controller
 {
