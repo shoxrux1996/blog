@@ -75,7 +75,7 @@
                     <div class="row">
                         @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
                             <div class="col-sm-4 col-xs-6">
-                                <h4><i class="fa fa-users"></i>
+                                <h4><i class="fa {{$categories[$j]->class}}"></i>
                                     <a type="submit"
                                        href="{{route('search.lawyers.bycategory', ['name'=>$categories[$j]->name])}}"
                                        name="category">
@@ -104,7 +104,7 @@
                     <div class="best-lawyers">
                         <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}"
                              class="img-circle"/>
-                        <h3>{{$lawyer->user->firstName}}</h3>
+                        <h3>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h3>
                         <h6>
                             <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
                         </h6>
@@ -175,7 +175,7 @@
                                     </div>
                                     <div class="content">
                                         <div class="main">
-                                            <h2 class="name">{{$lawyer->user->firstName}}</h2>
+                                            <h2 class="name">{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h2>
                                             <p class="profession">{{$lawyer->job_status}},
                                                 г. {{$lawyer->user->city->name}}</p>
                                             <p class="text-center">
@@ -203,7 +203,7 @@
                                                 . @endforeach</p>
                                             <div class="stats-container text-center">
                                                 <div class="stats">
-                                                    <h4>{{$lawyer->experienced_year}}</h4>
+                                                    <h4>{{$lawyer->experience_year}}</h4>
                                                     <p>
                                                         лет стажа
                                                     </p>

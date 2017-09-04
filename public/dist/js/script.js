@@ -51,10 +51,6 @@ jQuery(document).ready(function($){
         $(index).addClass("active");
     });
 
-    $('.price-table .package').click(function () {
-        $(this).children('input').prop('checked', true);
-    });
-
     //404.html page script
     $('.comment-list .row').hide();
     var childrens = $('.comment-list').children('.row');

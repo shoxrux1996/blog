@@ -59,22 +59,23 @@
 @endsection
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col-sm-9">
                 <div class="col-sm-12 question">
                     @if($question->type ==2)
                         <span class="question-price">
-                                <b>{{$question->price}} сум</b>
-                                <span>
-                                    стоимость<br/>
-                                    вопроса
-                                </span>
+                            <b>{{$question->price}} сум</b>
+                            <span>
+                                стоимость<br/>
+                                вопроса
                             </span>
+                        </span>
                     @endif
-                    <a class="btn btn-danger pull-right" href="{{route('admin.question.delete', $question->id)}}">Удалить</a>
-
+                    <a class="btn btn-danger pull-right"
+                       href="{{route('admin.question.delete', $question->id)}}">Удалить</a>
+                    <a class="btn btn-info pull-right"
+                       href="{{route('admin.question.edit', $question->id)}}">Изменить</a>
                     <h4 class="title"><a
                                 href="{{route('admin.question.show', $question->id)}}">{{$question->title}}</a>
                     </h4>
@@ -103,36 +104,49 @@
         </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2" style="margin: 10px;">
-                <hr>
-                <h3><span class="glyphicon glyphicon-comment"></span> Answers</h3>
+                <h3>Ответы</h3>
+                <!-- Comment news style -->
                 @foreach($question->answers as $answer)
-                    <div class="comment">
-                        <div class="author-info">
-                            <img src="{{ "https://www.gravatar.com/avatar/" .md5(strtolower(trim($answer->lawyer->email))) . "?s=50&d=monsterid" }}"
-                                 class="author-img">
-                            <div class="author-name">
-                                <h4>{{$answer->lawyer->email}}</h4>
-                                <p class="author-time">{{date('F n, Y - g:iA'), strtotime($answer->created_at)}}</p>
+                    <div class="col-sm-9 answer">
+                        <div class="answer-header">
+                            <img class="img-thumbnail"
+                                 src="{{$answer->lawyer->user->file != null ? asset($answer->lawyer->user->file->path.$answer->lawyer->user->file->file) : asset("dist/images/headshot-1.png")}}"
+                                 alt="Lawyer 1"/>
+                            <h4 class="lawyer-name">{{$answer->lawyer->firstName}}</h4>
+                            <h6 class="lawyer-type">{{$answer->lawyer->job_status}}</h6>
+                        </div>
+                        <div>
+                            <hr>
+                        </div>
+                        <div class="answer-content">
+                            {!! $answer->text !!}
+                        </div>
+                        <div class="answer-footer">
+                            <span class="pull-right answered-time">
+                                {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
+                            </span>
+                            <div>
+                                @foreach($answer->files as $file)
+                                    <a class="label label-default"
+                                       href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                                @endforeach
                             </div>
                         </div>
-                        <div class="comment-content">
-                            {{$answer->text}}
-                        </div>
-                        <div class="tags col-md-6 ">
-                            @foreach($answer->files as $file)
-                                <a class="label label-default"
-                                   href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                            @endforeach
-                            <hr>
-                            @if($answer->feedback != null)
-                                <h2>{{$answer->feedback->text}}</h2>
-                            @endif
-                        </div>
-                        @endforeach
-                        <hr>
                     </div>
+                @endforeach
+            <!-- /Comment new style -->
             </div>
         </div>
     </div>
 @endsection
-
+@section('scripts')
+    <script src={{asset('js/tinymce/tinymce.min.js')}}></script>
+    <script>tinymce.init({
+            mode: "specific_textareas",
+            editor_selector: "myTextEditor",
+            plugins: 'link code',
+            height: 300,
+            toolbar: 'undo redo | cut copy paste'
+        });
+    </script>
+@endsection

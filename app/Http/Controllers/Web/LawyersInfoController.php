@@ -2,12 +2,15 @@
 
 namespace yuridik\Http\Controllers\Web;
 
+use function foo\func;
+use yuridik\Answer;
 use yuridik\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use yuridik\Lawyer;
 use yuridik\Category;
 use yuridik\Client;
 use yuridik\City;
+use yuridik\Question;
 use yuridik\User;
 
 class LawyersInfoController extends Controller
@@ -28,9 +31,15 @@ class LawyersInfoController extends Controller
 
     public function show($id)
     {
-        $lawyer = Lawyer::findOrFail($id);
+        $lawyer=Lawyer::find($id);
+        $questions = Question::with('answers')->whereHas('answers',function($query) use ($id){
+            $query->with('lawyer')->whereHas('lawyer', function($query) use ($id){
+                $query->where('id', $id);
+            });
+        })->paginate(8,['*'],'questions');
+        $blogs = $lawyer->blogs()->paginate(8,['*'],'blogs');
 
-        return view('lawyer.show')->withLawyer($lawyer);
+        return view('lawyer.show')->withLawyer($lawyer)->withQuestions($questions)->withBlogs($blogs);
     }
 
 }

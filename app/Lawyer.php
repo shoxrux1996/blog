@@ -57,7 +57,9 @@ class Lawyer extends Authenticatable
     {
         return $this->hasMany('yuridik\Answer');
     }
-
+    public function questions(){
+        return $this->answers->question;
+    }
     public function requests()
     {
         return $this->hasMany('yuridik\Request');

@@ -54,10 +54,14 @@
                             <input type="radio" id="inlineCheckbox2" value="2" name="radio"> @lang('question.Представитель бизнеса')
                         </label>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group{{$errors->has('category') ? ' has-error' : '' }} ">
                         <label for="category">@lang('question.Категория права')</label>
+                        @if ($errors->has('category'))
+                            <span class="help-block">
+                                    <strong>{{ $errors->first('category') }}</strong>
+                                </span>
+                        @endif
                         {{Form::select('category', $categories, null , ['class'=>'form-control general-input', 'placeholder'=>''])}}
-                        
                     </div>
                     <div class="form-group{{$errors->has('title') ? ' has-error' : '' }} ">
                         <label for="question">@lang('question.Ваш вопрос*')</label>
@@ -148,7 +152,7 @@
                 <div class='wrapper'>
                     <div class='package col-sm-4'>
 
-                        <input type="radio" name="type" id="standart-price" value="1" />
+                        <input type="radio" name="type" id="standart-price" value="1" disabled/>
                         <div class='name'>
                             <label for="standart-price">@lang('question.Стандартная')</label>
                         </div>
@@ -164,7 +168,7 @@
                         </ul>
                     </div>
                     <div class='package brilliant col-sm-4' >
-                        <input type="radio" name="type" checked id="vip-price" value="2" />
+                        <input type="radio" name="type" id="vip-price" value="2" disabled/>
                         <div class='name'>
                             <label for="vip-price">@lang('question.VIP-консультация')</label>
                         </div>
@@ -193,7 +197,7 @@
                         </ul>
                     </div>
                     <div class='package col-sm-4' >
-                        <input type="radio" name="type" id="free-price" value="0" />
+                        <input type="radio" name="type" id="free-price" value="0" checked/>
                         <div class='name'>
                             <label for="free-price">@lang('question.Бесплатная')</label>
                         </div>
@@ -209,7 +213,31 @@
                         </ul>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-default blue-button btn-lg">@lang('question.Продолжить')</button>
+                <button type="submit" class="btn btn-default blue-button btn-lg">Опубликовать вопрос</button>
+
+
+                <!-- Modal for paid questions-->
+                <div id="paid-questions-modal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">@lang('index.soon')!!!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <img src="{{asset('dist/images/under-development.png')}}" alt="Under development"/>
+                                <h4>Функция "платные вопросы" в процессе разработки</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Modal for paid questions-->
+
             </div>
             <!-- /Price table -->
         </form>
@@ -239,6 +267,14 @@
             }
 
         });
+
+
+        $('.price-table .package').click(function () {
+           if(!($(this).find('input').is(':checked'))){
+               $('#paid-questions-modal').modal('show');
+           }
+        });
+
 
     </script>
 @endsection

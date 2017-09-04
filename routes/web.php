@@ -60,6 +60,8 @@ Route::prefix('admin')->group(function(){
        Route::get('/', 'Admin\AdminPostController@questions')->name('admin.questions.index');
        Route::get('/deny/{id}','Admin\AdminPostController@questionDeny')->name('admin.question.delete');
        Route::get('/show/{id}','Admin\AdminPostController@questionShow')->name('admin.question.show');
+       Route::get('/edit/{id}','Admin\AdminPostController@questionEdit')->name('admin.question.edit');
+       Route::post('/edit/{id}/submit','Admin\AdminPostController@questionUpdate')->name('admin.question.edit.submit');
    });
     Route::prefix('documents')->group(function (){
         Route::get('/', 'Admin\AdminPostController@documents')->name('admin.documents.index');

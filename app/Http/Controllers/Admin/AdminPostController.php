@@ -4,6 +4,7 @@ namespace yuridik\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use yuridik\Answer;
+use yuridik\Category;
 use yuridik\Comment;
 use yuridik\Document;
 use yuridik\Http\Controllers\Controller;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use yuridik\Client;
 use yuridik\Lawyer;
 use yuridik\Question;
+use Validator;
 use Illuminate\Support\Facades\Auth;
 
 class AdminPostController extends Controller
@@ -43,7 +45,36 @@ class AdminPostController extends Controller
         $question->delete();
         return redirect()->route('admin.questions.index');
     }
+    public function questionEdit($id){
+        $question = Question::findOrFail($id);
+        $category = Category::where('category_id',null)->get();
+        $categories = array();
+        foreach ($category as $key) {
+            $categories[$key->id] = $key->name;
+        }
+        return view('admin.question_edit')->withQuestion($question)->withCategories($categories);
+    }
+    public function questionUpdate(Request $request, $id){
+        $messages = [
+            'required' => 'Обязательно к заполнению',
+            'string' => 'Неправильный формат',
+            'title.min' => 'Минимум 3 символов',
+            'description.min' => 'Минимум 10 символов',
+        ];
+        $rules = array(
+            'title' => 'required|string|min:3',
+            'description' => 'required|string|min:10',
+            'category' => 'required',
+        );
 
+        Validator::make($request->all(), $rules, $messages)->validate();
+        $question = Question::findOrFail($id);
+        $question->title = $request->title;
+        $question->text = $request->description;
+        $question->category_id = $request->category;
+        $question->save();
+        return redirect()->route('admin.question.show', $id);
+    }
     public function documents()
     {
         $questions = Document::orderBy('id', 'desc')->paginate(10);
