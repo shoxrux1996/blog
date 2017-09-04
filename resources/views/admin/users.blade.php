@@ -4,7 +4,6 @@
     <link href="{{asset('dist/css/individual-lawyer.css')}}" rel="stylesheet">
 @endsection
 @section('content')
-
     <nav class="navbar navbar-default" style="border-radius: 0; border-width: 0 0 thin 0;">
         <ul class="nav navbar-nav">
             <li class="{{ $section == 1 ? "active" : "" }}">
@@ -20,6 +19,8 @@
     </nav>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+
+            <!-- Clients -->
             <div id="section1" class="section" style="display: {{ $section == 1 ? "block" : "none" }};">
                 @foreach ($clients as $lawyer)
                     <div class="row profile border-gray">
@@ -49,15 +50,27 @@
                                 <!-- SIDEBAR MENU -->
                                 <div class="profile-usermenu">
                                     <ul class="nav">
-                                        <li class="active"><a data-toggle="tab" href="#profile"><i
-                                                        class="fa fa-user"></i>
-                                                Профиль</a></li>
+                                        <li class="active">
+                                            <a data-toggle="tab" href="#profile-client-{{$lawyer->id}}">
+                                                <i class="fa fa-user"></i>Профиль
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#questions-client-{{$lawyer->id}}">
+                                                <i class="fa fa-user"></i>Вопросы <span class="badge">{{$lawyer->questions->count()}}</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#documents-client-{{$lawyer->id}}">
+                                                <i class="fa fa-user"></i>Документы <span class="badge">{{$lawyer->documents->count()}}</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-content">
-                            <div class="col-md-9 tab-pane fade in active ">
+                            <div class="col-md-9 tab-pane fade in active" id="profile-client-{{$lawyer->id}}">
                                 <div class="row text-center">
                                     <div class="col-sm-4">
                                         <h1>10,0</h1>
@@ -75,17 +88,6 @@
                                             <i class="fa fa-star"></i>
                                         </p>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <p>
-                                            <a href="#">{{$lawyer->questions->count() }} вопросов</a>
-                                        </p>
-                                        <p>
-                                            <a href="#">{{$lawyer->documents->count() }} документы</a>
-                                        </p>
-                                    </div>
-                                    <div class="col-sm-4">
-
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -97,9 +99,9 @@
                                         </p>
                                         <p><span class="color-gray">Почта: <strong>{{$lawyer->email}}</strong> </span></p>
                                         <p><span class="color-gray">Дата рождения: </span>
-                                           <strong>
+                                            <strong>
                                                 {{Carbon\Carbon::parse($lawyer->user->dateOfBirth)->toFormattedDateString()}}
-                                           </strong>
+                                            </strong>
                                         </p>
                                         <p><span class="color-gray">город: </span> <strong>{{$lawyer->user->city->name}} </strong>
                                         </p>
@@ -114,32 +116,56 @@
 
                                 </div>
                             </div>
+                            <div class="col-md-9 tab-pane fade" id="questions-client-{{$lawyer->id}}">
+                                <h4>Вопросы</h4>
+                                <ul>
+                                    <li>
+                                        <a href="#">Questions</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-9 tab-pane fade" id="documents-client-{{$lawyer->id}}">
+                                <h4>Документы</h4>
+                                <ul>
+                                    <li>
+                                        <a href="#">Documents</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+
+                        <div class="clearfix"></div>
+
+                        <!-- Buttons -->
                         <div class="row">
                             @if($lawyer->isBlocked == false)
-                                <form action="{{ route('admin.client.block', [$lawyer->id]) }}"
+                                <form action="{{ route('admin.client.block', [$lawyer->id]) }}" class="form-inline"
                                       method="post">
                                     {{csrf_field()}}
-                                    <input type="date" class="date" name="date" style="margin: 10px 30px;"
+                                    <input type="date" class="date form-control" name="date" style="margin: 10px 30px;"
                                            value="{{\Carbon\Carbon::now('Asia/Tashkent')->format('Y-m-d')}}">
-                                    <button type="submit" class="btn btn-danger pull-right btn-sm"
-                                            style="margin:5px 30px 0 0;">Блокировать
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            style="margin:0px 30px 0 0;">Блокировать
                                     </button>
                                 </form>
                             @else
                                 <form action="{{ route('admin.client.unblock', [$lawyer->id]) }}"
                                       method="post">
                                     {{csrf_field()}}
-                                    <button type="submit" class="btn btn-success pull-right btn-sm"
-                                            style="margin:5px 0 0 40px;">Разблокировать
+                                    <button type="submit" class="btn btn-success btn-sm"
+                                            style="margin:0px 0 0 40px;">Разблокировать
                                     </button>
                                 </form>
                             @endif
                         </div>
+                        <!-- /Buttons -->
                     </div>
                 @endforeach
 
             </div>
+            <!-- /Clients -->
+
+            <!-- Lawyers -->
             <div id="section2" class="section" style="display: {{ $section == 2 ? "block" : "none" }};">
 
                 @foreach ($lawyers as $lawyer)
@@ -169,25 +195,27 @@
                                     <button type="button" class="btn btn-success btn-sm">Обратиться к юристу</button>
                                 </div>
                                 <!-- END SIDEBAR BUTTONS -->
+
                                 <!-- SIDEBAR MENU -->
                                 <div class="profile-usermenu">
                                     <ul class="nav">
-                                        <li class="active"><a data-toggle="tab" href="#profile"><i
+                                        <li class="active"><a data-toggle="tab" href="#profile-{{$lawyer->id}}"><i
                                                         class="fa fa-user"></i>
                                                 Профиль</a></li>
-                                        <li><a data-toggle="tab" href="#specialisation"><i class="fa fa-tasks"></i>
+                                        <li><a data-toggle="tab" href="#specialisation-{{$lawyer->id}}"><i class="fa fa-tasks"></i>
                                                 Специализация</a></li>
-                                        <li><a data-toggle="tab" href="#education"><i class="fa fa-graduation-cap"></i>
+                                        <li><a data-toggle="tab" href="#education-{{$lawyer->id}}"><i class="fa fa-graduation-cap"></i>
                                                 Образование</a></li>
-                                        <li><a data-toggle="tab" href="#awards"><i class="fa fa-graduation-cap"></i>
+                                        <li><a data-toggle="tab" href="#awards-{{$lawyer->id}}"><i class="fa fa-graduation-cap"></i>
                                                 Сертификаты</a></li>
                                     </ul>
                                 </div>
-                                <!-- END MENU -->
+                                <!-- /SIDEBAR MENU -->
                             </div>
                         </div>
+
                         <div class="tab-content">
-                            <div class="col-md-9 tab-pane fade in active profile-content" id="profile">
+                            <div class="col-md-9 tab-pane fade in active profile-content" id="profile-{{$lawyer->id}}">
                                 <div class="row text-center">
                                     <div class="col-sm-4">
                                         <h1>10,0</h1>
@@ -224,8 +252,11 @@
                                         <h4>
                                             <i class="fa fa-building"></i> О себе
                                         </h4>
+                                        <p><b>Email: </b> <a href="mailto:testtest@mail.ru">testtest@mail.ru</a></p>
+                                        <p><b>Отчество:</b> Каюмович</p>
                                         <p>{{$lawyer->about_me}}</p>
-
+                                        <p><b>Тел: </b>+(97) 765-32-21</p>
+                                        <p><b>Пол: </b> Мужчина</p>
                                         <p><span class="color-gray">На проекте:</span>
                                             с {{Carbon\Carbon::parse($lawyer->created_at)->toFormattedDateString()}}</p>
                                     </div>
@@ -237,7 +268,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-9 tab-pane fade profile-content" id="specialisation">
+                            <div class="col-md-9 tab-pane fade profile-content" id="specialisation-{{$lawyer->id}}">
                                 <div class="row" id="category-section">
                                     <h3>Специализация</h3>
                                     <h6 class="color-gray"><b>Всего {{$lawyer->answers->count()}} ответа</b></h6>
@@ -259,7 +290,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-9 tab-pane fade profile-content" id="education">
+                            <div class="col-md-9 tab-pane fade profile-content" id="education-{{$lawyer->id}}">
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <ul class="list-unstyled">
@@ -283,7 +314,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-9 tab-pane fade profile-content" id="awards">
+                            <div class="col-md-9 tab-pane fade profile-content" id="awards-{{$lawyer->id}}">
                                 <div class="row">
                                     <h6><b>Награды</b></h6>
                                     @if($lawyer->files != null)
@@ -293,50 +324,54 @@
                                                      src="{!!asset($award->path . $award->file)!!}"/>
                                             </div>
                                         @endforeach
-                                @endif
+                                    @endif
                                 </div>
                             </div>
                         </div>
+
+
+                        <!-- Buttons -->
                         <div class="row">
-                            @if($lawyer->type==1)
-                                <form action="{{ route('admin.lawyer.confirm',[$lawyer->id]) }}" method="post">
-                                    {{csrf_field()}}
-                                    <button type="submit" class="btn btn-success pull-right btn-sm"
-                                            style="margin:5px 0 0 40px;">Confirm
-                                    </button>
-                                </form>
-                            @else
-                                <form action="{{ route('admin.lawyer.confirm',[$lawyer->id]) }}" method="post">
-                                    {{csrf_field()}}
-                                    <button type="submit" class="btn btn-success pull-right btn-sm"
-                                            style="margin:5px 0 0 40px;">Unconfirm
-                                    </button>
-                                </form>
-                            @endif
-                            @if($lawyer->isBlocked == false)
-                                <form action="{{ route('admin.lawyer.block', [$lawyer->id]) }}"
-                                      method="post">
-                                    {{csrf_field()}}
-                                    <input type="date" class="date" name="date" style="margin: 10px 30px;"
-                                           value="{{\Carbon\Carbon::now('Asia/Tashkent')->format('Y-m-d')}}">
-                                    <button type="submit" class="btn btn-danger pull-right btn-sm"
-                                            style="margin:5px 30px 0 0;">Блокировать
-                                    </button>
-                                </form>
-                            @else
-                                <form action="{{ route('admin.lawyer.unblock', [$lawyer->id]) }}"
-                                      method="post">
-                                    {{csrf_field()}}
-                                    <button type="submit" class="btn btn-success pull-right btn-sm"
-                                            style="margin:5px 0 0 40px;">Разблокировать
-                                    </button>
-                                </form>
-                            @endif
+                            <div class="col-sm-12" style="margin-bottom: 10px;">
+                                @if($lawyer->type==1)
+                                    <form action="{{ route('admin.lawyer.confirm',[$lawyer->id]) }}" method="post">
+                                        {{csrf_field()}}
+                                        <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 10px;">Принять
+                                        </button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('admin.lawyer.confirm',[$lawyer->id]) }}" method="post">
+                                        {{csrf_field()}}
+                                        <button type="submit" class="btn btn-success btn-sm pull-right"  style="margin-right: 10px;">Отказать
+                                        </button>
+                                    </form>
+                                @endif
+                                @if($lawyer->isBlocked == false)
+                                    <form action="{{ route('admin.lawyer.block', [$lawyer->id]) }}" class="form-inline"
+                                          method="post">
+                                        {{csrf_field()}}
+                                        <input type="date" class="date form-control" name="date" style="margin: 0 10px;"
+                                               value="{{\Carbon\Carbon::now('Asia/Tashkent')->format('Y-m-d')}}">
+                                        <button type="submit" class="btn btn-danger btn-sm">Блокировать
+                                        </button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('admin.lawyer.unblock', [$lawyer->id]) }}"
+                                          method="post">
+                                        {{csrf_field()}}
+                                        <button type="submit" class="btn btn-success btn-sm" style="margin-left: 10px;">Разблокировать
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
                         </div>
+                        <!-- /Buttons -->
                     </div>
                 @endforeach
 
             </div>
+            <!-- /Lawyers -->
+
         </div>
     </div>
 @endsection

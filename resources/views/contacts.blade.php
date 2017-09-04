@@ -3,12 +3,12 @@
     <link href="{{ asset('dist/css/contacts.css')}}" rel="stylesheet">
 @endsection
 @section('menu')
-    <li><a href="{{ route('home')}}">@lang('index.home')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('index.lawyers')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('index.questions')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('index.blog')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('index.howworks')</a></li>
-    <li><a href="{{ route('about')}}">@lang('index.aboutus')</a></li>
+    <li><a href="{{ route('home')}}">@lang('contacts.Главная')</a></li>
+    <li><a href="{{ route('lawyers.list')}}">@lang('contacts.Юристы')</a></li>
+    <li><a href="{{ route('question.list')}}">@lang('contacts.Вопросы')</a></li>
+    <li><a href="{{ route('web.blogs')}}">@lang('contacts.Блог')</a></li>
+    <li><a href="{{ route('how-works')}}">@lang('contacts.Как это работает')</a></li>
+    <li><a href="{{ route('about')}}">@lang('contacts.О нас')</a></li>
 @endsection
 @section('content')
 
@@ -18,16 +18,16 @@
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-8 color-dark-blue">
-                    <h3 class="text-primary">КОНТАКТЫ</h3>
-                    <p>Если у вас возникли вопросы, связанные с работой сайта, или есть предложения о сотрудничестве, вы всегда можете связаться с нами, используя контакты, указанные ниже.</p>
-                    <p><b><i class="fa fa-phone" aria-hidden="true"></i> 8 800 333-28-41 (для регионов)</b></p>
-                    <p><b><i class="fa fa-envelope" aria-hidden="true"></i> support@pravoved.ru</b></p>
-                    <p><b>ООО «Правовед.РУ», ИНН 7810384020, ОГРН 1157847336459</b></p>
+                    <h3 class="text-primary">@lang('contacts.КОНТАКТЫ')</h3>
+                    <p>@lang('contacts.Если у вас возникли вопросы, связанные с работой сайта, или есть предложения о сотрудничестве, вы всегда можете связаться с нами, используя контакты, указанные ниже.')</p>
+                    <p><b><i class="fa fa-phone" aria-hidden="true"></i></b></p>
+                    <p><b><i class="fa fa-envelope" aria-hidden="true"></i></b></p>
+                    <p><b>@lang('contacts.ООО') «Yuridik.uz»</b></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-8">
-                    <p><b><i class="fa fa-map-marker" aria-hidden="true"></i> Наш адрес в Нижнем Новгороде: 603005, г. Нижний Новгород, ул. Ульянова, д. 7</b></p>
+                    <p><b><i class="fa fa-map-marker" aria-hidden="true"></i> @lang('contacts.Наш адрес')</b></p>
                 </div>
             </div>
             <br>
@@ -38,12 +38,12 @@
     </div>
     <div class="container" id="tech-sup">
         <div class="row">
-            <h4>ТЕХНИЧЕСКАЯ ПОДДЕРЖКА</h4>
+            <h4>@lang('contacts.ТЕХНИЧЕСКАЯ ПОДДЕРЖКА')</h4>
             <div class="support">
-                <p>Здесь вы можете оставить свой вопрос, связанный с работой сайта.</p>
-                <p>Внимание!<br />
-                    Данные контакты НЕ предназначены для юридических консультаций. Если вы хотите задать вопрос юристам, воспользуйтесь формой подачи вопроса.</p>
-                <a type="button" class="btn btn-default btn-success">НАПИСАТЬ СООБЩЕНИЕ</a>
+                <p>@lang('contacts.Здесь вы можете оставить свой вопрос, связанный с работой сайта.')</p>
+                <p>@lang('contacts.Внимание!')<br />
+                    @lang('contacts.Данные контакты НЕ предназначены для юридических консультаций. Если вы хотите задать вопрос юристам, воспользуйтесь формой подачи вопроса.')</p>
+                <a type="button" class="btn btn-default btn-success">@lang('contacts.НАПИСАТЬ СООБЩЕНИЕ')</a>
             </div>
         </div>
     </div>
