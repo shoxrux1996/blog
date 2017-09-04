@@ -121,7 +121,7 @@
                 </span>
                 <button class="not-active btn-link" id="paid-questions">@lang('index.paid')</button>
             </h3>
-            <div id="paid-question-block">
+            <div id="paid-question-block" class="hidden">
                 @foreach($paid_question_examples as $var)
                     <a href="{{ route('web.question.show',['id' => $var->id])}}" class="question clearfix">
                         <div class="asked-time">
@@ -139,7 +139,7 @@
                     </a>
                 @endforeach
             </div>
-            <div id="free-question-block" class="hidden">
+            <div id="free-question-block" >
                 @foreach($free_question_examples as $var)
                     <a href="{{ route('web.question.show',['id' => $var->id])}}" class="question clearfix">
                         <div class="asked-time">
