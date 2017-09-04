@@ -252,11 +252,11 @@
                                         <h4>
                                             <i class="fa fa-building"></i> О себе
                                         </h4>
-                                        <p><b>Email: </b> <a href="mailto:testtest@mail.ru">testtest@mail.ru</a></p>
-                                        <p><b>Отчество:</b> Каюмович</p>
+                                        <p><b>Email: </b> <a href="mailto:{{$lawyer->email}}">{{$lawyer->email}}</a></p>
+                                        <p><b>Отчество:</b> {{$lawyer->fatherName}}</p>
                                         <p>{{$lawyer->about_me}}</p>
-                                        <p><b>Тел: </b>+(97) 765-32-21</p>
-                                        <p><b>Пол: </b> Мужчина</p>
+                                        <p><b>Тел: </b>{{$lawyer->user->phone}}</p>
+                                        <p><b>Пол: </b> {{$lawyer->gender}}</p>
                                         <p><span class="color-gray">На проекте:</span>
                                             с {{Carbon\Carbon::parse($lawyer->created_at)->toFormattedDateString()}}</p>
                                     </div>
@@ -273,12 +273,12 @@
                                     <h3>Специализация</h3>
                                     <h6 class="color-gray"><b>Всего {{$lawyer->answers->count()}} ответа</b></h6>
                                     <hr>
-                                    <h6 class="color-gray"><b>Специализируется в 5 категориях:</b></h6>
+                                    <h6 class="color-gray"><b>Специализируется в {{$lawyer->categories->count()}} категориях:</b></h6>
                                     <div class="row">
                                         @foreach($lawyer->categories as $category)
                                             <div class="col-md-4 col-sm-4 col-xs-4 categories">
                                                 <a href="{{route('web.category.show', $category->name)}}">
-                                                    <i class="fa fa-building"></i> {{$category->name}}
+                                                    <i class="fa {{$category->class}}"></i> {{$category->name}}
                                                 </a>
                                                 @foreach($category->children as $sub_category)
                                                     <p>

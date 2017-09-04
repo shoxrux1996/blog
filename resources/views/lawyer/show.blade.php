@@ -143,14 +143,14 @@
                     <div class="col-md-9 tab-pane fade profile-content" id="specialisation">
                         <div class="row" id="category-section">
                             <h3>Специализация</h3>
-                            <h6 class="color-gray"><b>Всего {{$lawyer->answers->count()}} </b></h6>
+                            <h6 class="color-gray"><b>Всего {{$lawyer->answers->count()}} ответа</b></h6>
                             <hr>
-                            <h6 class="color-gray"><b>Специализируется в 5 категориях:</b></h6>
+                            <h6 class="color-gray"><b>Специализируется в {{$lawyer->categories->count()}} категориях:</b></h6>
                             <div class="row">
                                 @foreach($lawyer->categories as $category)
                                     <div class="col-md-4 col-sm-4 col-xs-4 categories">
                                         <a href="{{route('web.category.show', $category->name)}}">
-                                            <i class="fa fa-building"></i> {{$category->name}}
+                                            <i class="fa {{$category->class}}"></i> {{$category->name}}
                                         </a>
                                         @foreach($category->children as $sub_category)
                                             <p>

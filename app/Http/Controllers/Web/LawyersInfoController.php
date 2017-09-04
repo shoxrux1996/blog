@@ -37,7 +37,8 @@ class LawyersInfoController extends Controller
             $query->with('lawyer')->whereHas('lawyer', function($query) use ($id){
                 $query->where('id', $id);
             });
-        })->paginate(8,['*'],'questions');
+        })->paginate(8, ['*'],'questions');
+
         $blogs = $lawyer->blogs()->paginate(8,['*'],'blogs');
 
         return view('lawyer.show')->withLawyer($lawyer)->withQuestions($questions)->withBlogs($blogs);

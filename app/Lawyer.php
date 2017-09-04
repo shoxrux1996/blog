@@ -59,8 +59,7 @@ class Lawyer extends Authenticatable
     }
     public function questions(){
         $collections = collect();
-
-        foreach($this->answers as $answer)
+        foreach($this->answers->unique('question_id') as $answer)
          $collections->push($answer->question);
         return $collections;
     }
