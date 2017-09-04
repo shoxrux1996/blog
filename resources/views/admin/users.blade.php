@@ -125,17 +125,21 @@
                             <div class="col-md-9 tab-pane fade" id="questions-client-{{$lawyer->id}}">
                                 <h4>Вопросы</h4>
                                 <ul>
-                                    <li>
-                                        <a href="#">Questions</a>
-                                    </li>
+                                    @foreach($lawyer->questions as $question)
+                                        <li>
+                                            <a href="{{route('admin.question.show', $question->id)}}">{{$question->title}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="col-md-9 tab-pane fade" id="documents-client-{{$lawyer->id}}">
                                 <h4>Документы</h4>
                                 <ul>
-                                    <li>
-                                        <a href="#">Documents</a>
-                                    </li>
+                                    @foreach($lawyer->documents as $document)
+                                        <li>
+                                            <a href="{{route('admin.document.show', $document->id)}}">{{$document->title}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -261,7 +265,7 @@
                                     <div class="col-sm-4">
                                         <h1>
                                             <i class="fa fa-registered"></i>
-                                            <h5><b>Член экспертного совета Правовед.ru</b></h5>
+                                            <h5><b>Член экспертного совета Yuridik.uz</b></h5>
                                         </h1>
                                     </div>
                                 </div>
@@ -301,7 +305,7 @@
                                                 </a>
                                                 @foreach($category->children as $sub_category)
                                                     <p>
-                                                        <a href="{{route('web.category.show', $sub_category->name)}}">{{$sub_category->name}}</a>
+                                                        <a href="{{route('admin.category.show', $sub_category->name)}}">{{$sub_category->name}}</a>
                                                     </p>
                                                 @endforeach
                                             </div>
@@ -335,7 +339,6 @@
                             </div>
                             <div class="col-md-9 tab-pane fade profile-content" id="awards-{{$lawyer->id}}">
                                 <!-- Lawyer answered questions -->
-
                                 <div class="row">
                                     <h6><b>Награды</b></h6>
                                     @if($lawyer->files != null)
@@ -402,7 +405,7 @@
                                     @foreach($lawyer->blogs as $blog)
                                         <ul>
                                             <li>
-                                                <a href="{{route('web.blog.show', $blog->id)}}">{{$blog->title}}</a>
+                                                <a href="{{route('admin.blog.show', $blog->id)}}">{{$blog->title}}</a>
                                             </li>
                                         </ul>
                                         {{--<a href="{{route('web.blog.show', $blog->id)}}">--}}

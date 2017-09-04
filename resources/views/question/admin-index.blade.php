@@ -62,13 +62,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-9">
-                    <p class="question-type">
+                   {{-- <p class="question-type">
                         <span class="active-type"><a href="#">Все</a> </span>
                         <span> <a href="#">Платные</a> </span>
                         <span> <a href="#">Бесплатные</a> </span>
-                    </p>
+                    </p>--}}
                     @foreach($questions as $question)
-
                         <div class="col-sm-12 question">
                             @if($question->type ==2)
                                 <span class="question-price">
@@ -107,7 +106,6 @@
 
                     <div class="col-sm-12 text-center">
                         {!! $questions->links('pagination') !!}
-
                     </div>
                 </div>
             </div>
