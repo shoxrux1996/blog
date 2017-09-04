@@ -22,7 +22,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" placeholder="{{ __('index.search') }}"/>
                         <span class="input-group-btn">
-                      <button type="submit" class="btn btn-default" >
+                      <button type="submit" class="btn btn-default">
                         <i class="fa fa-search" aria-hidden="true"></i>
                       </button>
                       </span>
@@ -38,21 +38,24 @@
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12 text-center">
                 <img src="{{ asset( 'dist/images/question-icon.png')}}" alt="Question icon"/>
-                <a type="button" class="btn btn-default" href="{{ route('question.create')}}">@lang('index.askquestion')</a>
+                <a type="button" class="btn btn-default"
+                   href="{{ route('question.create')}}">@lang('index.askquestion')</a>
                 <p class="statistics">50,000+</p>
                 <p class="what">@lang('index.answeredquestions')</p>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12 text-center">
                 <img src="{{ asset('dist/images/call-icon.png')}}" alt="Call icon"/>
                 {{--href="{{ route('call.create')}}"--}}
-                <a type="button" class="btn btn-default" data-toggle="modal" data-target="#call-function">@lang('index.ordercall')</a>
+                <a type="button" class="btn btn-default" data-toggle="modal"
+                   data-target="#call-function">@lang('index.ordercall')</a>
                 <p class="statistics">20,00,000+</p>
                 <p class="what">@lang('index.callback')</p>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12 text-center">
                 <img src="{{ asset('dist/images/document-icon.png')}}" class="img-responsive" alt="Document icon"/>
                 {{--href="{{ route('document.create')}}"--}}
-                <a type="button" class="btn btn-default" data-toggle="modal" data-target="#document-function">@lang('index.orderdocument')</a>
+                <a type="button" class="btn btn-default" data-toggle="modal"
+                   data-target="#document-function">@lang('index.orderdocument')</a>
                 <p class="statistics">40,000,000+</p>
                 <p class="what">@lang('index.madedocuments')</p>
             </div>
@@ -73,7 +76,8 @@
                     <h4>@lang('index.callinprocess')</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
+                    <button type="button" class="btn btn-default btn-dark-blue"
+                            data-dismiss="modal">@lang('index.close')</button>
                 </div>
             </div>
 
@@ -95,7 +99,8 @@
                     <h4>@lang('index.documentinprocess')</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
+                    <button type="button" class="btn btn-default btn-dark-blue"
+                            data-dismiss="modal">@lang('index.close')</button>
                 </div>
             </div>
 
@@ -107,13 +112,14 @@
 
     <!-- Questions Section -->
     <div class="container-fluid" id="questions-section">
-        <h2 class="text-center">@lang('index.asked') <span class="total">{{$num_of_questions}}</span> @lang('index.#questions')</h2>
+        <h2 class="text-center">@lang('index.asked') <span
+                    class="total">{{$num_of_questions}}</span> @lang('index.#questions')</h2>
         <div class="questions-bg clearfix">
             <h3 class="category text-center">
-                <button class="active btn-link" id="paid-questions">@lang('index.paid')</button>
                 <span>
-                     <button class="not-active btn-link" id="free-questions">@lang('index.free')</button>
+                    <button class="active btn-link" id="free-questions">@lang('index.free')</button>
                 </span>
+                <button class="not-active btn-link" id="paid-questions">@lang('index.paid')</button>
             </h3>
             <div id="paid-question-block">
                 @foreach($paid_question_examples as $var)
@@ -148,7 +154,8 @@
                     </a>
                 @endforeach
             </div>
-            <a type="button" class="btn btn-default btn-lg btn-block btn-dark-blue" href="{{ route('question.list')}}">@lang('index.allquestions')</a>
+            <a type="button" class="btn btn-default btn-lg btn-block btn-dark-blue"
+               href="{{ route('question.list')}}">@lang('index.allquestions')</a>
         </div>
     </div>
     <!-- /Questions -->
@@ -166,7 +173,9 @@
                                         <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name}}
                                     </a>
                                     @foreach($categories[$j]->children as $subcategory)
-                                        <p><a href="{{route('web.category.show', [$subcategory->name])}}">{{$subcategory->name}}</a></p>
+                                        <p>
+                                            <a href="{{route('web.category.show', [$subcategory->name])}}">{{$subcategory->name}}</a>
+                                        </p>
                                     @endforeach
                                 </div>
                             @endfor
@@ -181,7 +190,9 @@
                                         <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name_uz}}
                                     </a>
                                     @foreach($categories[$j]->children as $subcategory)
-                                        <p><a href="{{route('web.category.show', [$subcategory->name])}}">{{$subcategory->name_uz}}</a></p>
+                                        <p>
+                                            <a href="{{route('web.category.show', [$subcategory->name])}}">{{$subcategory->name_uz}}</a>
+                                        </p>
                                     @endforeach
                                 </div>
                             @endfor
@@ -192,7 +203,8 @@
             <div class="col-md-3 text-center view-all-categories">
                 <h3>@lang('index.helpforanyquestion')</h3>
                 <p>@lang('index.helpforanyquestionbody')</p>
-                <a type="button" class="btn  btn-dark-blue" href="{{ route('category.list')}}">@lang('index.allcategories')</a>
+                <a type="button" class="btn  btn-dark-blue"
+                   href="{{ route('category.list')}}">@lang('index.allcategories')</a>
             </div>
         </div>
     </div>
@@ -205,14 +217,19 @@
             @foreach($blogs as $blog)
                 <div class="col-md-4 col-sm-4">
                     @if($blog->file != null)
-                        <img class="img-responsive img-thumbnail" src="{{ asset($blog->file->path.$blog->file->file)}}" alt="{{$blog->title}}"/>
+                        <img class="img-responsive img-thumbnail" src="{{ asset($blog->file->path.$blog->file->file)}}"
+                             alt="{{$blog->title}}"/>
                     @else
-                        <img class="img-responsive img-thumbnail" src="{{ asset('dist/images/blog-img-2.jpg')}}" alt="News 2"/>
+                        <img class="img-responsive img-thumbnail" src="{{ asset('dist/images/blog-img-2.jpg')}}"
+                             alt="News 2"/>
                     @endif
                     <div class="middle">
-                        <a class="btn btn-dark-blue text" href="{{route('web.blog.show', $blog->id)}}">@lang('readblog')</a>
+                        <a class="btn btn-dark-blue text"
+                           href="{{route('web.blog.show', $blog->id)}}">@lang('readblog')</a>
                     </div>
-                    <h4><a href="{{route('web.blog.show', $blog->id)}}">{{mb_substr($blog->title,0,50)}} {{strlen($blog->title) > 50 ? '...' : ""}}</a></h4>
+                    <h4>
+                        <a href="{{route('web.blog.show', $blog->id)}}">{{mb_substr($blog->title,0,50)}} {{strlen($blog->title) > 50 ? '...' : ""}}</a>
+                    </h4>
                     <p>{{substr(strip_tags($blog->text),0,80)}} {{strlen(strip_tags($blog->text)) > 80 ? '...' : ""}}</p>
                 </div>
             @endforeach
@@ -227,7 +244,8 @@
 
     <!-- Lawyers Section -->
     <div class="container-fluid text-center" id="lawyers-section">
-        <h2>@lang('index.consultionfrom') <span class="total">{{$num_of_lawyers}}</span> @lang('index.lawyers&jurists')</h2>
+        <h2>@lang('index.consultionfrom') <span class="total">{{$num_of_lawyers}}</span> @lang('index.lawyers&jurists')
+        </h2>
         <h5>@lang('index.ourlawyers-...')</h5>
         <div class="row" id="gallery">
             <div id="lawyers-carousel" class="crsl-nav">
@@ -240,12 +258,15 @@
                         <figure class="crsl-item">
                             <div class="lawyer text-center">
                                 <a href="{{route('web.lawyer.show', $lawyer->id)}}">
-                                    <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}" alt="headshot 1"
+                                    <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}"
+                                         alt="headshot 1"
                                          class="img-responsive center-block"/>
                                     <h4>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h4>
                                     <h5>г. {{$lawyer->user->city->name}}</h5>
                                     <hr class="green-divider">
-                                    <p><span class="total">{{$lawyer->feedbacks->count()}}</span> @lang('index.feedbacks')</p>
+                                    <p>
+                                        <span class="total">{{$lawyer->feedbacks->count()}}</span> @lang('index.feedbacks')
+                                    </p>
                                 </a>
                             </div>
                         </figure>
@@ -255,7 +276,8 @@
                 </div>
             </div>
         </div>
-        <a type="button" class="btn  btn-dark-blue" href="{{ route('lawyers.list')}}">@lang('index.allprojectlawyers')</a>
+        <a type="button" class="btn  btn-dark-blue"
+           href="{{ route('lawyers.list')}}">@lang('index.allprojectlawyers')</a>
     </div>
     <!-- Lawyers Section -->
 
@@ -264,7 +286,7 @@
         <h1 class="text-center">@lang('index.aboutus')</h1>
         <div class="row" style="clear: both; overflow: hidden;">
             <div class="col-md-6 col-sm-6">
-                <img  src="{{asset('dist/images/aboutus.jpg')}}"  width="100%" height="auto" controls>
+                <img src="{{asset('dist/images/aboutus.jpg')}}" width="100%" height="auto" controls>
 
             </div>
             <div class="col-md-6 col-sm-6">

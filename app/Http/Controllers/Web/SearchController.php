@@ -22,7 +22,8 @@ class SearchController extends Controller
             return $query->feedbacks->count();
         });
         if ($request->search != "") {
-            $lawyers = Lawyer::with('user')
+            $lawyers = Lawyer::where('type', 2)
+                ->with('user')
                 ->whereHas('user', function ($query) use ($request) {
                 $query->where('firstName', 'LIKE', "%$request->search%")
                     ->orWhere('lastName', 'LIKE', "%$request->search%");
@@ -47,8 +48,8 @@ class SearchController extends Controller
                 ->withBlogs($blogs)
                 ->withBest_lawyers($best_lawyers);
         } else {
-            $lawyers = Lawyer::where('isBlocked', 0)
-                ->where('confirmed', 1)
+            $lawyers = Lawyer::where('type', 2)
+                ->where('isBlocked', 0)
                 ->paginate(4,['*'], 'lawyers');
             $questions = Question::orderBy('created_at', 'desc')
                 ->paginate(4,['*'], 'questions');
@@ -67,7 +68,7 @@ class SearchController extends Controller
         if ($request->search != null) {
 
             $search = explode(' ', $request->search);
-            $lawyers = Lawyer::with('user', 'categories')->whereHas('user', function ($query) use ($search) {
+            $lawyers = Lawyer::where('type', 2)->with('user', 'categories')->whereHas('user', function ($query) use ($search) {
                 foreach ($search as $value) {
                     $query->where('firstName', 'LIKE', "%$value%")
                         ->orWhere('lastName', 'LIKE', "%$value%");
@@ -80,7 +81,7 @@ class SearchController extends Controller
 
         }
         if ($request->city != null) {
-            $lawyers = Lawyer::where('confirmed', 1)->with('user')
+            $lawyers = Lawyer::where('type', 2)->with('user')
                 ->whereHas('user', function ($query) use ($request) {
                     $query->with('city')->whereHas('city', function ($query) use ($request) {
                         $query->where('name', 'LIKE', "%$request->city%");
@@ -89,7 +90,7 @@ class SearchController extends Controller
 
         }
         if ($request->search == null && $request->city == null) {
-            $lawyers = Lawyer::orderBy('id', 'desc')->paginate(8);
+            $lawyers = Lawyer::where('type', 2)->orderBy('id', 'desc')->paginate(8);
         }
 
         $categories = Category::where('category_id', null)->get();
@@ -106,7 +107,7 @@ class SearchController extends Controller
 
     public function searchByCategory($name)
     {
-        $lawyers = Lawyer::with('categories')->whereHas('categories', function ($query) use ($name) {
+        $lawyers = Lawyer::where('type', 2)->with('categories')->whereHas('categories', function ($query) use ($name) {
             $query->where('name', 'LIKE', "%$name%");
         })->paginate(8);
 

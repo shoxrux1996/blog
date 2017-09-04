@@ -19,7 +19,7 @@ class LawyersInfoController extends Controller
     public function showLawyersList()
     {
         $categories = Category::where('category_id', null)->get();
-        $lawyers = Lawyer::orderBy('id', 'desc')->paginate(8);
+        $lawyers = Lawyer::where('type', 2)->orderBy('id', 'desc')->paginate(8);
         $best_lawyers = Lawyer::where('type', 2)->with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });

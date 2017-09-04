@@ -44,7 +44,8 @@ class CategoryController extends Controller
             return $query->feedbacks->count();
         });
 
-        $lawyers = Lawyer::whereHas('categories', function ($query) use ($name){
+        $lawyers = Lawyer::where('type', 2)
+            ->whereHas('categories', function ($query) use ($name){
             $query->where('name', 'LIKE', "%$name%")->orWhereHas('parent', function ($query) use ($name){
                 $query->where('name', 'LIKE', "%$name%");
             });
@@ -82,10 +83,12 @@ class CategoryController extends Controller
             $query->where('name', 'LIKE', "%$name%");
         })->where('type', 0)
             ->orderBy('id', 'desc')->paginate(5);
-        $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+        $best_lawyers = $best_lawyers = Lawyer::where('type', 2)
+            ->with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
-        $lawyers = Lawyer::whereHas('categories', function ($query) use ($name){
+        $lawyers = Lawyer::where('type', 2)
+            ->whereHas('categories', function ($query) use ($name){
             $query->where('name', 'LIKE', "%$name%")->orWhereHas('parent', function ($query) use ($name){
                 $query->where('name', 'LIKE', "%$name%");
             });
@@ -120,10 +123,12 @@ class CategoryController extends Controller
             $query->where('name', 'LIKE', "%$name%");
         })->where('type', 0)
             ->orderBy('id', 'desc')->paginate(5);
-        $best_lawyers = $best_lawyers = Lawyer::with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
+        $best_lawyers = $best_lawyers = Lawyer::where('type', 2)
+            ->with('feedbacks')->take(4)->get()->sortByDesc(function ($query) {
             return $query->feedbacks->count();
         });
-        $lawyers = Lawyer::whereHas('categories', function ($query) use ($name){
+        $lawyers = Lawyer::where('type', 2)
+            ->whereHas('categories', function ($query) use ($name){
             $query->where('name', 'LIKE', "%$name%")->orWhereHas('parent', function ($query) use ($name){
                 $query->where('name', 'LIKE', "%$name%");
             });
