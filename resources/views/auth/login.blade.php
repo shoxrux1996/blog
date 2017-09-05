@@ -3,89 +3,14 @@
 <link href="{{ asset('dist/css/login-regis.css')}}" rel="stylesheet">
 @endsection
 @section('menu')
-  <li><a href="{{ route('home')}}">Главная</a></li>
-  <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-  <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-  <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-  <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-  <li><a href="{{ route('about')}}">О нас</a></li>
+  <li><a href="{{ route('home')}}">@lang('login.Главная')</a></li>
+  <li><a href="{{ route('lawyers.list')}}">@lang('login.Юристы')</a></li>
+  <li><a href="{{ route('question.list')}}">@lang('login.Вопросы')</a></li>
+  <li><a href="{{ route('web.blogs')}}">@lang('login.Блог')</a></li>
+  <li><a href="{{ route('how-works')}}">@lang('login.Как это работает')</a></li>
+  <li><a href="{{ route('about')}}">@lang('login.О нас')</a></li>
 @endsection
 @section('content')
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                                 @if (Session::has('message'))
-                                 <div class="alert alert-info">{{ Session::get('message') }}</div>
-                                @endif
-                                @if (Session::has('error-message'))
-                                 <div class="alert alert-info">{{ Session::get('message') }}</div>
-                                @endif
-                <div class="panel-heading">User Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('user.login.submit') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ ($errors->has('email') || $errors->has('wrong-attempt')) ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-                                 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ ($errors->has('password') || $errors->has('wrong-attempt')) ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @elseif ($errors->has('wrong-attempt'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('wrong-attempt') }}</strong>
-                                    </span>
-                                @endif
-
-                            </div>
-                        </div>
-                
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('user.password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <!-- Modal for message-->
     <div id="confirm-email-modal" class="modal fade" role="dialog">
@@ -94,17 +19,17 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">@lang('auth.modaltitle')</h4>
+                    <h4 class="modal-title">@lang('login.modaltitle')</h4>
                 </div>
                 <div class="modal-body">
                     <img src="{{asset('dist/images/email-send.png')}}" alt="Email send"/>
-                    <h4>@lang('auth.modalbody1')</h4>
+                    <h4>@lang('login.modalbody1')</h4>
                     @if(Session::has('question-create'))
-                        <h6>@lang('auth.modalbody2')</h6>
+                        <h6>@lang('login.modalbody2')</h6>
                     @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('auth.close')</button>
+                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('login.close')</button>
                 </div>
             </div>
 
@@ -116,31 +41,28 @@
 <div class="container">
     <div class="row" id="login-bg">
         <div class="col-md-6 col-sm-8 col-xs-12">
-        @if(Session::has('confirm-email') || Session::has('question-create'))
-            <h6>test</h6>
-        @endif
-            <h1>Вход на Yuridik.uz</h1>
+            <h1>@lang('login.Вход на Yuridik.uz')</h1>
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#menu1">Войти</a></li>
-                <li><a href="{{ route('user.register')}}">Регистрация</a></li>
+                <li class="active"><a data-toggle="tab" href="#menu1">@lang('login.Войти')</a></li>
+                <li><a href="{{ route('user.register')}}">@lang('login.Регистрация')</a></li>
             </ul>
 
             <div class="tab-content">
                 <div id="menu1" class="tab-pane fade in active">
-                    <h4>Ваш аккаунт</h4>
+                    <h4>@lang('login.Ваш аккаунт')</h4>
                     <form id="login-form" role="form" method="POST" action="{{ route('user.login.submit') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ ($errors->has('email') || $errors->has('wrong-attempt')) ? ' has-error' : '' }}">
-                            <label for="username"><i class="fa fa-user-circle" aria-hidden="true"></i> Эл. почта</label>
+                            <label for="username"><i class="fa fa-user-circle" aria-hidden="true"></i> @lang('login.Эл. почта')</label>
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                             @endif
-                            <input type="text"  class="form-control" id="email" name="email" placeholder="Введите электронную почту" value="{{ old('email') }}" required autofocus>
+                            <input type="text"  class="form-control" id="email" name="email" placeholder="{{ __('login.Введите электронную почту') }}" value="{{ old('email') }}" required autofocus>
                         </div>
                         <div class="form-group{{ ($errors->has('password') || $errors->has('wrong-attempt')) ? ' has-error' : '' }}">
-                            <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> Пароль</label>
+                            <label for="password"><i class="fa fa-lock" aria-hidden="true"></i> @lang('login.Пароль')</label>
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -150,13 +72,13 @@
                                     <strong>{{ $errors->first('wrong-attempt') }}</strong>
                                 </span>
                             @endif
-                            <input type="password"  class="form-control" id="password" name="password" placeholder="Введите пароль" required>
+                            <input type="password"  class="form-control" id="password" name="password" placeholder="{{ __('login.Введите пароль') }}" required>
                         </div>
-                        <a href="{{ route('user.password.request') }}">Забыли пароль?</a>
+                        <a href="{{ route('user.password.request') }}">@lang('login.Забыли пароль?')</a>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value=""> Запомнить меня</label>
+                            <label><input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value=""> @lang('login.Запомнить меня')</label>
                         </div>
-                        <button type="submit" class="btn btn-primary pull-right green-button">Войты</button>
+                        <button type="submit" class="btn btn-primary pull-right green-button">@lang('login.Войти')</button>
                         <div class="clearfix"></div>
                     </form>
                 </div>

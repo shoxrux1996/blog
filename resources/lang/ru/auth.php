@@ -15,9 +15,4 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'modaltitle' => "Добро пожаловать",
-    'modalbody1' => "Пожалуйста, подтвердите адрес электронной почты!",
-    'modalbody2' => "Вопрос успешно создан",
-    'close' => "Закрыт",
-
 ];
