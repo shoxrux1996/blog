@@ -7,12 +7,12 @@
 
 @endsection
 @section('menu')
-    <li><a href="{{ route('home')}}">Главная</a></li>
-    <li class="active-link"><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-    <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-    <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-    <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-    <li><a href="{{ route('about')}}">О нас</a></li>
+    <li><a href="{{ route('home')}}">@lang('individual-lawyer.Главная')</a></li>
+    <li><a href="{{ route('lawyers.list')}}">@lang('individual-lawyer.Юристы')</a></li>
+    <li><a href="{{ route('question.list')}}">@lang('individual-lawyer.Вопросы')</a></li>
+    <li><a href="{{ route('web.blogs')}}">@lang('individual-lawyer.Блог')</a></li>
+    <li><a href="{{ route('how-works')}}">@lang('individual-lawyer.Как это работает')</a></li>
+    <li><a href="{{ route('about')}}">@lang('individual-lawyer.О нас')</a></li>
 @endsection
 @section('content')
     <div id="wrapper">
@@ -42,7 +42,7 @@
                         <!-- SIDEBAR BUTTONS -->
                         <div class="profile-userbuttons">
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                                    data-target="#refer-lawyer">Обратиться к юристу
+                                    data-target="#refer-lawyer">@lang('individual-lawyer.Обратиться к юристу')
                             </button>
                             <!-- Modal for refer lawyer function-->
                             <div id="refer-lawyer" class="modal fade" role="dialog">
@@ -51,16 +51,16 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">@lang('index.soon')!!!</h4>
+                                            <h4 class="modal-title">@lang('individual-lawyer.index.soon')!!!</h4>
                                         </div>
                                         <div class="modal-body">
                                             <img src="{{asset('dist/images/under-development.png')}}"
                                                  alt="Under development"/>
-                                            <h4>Функция "обратиться к юристу" в процессе разработки</h4>
+                                            <h4>@lang('individual-lawyer.Функция "обратиться к юристу" в процессе разработки')</h4>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default btn-dark-blue"
-                                                    data-dismiss="modal">@lang('index.close')</button>
+                                                    data-dismiss="modal">@lang('individual-lawyer.index.close')</button>
                                         </div>
                                     </div>
                                 </div>
@@ -72,15 +72,15 @@
                         <div class="profile-usermenu">
                             <ul class="nav">
                                 <li class="active"><a data-toggle="tab" href="#profile"><i class="fa fa-user"></i>
-                                        Профиль</a></li>
+                                        @lang('individual-lawyer.Профиль')</a></li>
                                 <li><a data-toggle="tab" href="#specialisation"><i class="fa fa-tasks"></i>
-                                        Специализация</a></li>
+                                        @lang('individual-lawyer.Специализация')</a></li>
                                 <li><a data-toggle="tab" href="#education"><i class="fa fa-graduation-cap"></i>
-                                        Образование</a></li>
+                                        @lang('individual-lawyer.Образование')</a></li>
                                 <li><a data-toggle="tab" href="#answers"><i class="fa fa-reply"></i>
-                                        Отвеченные вопросы <span class="badge">{{$questions->total()}}</span></a></li>
+                                        @lang('individual-lawyer.Отвеченные вопросы') <span class="badge">{{$questions->total()}}</span></a></li>
                                 <li><a data-toggle="tab" href="#articles"><i class="fa fa-newspaper-o"></i>
-                                        Статьи <span class="badge">{{$blogs->total()}}</span></a></li>
+                                        @lang('individual-lawyer.Статьи') <span class="badge">{{$blogs->total()}}</span></a></li>
                             </ul>
                         </div>
                         <!-- END MENU -->
@@ -92,7 +92,7 @@
                         <div class="row text-center">
                             <div class="col-sm-4">
                                 <h1>10,0</h1>
-                                <h6><b>Рейтинг Yuridik.uz</b></h6>
+                                <h6><b>@lang('individual-lawyer.Рейтинг Yuridik.uz')</b></h6>
                                 <p>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -108,31 +108,31 @@
                             </div>
                             <div class="col-sm-4">
                                 <h1>99%</h1>
-                                <h6><b>довольных клиентов</b></h6>
+                                <h6><b>@lang('individual-lawyer.довольных клиентов')</b></h6>
                                 <p>
-                                    <a href="#">{{$lawyer->countPositiveFeedbacks() }} отзывов</a>
+                                    <a href="#">{{$lawyer->countPositiveFeedbacks() }} @lang('individual-lawyer.отзывов')</a>
                                 </p>
                             </div>
                             <div class="col-sm-4">
                                 <h1>
                                     <i class="fa fa-registered"></i>
-                                    <h5><b>Член экспертного совета Правовед.ru</b></h5>
+                                    <h5><b>@lang('individual-lawyer.Член экспертного совета Yuridik.uz')</b></h5>
                                 </h1>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <h4>
-                                    <i class="fa fa-building"></i> О себе
+                                    <i class="fa fa-building"></i> @lang('individual-lawyer.О себе')
                                 </h4>
                                 <p>{{$lawyer->about_me}}</p>
 
-                                <p><span class="color-gray">На проекте:</span>
+                                <p><span class="color-gray">@lang('individual-lawyer.На проекте:')</span>
                                     с {{Carbon\Carbon::parse($lawyer->created_at)->toFormattedDateString()}}</p>
                             </div>
                             <div class="col-sm-6">
                                 <h4>
-                                    <i class="fa fa-money"></i> Стоимость услуг
+                                    <i class="fa fa-money"></i> @lang('individual-lawyer.Стоимость услуг')
                                 </h4>
                                 <p>{{$lawyer->profile_shown_price}}</p>
                             </div>
@@ -143,19 +143,19 @@
                     <!-- Lawyer's specialisation -->
                     <div class="col-md-9 tab-pane fade profile-content" id="specialisation">
                         <div class="row" id="category-section">
-                            <h3>Специализация</h3>
-                            <h6 class="color-gray"><b>Всего {{$lawyer->answers->count()}} ответа</b></h6>
+                            <h3>@lang('individual-lawyer.Специализация')</h3>
+                            <h6 class="color-gray"><b>@lang('individual-lawyer.Всего') {{$lawyer->answers->count()}} @lang('individual-lawyer.ответа')</b></h6>
                             <hr>
-                            <h6 class="color-gray"><b>Специализируется в {{$lawyer->categories->count()}} категориях:</b></h6>
+                            <h6 class="color-gray"><b>@lang('individual-lawyer.Специализируется в') {{$lawyer->categories->count()}} @lang('individual-lawyer.категориях:')</b></h6>
                             <div class="row">
                                 @foreach($lawyer->categories as $category)
                                     <div class="col-md-4 col-sm-4 col-xs-4 categories">
                                         <a href="{{route('web.category.show', $category->name)}}">
-                                            <i class="fa {{$category->class}}"></i> {{$category->name}}
+                                            <i class="fa {{$category->class}}"></i> {{App::islocale('ru') ? $category->name : $caltegory->name_uz}}
                                         </a>
                                         @foreach($category->children as $sub_category)
                                             <p>
-                                                <a href="{{route('web.category.show', $sub_category->name)}}">{{$sub_category->name}}</a>
+                                                <a href="{{route('web.category.show', $sub_category->name)}}">{{App::islocale('ru') ? $sub_category->name : $sub_caltegory->name_uz}}</a>
                                             </p>
                                         @endforeach
                                     </div>

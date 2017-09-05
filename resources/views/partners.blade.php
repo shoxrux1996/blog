@@ -3,12 +3,12 @@
     <link href="{{ asset('dist/css/partners.css')}}" rel="stylesheet">
 @endsection
 @section('menu')
-    <li><a href="{{ route('home')}}">@lang('Главная')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('Юристы')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('Вопросы')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('Блог')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('Как это работает')</a></li>
-    <li><a href="{{ route('about')}}">@lang('О нас')</a></li>
+    <li><a href="{{ route('home')}}">@lang('partners.Главная')</a></li>
+    <li><a href="{{ route('lawyers.list')}}">@lang('partners.Юристы')</a></li>
+    <li><a href="{{ route('question.list')}}">@lang('partners.Вопросы')</a></li>
+    <li><a href="{{ route('web.blogs')}}">@lang('partners.Блог')</a></li>
+    <li><a href="{{ route('how-works')}}">@lang('partners.Как это работает')</a></li>
+    <li><a href="{{ route('about')}}">@lang('partners.О нас')</a></li>
 @endsection
 @section('content')
 
@@ -17,15 +17,15 @@
     <div class="container background-white padding-30">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="text-success">@lang('ПАРТНЕРЫ')</h3>
-                <h6><b>@lang('Хотите стать нашим партнером?')</b></h6>
-                <p>@lang('Сервис юридических онлайн консультаций «Yuridik.uz» приглашает к партнерству компании, заинтересованные в совместном привлечении новых клиентов. Наша целевая аудитория – индивидуальные предприниматели, руководители малого и среднего бизнеса, юристы и юридические компании, а также физические лица, нуждающиеся в консультации специалиста.')</p>
-                <a href="#" class="pull-right">@lang('Стать партнером') <i class="fa fa-arrow-circle-o-right"></i> </a>
+                <h3 class="text-success">@lang('partners.ПАРТНЕРЫ')</h3>
+                <h6><b>@lang('partners.Хотите стать нашим партнером?')</b></h6>
+                <p>@lang('partners.Сервис юридических онлайн консультаций «Yuridik.uz» приглашает к партнерству компании, заинтересованные в совместном привлечении новых клиентов. Наша целевая аудитория – индивидуальные предприниматели, руководители малого и среднего бизнеса, юристы и юридические компании, а также физические лица, нуждающиеся в консультации специалиста.')</p>
+                <a href="#" class="pull-right">@lang('partners.Стать партнером') <i class="fa fa-arrow-circle-o-right"></i> </a>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <h6><b>@lang('Генеральные партнеры')</b></h6>
+                <h6><b>@lang('partners.Генеральные партнеры')</b></h6>
                 <div class="col-sm-12 sponsors">
                     <img class="img-responsive img-thumbnail" alt="Partners" src="dist/images/mailru.png" />
                     <h5><b>Электронный бухгалтер «Эльба»</b></h5>
