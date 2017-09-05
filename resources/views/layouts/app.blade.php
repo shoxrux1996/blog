@@ -211,7 +211,7 @@
                 <p><a href="{{ route('document.create') }}">@lang('app.orderdocument')</a></p>
                 <p><a href="{{ route('lawyers.list') }}">@lang('app.ourlawyers')</a></p>
                 <p><a href="{{ route('question.list') }}">@lang('app.questions')</a></p>
-                <p><a href="{{route('category.list')}}">@lang('Все специализации')</a></p>
+                <p><a href="{{route('category.list')}}">@lang('app.Все специализации')</a></p>
             </div>
             <div class="col-md-3 col-sm-6 hidden-xxs">
                 <span><a href="#">@lang('app.tolawyers')</a></span>

@@ -22,7 +22,7 @@
         </div>
         <div class="col-sm-6">
             <p>Yuridik.uz - @lang('about.это сервис, связывающий профессиональных юристов с клиентами в режиме онлайн. Любой пользователь может получить здесь моментальную консультацию по всем правовым вопросам, а практикующие юристы - возможность для дополнительного заработка.')</p>
-            <p>Yuridik.uz это:</p>
+            <p>Yuridik.uz @lang('about.это'):</p>
             <h4 class="text-primary"><i class="fa fa-check-square-o" aria-hidden="true"></i> @lang('about.БЫСТРО')</h4>
             <span>@lang('about.решение вашего вопроса в течение 2-х часов')</span>
             <h4 class="text-success"><i class="fa fa-check-square-o" aria-hidden="true"></i> @lang('about.ДОСТУПНО')</h4>

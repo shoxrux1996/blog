@@ -44,7 +44,7 @@ return [
     'ourlawyers-...' => "Bizning  jamoamiz  qonunchilikni yaxshi biladigan, ytarli amaliy tajribaga ega professional yuristlardan iborat. Bizga murojaat qilib Siz o'z savolingizga asosli va to'g'ri javob olaiz",
     'feedbacks' => "ta minnatdorchiliklar",
     'allprojectlawyers' => "Barcha yuristlar ro'yxati",
-    'aboutustitle' => "Dunyoning italgan nuqtasida professional yuridik yordam ",
+    'aboutustitle' => "Dunyoning istalgan nuqtasida professional yuridik yordam ",
     'aboutusbody1' => "Malakali yuridik xizmatga ehtiyojingiz bormi? Qanday qilib yurist maslahati olishni bilmayapsizmi? Advokatlik tuzilmalariga borishga vaqtingiz yo'qmi? O'zingiz mustaqil qonunchilikni o'rganib savollarinizga javob qidiryapsiz-u, lekin javob noto'gri bo'lishi ehtimoli tufayli sizga yordam kerakmi? ",
     'aboutusbody2' => "",
     'aboutusbody3' => "",

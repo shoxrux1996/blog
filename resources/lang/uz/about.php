@@ -46,4 +46,5 @@ return [
 	'Существует масса причин, объективно мешающих вашему профессиональному росту. Сотрудничество с Yuridik.uz кардинально меняет эту ситуацию. Участвуйте в соревновании со своими коллегами, зарабатывая рейтинг, репутацию, и как следствие, новых клиентов.' => "Huquqshunoslik faoliyatingizda professional o‘sish uchun bir qancha omil va sabablar mavjudligi hech kimga sir emas. Yuridik.uz bilan hamkorlik qilish ushbu holatni mutlaqo o‘zgartirish imkonini beradi. Hamkasblaringiz bilan raqobat qilishda ishtirok eting, o‘z reytingingiz va reputatsiyangizni, shu bilan birgalikda, mijozlaringiz sonini oshiring.",
 	'ЗАДАТЬ ВОПРОС ЮРИСТАМ' => "Savol berish",
 	'ЗАРЕГИСТРИРОВАТЬСЯ' => "Ro'yxatdan o'tish",
+	'это' => 'bu',
 ];
