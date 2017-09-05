@@ -151,11 +151,11 @@
                                 @foreach($lawyer->categories as $category)
                                     <div class="col-md-4 col-sm-4 col-xs-4 categories">
                                         <a href="{{route('web.category.show', $category->name)}}">
-                                            <i class="fa {{$category->class}}"></i> {{App::islocale('ru') ? $category->name : $caltegory->name_uz}}
+                                            <i class="fa {{$category->class}}"></i> {{App::islocale('ru') ? $category->name : $category->name_uz}}
                                         </a>
                                         @foreach($category->children as $sub_category)
                                             <p>
-                                                <a href="{{route('web.category.show', $sub_category->name)}}">{{App::islocale('ru') ? $sub_category->name : $sub_caltegory->name_uz}}</a>
+                                                <a href="{{route('web.category.show', $sub_category->name)}}">{{App::islocale('ru') ? $sub_category->name : $sub_category->name_uz}}</a>
                                             </p>
                                         @endforeach
                                     </div>
