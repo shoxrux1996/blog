@@ -4,12 +4,12 @@
     <link href="{{ asset('dist/css/lawyer.css')}}" rel="stylesheet">
 @endsection
 @section('menu')
-    <li><a href="{{ route('home')}}">Главная</a></li>
-    <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-    <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-    <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-    <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-    <li><a href="{{ route('about')}}">О нас</a></li>
+    <li><a href="{{ route('home')}}">@lang('lawyer-settings.Главная')</a></li>
+    <li><a href="{{ route('lawyers.list')}}">@lang('lawyer-settings.Юристы')</a></li>
+    <li><a href="{{ route('question.list')}}">@lang('lawyer-settings.Вопросы')</a></li>
+    <li><a href="{{ route('web.blogs')}}">@lang('lawyer-settings.Блог')</a></li>
+    <li><a href="{{ route('how-works')}}">@lang('lawyer-settings.Как это работает')</a></li>
+    <li><a href="{{ route('about')}}">@lang('lawyer-settings.О нас')</a></li>
 @endsection
 @section('content')
 
@@ -21,7 +21,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#profile">
-                                Мой профиль <b class="caret"></b></a>
+                                @lang('lawyer-settings.Мой профиль') <b class="caret"></b></a>
                         </h4>
                     </div>
                     <div id="profile" class="panel-collapse collapse in">
@@ -30,26 +30,26 @@
                                 <li>
                                     <h6><b>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</b></h6>
                                     <p class="color-gray">г. {{$lawyer->user->city->name}}</p>
-                                    <a href="{{ route('lawyer.dashboard')}}">Личный кабинет</a>
+                                    <a href="{{ route('lawyer.dashboard')}}">@lang('lawyer-settings.Личный кабинет')</a>
                                 </li>
                                 <li>
                                     <i class="fa fa-hourglass pull-left"></i>
                                     <p class="color-grey">
-                                        Как считается рейтинг?
+                                        @lang('lawyer-settings.Как считается рейтинг?')
                                     </p>
                                     <p>
-                                        <a href="#">Как считается рейтинг?</a>
+                                        <a href="#">@lang('lawyer-settings.Как считается рейтинг?')</a>
                                     </p>
                                 </li>
                                 <li>
                                     <p>
-                                        <a href="#">Отзывы:</a>
+                                        <a href="#">@lang('lawyer-settings.Отзывы'):</a>
                                     </p>
                                     <p>
-                                        {{$lawyer->countPositiveFeedbacks()}} положительных
+                                        {{$lawyer->countPositiveFeedbacks()}} @lang('lawyer-settings.положительных')
                                     </p>
                                     <p>
-                                        {{$lawyer->countNegativeFeedbacks()}} отрицательных
+                                        {{$lawyer->countNegativeFeedbacks()}} @lang('lawyer-settings.отрицательных')
                                     </p>
                                 </li>
                             </ul>
@@ -63,16 +63,16 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#account">
-                                Мой аккаунт <b class="caret"></b></a>
+                                @lang('lawyer-settings.Мой аккаунт') <b class="caret"></b></a>
                         </h4>
                     </div>
                     <div id="account" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul class="list-unstyled">
                                 <li>
-                                    <h3>0 сум.</h3>
-                                    <h3>0 юркоинов</h3>
-                                    <a href="{{route('card.payment')}}">Управление балансом</a>
+                                    <h3>0 @lang('lawyer-settings.сум').</h3>
+                                    <h3>0 @lang('lawyer-settings.юркоинов')</h3>
+                                    <a href="#">@lang('lawyer-settings.Управление балансом')</a>
                                 </li>
                             </ul>
                         </div>
@@ -85,23 +85,23 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#services">
-                                Моя практика <b class="caret"></b></a>
+                                @lang('lawyer-settings.Моя практика') <b class="caret"></b></a>
                         </h4>
                     </div>
                     <div id="services" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="#">Вопросы</a>
+                                    <a href="#">@lang('lawyer-settings.Вопросы')</a>
                                 </li>
                                 <li>
-                                    <a href="#">Заявки</a>
+                                    <a href="#">@lang('lawyer-settings.Заявки')</a>
                                 </li>
                                 <li>
-                                    <a href="#">Документы</a>
+                                    <a href="#">@lang('lawyer-settings.Документы')</a>
                                 </li>
                                 <li>
-                                    <a href="#">Телефонные консультации</a>
+                                    <a href="#">@lang('lawyer-settings.Телефонные консультации')</a>
                                 </li>
                             </ul>
                         </div>
@@ -112,31 +112,31 @@
 
 
             <div class="col-sm-9 background-white border-gray">
-                <h5 class="text-success">Редактирование профиля</h5>
+                <h5 class="text-success">@lang('lawyer-settings.Редактирование профиля')</h5>
                 <ul class="nav nav-tabs">
                     <li class="{{$settingtype==='main' ? 'active' : ''}}">
-                        <a data-toggle="tab" href="#main">Основное</a>
+                        <a data-toggle="tab" href="#main">@lang('lawyer-settings.Основное')</a>
                     </li>
                     <li class="{{$settingtype==='photo' ? 'active' : ''}}">
-                        <a data-toggle="tab" href="#photo">Фотография</a>
+                        <a data-toggle="tab" href="#photo">@lang('lawyer-settings.Фотография')</a>
                     </li>
                     <li class="{{$settingtype==='password' ? 'active' : ''}}">
-                        <a data-toggle="tab" href="#password">Почта и пароль</a>
+                        <a data-toggle="tab" href="#password">@lang('lawyer-settings.Почта и пароль')</a>
                     </li>
                     <li class="{{$settingtype==='contacts' ? 'active' : ''}}">
-                        <a data-toggle="tab" href="#contacts">Контакты</a>
+                        <a data-toggle="tab" href="#contacts">@lang('lawyer-settings.Контакты')</a>
                     </li>
                 <!-- <li class="{{$settingtype==='education' ? 'active' : ''}}">
                     <a data-toggle="tab" href="#education">Образование</a>
                 </li> -->
                     <li class="{{$settingtype==='experience' ? 'active' : ''}}">
-                        <a data-toggle="tab" href="#experience">Опыть</a>
+                        <a data-toggle="tab" href="#experience">@lang('lawyer-settings.Опыть')</a>
                     </li>
                     <li class="{{$settingtype==='additional' ? 'active' : ''}}">
-                        <a data-toggle="tab" href="#additional">Дополнительно</a>
+                        <a data-toggle="tab" href="#additional">@lang('lawyer-settings.Дополнительно')</a>
                     </li>
                     <li class="{{$settingtype==='awards' ? 'active' : ''}}">
-                        <a data-toggle="tab" href="#awards">Сертификаты</a>
+                        <a data-toggle="tab" href="#awards">@lang('lawyer-settings.Сертификаты')</a>
                     </li>
                 </ul>
 
@@ -147,51 +147,51 @@
                                 <form action="{{ route('lawyer.update',['settingtype'=>'main'])}}" method="post">
                                     {{csrf_field()}}
                                     <div class="form-group">
-                                        <label for="surname">Фамилия</label>
+                                        <label for="surname">@lang('lawyer-settings.Фамилия')</label>
                                         <input type="text" class="form-control " id="surname" name="surname"
                                                value="{{$lawyer->user->lastName}}"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Имя</label>
+                                        <label for="name">@lang('lawyer-settings.Имя')</label>
                                         <input type="text" class="form-control " id="name" name="name"
                                                value="{{$lawyer->user->firstName}}"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="patronymic">Отчество</label>
+                                        <label for="patronymic">@lang('lawyer-settings.Отчество')</label>
                                         <input type="text" class="form-control " id="patronymic" name="patronymic"
                                                value="{{$lawyer->fatherName}}"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="city">Город</label>
+                                        <label for="city">@lang('lawyer-settings.Город')</label>
                                         {{Form::select('city', $cities, $lawyer->user->city_id, ['class'=>'form-control'])}}
                                     </div>
                                     <div class="form-group">
-                                        <label for="status">Ваш статус</label>
+                                        <label for="status">@lang('lawyer-settings.Ваш статус')</label>
                                         <select class="form-control" id="status" name="job_status">
                                             <option value="lawyer" {{$lawyer->job_status==='lawyer' ? 'selected' : ''}}>
-                                                Адвокат
+                                                @lang('lawyer-settings.Адвокат')
                                             </option>
                                             <option value="notary" {{$lawyer->job_status==='notary' ? 'selected' : ''}}>
-                                                Нотариус
+                                                @lang('lawyer-settings.Нотариус')
                                             </option>
                                             <option value="jurist" {{$lawyer->job_status==='jurist' ? 'selected' : ''}}>
-                                                Юрист
+                                                @lang('lawyer-settings.Юрист')
                                             </option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="birthday">Дата рождение</label>
+                                        <label for="birthday">@lang('lawyer-settings.Дата рождение')</label>
                                         {{Form::date('dateOfBirth', $lawyer->user->dateOfBirth, array('class' => 'form-control')) }}
                                     </div>
                                     <div class="form-group form-inline">
-                                        <label>Пол </label>
+                                        <label>@lang('lawyer-settings.Пол') </label>
                                         <input type="radio" name="gender"
-                                               value="M" {{$lawyer->gender==='M' ? 'checked' : ''}} /> Мужской
+                                               value="M" {{$lawyer->gender==='M' ? 'checked' : ''}} /> @lang('lawyer-settings.Мужской')
                                         <input type="radio" name="gender"
-                                               value="F" {{$lawyer->gender==='F' ? 'checked' : ''}}/> Женский
+                                               value="F" {{$lawyer->gender==='F' ? 'checked' : ''}}/> @lang('lawyer-settings.Женский')
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить
+                                        <button type="submit" class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
                                         </button>
                                     </div>
                                 </form>
@@ -220,11 +220,11 @@
                                     </span>
                                         @endif
                                         <label class="btn btn-default ">
-                                            Выбрать файл <input class="image" type="file" name="image" hidden>
+                                            @lang('lawyer-settings.Выбрать файл') <input class="image" type="file" name="image" hidden>
                                         </label>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary">Загрузить</button>
+                                        <button type="submit" class="btn btn-default btn-primary">@lang('lawyer-settings.Загрузить')</button>
                                     </div>
                                 </form>
                             </div>
@@ -236,12 +236,12 @@
                                 <form action="{{ route('lawyer.update',['settingtype'=>'password'])}}" method="post">
                                     {{csrf_field()}}
                                     <div class="form-group">
-                                        <label for="email">Email</label>
+                                        <label for="email">@lang('lawyer-settings.Email')</label>
                                         <input type="email" class="form-control " id="email" readonly
                                                placeholder="{{$lawyer->email}}"/>
                                     </div>
                                     <div class="form-group{{$errors->has('wrong-attempt') ? ' has-error' : '' }}">
-                                        <label for="current-password">Текущий пароль</label>
+                                        <label for="current-password">@lang('lawyer-settings.Текущий пароль')</label>
                                         @if ($errors->has('wrong-attempt'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('wrong-attempt') }}</strong>
@@ -251,7 +251,7 @@
                                                name="current_password"/>
                                     </div>
                                     <div class="form-group{{$errors->has('new_password') ? ' has-error' : '' }}">
-                                        <label for="new-password">Новый пароль</label>
+                                        <label for="new-password">@lang('lawyer-settings.Новый пароль')</label>
                                         @if ($errors->has('new_password'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('new_password') }}</strong>
@@ -261,12 +261,12 @@
                                                name="new_password"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="news-password-confirm">Новый пароль еще раз</label>
+                                        <label for="news-password-confirm">@lang('lawyer-settings.Новый пароль еще раз')</label>
                                         <input type="password" class="form-control " id="news-password-confirm"
                                                name="new_password_confirmation"/>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить
+                                        <button type="submit" class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
                                         </button>
                                     </div>
                                 </form>
@@ -279,7 +279,7 @@
                                 <form action="{{ route('lawyer.update',['settingtype'=>'contacts'])}}" method="post">
                                     {{csrf_field()}}
                                     <div class="form-group{{$errors->has('phone') ? ' has-error' : '' }}">
-                                        <label for="phone">Телефон</label>
+                                        <label for="phone">@lang('lawyer-settings.Телефон')</label>
                                         @if ($errors->has('phone'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -305,7 +305,7 @@
                                         <input type="text" class="form-control" id="skype"/>
                                     </div>-->
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить
+                                        <button type="submit" class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
                                         </button>
                                     </div>
                                 </form>
@@ -346,7 +346,7 @@
                         <form action="{{ route('lawyer.update',['settingtype'=>'experience'])}}" method="post">
                             {{csrf_field()}}
                             <div class="row">
-                                <p class="color-gray">Выбор специализации (можно выбрать не более пяти)</p>
+                                <p class="color-gray">@lang('lawyer-settings.Выбор специализации (можно выбрать не более пяти)')</p>
                                 <div class="col-sm-6">
                                     @foreach($categories as $category)
                                         @if($category->id%2==1)
@@ -399,10 +399,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <p class="color-gray">Текущее место работы</p>
+                                <p class="color-gray">@lang('lawyer-settings.Текущее место работы')</p>
                                 <div class="col-sm-6">
                                     <div class="form-group{{$errors->has('company') ? ' has-error' : '' }}">
-                                        <label for="company">Компания</label>
+                                        <label for="company">@lang('lawyer-settings.Компания')</label>
                                         @if ($errors->has('company'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('company') }}</strong>
@@ -412,7 +412,7 @@
                                                value="{{$lawyer->company}}"/>
                                     </div>
                                     <div class="form-group{{$errors->has('position') ? ' has-error' : '' }}">
-                                        <label for="position">Должность</label>
+                                        <label for="position">@lang('lawyer-settings.Должность')</label>
                                         @if ($errors->has('position'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('position') }}</strong>
@@ -422,7 +422,7 @@
                                                value="{{$lawyer->position}}"/>
                                     </div>
                                     <div class="form-group{{$errors->has('experience_year') ? ' has-error' : '' }}">
-                                        <label for="experience-year">Юридический стаж</label>
+                                        <label for="experience-year">@lang('lawyer-settings.Юридический стаж')</label>
                                         @if ($errors->has('experience_year'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('experience_year') }}</strong>
@@ -432,7 +432,7 @@
                                                name="experience_year" value="{{$lawyer->experience_year}}">
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить
+                                        <button type="submit" class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
                                         </button>
                                     </div>
                                 </div>
@@ -443,10 +443,10 @@
                         <form method="post" action="{{ route('lawyer.update', ['settingtype'=>'additional'])}}">
                             {{csrf_field()}}
                             <div class="row">
-                                <h6 class="color-gray"><b>Стоимость услуг в чате</b></h6>
+                                <h6 class="color-gray"><b>@lang('lawyer-settings.Стоимость услуг в чате')</b></h6>
                                 <div class="col-sm-4">
                                     <div class="form-group{{$errors->has('call_price') ? ' has-error' : ''}}">
-                                        <label for="phone-consultion">Телефонная консультация (сум)</label>
+                                        <label for="phone-consultion">@lang('lawyer-settings.Телефонная консультация (сум)')</label>
                                         @if($errors->has('call_price'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('call_price') }}</strong>
@@ -456,7 +456,7 @@
                                                value="{{$lawyer->call_price}}"/>
                                     </div>
                                     <div class="form-group{{$errors->has('doc_price') ? ' has-error' : ''}}">
-                                        <label for="document-prep">Изготовление документа (сум)</label>
+                                        <label for="document-prep">@lang('lawyer-settings.Изготовление документа (сум)')</label>
                                         @if($errors->has('doc_price'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('doc_price') }}</strong>
@@ -468,20 +468,20 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <h6><b>Дополнительно</b></h6>
+                                <h6><b>@lang('lawyer-settings.Дополнительно')</b></h6>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="profile-shown-price">Стоимость услуг, отображаемая в профиле</label>
+                                        <label for="profile-shown-price">@lang('lawyer-settings.Стоимость услуг, отображаемая в профиле')</label>
                                         <textarea id="profile-shown-price" cols="20" class="form-control" rows="5"
                                                   name="profile_shown_price">{{$lawyer->profile_shown_price}}</textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="about-me">О себе</label>
+                                        <label for="about-me">@lang('lawyer-settings.О себе')</label>
                                         <textarea id="about-me" cols="20" class="form-control" rows="5"
                                                   name="about_me">{{$lawyer->about_me}}</textarea>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary pull-right">Сохранить
+                                        <button type="submit" class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
                                         </button>
                                     </div>
                                 </div>
@@ -491,7 +491,7 @@
                         </div>
                         <div id="awards" class="tab-pane fade in {{$settingtype==='awards' ? 'active' : ''}}">
                             <div class="row">
-                                <h6><b>Награды</b></h6>
+                                <h6><b>@lang('lawyer-settings.Сертификаты')</b></h6>
                                 @if($lawyer->files != null)
                                     @foreach($lawyer->files as $award)
                                         <div class="col-sm-3">
@@ -503,11 +503,10 @@
                                 <form method="post" action="{{ route('lawyer.update', ['settingtype'=>'awards'])}}"
                                       enctype="multipart/form-data">
                                     {{csrf_field()}}
-                                    <p class="color-gray">Загрузите изображение Ваших сертификатов или дипломов (в формате
-                                        jpeg).</p>
+                                    <p class="color-gray">@lang('lawyer-settings.Загрузите изображение Ваших сертификатов или дипломов (в формате jpeg)').</p>
                                     <div class="form-group">
                                         <label class="btn btn-default ">
-                                            Выбрать файл <input type="file" name="files[]" multiple hidden>
+                                            @lang('lawyer-settings.Выбрать файл') <input type="file" name="files[]" multiple hidden>
                                         </label>
                                     </div>
                                     @if ($errors->any())
@@ -520,7 +519,7 @@
                                         </div>
                                     @endif
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary">Загрузить</button>
+                                        <button type="submit" class="btn btn-default btn-primary">@lang('lawyer-settings.Загрузить')</button>
                                     </div>
                                 </form>
                            
