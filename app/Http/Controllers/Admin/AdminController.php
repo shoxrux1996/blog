@@ -4,6 +4,7 @@ namespace yuridik\Http\Controllers\Admin;
 
 use yuridik\Http\Controllers\Controller;
 use yuridik\Admin;
+use Auth;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -25,7 +26,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $admin = Auth::guard('admin')->user();
+        return view('admin.dashboard')->withAdmin($admin);
     }
 
 

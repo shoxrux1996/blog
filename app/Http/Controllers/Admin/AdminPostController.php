@@ -14,6 +14,7 @@ use yuridik\Client;
 use yuridik\Lawyer;
 use yuridik\Question;
 use Validator;
+
 use Illuminate\Support\Facades\Auth;
 
 class AdminPostController extends Controller
@@ -27,7 +28,7 @@ class AdminPostController extends Controller
 
     public function questions()
     {
-
+        Auth::guard('admin')->user()->questionNotifications()->delete();
         $questions = Question::orderBy('id', 'desc')->paginate(10);
         return view('question.admin-index')->withQuestions($questions);
     }
@@ -75,18 +76,17 @@ class AdminPostController extends Controller
         $question->save();
         return redirect()->route('admin.question.show', $id);
     }
+
     public function documents()
     {
         $questions = Document::orderBy('id', 'desc')->paginate(10);
         return view('document.admin-index')->withDocuments($questions);
     }
-
     public function documentShow($id)
     {
         $question = Document::findOrFail($id);
         return view('document.admin_show')->withDocument($question);
     }
-
     public function documentDeny($id)
     {
         $question = Document::findOrFail($id);
@@ -99,13 +99,11 @@ class AdminPostController extends Controller
         $answers = Answer::orderBy('id', 'desc')->paginate(10);
         return view('answer.admin-list')->withAnswers($answers);
     }
-
     public function answerShow($id)
     {
 
         return view('answer.admin-show')->withAnswer(Answer::findOrFail($id));
     }
-
     public function answerDestroy($id)
     {
         $answer = Answer::findOrFail($id);
@@ -115,10 +113,10 @@ class AdminPostController extends Controller
 
     public function comments()
     {
+        Auth::guard('admin')->user()->commentNotifications()->delete();
         $comments = Comment::orderBy('id', 'desc')->paginate(10);
         return view('comment.list')->withComments($comments);
     }
-
     public function commentDeny(Request $request, $id)
     {
         $comment = Comment::findOrFail($id);
@@ -128,13 +126,14 @@ class AdminPostController extends Controller
 
     public function clients()
     {
+
         $clients = Client::orderBy('id', 'desc')->paginate(8);
         $lawyers = Lawyer::orderBy('id', 'desc')->paginate(8);;
         return view('admin.users')->withClients($clients)->withLawyers($lawyers)->withSection(1);
     }
-
     public function lawyers()
     {
+        Auth::guard('admin')->user()->userNotifications()->delete();
         $clients = Client::orderBy('id', 'desc')->paginate(8);
         $lawyers = Lawyer::orderBy('id', 'desc')->paginate(8);;
         return view('admin.users')->withClients($clients)->withLawyers($lawyers)->withSection(2);
@@ -150,7 +149,6 @@ class AdminPostController extends Controller
         $client->save();
         return redirect()->back();
     }
-
     public function clientUnblock(Request $request, $id)
     {
         $client = Client::findOrFail($id);

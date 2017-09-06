@@ -206,8 +206,15 @@
                                     <ul>
                                         <li>@lang('lawyer-dashboard.Новые вопросы')
                                             <ul>
-                                                @foreach($lawyer->questionNotifications() as $notification)
+                                                @foreach($lawyer->questionNotifications as $notification)
                                                         <li><a href="{{route('web.question.show', $notification->data['id'])}}">{{$notification->data['title']}}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                        <li>@lang('lawyer-dashboard.Новые блоги')
+                                            <ul>
+                                                @foreach($lawyer->blogNotifications as $notification)
+                                                    <li><a href="{{route('web.blog.show', $notification->data['id'])}}">{{$notification->data['title']}}</a></li>
                                                 @endforeach
                                             </ul>
                                         </li>

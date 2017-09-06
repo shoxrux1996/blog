@@ -2,16 +2,19 @@
 
 namespace yuridik\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Notification;
 use yuridik\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use yuridik\Blog;
+use yuridik\Notifications\BlogsNotification;
 use yuridik\Tag;
 use Session;
 use yuridik\File;
 use Illuminate\Support\Facades\File as LaraFile;
 use Purifier;
 use Auth;
+use yuridik\Lawyer;
+use yuridik\Admin;
 
 class AdminBlogController extends Controller
 {
@@ -34,13 +37,16 @@ class AdminBlogController extends Controller
     {
 
         $blogs = Blog::orderBy('id', 'desc')->paginate(12);
-
+        Auth::guard('admin')->user()->blogNotifications()->delete();
         return view('admin.bloglist')->with('blogs', $blogs);
     }
 
     public function destroy($id)
     {
         $blog = Blog::find($id);
+
+        LaraFile::delete(public_path().$blog->file->path.$blog->file->file);
+        $blog->file->delete();
         $tags = $blog->tags()->detach();
 
         $blog->delete();
@@ -139,7 +145,10 @@ class AdminBlogController extends Controller
             $file->move(public_path() . $upload_folder, $file_name);
         }
         Session::flash('message', 'Blog was inserted successfully');
-
+        $lawyers = Lawyer::where('type', 2)->get();
+        $admins = Admin::all();
+        Notification::send($lawyers, new BlogsNotification($blog));
+        Notification::send($admins, new BlogsNotification($blog));
         return redirect()->route('admin.blogs');
     }
     public function insertform()

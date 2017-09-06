@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class LawyerQuestionsNotification extends Notification
+class QuestionsNotification extends Notification
 {
     use Queueable;
     private $question;

@@ -3,7 +3,7 @@
 namespace yuridik\Http\Controllers\Client;
 
 use Illuminate\Support\Facades\Notification;
-use yuridik\Notifications\LawyerQuestionsNotification;
+use yuridik\Notifications\QuestionsNotification;
 
 use yuridik\Http\Controllers\Controller;
 
@@ -19,6 +19,7 @@ use Auth;
 use Validator;
 use yuridik\Order;
 use yuridik\Lawyer;
+use yuridik\Admin;
 use yuridik\User;
 use yuridik\City;
 use Illuminate\Support\Facades\Mail;
@@ -246,7 +247,9 @@ class ClientQuestionController extends Controller
             $question->order()->save($order);
         }
         $lawyers = Lawyer::where('type', 2)->get();
-        Notification::send($lawyers, new LawyerQuestionsNotification($question));
+        $admins = Admin::all();
+        Notification::send($lawyers, new QuestionsNotification($question));
+        Notification::send($admins, new QuestionsNotification($question));
 
         return true;    
     }

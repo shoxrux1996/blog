@@ -2,10 +2,14 @@
 
 namespace yuridik\Http\Controllers\Lawyer;
 
+use Illuminate\Support\Facades\Notification;
 use yuridik\Http\Controllers\Controller;
 use Auth;
+use yuridik\Lawyer;
+use yuridik\Admin;
 use Illuminate\Http\Request;
 use yuridik\Blog;
+use yuridik\Notifications\BlogsNotification;
 use yuridik\Tag;
 use yuridik\Http\Requests;
 use Session;
@@ -50,7 +54,10 @@ class LawyerBlogController extends Controller
         }
 
         Session::flash('message', 'Blog was inserted successfully');
-
+        $lawyers = Lawyer::where('type', 2)->get();
+        $admins = Admin::all();
+        Notification::send($lawyers, new BlogsNotification($blog));
+        Notification::send($admins, new BlogsNotification($blog));
         return redirect()->route('web.blogs');
     }
 

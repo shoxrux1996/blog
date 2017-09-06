@@ -4,6 +4,8 @@ namespace yuridik\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Notification;
+use yuridik\Admin;
 use yuridik\Http\Controllers\Controller;
 use yuridik\City;
 use Illuminate\Support\Facades\Mail;
@@ -14,6 +16,7 @@ use Auth;
 use Validator;
 use yuridik\Client;
 use yuridik\Lawyer;
+use yuridik\Notifications\UsersNotification;
 use yuridik\User;
 
 class UserRegisterController extends Controller
@@ -78,12 +81,14 @@ class UserRegisterController extends Controller
 
 
             $data = array('code' => $confirmation_code, 'email' => $new_client['email'], 'name' => $new_client['name']);
-            Mail::send('email.verify', ['data' => $data], function ($message) use ($data) {
-
+            Mail::send('email.email-confirmation', ['data' => $data], function ($message) use ($data) {
                 $message->to($data['email'], $data['name'])
                     ->subject(__('mail.email_confirm'));
             });
             $client->save();
+
+            $admins = Admin::all();
+            Notification::send($admins, new UsersNotification($user));
         } elseif ($usertype === "lawyer") {
             $messages = [
                 'required' => 'Обязательно к заполнению',
@@ -129,12 +134,13 @@ class UserRegisterController extends Controller
 
             $data = array('code' => $confirmation_code, 'email' => $new_lawyer['email'], 'name' => $new_lawyer['name']);
 
-            Mail::send('email.verify', ['data' => $data], function ($message) use ($data) {
+            Mail::send('email.email-confirmation', ['data' => $data], function ($message) use ($data) {
                 $message->to($data['email'], $data['name'])
-                    ->subject('Verify your email address');
+                    ->subject(__('mail.email_confirm'));
             });
             $lawyer->save();
-
+            $admins = Admin::all();
+            Notification::send($admins, new UsersNotification($user));
         } else {
             $messages = [
                 'required' => 'Обязательно к заполнению',

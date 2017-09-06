@@ -8,7 +8,7 @@ use yuridik\Blog;
 use yuridik\Tag;
 use yuridik\Comment;
 use Session;
-
+use Auth;
 class AdminCommentController extends Controller
 {
     /**

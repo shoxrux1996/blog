@@ -33,7 +33,19 @@ class Admin extends Authenticatable
     {
         return $this->morphMany('yuridik\Blog', 'blogable');
     }
+    public function questionNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\QuestionsNotification');
+    }
+    public function blogNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\BlogsNotification');
+    }
 
+    public function commentNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\CommentsNotification');
+    }
+    public function userNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\UsersNotification');
+    }
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new AdminResetPasswordNotification($token));

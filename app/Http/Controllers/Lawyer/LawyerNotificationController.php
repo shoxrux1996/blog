@@ -14,7 +14,7 @@ class LawyerNotificationController extends Controller
         $this->middleware('auth:lawyer');
     }
     public function notificationAsRead(){
-        Auth::guard('lawyer')->user()->unreadNotifications->markAsRead();
+        Auth::guard('lawyer')->user()->unreadNotifications()->delete();
         return redirect()->back();
     }
 }

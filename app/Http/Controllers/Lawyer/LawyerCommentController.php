@@ -2,9 +2,12 @@
 
 namespace yuridik\Http\Controllers\Lawyer;
 
+use Illuminate\Support\Facades\Notification;
+use yuridik\Admin;
 use yuridik\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use yuridik\Blog;
+use yuridik\Notifications\CommentsNotification;
 use yuridik\Tag;
 use yuridik\Comment;
 use Session;
@@ -39,6 +42,11 @@ class LawyerCommentController extends Controller
         $lawyer->comments()->save($comment);
 
         Session::flash('success', 'Comment was added');
+        $lawyers = Lawyer::where('type', 2)->get();
+        $admins = Admin::all();
+        Notification::send($lawyers, new CommentsNotification($comment));
+        Notification::send($admins, new CommentsNotification($comment));
+
         return redirect()->route('web.blog.show', ['id' => $blog_id]);
     }
 

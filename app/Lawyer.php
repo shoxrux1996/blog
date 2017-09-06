@@ -69,7 +69,10 @@ class Lawyer extends Authenticatable
         return $this->hasMany('yuridik\Request');
     }
     public function questionNotifications(){
-        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\LawyerQuestionsNotification')->get();
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\QuestionsNotification');
+    }
+    public function blogNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\BlogsNotification');
     }
     public function feedbacks()
     {
