@@ -215,7 +215,6 @@
                                                     <a href="{{route('client.document.show', $notification->data['request']['document_id'])}}">{{$notification->data['request']['description']}}</a>
                                                 @endif
                                             @endforeach
-
                                         </ul>
                                         <div >
                                             <a href="{{route('client.notifications.delete')}}"

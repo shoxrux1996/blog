@@ -2,14 +2,19 @@
 
 namespace yuridik\Http\Controllers\Client;
 
+use Illuminate\Support\Facades\Notification;
+use yuridik\Notifications\LawyerQuestionsNotification;
+
 use yuridik\Http\Controllers\Controller;
-use App;
+
 use Illuminate\Http\Request;
+
 use yuridik\Question;
 use yuridik\Category;
 use yuridik\File;
 use yuridik\Client;
 use Illuminate\Support\Facades\Session;
+use App;
 use Auth;
 use Validator;
 use yuridik\Order;
@@ -53,7 +58,6 @@ class ClientQuestionController extends Controller
         if(!Auth::guard('client')->check()){
             $cl = Client::where('email', $request->email)->first();
             if(!empty($cl)){
-                
                 if ($cl->isBlocked == 1) {
                     if ($cl->blockedTill <= Carbon::now('Asia/Tashkent')) {
                         $cl->isBlocked = 0;
@@ -68,7 +72,6 @@ class ClientQuestionController extends Controller
                 }
                 $credentials = ['email' => $request->email, 'password' => $request->password];
                 if (!Auth::guard('client')->attempt($credentials, $request->remember)) {
-
                     return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Неправильный email или пароль']);
                 }
                 $this->questionCreate($request,Auth::guard('client')->user());
@@ -224,6 +227,7 @@ class ClientQuestionController extends Controller
         $question->save();
         $client->user->save();// is it possible?
 
+
         if ($request->file('files') != null) {
             $file = $request->file('files');
             foreach ($file as $key) {
@@ -241,6 +245,9 @@ class ClientQuestionController extends Controller
             $order->amount = $question->price;
             $question->order()->save($order);
         }
+        $lawyers = Lawyer::where('type', 2)->get();
+        Notification::send($lawyers, new LawyerQuestionsNotification($question));
+
         return true;    
     }
 }

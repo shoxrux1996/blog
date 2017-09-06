@@ -57,7 +57,6 @@
                 </div>
             </div>
             <!-- /Profile -->
-
             <!-- Account -->
             <div class="panel panel-default panel-success">
                 <div class="panel-heading">
@@ -79,7 +78,6 @@
                 </div>
             </div>
             <!-- /Account -->
-
             <!-- My practices -->
             <div class="panel panel-default panel-primary">
                 <div class="panel-heading">
@@ -154,6 +152,10 @@
                         <li>
                             <a data-toggle="tab" href="#blog-created">@lang('lawyer-dashboard.Блоги')</a>
                         </li>
+                        <li>
+                            <a data-toggle="tab" href="#notifications">@lang('lawyer-dashboard.Уведомление') <i class="fa fa-bell"
+                                                                          aria-hidden="true">{{$lawyer->unreadNotifications->count()}}</i></a>
+                        </li>
                     </ul>
 
                     <div class="tab-content">
@@ -195,6 +197,25 @@
                                                 <a class="btn btn-info btn-xs" href="{{route('lawyer.blog.edit', $blog->id)}}">@lang('lawyer-dashboard.Изменить')</a></li>
                                         @endforeach
                                     </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="notifications" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul>
+                                        <li>@lang('lawyer-dashboard.Новые вопросы')
+                                            <ul>
+                                                @foreach($lawyer->questionNotifications() as $notification)
+                                                        <li><a href="{{route('web.question.show', $notification->data['id'])}}">{{$notification->data['title']}}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <div >
+                                        <a href="{{route('lawyer.notification.asRead')}}"
+                                           class="btn btn-info btn-xs"> @lang('lawyer-dashboard.Отметить')</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
