@@ -233,7 +233,7 @@
             <div class="col-md-3 col-sm-6">
                 <span><a href="{{ route('home') }}">Yuridik.uz</a></span>
                 <p><a href="{{ route('about') }}">@lang('app.aboutproject')</a></p>
-                {{--<p><a href="{{ route('team') }}">@lang('app.aboutus')</a></p>--}}
+                <p><a href="{{ route('team') }}">@lang('app.aboutus')</a></p>
                 <p><a href="{{ route('contacts') }}">@lang('app.contacts')</a></p>
                 <p><a href="{{ route('faq') }}">@lang('app.faqs')</a></p>
                 <p><a href="{{ route('license') }}">@lang('app.Лицензионное соглашение')</a></p>

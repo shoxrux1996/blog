@@ -6,7 +6,7 @@
  * Time: 13:22
  */
 return [
-    'aboutus' => "Jamoa haqida",
+    'aboutus' => "Loyiha haqida",
     'categories' => "Sohalar bo'yicha savolar ",
     'blog' => "Maqolalar",
     'askquestion' => "Savol berish",

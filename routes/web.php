@@ -81,7 +81,9 @@ Route::prefix('admin')->group(function(){
         Route::get('/', 'Admin\AdminPostController@feedbacks')->name('admin.feedbacks.index');
         Route::post('/deny/{id}','Admin\AdminPostController@feedbackDeny')->name('admin.feedbacks.delete');
     });
-    
+    Route::prefix('moderators')->group(function(){
+       Route::get('/','Admin\AdminPostController@moderators')->name('admin.moderators.index');
+    });
     Route::prefix('users')->group(function (){
         Route::get('/clients', 'Admin\AdminPostController@clients')->name('admin.clients.index');
         Route::get('/lawyers', 'Admin\AdminPostController@lawyers')->name('admin.lawyers.index');

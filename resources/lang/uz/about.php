@@ -11,7 +11,7 @@ return [
     'Вопросы' => "Savollar",
     'Блог' => "Maqola",
     'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Jamoa haqida",
+    'О нас' => "Loyiha haqida",
 	'ЮРИДИЧЕСКИЕ КОНСУЛЬТАЦИИ ОНЛАЙН' => "ONLAYN HUQUQIY KONSULTATSIYA",
 	'это сервис, связывающий профессиональных юристов с клиентами в режиме онлайн. Любой пользователь может получить здесь моментальную консультацию по всем правовым вопросам, а практикующие юристы - возможность для дополнительного заработка.' => "professional huquqshunoslar va mijozlar/fuqarolarni bir-biri bilan onlayn tarzda bog‘lovchi xizmat turi hisoblanadi. Ushbu sayt har qanday foydalanuvchiga istalgan huquq sohasiga oid savollar yuzasidan tez fursatda va sifatli konsultatsiya olish imkonini, huquqshunoslarga esa huquqiy konsultatsiya berish orqali qo‘shimcha daromad topish imkoniyatini beradi.",
 	'БЫСТРО' => "TEZ",

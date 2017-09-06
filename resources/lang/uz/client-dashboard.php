@@ -6,7 +6,7 @@ return [
     'Вопросы' => "Savollar",
     'Блог' => "Maqola",
     'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Jamoa haqida",
+    'О нас' => "Loyiha haqida",
     'client-dashboard.modaltitle' => "",
     'client-dashboard.modalbody' => "",
     'client-dashboard.close' => "",
