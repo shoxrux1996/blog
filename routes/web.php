@@ -1,5 +1,8 @@
 <?php
-
+Route::get('email', function (){
+    $data = array('name'=>'Shokhrukh', 'code'=>'1dsadsadasd');
+    return view('email.email-confirmation')->withData($data);
+});
 Route::get('card','Web\ApiController@show')->name('card.payment');
 Route::post('error/post', function (\Illuminate\Http\Request $request){
     $error = new \yuridik\Error;

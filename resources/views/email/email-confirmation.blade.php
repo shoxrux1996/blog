@@ -3,8 +3,7 @@
 <head>
     <!-- Bootstrap Core -->
     <meta charset="utf-8">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <style>
         #wrapper{
             width: 900px;
@@ -18,7 +17,7 @@
 
         .confirm{
             color: #fff;
-            background-color: #1F2746;
+            background-image: url('http://yuridik.uz/dist/images/10.jpg');
             padding: 20px;
         }
 
@@ -60,34 +59,34 @@
         <div class="container-fluid">
             <div class="row text-center">
                 <div class="col-sm-12 confirm">
-                    <img src="dist/images/logo.png" />
-                        <h3>Привет {{$data['name']}}!</h3>
-                    <h3>Начните использовать Yuridik.uz и получите бесплатное адвокатское обслуживание</h3>
-                    <button href="{{route('user.register.confirm', ['code' => $data['code']]) }}" type="button" class="btn btn-success btn-lg">Подтвердить</button>
+                    <img src="http://yuridik.uz/dist/images/logo.png" />
+                        <h3>@lang('mail.Привет') {{$data['name']}}!</h3>
+                    <h3>@lang('mail.Поздравить')</h3>
+                    <a href="{{route('user.register.confirm', ['code' => $data['code']]) }}" type="button" class="btn btn-success btn-lg">@lang('mail.Активация')</a>
                 </div>
                 <div class="col-sm-12 info text-center">
                     <hr>
                     <h4>
-                        Вы почти готовы начать работу с Yuridik.uz. Пожалуйста, подтвердите свой адрес электронной почты, чтобы мы знали, что это действительно вы.
+                        @lang('mail.Авто')
                     </h4>
                     <hr>
-                    <h5>Возникают проблемы в начале работы? Попробуйте вставить эту ссылку в адресную строку браузера.</h5>
+                    <h5>@lang('mail.Линк')</h5>
                     <h5>http://yuridik.uz/user/register/verify/{{$data['code']}}</h5>
                     <hr>
                 </div>
                 <div class="col-sm-12 number">
-                    <p>Телефон: (+99899) 837-37-77</p>
+                    <p>@lang('mail.Телефон'): (+99899) 837-37-77</p>
                     <p>Email: info@yuridik.uz</p>
                 </div>
                 <div class="col-sm-12 social-link">
                     <a href="https://t.me/yuridikuz">
-                        <i class="fa fa-telegram"></i>
+                        <img width="40px;" src="http://yuridik.uz/dist/images/telegram.png">
                     </a>
                     <a href="#">
-                        <i class="fa fa-facebook"></i>
+                        <img width="30px;" src="http://yuridik.uz/dist/images/facebook.png">
                     </a>
                     <a href="#">
-                        <i class="fa fa-twitter"></i>
+                        <img width="32px;" src="http://yuridik.uz/dist/images/twitter.png">
                     </a>
                 </div>
             </div>
