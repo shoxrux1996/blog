@@ -85,7 +85,7 @@
             <div id="beta-version" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 
-                    <!-- Modal content-->
+                    <!-- Modal contentforpush-->
 
                     <div class="modal-content">
                         <form action="{{route('error.find')}}" method="post">
