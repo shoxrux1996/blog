@@ -11,7 +11,7 @@ return [
     'Вопросы' => "Savollar",
     'Блог' => "Maqola",
     'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Jamoa haqida",
+    'О нас' => "Loyiha haqida",
     'Вы — юрист?' => "Huquqshunosmisiz?",
     'Нам нужны лучшие из лучших!' => "Unda ushbu sayt siz uchun!",
     'это сервис юридических консультаций онлайн, которым пользуются более 300 000 человек!' => "bu onlayn huquqiy konsultatsiya xizmati bo‘lib, ushbu xizmatdan 10 000 dan ortiq kishi muntazam foydalanadi!",

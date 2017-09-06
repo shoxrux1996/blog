@@ -21,7 +21,7 @@ return [
     'moneyback' => "Sizga yordam beramiz - yoki pulingini qaytarib beramiz",
     'allguarantees' => "Yuridik.uz ning barcha kafolatlari",
     'aboutproject' => "Loyiha haqida",
-    'aboutus' => "Jamoa haqida",
+    'aboutus' => "Loyiha haqida",
     'contacts' => "Biz bilan bog'lanish",
     'ourpartners' => "Hamkorlarimiz",
     'categories' => "Sohalar bo'yicha savolar ",

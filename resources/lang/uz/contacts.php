@@ -11,7 +11,7 @@ return [
     'Вопросы' => "Savollar",
     'Блог' => "Maqola",
     'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Jamoa haqida",
+    'О нас' => "Loyiha haqida",
     'КОНТАКТЫ' => "Aloqa",
     'Если у вас возникли вопросы, связанные с работой сайта, или есть предложения о сотрудничестве, вы всегда можете связаться с нами, используя контакты, указанные ниже.' => "Agar Sizda sayt ko‘rsatayotgan xizmatlar va sayt faoliyati yuzasidan qandaydir savolingiz bo‘lsa yoki hamkorlik qilish taklifingiz bo‘lsa, quyida keltirilgan kontaktlar orqali biz bilan bog‘lanishingiz mumkin.",
     'ООО' => "MCHJ",

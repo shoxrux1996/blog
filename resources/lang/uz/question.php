@@ -5,7 +5,7 @@ return [
 	"questions" => "Savollar",
     "lawyers" => "Yuristlar",
     "howworks" => "Bu qanday ishlaydi?",  
-    "aboutus" => "Jamoa haqida",
+    "aboutus" => "Loyiha haqida",
 	"blog" => "Maqolalar",
     "Задайте свой вопрос юристу" => "Yuristga savol bering",
     "Как работает Yuridik.uz?" => "Yuridik.uz qanday ishlaydi?",

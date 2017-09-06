@@ -11,7 +11,7 @@ return [
     'Вопросы' => "Savollar",
     'Блог' => "Maqola",
     'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Jamoa haqida",
+    'О нас' => "Loyiha haqida",
     'Регистрация на Yuridik.uz' => "Yuridik.uz’da ro‘yxatdan o‘tish",
     'Клиент' => "Mijoz",
     'Юрист' => "Huquqshunos",

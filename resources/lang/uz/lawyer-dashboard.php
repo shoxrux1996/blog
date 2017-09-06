@@ -11,7 +11,7 @@ return [
     'Вопросы' => "Savollar",
     'Блог' => "Maqola",
     'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Jamoa haqida",
+    'О нас' => "Loyiha haqida",
     'Редактировать' => "O‘zgartirish",
     'Как считается рейтинг?' => "Reyting qanday baholanadi?",
     'Отзывы' => "Izohlar",
