@@ -156,7 +156,10 @@ Route::prefix('lawyer')->group(function(){
 	Route::get('/password/reset/{token}', 'Auth\LawyerResetPasswordController@showResetForm')->name('lawyer.password.reset');
     Route::get('/settings/info', 'Lawyer\LawyerController@info')->name('lawyer.info');
     Route::post('/update/{settingtype}', 'Lawyer\LawyerController@update')->name('lawyer.update');
-    
+
+    Route::prefix('/notifications')->group(function (){
+        Route::get('/mark-as-read','Lawyer\LawyerNotificationController@notificationAsRead')->name('lawyer.notification.asRead');
+    });
     Route::prefix('/blogs')->group(function(){
         Route::get('/insertform','Lawyer\LawyerBlogController@insertform')->name('lawyer.blog.insert');
         Route::post('/create','Lawyer\LawyerBlogController@store')->name('lawyer.blog.submit');

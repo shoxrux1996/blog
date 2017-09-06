@@ -489,7 +489,7 @@
                         
                         </form>
                         </div>
-                        <div id="awards" class="tab-pane fade in {{$settingtype==='awards' ? 'active' : ''}}">
+                    <div id="awards" class="tab-pane fade in {{$settingtype==='awards' ? 'active' : ''}}">
                             <div class="row">
                                 <h6><b>@lang('lawyer-settings.Сертификаты')</b></h6>
                                 @if($lawyer->files != null)

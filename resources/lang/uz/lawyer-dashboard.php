@@ -37,6 +37,9 @@ return [
     'Блоги' => "Maqolalar",
     'Изменить' => "Изменить",
     'Мой профиль' => "Mening profilim",
+    'Уведомление' => 'Xabarnoma',
+    'Новые вопросы' => 'Yangi savollar',
+    'Отметить' => "o'qildi",
     'г' => "sh",
     'сум' => "sum",
     ];
