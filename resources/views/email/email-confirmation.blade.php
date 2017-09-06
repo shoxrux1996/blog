@@ -17,6 +17,7 @@
 
         .confirm{
             color: #fff;
+            height: 400px;
             background-image: url('http://yuridik.uz/dist/images/10.jpg');
             padding: 20px;
         }
@@ -60,12 +61,13 @@
             <div class="row text-center">
                 <div class="col-sm-12 confirm">
                     <img src="http://yuridik.uz/dist/images/logo.png" />
-                        <h3>@lang('mail.Привет') {{$data['name']}}!</h3>
-                    <h3>@lang('mail.Поздравить')</h3>
-                    <a href="{{route('user.register.confirm', ['code' => $data['code']]) }}" type="button" class="btn btn-success btn-lg">@lang('mail.Активация')</a>
-                </div>
+                    </div>
                 <div class="col-sm-12 info text-center">
+                    <h3>@lang('mail.Привет') {{$data['name']}}!</h3>
                     <hr>
+                   <a href="{{route('user.register.confirm', ['code' => $data['code']]) }}"><button>@lang('mail.Активация')</button></a>
+                    <hr>
+                    <h3>@lang('mail.Поздравить')</h3>
                     <h4>
                         @lang('mail.Авто')
                     </h4>
