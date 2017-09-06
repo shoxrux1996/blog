@@ -61,9 +61,9 @@
             <div class="row text-center">
                 <div class="col-sm-12 confirm">
                     <img src="dist/images/logo.png" />
-                    <h3>Привет Ulugbek!</h3>
+                        <h3>Привет {{$data['name']}}!</h3>
                     <h3>Начните использовать Yuridik.uz и получите бесплатное адвокатское обслуживание</h3>
-                    <button type="button" class="btn btn-success btn-lg">Подтвердить</button>
+                    <button href="{{route('user.register.confirm', ['code' => $data['code']]) }}" type="button" class="btn btn-success btn-lg">Подтвердить</button>
                 </div>
                 <div class="col-sm-12 info text-center">
                     <hr>
@@ -72,7 +72,7 @@
                     </h4>
                     <hr>
                     <h5>Возникают проблемы в начале работы? Попробуйте вставить эту ссылку в адресную строку браузера.</h5>
-                    <h5>http://yuridik.uz/djakjdakj2/</h5>
+                    <h5>http://yuridik.uz/user/register/verify/{{$data['code']}}</h5>
                     <hr>
                 </div>
                 <div class="col-sm-12 number">
@@ -80,7 +80,7 @@
                     <p>Email: info@yuridik.uz</p>
                 </div>
                 <div class="col-sm-12 social-link">
-                    <a href="#">
+                    <a href="https://t.me/yuridikuz">
                         <i class="fa fa-telegram"></i>
                     </a>
                     <a href="#">
