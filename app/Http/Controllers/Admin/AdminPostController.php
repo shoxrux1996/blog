@@ -186,5 +186,8 @@ class AdminPostController extends Controller
         $lawyer->save();
         return redirect()->back();
     }
-
+    public function moderators()
+    {
+        return view('admin.moderators');
+    }
 }

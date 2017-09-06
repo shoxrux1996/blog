@@ -74,7 +74,7 @@
                     <a href="{{route('admin.clients.index')}}"><i class="fa fa-fw fa-users"></i> Пользователи</a>
                 </li>
                  <li>
-                    <a href=""><i class="fa fa-fw fa-address-card"></i> Модераторы</a>
+                    <a href="{{route('admin.moderators.index')}}"><i class="fa fa-fw fa-address-card"></i> Модераторы</a>
                 </li>
                 <li>
                     <a href="{{route('admin.comments.index')}}"><i class="fa fa-fw fa-comments"></i> Комментарии</a>
