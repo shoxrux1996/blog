@@ -11,7 +11,7 @@ return [
 	'Вопросы' => "Savollar",
 	'Блог' => "Maqolalar",
 	'Как это работает' => "Bu qanday ishlaydi",
-	'О нас' => "Loyiha haqimida",
+	'О нас' => "Loyiha haqida",
 	'Ошибка 404' => "404 Xatolik",
 	'Назад к главной страницу' => "Bosh sahifaga qaytish",
 	'Здравствуйте, такой страницы не существует. Могу ли я вам чем-нибудь помочь?' => "Assalomu alaykum, siz qidirgan sahifa mavjud emas. Sizga qandaydir yordam beraolamizmi?",
