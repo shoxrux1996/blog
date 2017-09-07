@@ -147,7 +147,7 @@
         <div class="container-fluid">
             <div class="row text-center">
                 <div class="col-sm-12 confirm">
-                    <img src="dist/images/logo.png" />
+                    <img src="http://yuridik.uz/dist/images/logo.png" />
                     <h2>@lang('mail.Привет') {{$data['name']}}</h2>
                     <h3>@lang('mail.Поздравить')</h3>
                     <a href="{{route('user.register.confirm', $data['code'])}}" type="button" class="btn btn-success btn-lg">
