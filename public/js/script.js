@@ -14,4 +14,5 @@ jQuery(document).ready(function($){
             $(this).find('.next').animate({ right: 0, opacity: 0 });
         });
     });
+    $('[data-toggle="tooltip"]').tooltip();
 });
