@@ -36,6 +36,24 @@ body{
     color: #889A75;
 }
 
+
+.card-container, .front, .back{
+    height: 190px!important;
+    background-color: transparent!important;
+    box-shadow: none!important;
+}
+
+@media (max-width: 767px){
+    .card-container, .front, .back{
+        height: 220px!important;
+    }
+}
+
+.card-container.hover{
+    margin-bottom: 90px!important;
+}
+
+
 @media (max-width: 767px){
     .flex-row{
         display: block;
