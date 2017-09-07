@@ -71,4 +71,6 @@ jQuery(document).ready(function($){
             scrollTop : 0                       // Scroll to top of body
         }, 500);
     });
+
+    $('[data-toggle="tooltip"]').tooltip();
 });

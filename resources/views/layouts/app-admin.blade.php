@@ -120,6 +120,7 @@
 <!-- /#wrapper -->
 
 {!! Html::script('js/jquery-3.2.1.min.js') !!}
+{!! Html::script('js/script.js') !!}
 {!! Html::script('js/select2.min.js') !!}
 {!! Html::script('js/bootstrap.min.js') !!}
 <!-- Morris data -->

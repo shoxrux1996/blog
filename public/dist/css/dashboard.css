@@ -5,7 +5,9 @@
  */
 
 /* Global Styles */
-
+html{
+    background-color: #fff;
+}
 body {
     margin-top: 100px;
     background-color: #222;
