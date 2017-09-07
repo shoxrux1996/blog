@@ -11,7 +11,7 @@
         'Вопросы' => "Savollar",
         'Блог' => "Maqolalar",
         'Как это работает' => "Bu qanday ishlaydi",
-        'О нас' => "Loyiha haqimida",
+        'О нас' => "Loyiha haqida",
         'Политика защиты клиентов Yuridik.uz' => "Yuridik.uz mijozlari huquqlarini himoya qilish Siyosati",
         'Yuridik.uz предоставляет своим клиентам широкие гарантии качества, конфиденциальности и безопасности. На нашем сайте вы можете получить юридическую помощь по всем отраслям права, не беспокоясь о репутации юристов, безопасности платежей и ваших персональных данных - мы уже сделали все это за вас.' => "Yuridik.uz o’z mijozlariga sifati kafolatlangan, shaxsiy ma’lumotlarning maxfiyligini saqlagan holda va xavfsiz tarzda onlayn yuridik xizmatlarni taqdim etadi. Saytimiz orqali Siz huquqning istalgan sohasi bo’yicha  istalgan vaqtda savolingizga professional yuristlardan javob olishingiz mumkin. Xizmatlardan foydalanyotganingizda sizning shaxsiy ma’lumotlaringiz xavfsizligini kafolatlaymiz.",
         'Лучшие из лучших' => "Eng yaxshi huquqshunoslar",
