@@ -112,7 +112,11 @@
             font-size: 24px;
         }
 
-
+        .info a{
+            color: rgba(33, 31, 114, 0.7);
+            text-decoration: none;
+            font-family: Aharoni;
+        }
         .social-link a{
             text-decoration: none;
         }
@@ -148,19 +152,17 @@
             <div class="row text-center">
                 <div class="col-sm-12 confirm">
                     <img src="dist/images/logo.png" />
-                    <h2>@lang('mail.Привет') {{$data['name']}}</h2>
-                    <h3>@lang('mail.Поздравить')</h3>
-                    <a href="{{route('user.register.confirm', $data['code'])}}" type="button" class="btn btn-success btn-lg">
-                        @lang('mail.Активация')</a>
+                    <h2>@lang('mail.Уважаемый') {{$data['name']}}</h2>
+                    <h3>@lang('mail.Зарегистрировались')</h3>
+
                 </div>
                 <div class="col-sm-12 info text-center">
                     <hr>
                     <h4>
-                        @lang('mail.Авто')
+                        @lang('mail.Завершения')
                     </h4>
                     <hr>
-                    <h5>@lang('mail.Линк')</h5>
-                    <h5>http://yuridik.uz/user/register/verify/{{$data['code']}}</h5>
+                    <h3>@lang('mail.Подтревждение')</h3>
                     <hr>
                 </div>
                 <div class="col-sm-12 number">
