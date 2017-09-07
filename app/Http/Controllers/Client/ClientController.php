@@ -25,7 +25,7 @@ class ClientController extends Controller
         return view('client.dashboard')->withClient($client);
     }
 
-    public function info()
+    public function info($type = 'main')
     {
         $client = Auth::user();
         $city = City::all();
@@ -33,8 +33,7 @@ class ClientController extends Controller
         foreach ($city as $key) {
             $cities[$key->id] = $key->name;
         }
-
-        return view('client.info')->withSettingtype('main')->withClient($client)->withCities($cities);
+        return view('client.info')->withSettingtype($type)->withClient($client)->withCities($cities);
     }
 
     public function update(Request $request, $settingtype)
@@ -55,7 +54,7 @@ class ClientController extends Controller
             $client->user->dateOfBirth = $request->dateOfBirth;
             $client->user->city_id = $request->city;
             $client->push();
-            return view('client.info')->withSettingtype('main')->withClient($client)->withCities($cities);
+            return redirect()->route('client.info',['type' =>'main']);
         } elseif ($settingtype === "photo") {
             $messages = [
                 'image' => 'Формат не поддерживается',
@@ -65,17 +64,17 @@ class ClientController extends Controller
             $validator = Validator::make($request->all(),
                 ['image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',], $messages);
             if ($validator->fails()) {
-                return view('client.info')->withSettingtype('photo')->withClient($client)->withCities($cities)->withErrors($validator);
+                return redirect()->route('client.info',['type' =>'photo'])->withErrors($validator);
             }
             if ($request->file('image') != null) {
                 $file = $request->file('image');
                 $file_name = $file->getClientOriginalName();
                 $upload_folder = '/clients/photo' . $client->id . '/';
                 if ($client->user->file != null) {
-                    LaraFile::delete(public_path() . $upload_folder . $client->user->file->file);
+                    LaraFile::delete(public_path() . $client->user->file->path . $client->user->file->file);
                     $client->user->file->file = $file_name;
                     $client->user->file->path = $upload_folder;
-
+                    $client->user->file->save();
                 } else {
                     $fil = new File;
                     $fil->file = $file_name;
@@ -86,9 +85,8 @@ class ClientController extends Controller
                 $file->move(public_path() . $upload_folder, $file_name);
             }
             $client->push();
-            return view('client.info')->withSettingtype('photo')->withClient($client)->withCities($cities);
+            return redirect()->route('client.info',['type' =>'photo']);
         } else {
-
             if (Auth::attempt(['email' => $client->email, 'password' => $request->current_password])) {
                 $messages = [
                     'required' => 'Обязательно к заполнению',
@@ -99,14 +97,14 @@ class ClientController extends Controller
                 $validator = Validator::make($request->all(),
                     ['new_password' => 'required|string|min:6|confirmed',], $messages);
                 if ($validator->fails()) {
-                    return view('client.info')->withSettingtype('privacy')->withClient($client)->withCities($cities)->withErrors($validator);
+                    return redirect()->route('client.info',['type' =>'privacy'])->withErrors($validator);
                 } else {
                     $client->password = bcrypt($request->new_password);
                     $client->push();
-                    return view('client.info')->withSettingtype('privacy')->withClient($client)->withCities($cities);
+                    return redirect()->route('client.info',['type' =>'privacy']);
                 }
             } else
-                return view('client.info')->withSettingtype('privacy')->withClient($client)->withCities($cities)->withErrors(['wrong-attempt' => 'Неправильный пароль']);
+                return redirect()->route('client.info',['type' =>'privacy'])->withErrors(['wrong-attempt' => 'Неправильный пароль']);
         }
 
 

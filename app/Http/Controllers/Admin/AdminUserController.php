@@ -2,6 +2,8 @@
 
 namespace yuridik\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Session;
+use yuridik\Admin;
 use yuridik\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,9 +17,12 @@ class AdminUserController extends Controller
 
     public function moderatorList()
     {
-        return view('moderator.list');
+        $moderators = Admin::where('type', 0)->get();
+        return view('admin.moderators')->withModerators($moderators);
     }
-
+    public function moderatorCreate(){
+        return view('admin.moderator-create');
+    }
     public function moderatorStore(Request $request)
     {
         $this->validate($request, [
@@ -36,6 +41,7 @@ class AdminUserController extends Controller
     public function moderatorDelete($id)
     {
         $admin = Admin::findOrFail($id);
+        $admin->blogs()->delete();
         $admin->delete();
         Session::flash('message', 'Moderator was deleted successfully');
         return redirect()->back();

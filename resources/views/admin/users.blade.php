@@ -343,12 +343,18 @@
                                 <div class="row">
                                     <h6><b>Награды</b></h6>
                                     @if($lawyer->files != null)
-                                        @foreach($lawyer->files as $award)
-                                            <div class="col-sm-3">
-                                                <img class="img-responsive img-thumbnail"
-                                                     src="{!!asset($award->path . $award->file)!!}"/>
+                                        @for($i=0; $i<$lawyer->files->count(); $i+=3)
+                                            <div class="row">
+                                                @for($j=$i; $j<=$i+2 && $j<$lawyer->files->count(); $j++)
+                                                    <div class="col-sm-3">
+                                                        <a href="{{route('admin.lawyer.award.delete', $lawyer->files[$j]->id)}}" onclick="return confirm('Вы уверены')" class="btn btn-sm btn-danger"
+                                                           style="position: absolute;">X</a>
+                                                        <img class="img-responsive img-thumbnail"
+                                                             src="{!!asset($lawyer->files[$j]->path. $lawyer->files[$j]->file)!!}"/>
+                                                    </div>
+                                                @endfor
                                             </div>
-                                        @endforeach
+                                        @endfor
                                     @endif
                                 </div>
                             </div>
