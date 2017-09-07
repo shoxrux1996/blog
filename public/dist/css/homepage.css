@@ -381,9 +381,27 @@
     right: 0;
     background-position: 100% 0;
 }
+
+#gallery .crsl-wrap{
+    display: flex;
+}
+
 #gallery .crsl-item{
     margin-bottom: 0;
+    display: inline-flex;
 }
+
+@media (max-width: 767px){
+
+    #gallery .crsl-wrap{
+        display: block;
+    }
+
+    #gallery .crsl-item{
+        display: block;
+    }
+}
+
 
 /*About us section*/
 #about-us-section{
