@@ -150,7 +150,7 @@
                     <img src="dist/images/logo.png" />
                     <h2>@lang('mail.Привет') {{$data['name']}}</h2>
                     <h3>@lang('mail.Поздравить')</h3>
-                    <a href="" type="button" class="btn btn-success btn-lg">
+                    <a href="{{route('user.register.confirm', $data['code'])}}" type="button" class="btn btn-success btn-lg">
                         @lang('mail.Активация')</a>
                 </div>
                 <div class="col-sm-12 info text-center">
