@@ -22,5 +22,7 @@ E-pochta manzilingizni tasdiqlash uchun quyidagi linkni bosing.",
     'Зарегистрировались'=>"Siz Yuridik.uz - onlayn yuridik xizmatlar portalida yurist sifatida ro'yxatdan o'tdingiz.",
     'Завершения'=>"Ro'yxatdan o'tish jarayonini yakunlash uchun aloqa ma'lumotlari  va yuridik ma'lumotingizni kiriting hamda ma'muriyat sizni yurist sifatida tasdiqlashi uchun, oliy ma'lumotingiz haqidagi Diplom va boshqa sertifikatlarni <a href=\"http://yuridik.uz/lawyer/settings/info\">Sozlashlar</a> bo'limi orqali yuklang",
     'Подтревждение'=>"Ma'lumotlaringiz ma'muriyat tomonidan tasdiqlangan keyin, siz yurist sifatida xizmatlardan foydalanishingiz mumkin!",
-
+    'confirmed' =>"Siz muvaffaqiyatli tasdiqladingiz",
+    'already_confirmed' => "Siz allaqachon accountingizni tasdiqladingiz!",
+    'invalid_code' => "Tasdiqlash kodida hatolik, iltimos, pochta manzilini qayta tekshiring",
 ];

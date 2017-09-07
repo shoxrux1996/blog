@@ -21,14 +21,17 @@ use yuridik\User;
 
 class UserRegisterController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('guest:client');
         $this->middleware('guest:lawyer');
     }
 
-    public function showRegistrationForm(){
-            return view('auth.register')->withActiveuser('client');
+    public function showRegistrationForm()
+    {
+        return view('auth.register')->withActiveuser('client');
     }
+
     public function postRegister(Request $request, $usertype)
     {
         // $usertype = $request->route('usertype');
@@ -81,7 +84,7 @@ class UserRegisterController extends Controller
 
 
             $data = array('code' => $confirmation_code, 'email' => $new_client['email'], 'name' => $new_client['name']);
-            Mail::send(['html'=>'email.email-confirmation'], ['data' => $data], function ($message) use ($data) {
+            Mail::send(['html' => 'email.email-confirmation'], ['data' => $data], function ($message) use ($data) {
                 $message->to($data['email'], $data['name'])
                     ->subject(__('mail.email_confirm'));
             });
@@ -134,7 +137,7 @@ class UserRegisterController extends Controller
 
             $data = array('code' => $confirmation_code, 'email' => $new_lawyer['email'], 'name' => $new_lawyer['name']);
 
-            Mail::send(['html'=>'email.email-confirmation'], ['data' => $data], function ($message) use ($data) {
+            Mail::send(['html' => 'email.email-confirmation'], ['data' => $data], function ($message) use ($data) {
                 $message->to($data['email'], $data['name'])
                     ->subject(__('mail.email_confirm'));
             });
@@ -169,47 +172,53 @@ class UserRegisterController extends Controller
         return redirect()->route('user.login');
 
     }
-    public function confirm($code){
-        if( !$code)
-        {
-            Print "<script>alert('Invalid Confirmation Code ');</script>";
+
+    public function confirm($code)
+    {
+        $invalid = __('mail.invalid_code');
+        if (!$code) {
+            Print "<script>alert('$invalid');</script>";
         }
-        $cl = Client::where(['confirmation_code'=> $code])->first();
-        $lw = Lawyer::where(['confirmation_code'=> $code])->first();
-        
-        if(!is_null($lw)){
-            if($lw->confirmed == 0){
-            $lw->confirmation_code =null;
-            $lw->confirmed=1;
-            $lw->save();
-            Session::flash('message', 'You have successfully verified your account.');
-            }else{
-            Session::flash('error-message', 'You have already verified your account.');
+        $cl = Client::where(['confirmation_code' => $code])->first();
+        $lw = Lawyer::where(['confirmation_code' => $code])->first();
+
+        if (!is_null($lw)) {
+            if ($lw->confirmed == 0) {
+                $lw->confirmation_code = null;
+                $lw->confirmed = 1;
+                $lw->save();
+                $data = ['name' => $lw->user->firstName, 'email' => $lw->email];
+                Mail::send(['html' => 'email.lawyer-after-confirm'], ['data' => $data], function ($message) use ($data) {
+                    $message->to($data['email'], $data['name'])
+                        ->subject(__('mail.confirmed'));
+                });
+                Session::flash('message', __('mail.confirm'));
+            } else {
+                Session::flash('error-message', __('mail.already_confirmed'));
             }
             return redirect('user/login');
         }
-        if(!is_null($cl)){
-            if($cl->confirmed == 0){
-            $cl->confirmation_code =null;
-            $cl->confirmed=1;
-            $cl->save();
-            Session::flash('message', 'You have successfully verified your account.');
-            }else{
-            Session::flash('error-message', 'You have already verified your account.');
+        if (!is_null($cl)) {
+            if ($cl->confirmed == 0) {
+                $cl->confirmation_code = null;
+                $cl->confirmed = 1;
+                $cl->save();
+                Session::flash('message', __('mail.confirmed'));
+            } else {
+                Session::flash('error-message', __('mail.already_confirmed'));
             }
             return redirect('user/login');
         }
+        echo "<script type='text/javascript'>alert('$invalid');</script>";
 
-        Print "<script>alert('Invalid Confirmation Code ');</script>";
 
-        
     }
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
-   
+
 }
 
