@@ -225,7 +225,7 @@
                     @endif
                     <div class="middle">
                         <a class="btn btn-dark-blue text"
-                           href="{{route('web.blog.show', $blog->id)}}">@lang('readblog')</a>
+                           href="{{route('web.blog.show', $blog->id)}}">@lang('index.readblog')</a>
                     </div>
                     <h4>
                         <a href="{{route('web.blog.show', $blog->id)}}">{{mb_substr($blog->title,0,50)}} {{strlen($blog->title) > 50 ? '...' : ""}}</a>

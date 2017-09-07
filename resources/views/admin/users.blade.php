@@ -6,13 +6,13 @@
 @section('content')
     <nav class="navbar navbar-default" style="border-radius: 0; border-width: 0 0 thin 0;">
         <ul class="nav navbar-nav">
-            <li class="{{ $section == 1 ? "active" : "" }}">
-                <a href="{{route('admin.clients.index')}}" onclick="switchSection('section1')"><i
+            <li class="navs">
+                <a onclick="switchSection('section1')"><i
                             class="fa fa-columns"></i>
                     Клиенты</a>
             </li>
-            <li class="{{ $section == 2 ? "active" : "" }}">
-                <a href="{{route('admin.lawyers.index')}}" onclick="switchSection('section2')"><i
+            <li class="navs">
+                <a onclick="switchSection('section2')"><i
                             class="fa fa-list-alt"></i> Юристы</a>
             </li>
         </ul>
@@ -21,7 +21,7 @@
         <div class="col-md-10 col-md-offset-1">
 
             <!-- Clients -->
-            <div id="section1" class="section" style="display: {{ $section == 1 ? "block" : "none" }};">
+            <div id="section1" class="section">
                 @foreach ($clients as $lawyer)
                     <div class="row profile border-gray">
                         <div class="col-md-3">
@@ -171,13 +171,14 @@
                         <!-- /Buttons -->
                     </div>
                 @endforeach
-
+                <div class="col-md-12">
+                    {!! $clients->links('pagination') !!}
+                </div>
             </div>
             <!-- /Clients -->
 
             <!-- Lawyers -->
-            <div id="section2" class="section" style="display: {{ $section == 2 ? "block" : "none" }};">
-
+            <div id="section2" class="section">
                 @foreach ($lawyers as $lawyer)
                     <div class="row profile border-gray">
                         <div class="col-md-3">
@@ -366,34 +367,34 @@
                                             </li>
                                         </ul>
                                         {{--<div class="col-sm-12 question">--}}
-                                            {{--@if($question->type == 2 || $question->type == 1)--}}
-                                                {{--<span class="question-price">--}}
+                                        {{--@if($question->type == 2 || $question->type == 1)--}}
+                                        {{--<span class="question-price">--}}
                                         {{--<b>{{$question->price}} сум</b>--}}
                                         {{--<span>--}}
-                                            {{--стоимость<br/>--}}
-                                            {{--вопроса--}}
+                                        {{--стоимость<br/>--}}
+                                        {{--вопроса--}}
                                         {{--</span>--}}
-                                    {{--</span>--}}
-                                            {{--@endif--}}
-                                            {{--<h4 class="title"><a--}}
-                                                        {{--href="{{route('web.question.show', $question->id)}}">{{$question->title}}</a>--}}
-                                            {{--</h4>--}}
-                                            {{--<p class="description">{{$question->text}}</p>--}}
-                                            {{--<p>--}}
-                                                {{--<span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>--}}
-                                                {{--<span class="number"> вопрос №{{$question->id}}</span>--}}
-                                                {{--<span class="author">{{$question->client->user->firstName}}--}}
-                                                    {{--, г.{{$question->client->user->city->name}} </span>--}}
-                                            {{--</p>--}}
-                                            {{--<hr>--}}
-                                            {{--<p>--}}
+                                        {{--</span>--}}
+                                        {{--@endif--}}
+                                        {{--<h4 class="title"><a--}}
+                                        {{--href="{{route('web.question.show', $question->id)}}">{{$question->title}}</a>--}}
+                                        {{--</h4>--}}
+                                        {{--<p class="description">{{$question->text}}</p>--}}
+                                        {{--<p>--}}
+                                        {{--<span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>--}}
+                                        {{--<span class="number"> вопрос №{{$question->id}}</span>--}}
+                                        {{--<span class="author">{{$question->client->user->firstName}}--}}
+                                        {{--, г.{{$question->client->user->city->name}} </span>--}}
+                                        {{--</p>--}}
+                                        {{--<hr>--}}
+                                        {{--<p>--}}
                                         {{--<span class="category">Категория: <a--}}
-                                                    {{--href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>--}}
-                                                {{--<a class="answers"--}}
-                                                   {{--href="{{route('web.question.show', $question->id)}}">--}}
-                                                    {{--{{$question->answers->count()}}--}}
-                                                {{--</a>--}}
-                                            {{--</p>--}}
+                                        {{--href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>--}}
+                                        {{--<a class="answers"--}}
+                                        {{--href="{{route('web.question.show', $question->id)}}">--}}
+                                        {{--{{$question->answers->count()}}--}}
+                                        {{--</a>--}}
+                                        {{--</p>--}}
                                         {{--</div>--}}
                                     @endforeach
                                 </div>
@@ -409,52 +410,52 @@
                                             </li>
                                         </ul>
                                         {{--<a href="{{route('web.blog.show', $blog->id)}}">--}}
-                                            {{--<div class="col-sm-6">--}}
-                                                {{--<div class="blog-item">--}}
-                                                    {{--<div class="ribbon">--}}
-                                                        {{--<span>{{$blog->blogable_type != 'yuridik\Admin' ? 'Юрист' : 'Модератор'}}</span>--}}
-                                                    {{--</div>--}}
-                                                    {{--<div class="blog-item-img">--}}
-                                                        {{--@if($blog->file != null)--}}
-                                                            {{--<img alt="Blog item image"--}}
-                                                                 {{--src="{{asset($blog->file->path.$blog->file->file)}}">--}}
-                                                        {{--@else--}}
-                                                            {{--<img alt="Blog item image"--}}
-                                                                 {{--src="{{asset('dist/images/blog-img-2.jpg')}}">--}}
-                                                        {{--@endif--}}
-                                                        {{--<div class="middle">--}}
-                                                            {{--<button class="btn btn-dark-blue text">Читать статью--}}
-                                                            {{--</button>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                    {{--<div class="blog-item-description">--}}
-                                                        {{--<h5>--}}
-                                                            {{--<b>{{substr($blog->title,0,70)}} {{strlen($blog->title)>70 ? '...' : ""}}</b>--}}
-                                                        {{--</h5>--}}
-                                                        {{--<p>{{substr(strip_tags($blog->text),0,180)}} {{strlen(strip_tags($blog->text))>180 ? '...' : ""}}</p>--}}
-                                                        {{--<p class="post-info">--}}
-                                            {{--<span>--}}
-                                                {{--<i class="fa fa-eye"></i> {{$blog->count}}--}}
-                                            {{--</span>--}}
-                                                            {{--@foreach($blog->tags as $tag)--}}
-                                                                {{--<span style="margin-left:10px;"><strong>{{$tag->name}}</strong></span>--}}
-                                                            {{--@endforeach--}}
-                                                            {{--<span class="pull-right">--}}
-                                                {{--<i class="fa fa-comments-o"></i> {{$blog->comments->count()}}--}}
-                                            {{--</span>--}}
-                                                        {{--</p>--}}
-                                                    {{--</div>--}}
-                                                    {{--<hr>--}}
-                                                    {{--<div class="blog-item-footer">--}}
-                                            {{--<span>--}}
-                                                {{--<i class="fa fa-user"></i> {{$blog->blogable->user != null ? $blog->blogable->user->firstName : $blog->blogable->name}}--}}
-                                            {{--</span>--}}
-                                                        {{--<span class="pull-right">--}}
-                                            {{--<i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($blog->created_at)->toFormattedDateString()}}--}}
-                                            {{--</span>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
+                                        {{--<div class="col-sm-6">--}}
+                                        {{--<div class="blog-item">--}}
+                                        {{--<div class="ribbon">--}}
+                                        {{--<span>{{$blog->blogable_type != 'yuridik\Admin' ? 'Юрист' : 'Модератор'}}</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="blog-item-img">--}}
+                                        {{--@if($blog->file != null)--}}
+                                        {{--<img alt="Blog item image"--}}
+                                        {{--src="{{asset($blog->file->path.$blog->file->file)}}">--}}
+                                        {{--@else--}}
+                                        {{--<img alt="Blog item image"--}}
+                                        {{--src="{{asset('dist/images/blog-img-2.jpg')}}">--}}
+                                        {{--@endif--}}
+                                        {{--<div class="middle">--}}
+                                        {{--<button class="btn btn-dark-blue text">Читать статью--}}
+                                        {{--</button>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="blog-item-description">--}}
+                                        {{--<h5>--}}
+                                        {{--<b>{{substr($blog->title,0,70)}} {{strlen($blog->title)>70 ? '...' : ""}}</b>--}}
+                                        {{--</h5>--}}
+                                        {{--<p>{{substr(strip_tags($blog->text),0,180)}} {{strlen(strip_tags($blog->text))>180 ? '...' : ""}}</p>--}}
+                                        {{--<p class="post-info">--}}
+                                        {{--<span>--}}
+                                        {{--<i class="fa fa-eye"></i> {{$blog->count}}--}}
+                                        {{--</span>--}}
+                                        {{--@foreach($blog->tags as $tag)--}}
+                                        {{--<span style="margin-left:10px;"><strong>{{$tag->name}}</strong></span>--}}
+                                        {{--@endforeach--}}
+                                        {{--<span class="pull-right">--}}
+                                        {{--<i class="fa fa-comments-o"></i> {{$blog->comments->count()}}--}}
+                                        {{--</span>--}}
+                                        {{--</p>--}}
+                                        {{--</div>--}}
+                                        {{--<hr>--}}
+                                        {{--<div class="blog-item-footer">--}}
+                                        {{--<span>--}}
+                                        {{--<i class="fa fa-user"></i> {{$blog->blogable->user != null ? $blog->blogable->user->firstName : $blog->blogable->name}}--}}
+                                        {{--</span>--}}
+                                        {{--<span class="pull-right">--}}
+                                        {{--<i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($blog->created_at)->toFormattedDateString()}}--}}
+                                        {{--</span>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
                                         {{--</a>--}}
                                     @endforeach
 
@@ -504,10 +505,46 @@
                         <!-- /Buttons -->
                     </div>
                 @endforeach
-
+                <div class="col-md-12">
+                    {!! $lawyers->links('pagination') !!}
+                </div>
             </div>
             <!-- /Lawyers -->
 
         </div>
     </div>
+@endsection
+@section('onloadScripts')
+        switchSection(getCookie("yuridikAdminPage"));
+        var navs = document.getElementsByClassName("navs");
+        navs[getCookie("yuridikAdminPage").replace("section", "") - 1].className = "navs active";
+@endsection
+@section('scripts')
+    <script>
+        function switchSection(id) {
+            document.cookie = "yuridikAdminPage=" + id + ";";
+            var navs = document.getElementsByClassName("navs");
+            for (var nav = 0; nav < navs.length; nav++)
+                navs[nav].className = "navs";
+            navs[id.replace("section", "") - 1].className = "navs active";
+            var section = document.getElementsByClassName('section');
+            for (var i = 0; i < section.length; i++)
+                section[i].style.display = "none";
+            document.getElementById(id).style.display = "block";
+        }
+        function getCookie(key) {
+            var name = key + "=";
+            var values = document.cookie.split(';');
+            for (var i = 0; i < values.length; i++) {
+                var c = values[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "section1";
+        }
+    </script>
 @endsection

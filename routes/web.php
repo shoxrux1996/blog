@@ -88,8 +88,7 @@ Route::prefix('admin')->group(function(){
        Route::get('/','Admin\AdminPostController@moderators')->name('admin.moderators.index');
     });
     Route::prefix('users')->group(function (){
-        Route::get('/clients', 'Admin\AdminPostController@clients')->name('admin.clients.index');
-        Route::get('/lawyers', 'Admin\AdminPostController@lawyers')->name('admin.lawyers.index');
+        Route::get('/', 'Admin\AdminPostController@users')->name('admin.clients.index');
         Route::post('client/block/{id}','Admin\AdminPostController@clientBlock')->name('admin.client.block');
         Route::post('client/unblock/{id}','Admin\AdminPostController@clientUnblock')->name('admin.client.unblock');
         Route::post('lawyer/block/{id}','Admin\AdminPostController@lawyerBlock')->name('admin.lawyer.block');
