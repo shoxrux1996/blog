@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('styles')
     <link href="{{ asset('dist/css/client.css')}}" rel="stylesheet">
+    <style>
+
+    </style>
 @endsection
 @section('menu')
     <li><a href="{{ route('home')}}">@lang('client-dashboard.Главная')</a></li>
@@ -11,7 +14,7 @@
     <li><a href="{{ route('about')}}">@lang('client-dashboard.О нас')</a></li>
 @endsection
 @section('content')
-<!-- Modal for message-->
+    <!-- Modal for message-->
     <div id="dashboard-modal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -25,13 +28,14 @@
                     <h4>@lang('client-dashboard.modalbody')</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('client-dashboard.close')</button>
+                    <button type="button" class="btn btn-default btn-dark-blue"
+                            data-dismiss="modal">@lang('client-dashboard.close')</button>
                 </div>
             </div>
 
         </div>
     </div>
-<!-- /Modal for message-->
+    <!-- /Modal for message-->
     <!-- Modal for call function-->
     <div id="call-function" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -46,7 +50,8 @@
                     <h4>@lang('index.callinprocess')</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
+                    <button type="button" class="btn btn-default btn-dark-blue"
+                            data-dismiss="modal">@lang('index.close')</button>
                 </div>
             </div>
 
@@ -68,7 +73,8 @@
                     <h4>@lang('index.documentinprocess')</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-dark-blue" data-dismiss="modal">@lang('index.close')</button>
+                    <button type="button" class="btn btn-default btn-dark-blue"
+                            data-dismiss="modal">@lang('index.close')</button>
                 </div>
             </div>
 
@@ -136,17 +142,20 @@
                     <div class="col-sm-4">
                         <h4 class="text-success">@lang('client-dashboard.Вопрос')</h4>
                         <p>@lang('client-dashboard.Задайте любой вопрос, и в течение 15 минут вы получите ответы наших юристов.')</p>
-                        <a href="{{ route('question.create') }}" type="button" class="btn btn-default btn-success">@lang('client-dashboard.Задать вопрос')</a>
+                        <a href="{{ route('question.create') }}" type="button"
+                           class="btn btn-default btn-success">@lang('client-dashboard.Задать вопрос')</a>
                     </div>
                     <div class="col-sm-4">
                         <h4 class="text-primary">@lang('client-dashboard.Звонок')</h4>
                         <p>@lang('client-dashboard.Оставьте номер телефона, и наш юрист свяжется с вами, чтобы проконсультировать вас по любому вопросу.')</p>
-                        <a data-toggle="modal" data-target="#call-function" type="button" class="btn btn-default btn-primary">@lang('client-dashboard.Заказать звонок')</a>
+                        <a data-toggle="modal" data-target="#call-function" type="button"
+                           class="btn btn-default btn-primary">@lang('client-dashboard.Заказать звонок')</a>
                     </div>
                     <div class="col-sm-4">
                         <h4 class="text-warning">@lang('client-dashboard.Документ')</h4>
                         <p>@lang('client-dashboard.Закажите документ, после чего наш юрист свяжется с вами, уточнит детали и подготовит его.')</p>
-                        <a data-toggle="modal" data-target="#document-function" type="button" class="btn btn-default btn-warning">@lang('client-dashboard.Заказать документ')</a>
+                        <a data-toggle="modal" data-target="#document-function" type="button"
+                           class="btn btn-default btn-warning">@lang('client-dashboard.Заказать документ')</a>
                     </div>
                 </div>
                 <div class="row">
@@ -154,10 +163,12 @@
                         <h5 class="text-success">@lang('client-dashboard.Мои заказы')</h5>
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a data-toggle="tab" href="#asked-questions">@lang('client-dashboard.Вопросы юристам')</a>
+                                <a data-toggle="tab"
+                                   href="#asked-questions">@lang('client-dashboard.Вопросы юристам')</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#call-consultions">@lang('client-dashboard.Консультации по телефону')</a>
+                                <a data-toggle="tab"
+                                   href="#call-consultions">@lang('client-dashboard.Консультации по телефону')</a>
                             </li>
                             <li>
                                 <a data-toggle="tab" href="#document-requests">@lang('client-dashboard.Документы')</a>
@@ -203,20 +214,36 @@
                                 </div>
                             </div>
                             <div id="notifications" class="tab-pane fade">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <ul>
-                                            @foreach($client->unreadNotifications as $notification)
-                                                @if(class_basename($notification->type) == "ClientRequestNotification")
-                                                    <a href="{{route('client.document.show', $notification->data['request']['document_id'])}}">{{$notification->data['request']['description']}}</a>
-                                                @endif
-                                            @endforeach
-                                        </ul>
-                                        <div >
-                                            <a href="{{route('client.notifications.delete')}}"
-                                               class="btn btn-info btn-xs"> @lang('client-dashboard.Mark as Ready')</a>
-                                        </div>
+                                <h5>@lang('client-dashboard.Последние события')</h5>
+                                @foreach($client->answerNotifications as $notification)
+                                    <div class="row" style="padding: 10px;">
+                                            <span class="avatar col-sm-2">
+                                                <img class="img-thumbnail" style="width: 70px;"
+                                                     src="{{$notification->data['file'] != null ? asset($notification->data['file']['path'].$notification->data['file']['file']) : asset('dist/images/headshot-1.jpg')}}"
+                                                     alt="Добавлен новый ответ">
+                                            </span>
+                                        @if(\App::isLocale('ru'))
+                                            <p class="col-sm-6">Юрист <a
+                                                        href="{{route('web.lawyer.show',$notification->data['lawyer_id'] )}}">{{$notification->data['user']['firstName']}} {{$notification->data['user']['lastName']}}</a>
+                                                <a href="{{route('web.question.show', $notification->data['question_id'])}}"
+                                                   class="action">ответил</a> на Ваш
+                                                вопрос «{{$notification->data['title']}}»
+                                            </p>
+                                        @else
+                                            <p class="col-sm-6">Yurist <a
+                                                        href="{{route('web.lawyer.show',$notification->data['lawyer_id'] )}}">{{$notification->data['user']['firstName']}} {{$notification->data['user']['lastName']}}</a>
+                                                sizning «{{$notification->data['title']}}» savolingizga
+                                                <a href="{{route('web.question.show', $notification->data['question_id'])}}"
+                                                   class="action">javob berdi</a>
+                                            </p>
+
+                                        @endif
+                                        <p class="time col-sm-4">{{$notification->created_at}}</p>
                                     </div>
+                                @endforeach
+                                <div class="col-sm-12" style="margin: 20px 0 20px 0;">
+                                    <a href="{{route('client.notifications.delete')}}"
+                                       class="btn btn-info btn-xs"> @lang('client-dashboard.Mark as Ready')</a>
                                 </div>
                             </div>
                         </div>
@@ -229,9 +256,9 @@
 
 @endsection
 @if(Session::has('question-create'))
-    @section('scripts')
-        <script type="text/javascript">
-            $("#confirm-email-modal").modal();
-        </script>
-    @endsection
+@section('scripts')
+    <script type="text/javascript">
+        $("#confirm-email-modal").modal();
+    </script>
+@endsection
 @endif

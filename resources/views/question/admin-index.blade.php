@@ -60,6 +60,9 @@
 @section('content')
     <div>
         <div class="container">
+            <div class="page-header">
+                <h2>Вопросы {{$questions->total()}}</h2>
+            </div>
             <div class="row">
                 <div class="col-sm-9">
                    {{-- <p class="question-type">

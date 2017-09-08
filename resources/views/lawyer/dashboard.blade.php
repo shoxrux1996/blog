@@ -218,6 +218,13 @@
                                                 @endforeach
                                             </ul>
                                         </li>
+                                        <li>@lang('lawyer-dashboard.Новые комменты')
+                                            <ul>
+                                                @foreach($lawyer->commentNotifications as $notification)
+                                                    <li><a href="{{route('web.blog.show', $notification->data['blog_id'])}}">{{$notification->data['comment']}}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
                                     </ul>
                                     <div >
                                         <a href="{{route('lawyer.notification.asRead')}}"

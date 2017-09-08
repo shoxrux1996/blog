@@ -27,6 +27,7 @@ return [
     'Закажите документ, после чего наш юрист свяжется с вами, уточнит детали и подготовит его.' => "Hujjat tayyorlashga buyurtma bering va huquqshunoslarimiz siz bilan bog‘lanib, aynan qanday hujjat tayyorlash kerakligi, qanday tayyorlanishi kerakligi haqida ma’lumot oladi va tayyorlab beradi.",
     'Заказать документ' => "Hujjat buyurtma qilish",
     'Мои заказы' => "Mening buyurtmalarim",
-    'Mark as Ready' => "Mark as Ready",
+    'Mark as Ready' => "o'qildi",
+    'Юрист'=>'Yurist',
 
 ];

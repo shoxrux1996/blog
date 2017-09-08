@@ -14,8 +14,13 @@ class User extends Model
 
     public function city()
     {
-
         return $this->belongsTo('yuridik\City');
+    }
+    public function lawyer(){
+        return $this->hasOne('yuridik\Lawyer');
+    }
+    public function client(){
+        return $this->hasOne('yuridik\Client');
     }
 
     public function file()

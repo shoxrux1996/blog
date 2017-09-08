@@ -43,4 +43,5 @@ return [
     'Отметить' => "o'qildi",
     'г' => "sh",
     'сум' => "sum",
+    'Новые комменты'=>'Yangi muhokamalar',
     ];

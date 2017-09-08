@@ -9,11 +9,11 @@
             <li class="navs">
                 <a onclick="switchSection('section1')"><i
                             class="fa fa-columns"></i>
-                    Клиенты</a>
+                    Клиенты {{$clients->total()}}</a>
             </li>
             <li class="navs">
                 <a onclick="switchSection('section2')"><i
-                            class="fa fa-list-alt"></i> Юристы</a>
+                            class="fa fa-list-alt"></i> Юристы {{$lawyers->total()}}</a>
             </li>
         </ul>
     </nav>

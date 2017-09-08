@@ -63,6 +63,9 @@
     @endif
 
     <div class="container">
+        <div class="page-header">
+            <h2>Ответы {{$answers->total()}}</h2>
+        </div>
         <div class="row">
             @foreach($answers as $answer)
                 <div class="col-sm-9 question">

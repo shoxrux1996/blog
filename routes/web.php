@@ -10,6 +10,7 @@ Route::post('error/post', function (\Illuminate\Http\Request $request){
     return redirect()->back();
 })->name('error.find');
 Route::prefix('admin')->group(function(){
+
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
@@ -20,6 +21,13 @@ Route::prefix('admin')->group(function(){
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.request.confirm');
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
+    Route::prefix('notifications')->group(function (){
+       Route::get('users', 'Admin\AdminNotificationController@usersList')->name('admin.users.notification.index');
+        Route::get('comments', 'Admin\AdminNotificationController@commentsList')->name('admin.comments.notification.index');
+        Route::get('blogs', 'Admin\AdminNotificationController@blogsList')->name('admin.blogs.notification.index');
+        Route::get('questions', 'Admin\AdminNotificationController@questionsList')->name('admin.questions.notification.index');
+        Route::get('answers', 'Admin\AdminNotificationController@answersList')->name('admin.answers.notification.index');
+    });
     Route::prefix('blogs')->group(function(){
         Route::get('/delete/{id}', 'Admin\AdminBlogController@destroy')->name('admin.blog.delete');
         Route::get('/', 'Admin\AdminBlogController@showBlogList')->name('admin.blogs');

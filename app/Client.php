@@ -53,6 +53,12 @@ class Client extends Authenticatable
     {
         return $this->hasMany('yuridik\Document');
     }
+    public function answerNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\AnswerNotification');
+    }
+    public function requestNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\ClientRequestNotification');
+    }
 
 
 }

@@ -2,8 +2,13 @@
 
 namespace yuridik\Http\Controllers\Lawyer;
 
+use Illuminate\Support\Facades\Notification;
+use yuridik\Admin;
+use yuridik\Client;
 use yuridik\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+use yuridik\Notifications\AnswerNotification;
 use yuridik\Question;
 use yuridik\Answer;
 use Session;
@@ -63,6 +68,10 @@ class LawyerAnswerController extends Controller
                 $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
             }
         }
+        $client = Client::findOrFail($question->client_id);
+        $admins = Admin::all();
+        Notification::send($client, new AnswerNotification($answer));
+        Notification::send($admins, new AnswerNotification($answer));
         // $comment->blog()->associate($blog);
         Session::flash('success', 'Answer was added');
         return redirect()->route('web.question.show', ['id' => $question_id]);
