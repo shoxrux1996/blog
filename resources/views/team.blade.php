@@ -29,7 +29,7 @@
                 </div>
                 <p>@lang('team.Миссия Yuridik.uz — сделать юридические услуги в Узбекистана по-настоящему доступными и инновационными.')</p>
                 <ul class="list-unstyled">
-                    <li><i class="fa fa-check-square-o text-primary"></i> @lang('team.Мы считаем, что юридическая помощь должна быть доступна для всех, в независимости от ситуации.)')</li>
+                    <li><i class="fa fa-check-square-o text-primary"></i> @lang('team.Мы считаем, что юридическая помощь должна быть доступна для всех, в независимости от ситуации.')</li>
                     <li><i class="fa fa-check-square-o text-primary"></i> @lang('team.Мы стремимся предоставить людям возможность быть свободными в вопросах защиты своих прав.')</li>
                     <li><i class="fa fa-check-square-o text-primary"></i> @lang('team.Мы помогаем найти людей, которые могут оказать компетентную юридическую помощь.')</li>
                     <li><i class="fa fa-check-square-o text-primary"></i> @lang('team.Мы внедряем в отрасль юридических услуг новые технологии;')</li>
