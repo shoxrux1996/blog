@@ -34,7 +34,7 @@
                                 {{$lawyer->user->lastName}}
                             </div>
                             <div class="profile-usertitle-job">
-                                {{$lawyer->job_status}}, г. {{$lawyer->user->city->name}} <br/>
+                                @lang("lawyer-settings.$lawyer->job_status"), г. {{$lawyer->user->city->name}} <br/>
                                 {{--Был в сети сегодня в 15:04--}}
                             </div>
                         </div>

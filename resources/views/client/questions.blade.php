@@ -57,7 +57,7 @@
                          class="img-rounded"/>
                     <h3>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h3>
                     <h6>
-                        <b>{{$lawyer->job_status}}, г. {{$lawyer->user->city->name}}</b>
+                        <b>@lang("lawyer-settings.$lawyer->job_status"), г. {{$lawyer->user->city->name}}</b>
                     </h6>
                     <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть
                         профиль</a>

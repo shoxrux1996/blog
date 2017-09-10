@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('styles')
-    <link href="{{ asset('dist/css/lawyers.css')}}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+
     <link href="{{ asset('dist/css/homepage.css')}}" rel="stylesheet">
     <link href="{{ asset('dist/css/individual-category.css')}}" rel="stylesheet">
+    <link href="{{ asset('dist/css/lawyers.css')}}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+    <link href="{{ asset('dist/css/rotating-card.css')}}" rel="stylesheet">
 
 @endsection
 @section('menu')
@@ -233,7 +235,7 @@
                                          class="img-rounded"/>
                                     <h5>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h5>
                                     <h6>
-                                        <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
+                                        <b>@lang("lawyer-settings.$lawyer->job_status"), г. {{  $lawyer->user->city->name }}</b>
                                     </h6>
                                     <a type="button" class="btn btn-default btn-success"
                                        href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
@@ -272,7 +274,7 @@
                                             <div class="content">
                                                 <div class="main">
                                                     <h2 class="name">{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h2>
-                                                    <p class="profession">{{$lawyer->job_status}},
+                                                    <p class="profession">@lang("lawyer-settings.$lawyer->job_status"),
                                                         г. {{$lawyer->user->city->name}}</p>
                                                     <p class="text-center">
                                                         <i class="fa fa-star"></i>
@@ -329,7 +331,6 @@
                                 </div> <!-- end card-container -->
                             </div>
                         @endforeach
-
                     </div>
                     <!-- /Lawyers -->
                 </div>

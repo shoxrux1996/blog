@@ -106,9 +106,10 @@
                              class="img-circle"/>
                         <h5>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h5>
                         <h6>
-                            <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
+                            <b>@lang("lawyer-settings.$lawyer->job_status"), г. {{  $lawyer->user->city->name }}</b>
                         </h6>
-                        <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
+                        <a type="button" class="btn btn-default btn-success"
+                           href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
                     </div>
                 @endforeach
 
@@ -141,17 +142,19 @@
                     <form action="{{route('search.lawyers')}}" method="get">
                         <?php $i = 0; $count = count($cities); ?>
                         @foreach($cities as $index => $city)
-                            <?php if($city->name == " ") continue ?>
-                            @if($index <= 5)
-                                <button type="submit" class="btn-link" name="city"
-                                        value="{{$city->name}}">{{$city->name}}</button>
-                                @if($index == 5)
-                                    <a class="btn-link" onclick="showCities()" id="show-cities">Все города ...</a>
+                            @if($city->name != " ")
+                                @if($index <= 5)
+                                    <button type="submit" class="btn-link" name="city"
+                                            value="{{$city->name}}">{{$city->name}}</button>
+                                    @if($index == 5)
+                                        <a class="btn-link" onclick="showCities()" id="show-cities">Все города ...</a>
+                                    @endif
+                                @else
+                                    <?php if ($i % 5 == 0) echo "<p style=\"margin-bottom: 0; \">" ?>
+                                    <button type="submit" class="btn-link cities" name="city" value="{{$city->name}}"
+                                            style="display: none;">{{$city->name}}</button>
+                                    <?php $i++; if ($i % 5 == 0 || $count == $index) echo "</p>" ?>
                                 @endif
-                            @else
-                                <?php if($i % 5 == 0) echo "<p style=\"margin-bottom: 0; \">" ?>
-                                <button type="submit" class="btn-link cities" name="city" value="{{$city->name}}" style="display: none;">{{$city->name}}</button>
-                                <?php $i++; if($i % 5 == 0 || $count == $index) echo "</p>" ?>
                             @endif
                         @endforeach
                     </form>
@@ -176,7 +179,7 @@
                                     <div class="content">
                                         <div class="main">
                                             <h2 class="name">{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h2>
-                                            <p class="profession">{{$lawyer->job_status}},
+                                            <p class="profession">@lang("lawyer-settings.$lawyer->job_status"),
                                                 г. {{$lawyer->user->city->name}}</p>
                                             <p class="text-center">
                                                 <i class="fa fa-star"></i>
@@ -219,7 +222,8 @@
                                     </div>
                                     <div class="footer">
                                         <div class="social-links text-center">
-                                            <a href="{{route('web.lawyer.show', $lawyer->id)}}" type="button" class="btn btn-default btn-block blue-button">
+                                            <a href="{{route('web.lawyer.show', $lawyer->id)}}" type="button"
+                                               class="btn btn-default btn-block blue-button">
                                                 Обратиться к юристу
                                             </a>
                                             <span>{{$lawyer->feedbacks->count()}} отзыва от клиентов</span>
@@ -267,10 +271,10 @@
         }
 
 
-        function rotateCard(btn){
+        function rotateCard(btn) {
             var $card = $(btn).closest('.card-container');
             console.log($card);
-            if($card.hasClass('hover')){
+            if ($card.hasClass('hover')) {
                 $card.removeClass('hover');
             } else {
                 $card.addClass('hover');

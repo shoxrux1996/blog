@@ -71,8 +71,7 @@
                                 </p>
                                 <hr>
                                 <p>
-                                    <span class="category">Категория: <a
-                                                href="">{{$question->category->name}}</a></span>
+                                    <span class="category">Категория: <a href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
                                     <a class="answers" href="{{route('web.question.show', $question->id)}}">
                                         {{$question->answers->count()}}
                                     </a>
@@ -106,8 +105,7 @@
                                 </p>
                                 <hr>
                                 <p>
-                                    <span class="category">Категория: <a
-                                                href="">{{$question->category->name}}</a></span>
+                                    <span class="category">Категория: <a href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
                                     <a class="answers" href="{{route('web.question.show', $question->id)}}">
                                         {{$question->answers->count()}}
                                     </a>
@@ -133,8 +131,7 @@
                                     </p>
                                     <hr>
                                     <p>
-                                    <span class="category">Категория: <a
-                                                href="">{{$question->category->name}}</a></span>
+                                    <span class="category">Категория: <a href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
                                         <a class="answers" href="{{route('web.question.show', $question->id)}}">
                                             {{$question->answers->count()}}
                                         </a>
@@ -156,7 +153,7 @@
                              class="img-rounded"/>
                         <h5>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h5>
                         <h6>
-                            <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
+                            <b>@lang("lawyer-settings.$lawyer->job_status"), г. {{  $lawyer->user->city->name }}</b>
                         </h6>
                         <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
                     </div>
