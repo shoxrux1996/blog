@@ -64,3 +64,4 @@ class Kernel extends HttpKernel
         'isAdmin' => \yuridik\Http\Middleware\isAdmin::class,
     ];
 }
+/**/
