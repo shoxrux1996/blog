@@ -19,6 +19,6 @@ class IsAdmin
         if (Auth::guard('admin')->user()->type == 2)
             return $next($request);
         else
-            abort(403, 'Unauthorized action.');
+         return abort(403, 'Unauthorized action.');
     }
 }
