@@ -48,13 +48,19 @@
                 <!-- Comment news style -->
                 @foreach($question->answers as $answer)
                     <div class="col-sm-9 answer">
+                        <div class="answer-footer">
+                            <span class="pull-right answered-time">
+                                {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
+                            </span>
+                        </div>
                         <div class="answer-header">
                             <img class="img-thumbnail"
                                  src="{{$answer->lawyer->user->file != null ? asset($answer->lawyer->user->file->path.$answer->lawyer->user->file->file) : asset("dist/images/headshot-1.png")}}"
                                  alt="Lawyer 1"/>
-                            <h4 class="lawyer-name">{{$answer->lawyer->firstName}}</h4>
+                            <h4 class="lawyer-name">{{$answer->lawyer->user->firstName}} {{$answer->lawyer->user->lastName}}</h4>
                             <h6 class="lawyer-type">@lang("lawyer-settings.".$answer->lawyer->job_status)</h6>
                         </div>
+
                         <div class="clearfix">
 
                         </div>
@@ -64,17 +70,13 @@
                         <div class="answer-content">
                             {!! $answer->text !!}
                         </div>
-                        <div class="answer-footer">
-                            <span class="pull-right answered-time">
-                                {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
-                            </span>
-                            <div>
-                                @foreach($answer->files as $file)
-                                    <a class="label label-default"
-                                       href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                                @endforeach
-                            </div>
+                        <div>
+                            @foreach($answer->files as $file)
+                                <a class="label label-default"
+                                   href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                            @endforeach
                         </div>
+
                     </div>
                 @endforeach
             <!-- /Comment new style -->

@@ -173,7 +173,7 @@ Route::prefix('lawyer')->group(function(){
     Route::get('/settings/info/{type?}', 'Lawyer\LawyerController@info')->name('lawyer.info');
     Route::post('/update/{settingtype}', 'Lawyer\LawyerController@update')->name('lawyer.update');
     Route::get('/file/delete/{id}','Lawyer\LawyerController@awardDelete')->name('lawyer.award.delete');
-
+    Route::get('/file/delete/{id}','Lawyer\LawyerController@fileDelete')->name('lawyer.file.delete');
     Route::prefix('/notifications')->group(function (){
         Route::get('/mark-as-read','Lawyer\LawyerNotificationController@notificationAsRead')->name('lawyer.notification.asRead');
     });
@@ -187,7 +187,12 @@ Route::prefix('lawyer')->group(function(){
     Route::prefix('/comment')->group(function(){
         Route::post('/{blog_id}', 'Lawyer\LawyerCommentController@store')->name('lawyer.comment.store');
     });
-    Route::post('answer/create/{question_id}', 'Lawyer\LawyerAnswerController@store')->name('lawyer.answer.store');
+    Route::prefix('answer')->group(function (){
+        Route::post('/create/{question_id}', 'Lawyer\LawyerAnswerController@store')->name('lawyer.answer.store');
+        Route::get('/edit/{id}', 'Lawyer\LawyerAnswerController@edit')->name('lawyer.answer.edit');
+        Route::post('/update/{id}', 'Lawyer\LawyerAnswerController@update')->name('lawyer.answer.update');
+    });
+
     Route::prefix('document')->group(function(){
         Route::get('/list', 'Lawyer\LawyerDocumentController@index')->name('lawyer.document.info');
         Route::post('/submit/{id}', 'Lawyer\LawyerDocumentController@sendRequest')->name('lawyer.document.request');

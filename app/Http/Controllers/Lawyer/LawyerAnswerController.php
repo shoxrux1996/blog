@@ -15,6 +15,7 @@ use Session;
 use Auth;
 use Validator;
 use yuridik\File;
+use Illuminate\Support\Facades\File as LaraFile;
 use Purifier;
 
 class LawyerAnswerController extends Controller
@@ -87,4 +88,35 @@ class LawyerAnswerController extends Controller
         $questions = Question::where('id', $id)->orderBy('id', 'desc')->paginate(5);
         return view('question.list')->withQuestions($questions);
     }
+    public function edit($id){
+        $answer = Answer::findOrFail($id);
+        return view('answer.edit')->withAnswer($answer);
+    }
+    public function update(Request $request, $id){
+        $rules = array(
+            'text' => 'required|min:5|max:10000'
+        );
+        $count = count($request->file('files')) - 1;
+
+        foreach (range(0, $count) as $i) {
+            $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
+        }
+        Validator::make($request->all(), $rules)->validate();
+        $answer = Answer::findOrFail($id);
+        $answer->text = Purifier::clean($request->text);
+        $answer->save();
+        if ($request->file('files') != null) {
+            $file = $request->file('files');
+            foreach ($file as $key) {
+                $fil = new File;
+                $fil->file = $key->getClientOriginalName();
+                $upload_folder = '/answers/' . time() . '/';
+                $fil->path = $upload_folder;
+                $answer->files()->save($fil);
+                $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
+            }
+        }
+        return redirect()->route('web.question.show', $answer->question->id);
+    }
+
 }

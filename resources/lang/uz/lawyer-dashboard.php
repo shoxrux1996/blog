@@ -38,4 +38,6 @@ return [
     'г' => "sh",
     'сум' => "sum",
     'Новые комменты'=>'Yangi muhokamalar',
+    'Ответы' => 'Javoblar',
+    'Изменить ответ' => "Javobni o'zgartirish",
     ];

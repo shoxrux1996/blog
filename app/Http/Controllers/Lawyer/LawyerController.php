@@ -221,4 +221,11 @@ class LawyerController extends Controller
         $file->delete();
         return redirect()->route('lawyer.info', ['type' => 'awards']);
     }
+    public function fileDelete($id)
+    {
+        $file = File::findOrFail($id);
+        LaraFile::delete(public_path() . $file->path . $file->file);
+        $file->delete();
+        return redirect()->back();
+    }
 }
