@@ -60,8 +60,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \yuridik\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'Api' => \yuridik\Http\Middleware\Api::class,
         'isAdmin' => \yuridik\Http\Middleware\isAdmin::class,
+        'Api' => \yuridik\Http\Middleware\Api::class
     ];
 }
 /**/
