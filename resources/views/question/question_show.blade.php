@@ -60,7 +60,7 @@
                                  src="{{$answer->lawyer->user->file != null ? asset($answer->lawyer->user->file->path.$answer->lawyer->user->file->file) : asset("dist/images/headshot-1.png")}}"
                                  alt="Lawyer 1"/>
                             <h4 class="lawyer-name">{{$answer->lawyer->firstName}}</h4>
-                            <h6 class="lawyer-type">{{$answer->lawyer->job_status}}</h6>
+                            <h6 class="lawyer-type">@lang("lawyer-settings.".$answer->lawyer->job_status)</h6>
                         </div>
                         <div class="clearfix">
 
