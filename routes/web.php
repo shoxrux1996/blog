@@ -118,6 +118,8 @@ Route::prefix('user')->group(function(){
 });
 
 Route::prefix('client')->group(function(){
+    Route::get('/file/delete/{id}','Client\ClientController@fileDelete')->name('client.file.delete');
+
 	Route::post('/password/reset', 'Auth\ClientResetPasswordController@reset')->name('client.password.request');
 	Route::get('/password/reset/{token}', 'Auth\ClientResetPasswordController@showResetForm')->name('client.password.reset');
 	Route::get('/', 'Client\ClientController@index')->name('client.dashboard');
@@ -127,6 +129,8 @@ Route::prefix('client')->group(function(){
     Route::prefix('question')->group(function(){
         Route::get('/create', 'Client\ClientQuestionController@create')->name('question.create');
         Route::post('/store', 'Client\ClientQuestionController@store')->name('question.insert.submit');
+        Route::get('/edit/{id}','Client\ClientQuestionController@edit')->name('question.edit');
+        Route::post('/edit/update/{id}', 'Client\ClientQuestionController@update')->name('question.edit.submit');
         
     });
     Route::prefix('feedback')->group(function(){

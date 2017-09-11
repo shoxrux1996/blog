@@ -51,5 +51,7 @@ return [
     "Гарантии ответа нет" => "Javob kafolatlanmagan",
     "Продолжить" => "Davom etish",
     "Задать вопрос" => "Savol berish",
-    "Выбрать файл" => "Faylni tanlash",  
+    "Выбрать файл" => "Faylni tanlash",
+    'Изменить вопрос' => "Savolni o'zgartirish",
+    'Файлы' => 'Fayllar',
     ];

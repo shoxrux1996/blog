@@ -144,6 +144,53 @@ class ClientQuestionController extends Controller
         }        
     }
 
+    public function edit($id){
+        $question = Question::findOrFail($id);
+        $category = Category::where('category_id',null)->get();
+        $categories = array();
+        foreach ($category as $key) {
+            $categories[$key->id] = $key->name;
+        }
+        return view('question.question_edit')->withCategories($categories)->withQuestion($question);
+    }
+    public function update(Request $request, $id){
+        $messages = [
+            'required' => 'Обязательно к заполнению',
+            'string' => 'Неправильный формат',
+            'title.min' => 'Минимум 3 символов',
+            'description.min' => 'Минимум 10 символов',
+        ];
+        $rules = array(
+            'title' => 'required|string|min:3',
+            'description' => 'required|string|min:10',
+            'category' => 'required',
+            'mimes' => 'Неверный формат(doc,docx,pdf)',
+        );
+        $count = count($request->file('files')) - 1;
+        foreach (range(0, $count) as $i) {
+            $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
+        }
+
+        Validator::make($request->all(), $rules, $messages)->validate();
+        $question = Question::findOrFail($id);
+        $question->title = $request->title;
+        $question->text = $request->description;
+        $question->category_id = $request->category;
+
+        $question->save();
+        if ($request->file('files') != null) {
+            $file = $request->file('files');
+            foreach ($file as $key) {
+                $fil = new File;
+                $fil->file = $key->getClientOriginalName();
+                $upload_folder = '/questions/' . time() . '/';
+                $fil->path = $upload_folder;
+                $question->files()->save($fil);
+                $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
+            }
+        }
+        return redirect()->route('web.question.show', $question->id);
+    }
     public function myQuestions()
     {
         $questions = Question::where('client_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(5);

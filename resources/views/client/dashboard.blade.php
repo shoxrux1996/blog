@@ -181,17 +181,13 @@
 
                         <div class="tab-content">
                             <div id="asked-questions" class="tab-pane fade in active">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <ul>
-                                            @foreach($client->questions->reverse() as $question)
-                                                <li>
-                                                    <a href="{{ route('web.question.show', ['id'=>$question->id])}}">{{$question->title}}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
+                                    @foreach($client->questions->reverse() as $question)
+                                    <div class="row well well-sm" style="padding: 10px;">
+                                        <span class="col-sm-3">{{$question->created_at}}</span>
+                                        <a class="col-sm-7" href="{{ route('web.question.show', ['id'=>$question->id])}}">{{$question->title}}</a>
+                                        <a href="{{route('question.edit',$question->id)}}"><i class="col-sm-1 fa fa-pencil" aria-hidden="true"></i></a>
                                     </div>
-                                </div>
+                                    @endforeach
                             </div>
                             <div id="call-consultions" class="tab-pane fade">
                                 <div class="row">
