@@ -2,14 +2,7 @@
 @section('styles')
 <link href="{{ asset('dist/css/login-regis.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-  <li><a href="{{ route('home')}}">@lang('login.Главная')</a></li>
-  <li><a href="{{ route('lawyers.list')}}">@lang('login.Юристы')</a></li>
-  <li><a href="{{ route('question.list')}}">@lang('login.Вопросы')</a></li>
-  <li><a href="{{ route('web.blogs')}}">@lang('login.Блог')</a></li>
-  <li><a href="{{ route('how-works')}}">@lang('login.Как это работает')</a></li>
-  <li><a href="{{ route('about')}}">@lang('login.О нас')</a></li>
-@endsection
+
 @section('content')
 
 <!-- Modal for message-->

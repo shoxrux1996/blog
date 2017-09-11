@@ -2,14 +2,7 @@
 @section('styles')
  <link href="{{asset('dist/css/how-works.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-  <li><a href="{{ route('home')}}">@lang('how-works.Главная')</a></li>
-  <li><a href="{{ route('lawyers.list')}}">@lang('how-works.Юристы')</a></li>
-  <li><a href="{{ route('question.list')}}">@lang('how-works.Вопросы')</a></li>
-  <li><a href="{{ route('web.blogs')}}">@lang('how-works.Блог')</a></li>
-  <li class="active-link"><a href="{{ route('how-works')}}">@lang('how-works.Как это работает')</a></li>
-  <li><a href="{{ route('about')}}">@lang('how-works.О нас')</a></li>
-@endsection
+
 @section('content')
 
 <!-- Content -->
@@ -18,7 +11,7 @@
         <div class="col-sm-6 text-center">
             <h3>@lang('how-works.Задайте вопрос юристу')</h3>
             <h5>
-                @lang('how-works.Вопрос юристу онлайн - услуга, которую по достоинству оценило более 350 000 наших клиентов. Это быстрый и очень удобный способ узнать мнения нескольких юристов, не покидая дома или офиса.')
+                @lang('how-works.Вопрос юристу онлайн')
             </h5>
             <a href="{{ route('question.create') }}" type="button" class="btn btn-default btn-lg btn-success pulse-button" >@lang('how-works.Задать вопрос')</a>
         </div>
@@ -39,7 +32,7 @@
         <div class="col-sm-4">
             <i class="fa fa-money text-warning"></i>
             <h3 class="text-warning">@lang('how-works.Экономия') 60%</h3>
-            <p>@lang('how-works.Средняя стоимость услуги на нашем сайте составляет лишь 600 рублей. А это как минимум в два раза дешевле услуг юридических фирм.')</p>
+            <p>@lang('how-works.Средняя стоимость услуги')</p>
         </div>
     </div>
     <div class="row" id="how-it-works">

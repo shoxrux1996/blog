@@ -2,14 +2,7 @@
 @section('styles')
     <link href="{{ asset('dist/css/ad.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">@lang('index.home')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('index.lawyers')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('index.questions')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('index.blog')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('index.howworks')</a></li>
-    <li><a href="{{ route('about')}}">@lang('index.aboutus')</a></li>
-@endsection
+
 @section('content')
 <!-- Content -->
 <div id="wrapper">

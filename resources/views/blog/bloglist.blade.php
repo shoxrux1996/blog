@@ -4,14 +4,6 @@
 
 @endsection
 
-@section('menu')
-  <li><a href="{{ route('home')}}">Главная</a></li>
-  <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-  <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-  <li class="active-link"><a href="{{ route('web.blogs')}}">Блог</a></li>
-  <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-  <li><a href="{{ route('about')}}">О нас</a></li>
-@endsection
 @section('content')
 <!-- Content -->
 <div id="wrapper">

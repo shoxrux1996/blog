@@ -1,11 +1,6 @@
 <?php
 
-return [	
-	"home" => "Bosh sahifa",
-	"questions" => "Savollar",
-    "lawyers" => "Yuristlar",
-    "howworks" => "Bu qanday ishlaydi?",  
-    "aboutus" => "Loyiha haqida",
+return [
 	"blog" => "Maqolalar",
     "Задайте свой вопрос юристу" => "Yuristga savol bering",
     "Как работает Yuridik.uz?" => "Yuridik.uz qanday ishlaydi?",
@@ -40,7 +35,6 @@ return [
     "от" => "",
     "отсум" => "so'mdan",
     "Стоимость вы устанавливаете сами" => "Narxni o'zingiz belgilaysiz",
-    "Моментальная публикация вопроса" => "Savolni darhol e'lon qilish",
     "Гарантия полного и подробного разбора ситуации" => "Vaziyatni to'liq va batafsil tahlili kafolati",
     "Мнения нескольких юристов" => "Vaziyat bo'yicha bir necha yuristlar fikrlari",
     "Первый ответ в течение 15 минут" => "Birinchi javob 15 minut ichida",

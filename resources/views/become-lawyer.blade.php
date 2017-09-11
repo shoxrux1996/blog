@@ -2,14 +2,7 @@
 @section('styles')
     <link href="{{ asset('dist/css/become-lawyer.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">@lang('become-lawyer.Главная')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('become-lawyer.Юристы')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('become-lawyer.Вопросы')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('become-lawyer.Блог')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('become-lawyer.Как это работает')</a></li>
-    <li><a href="{{ route('about')}}">@lang('become-lawyer.О нас')</a></li>
-@endsection
+
 @section('content')
 
 <!-- Content -->

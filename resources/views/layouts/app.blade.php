@@ -69,7 +69,6 @@
     <!-- /Yandex.Metrika counter -->
 </head>
 <body>
-
 <!-- Return to Top -->
 <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
 
@@ -203,7 +202,12 @@
 
         <div class="collapse navbar-collapse" id="menu">
             <ul class="nav navbar-nav">
-                @yield('menu')
+                <li class="{{Request::is('/') ? 'active-link' : ''}}"><a href="{{ route('home')}}">@lang('app.Главная')</a></li>
+                <li class="{{Request::is('lawyer-info') ? 'active-link' : ''}}"><a href="{{ route('lawyers.list')}}">@lang('app.Юристы')</a></li>
+                <li class="{{Request::is('question-info/list') ? 'active-link' : ''}}"><a href="{{ route('question.list')}}">@lang('app.Вопросы')</a></li>
+                <li class="{{Request::is('blog-info') ? 'active-link' : ''}}"><a href="{{ route('web.blogs')}}">@lang('app.Блог')</a></li>
+                <li class="{{Request::is('how-works') ? 'active-link' : ''}}"><a href="{{ route('how-works')}}">@lang('app.Как это работает')</a></li>
+                <li class="{{Request::is('about') ? 'active-link' : ''}}"><a href="{{ route('about')}}">@lang('app.О нас')</a></li>
             </ul>
         </div>
     </div>

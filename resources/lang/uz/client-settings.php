@@ -6,12 +6,6 @@
  * Time: 13:51
  */
 return [
-    'Главная' => "Bosh sahifa",
-    'Юристы' => "Yuristlar",
-    'Вопросы' => "Savollar",
-    'Блог' => "Maqola",
-    'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Loyiha haqida",
     'Мой профиль' => "Mening profilim",
     'Личный кабинет' => "Shaxsiy kabinet",
     'Мой аккаунт' => "Mening akkauntim",

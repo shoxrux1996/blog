@@ -2,14 +2,7 @@
 @section('styles')
     <link href="{{ asset('dist/css/404.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">@lang('404.Главная')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('404.Юристы')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('404.Вопросы')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('404.Блог')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('404.Как это работает')</a></li>
-    <li><a href="{{ route('about')}}">@lang('404.О нас')</a></li>
-@endsection
+
 @section('content')
     <div class="container">
     <div class="row">

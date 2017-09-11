@@ -2,14 +2,7 @@
 @section('styles')
    <link href="{{asset('dist/css/login-regis.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-  <li><a href="{{ route('home')}}">@lang('register.Главная')</a></li>
-  <li><a href="{{ route('lawyers.list')}}">@lang('register.Юристы')</a></li>
-  <li><a href="{{ route('question.list')}}">@lang('register.Вопросы')</a></li>
-  <li><a href="{{ route('web.blogs')}}">@lang('register.Блог')</a></li>
-  <li><a href="{{ route('how-works')}}">@lang('register.Как это работает')</a></li>
-  <li><a href="{{ route('about')}}">@lang('register.О нас')</a></li>
-@endsection
+
 @section('content')
 
 <!-- Login Form -->

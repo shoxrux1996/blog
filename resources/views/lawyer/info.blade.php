@@ -3,14 +3,7 @@
     <link href="{{ asset('dist/css/client.css')}}" rel="stylesheet">
     <link href="{{ asset('dist/css/lawyer.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">@lang('lawyer-settings.Главная')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('lawyer-settings.Юристы')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('lawyer-settings.Вопросы')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('lawyer-settings.Блог')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('lawyer-settings.Как это работает')</a></li>
-    <li><a href="{{ route('about')}}">@lang('lawyer-settings.О нас')</a></li>
-@endsection
+
 @section('content')
 
     <div id="wrapper">

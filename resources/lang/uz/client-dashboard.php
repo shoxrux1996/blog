@@ -1,15 +1,9 @@
 <?php
 
 return [
-    'Главная' => "Bosh sahifa",
-    'Юристы' => "Yuristlar",
-    'Вопросы' => "Savollar",
-    'Блог' => "Maqola",
-    'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Loyiha haqida",
-    'client-dashboard.modaltitle' => "",
-    'client-dashboard.modalbody' => "",
-    'client-dashboard.close' => "",
+    'modaltitle' => "",
+    'modalbody' => "",
+    'close' => "",
     'Мой профиль' => "Mening profilim",
     'Редактировать' => "Tahrirlash",
     'сум' => "sum",

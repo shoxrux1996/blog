@@ -3,14 +3,7 @@
     <link href="{{ asset('dist/css/services.css')}}" rel="stylesheet">
     <link href="{{ asset('dist/css/become-brilliant.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-  <li><a href="{{ route('home')}}">Главная</a></li>
-  <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-  <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-  <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-  <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-  <li><a href="{{ route('about')}}">О нас</a></li>
-@endsection
+
 @section('content')
 
 <!-- Content -->
@@ -170,14 +163,4 @@
 <!-- /Content -->
 
 
-@endsection
-@section('scripts')
-<script type="text/javascript">
-hide(){
-    document.getElementById("price-list").removeChild(document.getElementById("phone-call-price"));
-}
-unhide(){
-    document.getElementById("price-list").appendChild(document.getElementById("phone-call-price"));
-}
-</script>
 @endsection

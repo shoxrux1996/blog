@@ -1,12 +1,6 @@
 <?php
 
 return [
-    'Главная' => "Главная",
-    'Юристы' => "Юристы",
-    'Вопросы' => "Вопросы",
-    'Блог' => "Блог",
-    'Как это работает' => "Как это работает",
-    'О нас' => "О нас",
     'client-dashboard.modaltitle' => "",
     'client-dashboard.modalbody' => "",
     'client-dashboard.close' => "",

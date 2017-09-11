@@ -5,14 +5,7 @@
 
     </style>
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">@lang('client-dashboard.Главная')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('client-dashboard.Юристы')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('client-dashboard.Вопросы')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('client-dashboard.Блог')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('client-dashboard.Как это работает')</a></li>
-    <li><a href="{{ route('about')}}">@lang('client-dashboard.О нас')</a></li>
-@endsection
+
 @section('content')
     <!-- Modal for message-->
     <div id="dashboard-modal" class="modal fade" role="dialog">

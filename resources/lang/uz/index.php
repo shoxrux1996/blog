@@ -6,16 +6,13 @@
  * Time: 13:22
  */
 return [
-    'aboutus' => "Loyiha haqida",
+    'aboutus' => "Jamoa haqida",
     'categories' => "Sohalar bo'yicha savolar ",
     'blog' => "Maqolalar",
     'askquestion' => "Savol berish",
     'ordercall' => "Qo'ng'iroq buyurtma qilish",
     'orderdocument' => "Hujjat buyurtma qilish",
     'questions' => "Savollar",
-    'home' => "Bosh sahifa",
-    'lawyers' => "Yuristlar",
-    'howworks' => "Bu qanday ishlaydi?",
     'confidence' => "Har bir qaror ishonch bilan",
     'search' => "Qidirish uchun so'zni kiriting",
     'answeredquestions' => "Javob berilgan savollar",

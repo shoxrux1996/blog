@@ -2,14 +2,7 @@
 @section('styles')
     <link href="{{ asset('dist/css/contacts.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">@lang('contacts.Главная')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('contacts.Юристы')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('contacts.Вопросы')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('contacts.Блог')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('contacts.Как это работает')</a></li>
-    <li><a href="{{ route('about')}}">@lang('contacts.О нас')</a></li>
-@endsection
+
 @section('content')
 
 
