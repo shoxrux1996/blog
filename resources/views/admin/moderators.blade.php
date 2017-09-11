@@ -14,7 +14,8 @@
             </div>
             <div class="col-sm-6 text-right">
                 <h3>
-                    <a href="{{route('admin.moderator.create')}}" type="button" class="btn btn-success">Добавить модераторов</a>
+                    <a href="{{route('admin.moderator.create')}}" type="button" class="btn btn-success">Добавить
+                        модераторов</a>
                 </h3>
             </div>
         </div>
@@ -25,20 +26,26 @@
                     <tr>
                         <th>Почта</th>
                         <th>Имя</th>
-                        <th>Действии</th>
+                        <th>Удалить</th>
+                        <th>Изменить</th>
+
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($moderators as $moderator)
-                    <tr>
-                        <th>{{$moderator->email}}</th>
-                        <th>{{$moderator->name}}</th>
-                        <th>
-                            <a onclick="return confirm('Вы уверены?');"
-                               href="{{route('admin.moderator.delete', $moderator->id)}}" type="submit"><i
-                                        class="fa fa-trash" data-toggle="tooltip" title="Удалить"></i></a>
-                        </th>
-                    </tr>
+                        <tr>
+                            <th>{{$moderator->email}}</th>
+                            <th>{{$moderator->name}}</th>
+                            <th>
+                                <a onclick="return confirm('Вы уверены?');"
+                                   href="{{route('admin.moderator.delete', $moderator->id)}}" type="submit"><i
+                                            class="fa fa-trash" data-toggle="tooltip" title="Удалить"></i></a>
+                            </th>
+                            <th>
+                                <a href="{{route('admin.moderator.edit', $moderator->id)}}" type="submit"><i
+                                            class="fa fa-pencil" data-toggle="tooltip" title="Изменить"></i></a>
+                            </th>
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>

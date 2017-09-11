@@ -2,6 +2,7 @@
 
 namespace yuridik\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use yuridik\Admin;
 use yuridik\Http\Controllers\Controller;
@@ -11,8 +12,8 @@ class AdminUserController extends Controller
 {
     public function __construct()
     {
-        return $this->middleware('auth:admin');
-        return $this->middleware('isAdmin');
+        $this->middleware('auth:admin');
+        $this->middleware('isAdmin');
     }
 
     public function moderatorList()
@@ -26,7 +27,7 @@ class AdminUserController extends Controller
     public function moderatorStore(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
+            'email' => 'required|string|email|max:255|unique:admins',
             'password' => 'required|string|min:6|confirmed',
             'name' => 'required',
         ]);
@@ -35,7 +36,7 @@ class AdminUserController extends Controller
         $admin->name = $request->name;
         $admin->password = Hash::make($request->password);
         $admin->save();
-        return redirect()->back();
+        return redirect()->route('admin.moderators.index');
     }
 
     public function moderatorDelete($id)
@@ -46,42 +47,22 @@ class AdminUserController extends Controller
         Session::flash('message', 'Moderator was deleted successfully');
         return redirect()->back();
     }
-
-    public function adminList()
-    {
-        return view('admin.list');
+    public function moderatorEdit($id){
+        $admin = Admin::findOrFail($id);
+        return view('admin.moderator-edit')->withModerator($admin);
     }
-
-    public function adminStore(Request $request)
-    {
+    public function moderatorUpdate(Request $request, $id){
+        $admin = Admin::findOrFail($id);
         $this->validate($request, [
-            'email' => 'required|string|email|max:255|unique:clients|unique:lawyers',
+            'email' => 'required|string|email|max:255|unique:admins,email,'.$id,
             'password' => 'required|string|min:6|confirmed',
             'name' => 'required',
         ]);
-        $admin = new Admin;
-        $admin->email = $request->email;
         $admin->name = $request->name;
+        $admin->email = $request->email;
         $admin->password = Hash::make($request->password);
-        $admin->type = 1;
         $admin->save();
-        Session::flash('message', 'New admin was added successfully');
-        return redirect()->back();
+        return redirect()->route('admin.moderators.index');
     }
 
-    public function adminDelete($id)
-    {
-        $admin = Admin::findOrFail($id);
-        $admin->delete();
-        Session::flash('message', 'Admin was deleted successfully');
-        return redirect()->back();
-    }
-
-    public function admins()
-    {
-        $moderators = Admin::where('type', 0);
-        $admins = Admin::where('type', 1);
-
-        return view('admin.user.list')->withModerators($moderators)->withAdmin($admins);
-    }
 }

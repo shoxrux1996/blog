@@ -58,14 +58,12 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Улугбек <b
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fa fa-user"></i> {{Auth::user()->name}} <b
                             class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Профиль</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Настройки</a>
+                        <a href="{{route('admin.info')}}"><i class="fa fa-fw fa-user"></i> Профиль</a>
                     </li>
                     <li class="divider"></li>
                     <li>
@@ -93,10 +91,12 @@
                 <li>
                     <a href="{{route('admin.clients.index')}}"><i class="fa fa-fw fa-users"></i> Пользователи</a>
                 </li>
-                <li>
-                    <a href="{{route('admin.moderators.index')}}"><i class="fa fa-fw fa-address-card"></i>
-                        Модераторы</a>
-                </li>
+                @if(Auth::user()->type == 2)
+                    <li>
+                        <a href="{{route('admin.moderators.index')}}"><i class="fa fa-fw fa-address-card"></i>
+                            Модераторы</a>
+                    </li>
+                @endif
                 <li>
                     <a href="{{route('admin.comments.index')}}"><i class="fa fa-fw fa-comments"></i> Комментарии</a>
                 </li>

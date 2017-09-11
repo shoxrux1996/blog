@@ -10,10 +10,11 @@ Route::post('error/post', function (\Illuminate\Http\Request $request){
     return redirect()->back();
 })->name('error.find');
 Route::prefix('admin')->group(function(){
-
+    Route::get('/dashboard', 'Admin\AdminController@info')->name('admin.info');
+    Route::post('/info/update','Admin\AdminController@update')->name('admin.info.update');
+    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
     Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
@@ -90,9 +91,12 @@ Route::prefix('admin')->group(function(){
         Route::post('/deny/{id}','Admin\AdminPostController@feedbackDeny')->name('admin.feedbacks.delete');
     });
     Route::prefix('moderators')->group(function(){
-       Route::get('/','Admin\AdminUserController@moderatorList')->name('admin.moderators.index');
-       Route::get('/delete/{id}', 'Admin\AdminUserController@moderatorDelete')->name('admin.moderator.delete');
-       Route::get('/create', 'Admin\AdminUserController@moderatorCreate')->name('admin.moderator.create');
+        Route::get('/', 'Admin\AdminUserController@moderatorList')->name('admin.moderators.index');
+        Route::get('/delete/{id}', 'Admin\AdminUserController@moderatorDelete')->name('admin.moderator.delete');
+        Route::get('/create', 'Admin\AdminUserController@moderatorCreate')->name('admin.moderator.create');
+        Route::post('/store', 'Admin\AdminUserController@moderatorStore')->name('admin.moderator.store');
+        Route::get('/edit/{id}', 'Admin\AdminUserController@moderatorEdit')->name('admin.moderator.edit');
+        Route::post('/update/{id}', 'Admin\AdminUserController@moderatorUpdate')->name('admin.moderator.update');
     });
     Route::prefix('users')->group(function (){
         Route::get('/', 'Admin\AdminPostController@users')->name('admin.clients.index');
