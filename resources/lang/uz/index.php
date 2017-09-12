@@ -38,7 +38,7 @@ return [
     'allblogs' => "Barcha maqolalar ro'yxati",
     'consultionfrom' => "",
     'lawyers&jurists' => "ta yurist va advokatlardan maslahat",
-    'ourlawyers-...' => "Bizning  jamoamiz  qonunchilikni yaxshi biladigan, ytarli amaliy tajribaga ega professional yuristlardan iborat. Bizga murojaat qilib Siz o'z savolingizga asosli va to'g'ri javob olaiz",
+    'ourlawyers-...' => "Bizning  jamoamiz  qonunchilikni yaxshi biladigan, yetarli amaliy tajribaga ega professional huquqshunoslardan iborat. Bizga murojaat qilib Siz o'z savolingizga asosli va to'g'ri javob olasiz",
     'feedbacks' => "ta minnatdorchiliklar",
     'allprojectlawyers' => "Barcha yuristlar ro'yxati",
     'aboutustitle' => "Dunyoning istalgan nuqtasida professional yuridik yordam ",
