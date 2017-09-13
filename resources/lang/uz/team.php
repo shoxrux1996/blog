@@ -6,19 +6,13 @@
  * Time: 15:20
  */
 return [
-    'Главная' => "Bosh sahifa",
-    'Юристы' => "Yuristlar",
-    'Вопросы' => "Savollar",
-    'Блог' => "Maqolalar",
-    'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Loyiha haqida",
     'Yuridik.uz — это крупнейший узбекский интернет сервис по оказанию юридических услуг в режиме онлайн. Сегодня аудитория нашего проекта — это сотни тысяч людей из разных уголков Узбекистана. В основе Yuridik.uz лежит идея о том, что около 70% всех юридических услуг могут быть оказаны удаленно, онлайн, без посещения офиса юриста.' => "Yuridik.uz – onlayn tarzda yuridik xizmat ko‘rsatuvchi O‘zbekistondagi eng yirik internet servislaridan biri. Hozirda loyihamizning auditoriyasi O‘zbekistonning turli burchaklaridan bo‘lgan o‘n minglab kishilarni o‘z ichiga qamrab olgan. Yuridik.uz bilan mavjud barcha huquqiy xizmatlarning deyarli 70 foizini masofadan turib, huquqshunos ofisiga bormasdan, onlayn tarzda amalga oshirish mumkin.",
     'Мы делаем Yuridik.uz, чтобы навсегда изменить ваше представление о том, как можно взаимодействовать с юристами, консультироваться, готовить документы, получать эффективную юридическую защиту.' => "Biz Yuridik.uz loyihasini huquqiy hujjatlarni tayyorlash, huquqshunos bilan ishlash, konsultatsiya va samarali huquqi yordam olish haqidagi tasavvuringizni to‘laligicha ijobiy tarafga o‘zgartirish uchun amalga oshirmoqdamiz.",
     'Посмотрите видео как работает Yuridik.uz.' => "Yuridik.uz qanday ishlashi haqidagi videorolikni tomosha qiling",
     'Yuridik.uz создают увлеченные талантливые люди, которые являются самой большей ценностью нашей компании. Это инженеры в сфере программного обеспечения, разработчики баз данных, проектировщики веб-интерфейсов, дизайнеры, интернет-маркетологи, юристы. Большая часть нашей команды (а пока это 18 человек) находится в Санкт-Петербурге. Несколько человек работают и в других городах: Москве, Новосибирске, Нью-Йорке.' => "Yuridik.uz zamonamizning yuqori ishtiyoqli va iqtidorli kishilari tomonidan yaratilgan bo‘lib, aynan ular loyihaning eng qimmatli resursi hisoblanadi. Ular orasida huquqshunoslar, dasturiy ta’minot muhandislari, ma’lumotlar bazasi muhandislari, veb-dizaynerlar, internet-marketologlar mavjud. Shuningdek, jamoamizning a’zolari faqatgina O‘zbekistonda turib emas, balki boshqa xorijiy davlatlarda yurib ham (AQSh, Yaponiya) faoliyat yuritishadi.",
     'МИССИЯ' => "VAZIFA",
     'Миссия Yuridik.uz — сделать юридические услуги в Узбекистана по-настоящему доступными и инновационными.' => "Yuridik.uz’ning vazifasi - O‘zbekistonda barcha uchun istalgan vaqt foydalanish imkoniyati mavjud bo‘lgan va innavatsion huquqiy xizmatlarni ko‘rsatilishini ta’minlash hisoblanadi.",
-    'Мы считаем, что юридическая помощь должна быть доступна для всех, в независимости от ситуации.)' => "Biz har bir fuqaro har qanday holatda kerakli huquqiy yordamni olish imkoniga ega bo‘lishi lozim deb hisoblaymiz.",
+    'Мы считаем, что юридическая помощь должна быть доступна для всех, в независимости от ситуации.' => "Biz har bir fuqaro har qanday holatda kerakli huquqiy yordamni olish imkoniga ega bo‘lishi lozim deb hisoblaymiz.",
     'Мы стремимся предоставить людям возможность быть свободными в вопросах защиты своих прав.' => "Fuqarolarga o‘z huquqlarini erkin va samarali himoya qilish imkonini yaratish uchun qo‘limizdan kelgan barcha harakatlarni amalga oshirishga tayyormiz.",
     'Мы помогаем найти людей, которые могут оказать компетентную юридическую помощь.' => "Fuqarolarga samarali huquqiy yordam ko‘rsata oladigan mutaxassislarni topishga yordam beramiz.",
     'Мы внедряем в отрасль юридических услуг новые технологии;' => "Huquqiy yordam ko‘rsatish sohasida yangi texnologik usullarni joriy qilmoqdamiz.",
@@ -51,7 +45,7 @@ return [
     'ну и стандартный набор: зерновой кофе, чай, печенье, пятничные пиццы' => "",
     'ОСТАЛИСЬ ВОПРОСЫ О РАБОТЕ В Yuridik.uz?' => "",
     'Напишите нам' => "",
-    'Хотите работу мечты?' => "",
-    'Смотрите наши вакансии' => "",
-    'Посмотреть вакансии' => "",
+    'Хотите работу мечты?' => "Orzuyingizdagi ishni xohlaysizmi?",
+    'Смотрите наши вакансии' => "Bizdagi bo'sh ish o'rinlarini ko'rib chiqing",
+    'Посмотреть вакансии' => "Bo'sh ish o'rinlarini ko'rish",
 ];

@@ -28,7 +28,6 @@ class AdminPostController extends Controller
 
     public function questions()
     {
-        Auth::guard('admin')->user()->questionNotifications()->delete();
         $questions = Question::orderBy('id', 'desc')->paginate(10);
         return view('question.admin-index')->withQuestions($questions);
     }
@@ -113,7 +112,7 @@ class AdminPostController extends Controller
 
     public function comments()
     {
-        Auth::guard('admin')->user()->commentNotifications()->delete();
+
         $comments = Comment::orderBy('id', 'desc')->paginate(10);
         return view('comment.list')->withComments($comments);
     }
@@ -126,7 +125,7 @@ class AdminPostController extends Controller
 
     public function users()
     {
-        Auth::guard('admin')->user()->userNotifications()->delete();
+
         $clients = Client::orderBy('id', 'desc')->paginate(8,['*'],'clients');
         $lawyers = Lawyer::orderBy('id', 'desc')->paginate(8,['*'],'lawyers');
         return view('admin.users')->withClients($clients)->withLawyers($lawyers);
@@ -176,8 +175,5 @@ class AdminPostController extends Controller
         $lawyer->save();
         return redirect()->back();
     }
-    public function moderators()
-    {
-        return view('admin.moderators');
-    }
+
 }

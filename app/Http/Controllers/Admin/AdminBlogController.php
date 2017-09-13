@@ -37,7 +37,7 @@ class AdminBlogController extends Controller
     {
 
         $blogs = Blog::orderBy('id', 'desc')->paginate(12);
-        Auth::guard('admin')->user()->blogNotifications()->delete();
+
         return view('admin.bloglist')->with('blogs', $blogs);
     }
 

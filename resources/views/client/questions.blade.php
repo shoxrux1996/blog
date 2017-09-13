@@ -2,14 +2,7 @@
 @section('styles')
 <link href="{{ asset('dist/css/questions.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-  <li><a href="{{ route('home')}}">Главная</a></li>
-  <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-  <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-  <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-  <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-  <li><a href="{{ route('about')}}">О нас</a></li>
-@endsection
+
 @section('content')
 	<div id="wrapper">
     <div class="container">
@@ -57,7 +50,7 @@
                          class="img-rounded"/>
                     <h3>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h3>
                     <h6>
-                        <b>{{$lawyer->job_status}}, г. {{$lawyer->user->city->name}}</b>
+                        <b>@lang("lawyer-settings.$lawyer->job_status"), г. {{$lawyer->user->city->name}}</b>
                     </h6>
                     <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть
                         профиль</a>

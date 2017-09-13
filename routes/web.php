@@ -1,8 +1,5 @@
 <?php
-Route::get('email', function (){
-    $data = array('name'=>'Shokhrukh', 'code'=>'1dsadsadasd');
-    return view('email.email-confirmation')->withData($data);
-});
+
 Route::get('card','Web\ApiController@show')->name('card.payment');
 Route::post('error/post', function (\Illuminate\Http\Request $request){
     $error = new \yuridik\Error;
@@ -13,9 +10,11 @@ Route::post('error/post', function (\Illuminate\Http\Request $request){
     return redirect()->back();
 })->name('error.find');
 Route::prefix('admin')->group(function(){
+    Route::get('/dashboard', 'Admin\AdminController@info')->name('admin.info');
+    Route::post('/info/update','Admin\AdminController@update')->name('admin.info.update');
+    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
     Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
@@ -23,6 +22,13 @@ Route::prefix('admin')->group(function(){
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.request.confirm');
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
+    Route::prefix('notifications')->group(function (){
+       Route::get('users', 'Admin\AdminNotificationController@usersList')->name('admin.users.notification.index');
+        Route::get('comments', 'Admin\AdminNotificationController@commentsList')->name('admin.comments.notification.index');
+        Route::get('blogs', 'Admin\AdminNotificationController@blogsList')->name('admin.blogs.notification.index');
+        Route::get('questions', 'Admin\AdminNotificationController@questionsList')->name('admin.questions.notification.index');
+        Route::get('answers', 'Admin\AdminNotificationController@answersList')->name('admin.answers.notification.index');
+    });
     Route::prefix('blogs')->group(function(){
         Route::get('/delete/{id}', 'Admin\AdminBlogController@destroy')->name('admin.blog.delete');
         Route::get('/', 'Admin\AdminBlogController@showBlogList')->name('admin.blogs');
@@ -85,7 +91,12 @@ Route::prefix('admin')->group(function(){
         Route::post('/deny/{id}','Admin\AdminPostController@feedbackDeny')->name('admin.feedbacks.delete');
     });
     Route::prefix('moderators')->group(function(){
-       Route::get('/','Admin\AdminPostController@moderators')->name('admin.moderators.index');
+        Route::get('/', 'Admin\AdminUserController@moderatorList')->name('admin.moderators.index');
+        Route::get('/delete/{id}', 'Admin\AdminUserController@moderatorDelete')->name('admin.moderator.delete');
+        Route::get('/create', 'Admin\AdminUserController@moderatorCreate')->name('admin.moderator.create');
+        Route::post('/store', 'Admin\AdminUserController@moderatorStore')->name('admin.moderator.store');
+        Route::get('/edit/{id}', 'Admin\AdminUserController@moderatorEdit')->name('admin.moderator.edit');
+        Route::post('/update/{id}', 'Admin\AdminUserController@moderatorUpdate')->name('admin.moderator.update');
     });
     Route::prefix('users')->group(function (){
         Route::get('/', 'Admin\AdminPostController@users')->name('admin.clients.index');
@@ -94,6 +105,7 @@ Route::prefix('admin')->group(function(){
         Route::post('lawyer/block/{id}','Admin\AdminPostController@lawyerBlock')->name('admin.lawyer.block');
         Route::post('lawyer/unblock/{id}','Admin\AdminPostController@lawyerUnblock')->name('admin.lawyer.unblock');
         Route::post('lawyer/confirm/{id}','Admin\AdminPostController@lawyerConfirm')->name('admin.lawyer.confirm');
+        Route::get('lawyer/award/delete/{id}', 'Admin\AdminPostController@lawyerAwardDelete')->name('admin.lawyer.award.delete');
     });
 });
 
@@ -110,15 +122,19 @@ Route::prefix('user')->group(function(){
 });
 
 Route::prefix('client')->group(function(){
+    Route::get('/file/delete/{id}','Client\ClientController@fileDelete')->name('client.file.delete');
+
 	Route::post('/password/reset', 'Auth\ClientResetPasswordController@reset')->name('client.password.request');
 	Route::get('/password/reset/{token}', 'Auth\ClientResetPasswordController@showResetForm')->name('client.password.reset');
 	Route::get('/', 'Client\ClientController@index')->name('client.dashboard');
-	Route::get('/settings/info', 'Client\ClientController@info')->name('client.info');
+	Route::get('/settings/info/{type?}', 'Client\ClientController@info')->name('client.info');
 	Route::post('/update/{settingtype}', 'Client\ClientController@update')->name('client.update');
 
     Route::prefix('question')->group(function(){
         Route::get('/create', 'Client\ClientQuestionController@create')->name('question.create');
         Route::post('/store', 'Client\ClientQuestionController@store')->name('question.insert.submit');
+        Route::get('/edit/{id}','Client\ClientQuestionController@edit')->name('question.edit');
+        Route::post('/edit/update/{id}', 'Client\ClientQuestionController@update')->name('question.edit.submit');
         
     });
     Route::prefix('feedback')->group(function(){
@@ -158,9 +174,10 @@ Route::prefix('lawyer')->group(function(){
 //	Route::post('/password/email', 'Auth\LawyerForgotPasswordController@sendResetLinkEmail')->name('lawyer.password.email');
 	Route::post('/password/reset', 'Auth\LawyerResetPasswordController@reset')->name('lawyer.password.request');
 	Route::get('/password/reset/{token}', 'Auth\LawyerResetPasswordController@showResetForm')->name('lawyer.password.reset');
-    Route::get('/settings/info', 'Lawyer\LawyerController@info')->name('lawyer.info');
+    Route::get('/settings/info/{type?}', 'Lawyer\LawyerController@info')->name('lawyer.info');
     Route::post('/update/{settingtype}', 'Lawyer\LawyerController@update')->name('lawyer.update');
-
+    Route::get('/file/delete/{id}','Lawyer\LawyerController@awardDelete')->name('lawyer.award.delete');
+    Route::get('/file/delete/{id}','Lawyer\LawyerController@fileDelete')->name('lawyer.file.delete');
     Route::prefix('/notifications')->group(function (){
         Route::get('/mark-as-read','Lawyer\LawyerNotificationController@notificationAsRead')->name('lawyer.notification.asRead');
     });
@@ -174,7 +191,12 @@ Route::prefix('lawyer')->group(function(){
     Route::prefix('/comment')->group(function(){
         Route::post('/{blog_id}', 'Lawyer\LawyerCommentController@store')->name('lawyer.comment.store');
     });
-    Route::post('answer/create/{question_id}', 'Lawyer\LawyerAnswerController@store')->name('lawyer.answer.store');
+    Route::prefix('answer')->group(function (){
+        Route::post('/create/{question_id}', 'Lawyer\LawyerAnswerController@store')->name('lawyer.answer.store');
+        Route::get('/edit/{id}', 'Lawyer\LawyerAnswerController@edit')->name('lawyer.answer.edit');
+        Route::post('/update/{id}', 'Lawyer\LawyerAnswerController@update')->name('lawyer.answer.update');
+    });
+
     Route::prefix('document')->group(function(){
         Route::get('/list', 'Lawyer\LawyerDocumentController@index')->name('lawyer.document.info');
         Route::post('/submit/{id}', 'Lawyer\LawyerDocumentController@sendRequest')->name('lawyer.document.request');

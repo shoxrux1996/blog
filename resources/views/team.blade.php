@@ -29,7 +29,7 @@
                 </div>
                 <p>@lang('team.Миссия Yuridik.uz — сделать юридические услуги в Узбекистана по-настоящему доступными и инновационными.')</p>
                 <ul class="list-unstyled">
-                    <li>(<i class="fa fa-check-square-o text-primary"></i> @lang('team.Мы считаем, что юридическая помощь должна быть доступна для всех, в независимости от ситуации.)')</li>
+                    <li><i class="fa fa-check-square-o text-primary"></i> @lang('team.Мы считаем, что юридическая помощь должна быть доступна для всех, в независимости от ситуации.')</li>
                     <li><i class="fa fa-check-square-o text-primary"></i> @lang('team.Мы стремимся предоставить людям возможность быть свободными в вопросах защиты своих прав.')</li>
                     <li><i class="fa fa-check-square-o text-primary"></i> @lang('team.Мы помогаем найти людей, которые могут оказать компетентную юридическую помощь.')</li>
                     <li><i class="fa fa-check-square-o text-primary"></i> @lang('team.Мы внедряем в отрасль юридических услуг новые технологии;')</li>
@@ -63,17 +63,17 @@
     <div class="row">
         <h4 class="text-danger">@lang('team.Наши преимущества')</h4>
         <p>@lang('team.Работа в Yuridik.uz даст вам возможность решать увлекательные и сложные задачи. Вместе мы будем создавать продукт, которым будут пользоваться миллионы людей по всей Узбекистана.')</p>
-        <p>@lang('team.Кроме этого, есть много других преимуществ, включая:')</p>
-        <ul class="list-unstyled">
-            <li><i class="fa fa-check-square"></i> @lang('team.нужные для работы книги и журналы')</li>
-            <li><i class="fa fa-check-square"></i> @lang('team.оплата необходимых конференций, курсов, семинаров')</li>
-            <li><i class="fa fa-check-square"></i> @lang('team.возмещение 50% расходов на посещение спортивного зала')</li>
-            <li><i class="fa fa-check-square"></i> @lang('team.мы купим для вас любое необходимое для работы оборудование и софт')</li>
-            <li><i class="fa fa-check-square"></i> @lang('team.гибкая и справедливая политика предоставления оплачиваемых отпусков')</li>
-            <li><i class="fa fa-check-square"></i> @lang('team.офис в десяти минутах ходьбы от станции метро “Московские ворота”')</li>
-            <li><i class="fa fa-check-square"></i> @lang('team.ну и стандартный набор: зерновой кофе, чай, печенье, пятничные пиццы')</li>
-        </ul>
-        <h6 class="text-danger"><b>@lang('team.ОСТАЛИСЬ ВОПРОСЫ О РАБОТЕ В Yuridik.uz?')</b> <button type="button" class="btn btn-default btn-primary">@lang('team.Напишите нам')</button> </h6>
+        {{--<p>@lang('team.Кроме этого, есть много других преимуществ, включая:')</p>--}}
+        {{--<ul class="list-unstyled">--}}
+            {{--<li><i class="fa fa-check-square"></i> @lang('team.нужные для работы книги и журналы')</li>--}}
+            {{--<li><i class="fa fa-check-square"></i> @lang('team.оплата необходимых конференций, курсов, семинаров')</li>--}}
+            {{--<li><i class="fa fa-check-square"></i> @lang('team.возмещение 50% расходов на посещение спортивного зала')</li>--}}
+            {{--<li><i class="fa fa-check-square"></i> @lang('team.мы купим для вас любое необходимое для работы оборудование и софт')</li>--}}
+            {{--<li><i class="fa fa-check-square"></i> @lang('team.гибкая и справедливая политика предоставления оплачиваемых отпусков')</li>--}}
+            {{--<li><i class="fa fa-check-square"></i> @lang('team.офис в десяти минутах ходьбы от станции метро “Московские ворота”')</li>--}}
+            {{--<li><i class="fa fa-check-square"></i> @lang('team.ну и стандартный набор: зерновой кофе, чай, печенье, пятничные пиццы')</li>--}}
+        {{--</ul>--}}
+        {{--<h6 class="text-danger"><b>@lang('team.ОСТАЛИСЬ ВОПРОСЫ О РАБОТЕ В Yuridik.uz?')</b> <button type="button" class="btn btn-default btn-primary">@lang('team.Напишите нам')</button> </h6>--}}
     </div>
 </div>
 

@@ -74,6 +74,9 @@ class Lawyer extends Authenticatable
     public function blogNotifications(){
         return $this->unreadNotifications()->where('type', 'yuridik\Notifications\BlogsNotification');
     }
+    public function commentNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\CommentsNotification');
+    }
     public function feedbacks()
     {
         return $this->hasManyThrough('yuridik\Feedback', 'yuridik\Answer');

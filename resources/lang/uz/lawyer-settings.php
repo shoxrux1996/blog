@@ -6,12 +6,6 @@
  * Time: 14:06
  */
 return [
-    'Главная' => "Bosh sahifa",
-    'Юристы' => "Yuristlar",
-    'Вопросы' => "Savollar",
-    'Блог' => "Maqola",
-    'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Loyiha haqida",
     'Мой профиль' => "Mening profilim",
     'Личный кабинет' => "Shaxsiy kabinet",
     'Как считается рейтинг?' => "Reyting qanday baholanadi?",
@@ -39,6 +33,9 @@ return [
     'Отчество' => "Otasining ismi",
     'Город' => "Shahar",
     'Ваш статус' => "Status",
+    'lawyer' => 'Advokat',
+    'notary'=>'Notarius',
+    'jurist' =>'Huquqshunos',
     'Адвокат' => "Advokat",
     'Нотариус' => "Notarius",
     'Юрист' => "Huquqshunos",

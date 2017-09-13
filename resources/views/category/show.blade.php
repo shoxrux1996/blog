@@ -1,18 +1,13 @@
 @extends('layouts.app')
 @section('styles')
-    <link href="{{ asset('dist/css/lawyers.css')}}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+
     <link href="{{ asset('dist/css/homepage.css')}}" rel="stylesheet">
     <link href="{{ asset('dist/css/individual-category.css')}}" rel="stylesheet">
+    <link href="{{ asset('dist/css/lawyers.css')}}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+    <link href="{{ asset('dist/css/rotating-card.css')}}" rel="stylesheet">
 
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">Главная</a></li>
-    <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-    <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-    <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-    <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-    <li><a href="{{ route('about')}}">О нас</a></li>
-@endsection
+
 @section('content')
     <div id="wrapper">
         <!-- Category info -->
@@ -233,7 +228,7 @@
                                          class="img-rounded"/>
                                     <h5>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h5>
                                     <h6>
-                                        <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
+                                        <b>@lang("lawyer-settings.$lawyer->job_status"), г. {{  $lawyer->user->city->name }}</b>
                                     </h6>
                                     <a type="button" class="btn btn-default btn-success"
                                        href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
@@ -267,12 +262,12 @@
                                             </div>
                                             <div class="user">
                                                 <img class="img-circle"
-                                                     src="{{$lawyer->file != null ? asset($lawyer->file->path.$lawyer->file->file) : asset('dist/images/headshot-3.jpg')}}"/>
+                                                     src="{{$lawyer->user->file != null ? asset($lawyer->user->file->path.$lawyer->user->file->file) : asset('dist/images/headshot-3.jpg')}}"/>
                                             </div>
                                             <div class="content">
                                                 <div class="main">
                                                     <h2 class="name">{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h2>
-                                                    <p class="profession">{{$lawyer->job_status}},
+                                                    <p class="profession">@lang("lawyer-settings.$lawyer->job_status"),
                                                         г. {{$lawyer->user->city->name}}</p>
                                                     <p class="text-center">
                                                         <i class="fa fa-star"></i>
@@ -329,7 +324,6 @@
                                 </div> <!-- end card-container -->
                             </div>
                         @endforeach
-
                     </div>
                     <!-- /Lawyers -->
                 </div>

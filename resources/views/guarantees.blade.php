@@ -3,14 +3,7 @@
     <link href="{{asset('dist/css/guarantees.css')}}" rel="stylesheet">
     <link href="{{asset('dist/css/rotating-card.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">@lang('guarantees.Главная')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('guarantees.Юристы')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('guarantees.Вопросы')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('guarantees.Блог')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('guarantees.Как это работает')</a></li>
-    <li><a href="{{ route('about')}}">@lang('guarantees.О нас')</a></li>
-@endsection
+
 @section('content')
 
 

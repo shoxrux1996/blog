@@ -91,9 +91,10 @@
     <script src={{asset('js/tinymce/tinymce.min.js')}}></script>
     <script>tinymce.init({
             selector: 'textarea',
-            plugins: 'link code',
+            plugins:[ 'link code', "textcolor"],
             height: 500,
-            toolbar: 'undo redo | cut copy paste'
+            toolbar: ['undo redo | cut copy paste forecolor backcolor fontsizeselect fontselect'],
+            fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt'
         });</script>
 @endsection
 

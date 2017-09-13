@@ -2,14 +2,7 @@
 @section('styles')
 <link href="{{ asset('dist/css/client.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-  <li><a href="{{ route('home')}}">@lang('client-settings.Главная')</a></li>
-  <li><a href="{{ route('lawyers.list')}}">@lang('client-settings.Юристы')</a></li>
-  <li><a href="{{ route('question.list')}}">@lang('client-settings.Вопросы')</a></li>
-  <li><a href="{{ route('web.blogs')}}">@lang('client-settings.Блог')</a></li>
-  <li><a href="{{ route('how-works')}}">@lang('client-settings.Как это работает')</a></li>
-  <li><a href="{{ route('about')}}">@lang('client-settings.О нас')</a></li>
-@endsection
+
 @section('content')
 <!-- Content -->
 <div id="wrapper">

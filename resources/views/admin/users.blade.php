@@ -9,11 +9,11 @@
             <li class="navs">
                 <a onclick="switchSection('section1')"><i
                             class="fa fa-columns"></i>
-                    Клиенты</a>
+                    Клиенты {{$clients->total()}}</a>
             </li>
             <li class="navs">
                 <a onclick="switchSection('section2')"><i
-                            class="fa fa-list-alt"></i> Юристы</a>
+                            class="fa fa-list-alt"></i> Юристы {{$lawyers->total()}}</a>
             </li>
         </ul>
     </nav>
@@ -196,7 +196,7 @@
                                         {{$lawyer->user->lastName}}
                                     </div>
                                     <div class="profile-usertitle-job">
-                                        {{$lawyer->job_status}}, г. {{$lawyer->user->city->name}} <br/>
+                                        @lang("lawyer-settings.$lawyer->job_status"), г. {{$lawyer->user->city->name}} <br/>
                                         {{--Был в сети сегодня в 15:04--}}
                                     </div>
                                 </div>
@@ -343,12 +343,18 @@
                                 <div class="row">
                                     <h6><b>Награды</b></h6>
                                     @if($lawyer->files != null)
-                                        @foreach($lawyer->files as $award)
-                                            <div class="col-sm-3">
-                                                <img class="img-responsive img-thumbnail"
-                                                     src="{!!asset($award->path . $award->file)!!}"/>
+                                        @for($i=0; $i<$lawyer->files->count(); $i+=3)
+                                            <div class="row">
+                                                @for($j=$i; $j<=$i+2 && $j<$lawyer->files->count(); $j++)
+                                                    <div class="col-sm-3">
+                                                        <a href="{{route('admin.lawyer.award.delete', $lawyer->files[$j]->id)}}" onclick="return confirm('Вы уверены')" class="btn btn-sm btn-danger"
+                                                           style="position: absolute;">X</a>
+                                                        <img class="img-responsive img-thumbnail"
+                                                             src="{!!asset($lawyer->files[$j]->path. $lawyer->files[$j]->file)!!}"/>
+                                                    </div>
+                                                @endfor
                                             </div>
-                                        @endforeach
+                                        @endfor
                                     @endif
                                 </div>
                             </div>

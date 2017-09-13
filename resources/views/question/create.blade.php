@@ -3,14 +3,7 @@
     <link href="{{ asset('dist/css/services.css')}}" rel="stylesheet">
     <link href="{{ asset('dist/css/become-brilliant.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-  <li><a href="{{ route('home')}}">@lang('question.home')</a></li>
-  <li><a href="{{ route('lawyers.list')}}">@lang('question.lawyers')</a></li>
-  <li><a href="{{ route('question.list')}}">@lang('question.questions')</a></li>
-  <li><a href="{{ route('web.blogs')}}">@lang('question.blog')</a></li>
-  <li><a href="{{ route('how-works')}}">@lang('question.howworks')</a></li>
-  <li><a href="{{ route('about')}}">@lang('question.aboutus')</a></li>
-@endsection
+
 @section('content')
     
 

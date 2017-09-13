@@ -6,12 +6,6 @@
  * Time: 13:01
  */
 return [
-    'Главная' => "Bosh sahifa",
-    'Юристы' => "Yuristlar",
-    'Вопросы' => "Savollar",
-    'Блог' => "Maqola",
-    'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Loyiha haqida",
     'Регистрация на Yuridik.uz' => "Yuridik.uz’da ro‘yxatdan o‘tish",
     'Клиент' => "Mijoz",
     'Юрист' => "Huquqshunos",

@@ -96,7 +96,7 @@ return [
              * After cleaning up backups, remove the oldest backup until
              * this number of megabytes has been reached.
              */
-            'deleteOldestBackupsWhenUsingMoreMegabytesThan' => 5000,
+            'deleteOldestBackupsWhenUsingMoreMegabytesThan' => 120,
         ],
     ],
 
@@ -142,9 +142,9 @@ return [
             'whenBackupWasSuccessful'     => ['log', 'telegram'],
             'whenCleanupWasSuccessful'    => ['log', 'telegram'],
             'whenHealthyBackupWasFound'   => ['log', 'telegram'],
-            'whenBackupHasFailed'         => ['log', 'mail', 'telegram'],
-            'whenCleanupHasFailed'        => ['log', 'mail', 'telegram'],
-            'whenUnhealthyBackupWasFound' => ['log', 'mail', 'telegram'],
+            'whenBackupHasFailed'         => ['log', 'telegram'],
+            'whenCleanupHasFailed'        => ['log', 'telegram'],
+            'whenUnhealthyBackupWasFound' => ['log', 'telegram'],
         ],
 
         /*

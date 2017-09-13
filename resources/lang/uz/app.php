@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'Главная' => "Bosh sahifa",
+    'Юристы' => "Huquqshunoslar",
+    'Вопросы' => "Savollar",
+    'Блог' => "Maqola",
+    'Как это работает' => "Bu qanday ishlaydi",
+    'О нас' => "Loyiha haqida",
     'or' => "yoki",
     'registration' => "Ro'yxatdan o'tish",
     'login' => "Kirish",
@@ -21,7 +27,7 @@ return [
     'moneyback' => "Sizga yordam beramiz - yoki pulingini qaytarib beramiz",
     'allguarantees' => "Yuridik.uz ning barcha kafolatlari",
     'aboutproject' => "Loyiha haqida",
-    'aboutus' => "Loyiha haqida",
+    'aboutus' => "Jamoa haqida",
     'contacts' => "Biz bilan bog'lanish",
     'ourpartners' => "Hamkorlarimiz",
     'categories' => "Sohalar bo'yicha savolar ",

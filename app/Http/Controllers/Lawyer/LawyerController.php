@@ -2,6 +2,7 @@
 
 namespace yuridik\Http\Controllers\Lawyer;
 
+use Illuminate\Support\Facades\Hash;
 use yuridik\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -27,8 +28,9 @@ class LawyerController extends Controller
         return view('lawyer.dashboard')->withLawyer($lawyer);
     }
 
-    public function info()
+    public function info($type = 'main')
     {
+
         $lawyer = Auth::user();
         $categories = Category::where('category_id', null)->get();
         $city = City::all();
@@ -36,22 +38,14 @@ class LawyerController extends Controller
         foreach ($city as $key) {
             $cities[$key->id] = $key->name;
         }
+            return view('lawyer.info')->withSettingtype($type)->withLawyer($lawyer)->withCities($cities)->withCategories($categories);
 
-        return view('lawyer.info')->withSettingtype('main')->withLawyer($lawyer)->withCities($cities)->withCategories($categories);
     }
 
     public function update(Request $request, $settingtype)
     {
-
         $lawyer = Auth::user();
-        $city = City::all();
-        $categories = Category::where('category_id', null)->get();
-        $cities = array();
-        foreach ($city as $key) {
-            $cities[$key->id] = $key->name;
-        }
         if ($settingtype === "main") {
-
             if ($request->name !== null)
                 $lawyer->user->firstName = $request->name;
             if ($request->surname !== null)
@@ -63,7 +57,7 @@ class LawyerController extends Controller
             $lawyer->user->dateOfBirth = $request->dateOfBirth;
             $lawyer->user->city_id = $request->city;
             $lawyer->push();
-            return view('lawyer.info')->withSettingtype('main')->withLawyer($lawyer)->withCities($cities)->withCategories($categories);
+            return redirect()->route('lawyer.info', ['type' => 'main']);
         } elseif ($settingtype === "photo") {
             $messages = [
                 'image' => 'Формат не поддерживается',
@@ -71,16 +65,17 @@ class LawyerController extends Controller
             $validator = Validator::make($request->all(),
                 ['image' => 'image'], $messages);
             if ($validator->fails()) {
-                return view('lawyer.info')->withSettingtype('photo')->withLawyer($lawyer)->withCities($cities)->withCategories($categories)->withErrors($validator);
+                return redirect()->route('lawyer.info', ['type' => 'photo'])->withErrors($validator);
             }
             if ($request->file('image') != null) {
                 $file = $request->file('image');
                 $file_name = $file->getClientOriginalName();
                 $upload_folder = '/lawyers/photo' . $lawyer->id . '/';
                 if ($lawyer->user->file != null) {
-                    LaraFile::delete(public_path() . $upload_folder . $lawyer->user->file->file);
+                    LaraFile::delete(public_path() . $lawyer->user->file->path . $lawyer->user->file->file);
                     $lawyer->user->file->file = $file_name;
                     $lawyer->user->file->path = $upload_folder;
+                    $lawyer->user->file->save();
 
                 } else {
                     $fil = new File;
@@ -91,11 +86,10 @@ class LawyerController extends Controller
                 }
                 $file->move(public_path() . $upload_folder, $file_name);
             }
-            $lawyer->push();
-            return view('lawyer.info')->withSettingtype('photo')->withLawyer($lawyer)->withCities($cities)->withCategories($categories);
+            $lawyer->save();
+            return redirect()->route('lawyer.info', ['type' => 'photo']);
         } elseif ($settingtype === "password") {
-
-            if (Auth::attempt(['email' => $lawyer->email, 'password' => $request->current_password])) {
+            if (Hash::check($request->current_password, $lawyer->password)) {
                 $messages = [
                     'required' => 'Обязательно к заполнению',
                     'string' => 'Неправильный формат',
@@ -105,14 +99,14 @@ class LawyerController extends Controller
                 $validator = Validator::make($request->all(),
                     ['new_password' => 'required|string|min:6|confirmed',], $messages);
                 if ($validator->fails()) {
-                    return view('lawyer.info')->withSettingtype('password')->withLawyer($lawyer)->withCities($cities)->withCategories($categories)->withErrors($validator);
+                    return redirect()->route('lawyer.info', ['type' => 'password'])->withErrors($validator);
                 } else {
-                    $lawyer->password = bcrypt($request->new_password);
-                    $lawyer->push();
-                    return view('lawyer.info')->withSettingtype('password')->withLawyer($lawyer)->withCities($cities)->withCategories($categories);
+                    $lawyer->password = Hash::make($request->new_password);
+                    $lawyer->save();
+                    return redirect()->route('lawyer.info', ['type' => 'password']);
                 }
             } else
-                return view('lawyer.info')->withSettingtype('password')->withLawyer($lawyer)->withCities($cities)->withCategories($categories)->withErrors(['wrong-attempt' => 'Неправильный пароль']);
+                return redirect()->route('lawyer.info', ['type' => 'password'])->withErrors(['wrong-attempt' => 'Неправильный пароль']);
         } elseif ($settingtype === 'contacts') {
             $messages = [
                 'required' => 'Обязательно к заполнению',
@@ -121,11 +115,11 @@ class LawyerController extends Controller
             $validator = Validator::make($request->all(),
                 ['phone' => 'required',], $messages);
             if ($validator->fails()) {
-                return view('lawyer.info')->withSettingtype('contacts')->withLawyer($lawyer)->withCities($cities)->withCategories($categories)->withErrors($validator);
+                return redirect()->route('lawyer.info', ['type' => 'contacts'])->withErrors($validator);
             } else {
                 $lawyer->user->phone = $request->phone;
-                $lawyer->push();
-                return view('lawyer.info')->withSettingtype('contacts')->withLawyer($lawyer)->withCities($cities)->withCategories($categories);
+                $lawyer->user->save();
+                return redirect()->route('lawyer.info', ['type' => 'contacts']);
             }
         } elseif ($settingtype === 'experience') {
             $lawyer->categories()->detach();
@@ -137,7 +131,7 @@ class LawyerController extends Controller
                 $validator = Validator::make($request->all(),
                     ['position' => 'required', 'company' => 'required',], $messages);
                 if ($validator->fails()) {
-                    return view('lawyer.info')->withSettingtype('experience')->withLawyer($lawyer)->withCities($cities)->withCategories($categories)->withErrors($validator);
+                    return redirect()->route('lawyer.info', ['type' => 'experience'])->withErrors($validator);
                 } else {
                     $lawyer->company = $request->company;
                     $lawyer->position = $request->position;
@@ -155,14 +149,14 @@ class LawyerController extends Controller
                 $validator = Validator::make($request->all(),
                     ['experience_year' => 'required|integer|between:0,99',], $messages);
                 if ($validator->fails()) {
-                    return view('lawyer.info')->withSettingtype('experience')->withLawyer($lawyer)->withCities($cities)->withCategories($categories)->withErrors($validator);
+                    return redirect()->route('lawyer.info', ['type' => 'experience'])->withErrors($validator);
                 } else {
                     $lawyer->experience_year = $request->experience_year;
                     $lawyer->push();
+                    return redirect()->route('lawyer.info', ['type' => 'experience']);
                 }
             }
-
-            return view('lawyer.info')->withSettingtype('experience')->withLawyer($lawyer)->withCities($cities)->withCategories($categories);
+            return redirect()->route('lawyer.info', ['type' => 'experience']);
         } elseif ($settingtype === 'additional') {
             $messages = [
                 'integer' => 'Неверный формат',
@@ -172,7 +166,7 @@ class LawyerController extends Controller
                 'call_price' => 'integer|between:0,20000',
                 'doc_price' => 'integer|between:0,50000',], $messages);
             if ($validator->fails()) {
-                return view('lawyer.info')->withSettingtype('additional')->withLawyer($lawyer)->withCities($cities)->withCategories($categories)->withErrors($validator);
+                return redirect()->route('lawyer.info', ['type' => 'additional'])->withErrors($validator);
             } else {
                 if ($request->call_price !== null)
                     $lawyer->call_price = $request->call_price;
@@ -185,12 +179,11 @@ class LawyerController extends Controller
                 $lawyer->profile_shown_price = $request->profile_shown_price;
                 $lawyer->about_me = $request->about_me;
                 $lawyer->push();
-                return view('lawyer.info')->withSettingtype('additional')->withLawyer($lawyer)->withCities($cities)->withCategories($categories);
+                return redirect()->route('lawyer.info', ['type' => 'additional']);
             }
         } elseif ($settingtype === 'awards') {
             $messages = [
                 'image' => 'Неверный формат',
-
             ];
             $rules = array();
             $count = count($request->file('files')) - 1;
@@ -200,21 +193,39 @@ class LawyerController extends Controller
             }
             $validator = Validator::make($request->all(), $rules, $messages);
             if ($validator->fails()) {
-                return view('lawyer.info')->withSettingtype('awards')->withLawyer($lawyer)->withCities($cities)->withCategories($categories)->withErrors($validator);
+                return redirect()->route('lawyer.info', ['type' => 'awards'])->withErrors($validator);
             } else {
                 if ($request->file('files') != null) {
                     $file = $request->file('files');
                     foreach ($file as $key) {
                         $fil = new File;
                         $fil->file = $key->getClientOriginalName();
-                        $upload_folder = '/awards/' . time() . '/';
+                        $upload_folder = '/awards/lawyer' . $lawyer->id . '/';
                         $fil->path = $upload_folder;
                         $lawyer->files()->save($fil);
                         $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
                     }
                 }
-                return view('lawyer.info')->withSettingtype('awards')->withLawyer($lawyer)->withCities($cities)->withCategories($categories);
+                return redirect()->route('lawyer.info', ['type' => 'awards']);
             }
+        } else {
+            return redirect()->route('lawyer.info');
         }
+
+    }
+
+    public function awardDelete($id)
+    {
+        $file = File::findOrFail($id);
+        LaraFile::delete(public_path() . $file->path . $file->file);
+        $file->delete();
+        return redirect()->route('lawyer.info', ['type' => 'awards']);
+    }
+    public function fileDelete($id)
+    {
+        $file = File::findOrFail($id);
+        LaraFile::delete(public_path() . $file->path . $file->file);
+        $file->delete();
+        return redirect()->back();
     }
 }

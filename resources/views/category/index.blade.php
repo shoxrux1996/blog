@@ -3,14 +3,7 @@
     <link href="{{ asset('dist/css/homepage.css')}}" rel="stylesheet">
     <link href="{{ asset('dist/css/individual-category.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">Главная</a></li>
-    <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-    <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-    <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-    <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-    <li><a href="{{ route('about')}}">О нас</a></li>
-@endsection
+
 @section('content')
     <div id="wrapper">
         <div class="container" id="category-section">

@@ -27,7 +27,6 @@
                             <h3 class="media-heading">
                                 <a href="{{route('admin.tag.showeach',$tag->id)}}">{{$tag->name}}
                                     <strong>{{ $tag->id }}</strong></a></h3>
-
                         </div>
 
                     </div>

@@ -13,7 +13,7 @@ class ClientNotificationsController extends Controller
     }
     public function deleteNotifications(){
         $client = Auth::guard('client')->user();
-        $client->unreadNotifications->markAsRead();
+        $client->unreadNotifications()->delete();
         return redirect()->back();
     }
 }

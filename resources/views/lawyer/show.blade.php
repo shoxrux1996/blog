@@ -6,14 +6,7 @@
     <link href="{{asset('dist/css/blog.css')}}" rel="stylesheet">
 
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">@lang('individual-lawyer.Главная')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('individual-lawyer.Юристы')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('individual-lawyer.Вопросы')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('individual-lawyer.Блог')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('individual-lawyer.Как это работает')</a></li>
-    <li><a href="{{ route('about')}}">@lang('individual-lawyer.О нас')</a></li>
-@endsection
+
 @section('content')
     <div id="wrapper">
         <div class="container-fluid">
@@ -34,7 +27,7 @@
                                 {{$lawyer->user->lastName}}
                             </div>
                             <div class="profile-usertitle-job">
-                                {{$lawyer->job_status}}, г. {{$lawyer->user->city->name}} <br/>
+                                @lang("lawyer-settings.$lawyer->job_status"), г. {{$lawyer->user->city->name}} <br/>
                                 {{--Был в сети сегодня в 15:04--}}
                             </div>
                         </div>

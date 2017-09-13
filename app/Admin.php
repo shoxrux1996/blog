@@ -39,7 +39,9 @@ class Admin extends Authenticatable
     public function blogNotifications(){
         return $this->unreadNotifications()->where('type', 'yuridik\Notifications\BlogsNotification');
     }
-
+    public function answerNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\AnswerNotification');
+    }
     public function commentNotifications(){
         return $this->unreadNotifications()->where('type', 'yuridik\Notifications\CommentsNotification');
     }

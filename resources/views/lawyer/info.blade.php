@@ -3,14 +3,7 @@
     <link href="{{ asset('dist/css/client.css')}}" rel="stylesheet">
     <link href="{{ asset('dist/css/lawyer.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">@lang('lawyer-settings.Главная')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('lawyer-settings.Юристы')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('lawyer-settings.Вопросы')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('lawyer-settings.Блог')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('lawyer-settings.Как это работает')</a></li>
-    <li><a href="{{ route('about')}}">@lang('lawyer-settings.О нас')</a></li>
-@endsection
+
 @section('content')
 
     <div id="wrapper">
@@ -191,7 +184,8 @@
                                                value="F" {{$lawyer->gender==='F' ? 'checked' : ''}}/> @lang('lawyer-settings.Женский')
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
+                                        <button type="submit"
+                                                class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
                                         </button>
                                     </div>
                                 </form>
@@ -203,10 +197,10 @@
                             <div class="col-sm-4">
                                 <div class="img-responsive">
                                     @if($lawyer->user->file != null)
-                                        <img src="{!!asset($lawyer->user->file->path . $lawyer->user->file->file)!!}"
+                                        <img id="blah" src="{!!asset($lawyer->user->file->path . $lawyer->user->file->file)!!}"
                                              alt="..." class="img-thumbnail" style="height: 300px;">
                                     @else
-                                        <img class="img-thumbnail"
+                                        <img id="blah" class="img-thumbnail"
                                              src="{{ asset('dist/images/avatar_large_male_client_default.jpg')}}"/>
                                     @endif
                                 </div>
@@ -220,11 +214,13 @@
                                     </span>
                                         @endif
                                         <label class="btn btn-default ">
-                                            @lang('lawyer-settings.Выбрать файл') <input class="image" type="file" name="image" hidden>
+                                            @lang('lawyer-settings.Выбрать файл') <input onchange="readURL(this);"  class="image" type="file"
+                                                                                         name="image" hidden>
                                         </label>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary">@lang('lawyer-settings.Загрузить')</button>
+                                        <button type="submit"
+                                                class="btn btn-default btn-primary">@lang('lawyer-settings.Загрузить')</button>
                                     </div>
                                 </form>
                             </div>
@@ -266,7 +262,8 @@
                                                name="new_password_confirmation"/>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
+                                        <button type="submit"
+                                                class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
                                         </button>
                                     </div>
                                 </form>
@@ -305,7 +302,8 @@
                                         <input type="text" class="form-control" id="skype"/>
                                     </div>-->
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
+                                        <button type="submit"
+                                                class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
                                         </button>
                                     </div>
                                 </form>
@@ -432,7 +430,8 @@
                                                name="experience_year" value="{{$lawyer->experience_year}}">
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
+                                        <button type="submit"
+                                                class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
                                         </button>
                                     </div>
                                 </div>
@@ -481,48 +480,57 @@
                                                   name="about_me">{{$lawyer->about_me}}</textarea>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
+                                        <button type="submit"
+                                                class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                        
+
                         </form>
-                        </div>
+                    </div>
                     <div id="awards" class="tab-pane fade in {{$settingtype==='awards' ? 'active' : ''}}">
-                            <div class="row">
-                                <h6><b>@lang('lawyer-settings.Сертификаты')</b></h6>
-                                @if($lawyer->files != null)
-                                    @foreach($lawyer->files as $award)
-                                        <div class="col-sm-3">
-                                            <img class="img-responsive img-thumbnail"
-                                                 src="{!!asset($award->path . $award->file)!!}"/>
-                                        </div>
-                                    @endforeach
+                        <div class="row">
+                            <h6><b>@lang('lawyer-settings.Сертификаты')</b></h6>
+                            @if($lawyer->files != null)
+                                @for($i=0; $i<$lawyer->files->count(); $i+=3)
+                                    <div class="row">
+                                        @for($j=$i; $j<=$i+2 && $j<$lawyer->files->count(); $j++)
+                                            <div class="col-sm-3">
+                                                <a href="{{route('lawyer.award.delete', $lawyer->files[$j]->id)}}" onclick="return confirm('Вы уверены')" class="btn btn-sm btn-danger"
+                                                   style="position: absolute;">X</a>
+                                                <img class="img-responsive img-thumbnail"
+                                                     src="{!!asset($lawyer->files[$j]->path. $lawyer->files[$j]->file)!!}"/>
+                                            </div>
+                                        @endfor
+                                    </div>
+                                @endfor
+                            @endif
+                            <form method="post" action="{{ route('lawyer.update', ['settingtype'=>'awards'])}}"
+                                  enctype="multipart/form-data">
+                                {{csrf_field()}}
+                                <p class="color-gray">@lang('lawyer-settings.Загрузите изображение Ваших сертификатов или дипломов (в формате jpeg)')
+                                    .</p>
+                                <div class="form-group">
+                                    <label class="btn btn-default ">
+                                        @lang('lawyer-settings.Выбрать файл') <input type="file" name="files[]" multiple
+                                                                                     hidden>
+                                    </label>
+                                </div>
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 @endif
-                                <form method="post" action="{{ route('lawyer.update', ['settingtype'=>'awards'])}}"
-                                      enctype="multipart/form-data">
-                                    {{csrf_field()}}
-                                    <p class="color-gray">@lang('lawyer-settings.Загрузите изображение Ваших сертификатов или дипломов (в формате jpeg)').</p>
-                                    <div class="form-group">
-                                        <label class="btn btn-default ">
-                                            @lang('lawyer-settings.Выбрать файл') <input type="file" name="files[]" multiple hidden>
-                                        </label>
-                                    </div>
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-default btn-primary">@lang('lawyer-settings.Загрузить')</button>
-                                    </div>
-                                </form>
-                           
+                                <div class="form-group">
+                                    <button type="submit"
+                                            class="btn btn-default btn-primary">@lang('lawyer-settings.Загрузить')</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -531,4 +539,20 @@
     </div>
     <!-- /Content -->
 
+@endsection
+@section('scripts')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

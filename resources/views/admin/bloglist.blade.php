@@ -8,7 +8,7 @@
         <div class="col-md-10 col-lg-offset-2">
 
             <div class="page-header">
-                <h2>Блоги</h2>
+                <h2>Блоги {{$blogs->total()}}</h2>
             </div>
             @foreach($blogs as $blog)
 

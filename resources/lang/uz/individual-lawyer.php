@@ -6,12 +6,6 @@
  * Time: 11:06
  */
 return [
-    'Главная' => "Bosh sahifa",
-    'Юристы' => "Yuristlar",
-    'Вопросы' => "Savollar",
-    'Блог' => "Maqola",
-    'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Jamoa haqida",
     'Обратиться к юристу' => "Huquqshunos bilan bog'lanish",
     'Функция "обратиться к юристу" в процессе разработки' => "\"Huquqshunos bilan bog'lanish\" xizmati ishlab chiqilish jarayonida",
     'Профиль' => "Profil",

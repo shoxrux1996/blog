@@ -6,12 +6,6 @@
  * Time: 11:30
  */
 return [
-    'Главная' => "Bosh sahifa",
-    'Юристы' => "Yuristlar",
-    'Вопросы' => "Savollar",
-    'Блог' => "Maqola",
-    'Как это работает' => "Bu qanday ishlaydi",
-    'О нас' => "Loyiha haqida",
     'Редактировать' => "O‘zgartirish",
     'Как считается рейтинг?' => "Reyting qanday baholanadi?",
     'Отзывы' => "Izohlar",
@@ -43,4 +37,7 @@ return [
     'Отметить' => "o'qildi",
     'г' => "sh",
     'сум' => "sum",
+    'Новые комменты'=>'Yangi muhokamalar',
+    'Ответы' => 'Javoblar',
+    'Изменить ответ' => "Javobni o'zgartirish",
     ];

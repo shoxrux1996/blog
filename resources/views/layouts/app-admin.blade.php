@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-   <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="{{asset('dist/images/favicon.png')}}" type="image/png" >
+    <link rel="icon" href="{{asset('dist/images/favicon.png')}}" type="image/png">
     <title>Yuridik.uz - Панель администратора</title>
 
     <!-- Bootstrap Core CSS -->
@@ -19,8 +19,25 @@
 
     <!-- Morris -->
     <link href="{{asset('dist/css/morris.css')}}" rel="stylesheet">
-    <style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #2C3E50 url({{asset('dist/images/three-dots.svg')}}) center center no-repeat;background-size:79px;}</style>
-    <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
+    <style type="text/css">#hellopreloader > p {
+            display: none;
+        }
+
+        #hellopreloader_preload {
+            display: block;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            min-width: 1000px;
+            background: #2C3E50 url({{asset('dist/images/three-dots.svg')}}) center center no-repeat;
+            background-size: 79px;
+        }</style>
+    <div id="hellopreloader">
+        <div id="hellopreloader_preload"></div>
+    </div>
     @yield('styles')
 </head>
 <body>
@@ -41,25 +58,26 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Улугбек <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fa fa-user"></i> {{Auth::user()->name}} <b
+                            class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Профиль</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Настройки</a>
+                        <a href="{{route('admin.info')}}"><i class="fa fa-fw fa-user"></i> Профиль</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                                        <a href="{{ route('admin.logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i> 
-                                            Выйти
-                                        </a>
+                        <a href="{{ route('admin.logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i
+                                    class="fa fa-fw fa-power-off"></i>
+                            Выйти
+                        </a>
 
-                                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
+                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                              style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </li>
                 </ul>
             </li>
@@ -73,9 +91,12 @@
                 <li>
                     <a href="{{route('admin.clients.index')}}"><i class="fa fa-fw fa-users"></i> Пользователи</a>
                 </li>
-                 <li>
-                    <a href=""><i class="fa fa-fw fa-address-card"></i> Модераторы</a>
-                </li>
+                @if(Auth::user()->type == 2)
+                    <li>
+                        <a href="{{route('admin.moderators.index')}}"><i class="fa fa-fw fa-address-card"></i>
+                            Модераторы</a>
+                    </li>
+                @endif
                 <li>
                     <a href="{{route('admin.comments.index')}}"><i class="fa fa-fw fa-comments"></i> Комментарии</a>
                 </li>
@@ -83,7 +104,8 @@
                     <a href="{{route('admin.blogs')}}"><i class="fa fa-fw fa-newspaper-o"></i> Блог</a>
                 </li>
                 <li>
-                    <a href="{{route('admin.questions.index')}}"><i class="fa fa-fw fa-question-circle-o"></i> Вопросы</a>
+                    <a href="{{route('admin.questions.index')}}"><i class="fa fa-fw fa-question-circle-o"></i>
+                        Вопросы</a>
                 </li>
                 <li>
                     <a href="{{route('admin.documents.index')}}"><i class="fa fa-fw fa-address-card"></i> Документы</a>
@@ -97,10 +119,10 @@
                 <li>
                     <a href="{{route('admin.category.info')}}"><i class="fa fa-fw fa-reply"></i> Категория</a>
                 </li>
-                   {{-- <li>
-                        <a href="{{route('admin.feedbacks.index')}}"><i class="fa fa-fw fa-reply"></i> Отзывы</a>
-                    </li>--}}
-                 <li>
+                {{-- <li>
+                     <a href="{{route('admin.feedbacks.index')}}"><i class="fa fa-fw fa-reply"></i> Отзывы</a>
+                 </li>--}}
+                <li>
                     <a href="{{route('admin.cities.index')}}"><i class="fa fa-fw fa-reply"></i> Города</a>
                 </li>
             </ul>
@@ -110,12 +132,12 @@
 
     <div id="page-wrapper">
 
-            <div class="container-fluid">
-        @yield('content')
+        <div class="container-fluid">
+            @yield('content')
         </div>
     </div>
     <!-- /#page-wrapper -->
-    
+
 </div>
 <!-- /#wrapper -->
 
@@ -129,10 +151,23 @@
 {!! Html::script('dist/js/morris-data.js') !!}
 
 
-<script type="text/javascript">var hellopreloader = document.getElementById("hellopreloader_preload");function fadeOutnojquery(el){el.style.opacity = 1;var interhellopreloader = setInterval(function(){el.style.opacity = el.style.opacity - 0.05;if (el.style.opacity <=0.05){ clearInterval(interhellopreloader);hellopreloader.style.display = "none";}},16);}
-window.onload = function(){
+<script type="text/javascript">var hellopreloader = document.getElementById("hellopreloader_preload");
+    function fadeOutnojquery(el) {
+        el.style.opacity = 1;
+        var interhellopreloader = setInterval(function () {
+            el.style.opacity = el.style.opacity - 0.05;
+            if (el.style.opacity <= 0.05) {
+                clearInterval(interhellopreloader);
+                hellopreloader.style.display = "none";
+            }
+        }, 16);
+    }
+    window.onload = function () {
         @yield('onloadScripts')
-    setTimeout(function(){fadeOutnojquery(hellopreloader);},1000);};
+    setTimeout(function () {
+            fadeOutnojquery(hellopreloader);
+        }, 1000);
+    };
 </script>
 <!-- /Preloader -->
 

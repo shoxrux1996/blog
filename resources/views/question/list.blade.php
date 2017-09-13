@@ -2,14 +2,7 @@
 @section('styles')
     <link href="{{ asset('dist/css/questions.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">Главная</a></li>
-    <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-    <li class="active-link"><a href="{{ route('question.list')}}">Вопросы</a></li>
-    <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-    <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-    <li><a href="{{ route('about')}}">О нас</a></li>
-@endsection
+
 @section('content')
 
 
@@ -21,7 +14,7 @@
                     <form method="GET" action="{{route('search.questions.bycategory')}}">
                     <div class="input-group" id="search">
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Все темы <span class="caret"></span></button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('questions.Все темы') <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 @foreach($categories as $category2)
                                     <li>
@@ -33,7 +26,7 @@
                         <input type="text" name="name" class="form-control" aria-label="...">
                         <div class="input-group-btn">
                             <button type="submit" class="btn btn-default">
-                                Искать
+                                @lang('questions.Искать')
                             </button>
                         </div>
                     </div><!-- /input-group -->
@@ -41,11 +34,11 @@
                     <!-- /Search -->
                     <p class="question-type">
                         <span class="{{ $section == 1 ? "active-type" : "" }}"><a href="{{route('question.list')}}"
-                                                                             >Все</a> </span>
+                                                                             >@lang('questions.Все')</a> </span>
                         <span class="{{ $section == 2 ? "active-type" : "" }}"> <a href="{{route('costly.questions')}}"
-                                  onclick="switchSection('section2')">Платные</a> </span>
+                                  onclick="switchSection('section2')">@lang('questions.Платные')</a> </span>
                         <span class="{{ $section == 3 ? "active-type" : "" }}"> <a href="{{route('free.questions')}}"
-                                  onclick="switchSection('section3')">Бесплатные</a> </span>
+                                  onclick="switchSection('section3')">@lang('questions.Бесплатные')</a> </span>
                     </p>
                     <div id="section1" class="section" style="display: {{ $section == 1 ? "block" : "none" }};">
                         @foreach($questions as $question)
@@ -54,8 +47,8 @@
                                     <span class="question-price">
                                         <b>{{$question->price}} сум</b>
                                         <span>
-                                            стоимость<br/>
-                                            вопроса
+                                            @lang('questions.стоимость')<br/>
+                                            @lang('questions.вопроса')
                                         </span>
                                     </span>
                                 @endif
@@ -65,14 +58,13 @@
                                 <p class="description">{{$question->text}}</p>
                                 <p>
                                     <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>
-                                    <span class="number"> вопрос №{{$question->id}}</span>
+                                    <span class="number"> @lang('questions.вопрос') №{{$question->id}}</span>
                                     <span class="author">{{$question->client->user->firstName}}
                                         , г.{{$question->client->user->city->name}} </span>
                                 </p>
                                 <hr>
                                 <p>
-                                    <span class="category">Категория: <a
-                                                href="">{{$question->category->name}}</a></span>
+                                    <span class="category">@lang('questions.Категория'): <a href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
                                     <a class="answers" href="{{route('web.question.show', $question->id)}}">
                                         {{$question->answers->count()}}
                                     </a>
@@ -89,8 +81,8 @@
                                     <span class="question-price">
                             <b>{{$question->price}} сум</b>
                             <span>
-                                стоимость<br/>
-                                вопроса
+                                @lang('questions.стоимость')<br/>
+                                @lang('questions.вопроса')
                             </span>
                         </span>
 
@@ -100,14 +92,13 @@
                                 <p class="description">{{$question->text}}</p>
                                 <p>
                                     <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>
-                                    <span class="number"> вопрос №{{$question->id}}</span>
+                                    <span class="number"> @lang('questions.вопрос') №{{$question->id}}</span>
                                     <span class="author">{{$question->client->user->firstName}}
                                         , г.{{$question->client->user->city->name}} </span>
                                 </p>
                                 <hr>
                                 <p>
-                                    <span class="category">Категория: <a
-                                                href="">{{$question->category->name}}</a></span>
+                                    <span class="category">@lang('questions.Категория'): <a href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
                                     <a class="answers" href="{{route('web.question.show', $question->id)}}">
                                         {{$question->answers->count()}}
                                     </a>
@@ -127,14 +118,13 @@
                                     <p class="description">{{$question->text}}</p>
                                     <p>
                                         <span class="date">{{Carbon\Carbon::parse($question->created_at)->toFormattedDateString()}}</span>
-                                        <span class="number"> вопрос №{{$question->id}}</span>
+                                        <span class="number"> @lang('questions.вопрос') №{{$question->id}}</span>
                                         <span class="author">{{$question->client->user->firstName}}
                                             , г.{{$question->client->user->city->name}} </span>
                                     </p>
                                     <hr>
                                     <p>
-                                    <span class="category">Категория: <a
-                                                href="">{{$question->category->name}}</a></span>
+                                    <span class="category">@lang('questions.Категория'): <a href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
                                         <a class="answers" href="{{route('web.question.show', $question->id)}}">
                                             {{$question->answers->count()}}
                                         </a>
@@ -149,26 +139,26 @@
                 </div>
                  <!-- Sidebar -->
             <div class="col-sm-3 text-center">
-                <h3>Лучшие юристы</h3>
+                <h3>@lang('questions.Лучшие юристы')</h3>
                 @foreach($best_lawyers as $lawyer)
                     <div class="best-lawyers">
                         <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}"
                              class="img-rounded"/>
                         <h5>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h5>
                         <h6>
-                            <b>{{$lawyer->job_status}}, г. {{  $lawyer->user->city->name }}</b>
+                            <b>@lang("lawyer-settings.$lawyer->job_status"), г. {{  $lawyer->user->city->name }}</b>
                         </h6>
-                        <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
+                        <a type="button" class="btn btn-default btn-success" href="{{route('web.lawyer.show', $lawyer->id)}}">@lang('questions.Посмотреть профиль')</a>
                     </div>
                 @endforeach
 
                 <div class="ask-question-block text-center">
                     <img class="img-responsive" src="{{ asset('dist/images/one-word-save_0.png')}}"/>
                     <h6>
-                        <b>Задайте вопрос бесплатно</b>
+                        <b>@lang('questions.Задайте вопрос бесплатно')</b>
                     </h6>
                     <a class="btn btn-default btn-success pulse-button" type="button"
-                       href="{{route('question.create')}}">Задать вопрос</a>
+                       href="{{route('question.create')}}">@lang('questions.Задать вопрос')</a>
                 </div>
             </div>
             <!-- /Sidebar -->

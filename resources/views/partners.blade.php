@@ -2,14 +2,7 @@
 @section('styles')
     <link href="{{ asset('dist/css/partners.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">@lang('partners.Главная')</a></li>
-    <li><a href="{{ route('lawyers.list')}}">@lang('partners.Юристы')</a></li>
-    <li><a href="{{ route('question.list')}}">@lang('partners.Вопросы')</a></li>
-    <li><a href="{{ route('web.blogs')}}">@lang('partners.Блог')</a></li>
-    <li><a href="{{ route('how-works')}}">@lang('partners.Как это работает')</a></li>
-    <li><a href="{{ route('about')}}">@lang('partners.О нас')</a></li>
-@endsection
+
 @section('content')
 
 <!-- Content -->

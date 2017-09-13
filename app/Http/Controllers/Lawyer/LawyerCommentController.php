@@ -7,6 +7,7 @@ use yuridik\Admin;
 use yuridik\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use yuridik\Blog;
+use yuridik\Lawyer;
 use yuridik\Notifications\CommentsNotification;
 use yuridik\Tag;
 use yuridik\Comment;

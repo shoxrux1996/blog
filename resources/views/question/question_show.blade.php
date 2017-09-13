@@ -2,14 +2,7 @@
 @section('styles')
     <link href="{{ asset('dist/css/questions.css')}}" rel="stylesheet">
 @endsection
-@section('menu')
-    <li><a href="{{ route('home')}}">Главная</a></li>
-    <li><a href="{{ route('lawyers.list')}}">Юристы</a></li>
-    <li><a href="{{ route('question.list')}}">Вопросы</a></li>
-    <li><a href="{{ route('web.blogs')}}">Блог</a></li>
-    <li><a href="{{ route('how-works')}}">Как это работает</a></li>
-    <li><a href="{{ route('about')}}">О нас</a></li>
-@endsection
+
 @section('content')
     <div id="wrapper">
         <div class="container">
@@ -35,7 +28,7 @@
                         </p>
                         <hr>
                         <p>
-                            <span class="category">Категория: <a href="">{{$question->category->name}}</a></span>
+                            <span class="category">Категория: <a href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
                             <i class="answers">
                                 {{$question->answers->count()}}
                             </i>
@@ -55,13 +48,19 @@
                 <!-- Comment news style -->
                 @foreach($question->answers as $answer)
                     <div class="col-sm-9 answer">
+                        <div class="answer-footer">
+                            <span class="pull-right answered-time">
+                                {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
+                            </span>
+                        </div>
                         <div class="answer-header">
                             <img class="img-thumbnail"
                                  src="{{$answer->lawyer->user->file != null ? asset($answer->lawyer->user->file->path.$answer->lawyer->user->file->file) : asset("dist/images/headshot-1.png")}}"
                                  alt="Lawyer 1"/>
-                            <h4 class="lawyer-name">{{$answer->lawyer->firstName}}</h4>
-                            <h6 class="lawyer-type">{{$answer->lawyer->job_status}}</h6>
+                            <h4 class="lawyer-name">{{$answer->lawyer->user->firstName}} {{$answer->lawyer->user->lastName}}</h4>
+                            <h6 class="lawyer-type">@lang("lawyer-settings.".$answer->lawyer->job_status)</h6>
                         </div>
+
                         <div class="clearfix">
 
                         </div>
@@ -71,17 +70,13 @@
                         <div class="answer-content">
                             {!! $answer->text !!}
                         </div>
-                        <div class="answer-footer">
-                            <span class="pull-right answered-time">
-                                {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
-                            </span>
-                            <div>
-                                @foreach($answer->files as $file)
-                                    <a class="label label-default"
-                                       href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                                @endforeach
-                            </div>
+                        <div>
+                            @foreach($answer->files as $file)
+                                <a class="label label-default"
+                                   href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                            @endforeach
                         </div>
+
                     </div>
                 @endforeach
             <!-- /Comment new style -->
@@ -144,9 +139,11 @@
     <script>tinymce.init({
             mode: "specific_textareas",
             editor_selector: "myTextEditor",
-            plugins: 'link code',
+            plugins:[ 'link code', "textcolor"],
             height: 300,
-            toolbar: 'undo redo | cut copy paste'
+            toolbar: ['undo redo | cut copy paste forecolor backcolor fontsizeselect fontselect'],
+
+            fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt'
         });
     </script>
 @endsection
