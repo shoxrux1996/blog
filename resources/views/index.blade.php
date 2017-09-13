@@ -20,7 +20,7 @@
                 <h1>@lang('index.confidence')</h1>
                 <form action="{{route('search.all')}}" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="{{ __('index.search') }}"/>
+                        <input type="text" class="form-control" name="search" placeholder="{{ __('index.search') }}" required/>
                         <span class="input-group-btn">
                       <button type="submit" class="btn btn-default">
                         <i class="fa fa-search" aria-hidden="true"></i>
