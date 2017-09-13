@@ -176,7 +176,7 @@ Route::prefix('lawyer')->group(function(){
 	Route::get('/password/reset/{token}', 'Auth\LawyerResetPasswordController@showResetForm')->name('lawyer.password.reset');
     Route::get('/settings/info/{type?}', 'Lawyer\LawyerController@info')->name('lawyer.info');
     Route::post('/update/{settingtype}', 'Lawyer\LawyerController@update')->name('lawyer.update');
-    Route::get('/file/delete/{id}','Lawyer\LawyerController@awardDelete')->name('lawyer.award.delete');
+    Route::get('/award/delete/{id}','Lawyer\LawyerController@awardDelete')->name('lawyer.award.delete');
     Route::get('/file/delete/{id}','Lawyer\LawyerController@fileDelete')->name('lawyer.file.delete');
     Route::prefix('/notifications')->group(function (){
         Route::get('/mark-as-read','Lawyer\LawyerNotificationController@notificationAsRead')->name('lawyer.notification.asRead');
