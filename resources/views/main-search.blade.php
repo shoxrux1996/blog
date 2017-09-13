@@ -100,7 +100,7 @@
                                         </div>
                                         <div class="user">
                                             <img class="img-circle"
-                                                 src="{{$lawyer->file != null ? asset($lawyer->file->path.$lawyer->file->file) : asset('dist/images/headshot-3.jpg')}}"/>
+                                                 src="{{$lawyer->user->file != null ? asset($lawyer->user->file->path.$lawyer->user->file->file) : asset('dist/images/headshot-3.jpg')}}"/>
                                         </div>
                                         <div class="content">
                                             <div class="main">
