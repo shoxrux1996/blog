@@ -145,7 +145,11 @@ class ClientQuestionController extends Controller
     }
 
     public function edit($id){
+        $client = Auth::user();
         $question = Question::findOrFail($id);
+        if($client->id != $question->client->id){
+            return redirect()->back();
+        }
         $category = Category::where('category_id',null)->get();
         $categories = array();
         foreach ($category as $key) {

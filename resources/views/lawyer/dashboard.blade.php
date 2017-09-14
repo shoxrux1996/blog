@@ -193,8 +193,10 @@
                                         <ul>
                                             @foreach($lawyer->blogs as $blog)
                                                 <li><a href="{{ route('web.blog.show',$blog->id)}}"> {{$blog->title}}</a>
+                                                    @if(\Carbon\Carbon::parse($blog->created_at)->addDays(5) > \Carbon\Carbon::now())
                                                     <a class="btn btn-info btn-xs"
                                                        href="{{route('lawyer.blog.edit', $blog->id)}}">@lang('lawyer-dashboard.Изменить')</a>
+                                                    @endif
                                                 </li>
                                             @endforeach
                                         </ul>

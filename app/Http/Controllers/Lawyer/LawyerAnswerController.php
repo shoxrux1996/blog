@@ -20,11 +20,6 @@ use Purifier;
 
 class LawyerAnswerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function __construct()
     {
@@ -89,7 +84,11 @@ class LawyerAnswerController extends Controller
         return view('question.list')->withQuestions($questions);
     }
     public function edit($id){
+        $lawyer = Auth::user();
         $answer = Answer::findOrFail($id);
+        if($answer->lawyer->id != $lawyer->id){
+            return redirect()->back();
+        }
         return view('answer.edit')->withAnswer($answer);
     }
     public function update(Request $request, $id){

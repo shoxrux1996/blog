@@ -2,6 +2,7 @@
 
 namespace yuridik\Http\Controllers\Lawyer;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Notification;
 use yuridik\Http\Controllers\Controller;
 use Auth;
@@ -103,8 +104,16 @@ class LawyerBlogController extends Controller
 
     public function editform($id)
     {
+        $lawyer = Auth::user();
         $blog = Blog::find($id);
 
+        if($blog->blogable->id != $lawyer->id && $blog->blogable_type != 'yuridik\Lawyer'){
+            return redirect()->back();
+        }
+        if(Carbon::parse($blog->created_at)->addDays(5) < Carbon::now())
+        {
+           return redirect()->back();
+        }
         $tags = Tag::all();
 
         $tags2 = array();

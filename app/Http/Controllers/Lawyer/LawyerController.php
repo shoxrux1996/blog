@@ -216,14 +216,25 @@ class LawyerController extends Controller
 
     public function awardDelete($id)
     {
+        $lawyer = Auth::user();
         $file = File::findOrFail($id);
+        if($lawyer->id != $file->fileable->lawyer->id && $file->fileable_type != 'yuridik\Lawyer'){
+            return redirect()->back();
+        }
+
         LaraFile::delete(public_path() . $file->path . $file->file);
         $file->delete();
         return redirect()->route('lawyer.info', ['type' => 'awards']);
     }
     public function fileDelete($id)
     {
+        $lawyer = Auth::user();
+
         $file = File::findOrFail($id);
+
+        if($lawyer->id != $file->fileable->lawyer->id && $file->fileable_type != 'yuridik\Answer'){
+            return redirect()->back();
+        }
         LaraFile::delete(public_path() . $file->path . $file->file);
         $file->delete();
         return redirect()->back();
