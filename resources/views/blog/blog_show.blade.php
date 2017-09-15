@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <ul class='social'>
+    <ul class='social hidden-xs'>
         <li>
             <a class="fa fa-facebook" href="https://www.facebook.com">
                 <span>Facebook</span>
@@ -85,6 +85,39 @@
             </div>
         </div>
         <!-- /Blog item text -->
+
+        <!-- Share buttons -->
+        <div class="row share-buttons visible-xs">
+            <div class="col-sm-12">
+                <ul class="list-unstyled">
+                    <li>
+                        Поделиться <i class="fa fa-share"></i>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com">
+                            <i class="fa fa-facebook-official"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.odnoklassniki.com">
+                            <i class="fa fa-odnoklassniki-square"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.telegram.com">
+                            <i class="fa fa-telegram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.twitter.com">
+                            <i class="fa fa-twitter-square"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /Share buttons -->
+
         <!-- Blog comments-->
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
