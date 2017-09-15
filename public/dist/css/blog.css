@@ -139,6 +139,10 @@
     border-color: #1F2746;
 }
 
+.blog-text-description {
+    font-family: 'Open Sans'!important;
+}
+
 .blog-text-description h4{
     line-height: 40px;
 }
