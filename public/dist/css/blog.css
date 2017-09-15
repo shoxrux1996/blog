@@ -638,3 +638,38 @@ hr{
     margin-right: 7px;
 }
 
+/* Share buttons */
+.share-buttons ul{
+    text-align: center;
+}
+
+.share-buttons ul li{
+    display: inline;
+    padding: 5px 7px;
+    font-size: 16px;
+}
+
+.share-buttons ul li a{
+    color: #fff;
+}
+
+
+.share-buttons ul li a:hover{
+    text-decoration: none;
+}
+
+.share-buttons ul li:nth-child(2){
+    background-color: #3b5998;
+}
+
+.share-buttons ul li:nth-child(3){
+    background-color: #ed812b;
+}
+
+.share-buttons ul li:nth-child(4){
+    background-color: #0088cc;
+}
+
+.share-buttons ul li:nth-child(5){
+    background-color: #1da1f2;
+}
