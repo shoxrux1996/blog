@@ -3,6 +3,10 @@
 namespace yuridik\Http\Controllers\Lawyer;
 
 use Illuminate\Support\Facades\Hash;
+
+
+use Webpatser\Countries\CountriesFacade;
+use yuridik\Education;
 use yuridik\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -35,11 +39,18 @@ class LawyerController extends Controller
         $categories = Category::where('category_id', null)->get();
         $city = City::all();
         $cities = array();
+        $countries =CountriesFacade::getList();
+
+
         foreach ($city as $key) {
             $cities[$key->id] = $key->name;
         }
-            return view('lawyer.info')->withSettingtype($type)->withLawyer($lawyer)->withCities($cities)->withCategories($categories);
-
+        return view('lawyer.info')
+                ->withSettingtype($type)
+                ->withLawyer($lawyer)
+                ->withCities($cities)
+                ->withCategories($categories)
+                ->withCountries($countries);
     }
 
     public function update(Request $request, $settingtype)
@@ -88,7 +99,8 @@ class LawyerController extends Controller
             }
             $lawyer->save();
             return redirect()->route('lawyer.info', ['type' => 'photo']);
-        } elseif ($settingtype === "password") {
+        }
+        elseif ($settingtype === "password") {
             if (Hash::check($request->current_password, $lawyer->password)) {
                 $messages = [
                     'required' => 'Обязательно к заполнению',
@@ -121,7 +133,8 @@ class LawyerController extends Controller
                 $lawyer->user->save();
                 return redirect()->route('lawyer.info', ['type' => 'contacts']);
             }
-        } elseif ($settingtype === 'experience') {
+        }
+        elseif ($settingtype === 'experience') {
             $lawyer->categories()->detach();
             $lawyer->categories()->sync($request->specialization, false);
             if ($request->company !== null || $request->position !== null) {
@@ -181,7 +194,8 @@ class LawyerController extends Controller
                 $lawyer->push();
                 return redirect()->route('lawyer.info', ['type' => 'additional']);
             }
-        } elseif ($settingtype === 'awards') {
+        }
+        elseif ($settingtype === 'awards') {
             $messages = [
                 'image' => 'Неверный формат',
             ];
@@ -208,12 +222,44 @@ class LawyerController extends Controller
                 }
                 return redirect()->route('lawyer.info', ['type' => 'awards']);
             }
-        } else {
+        }elseif ($settingtype === 'education') {
+
+            $rules = array(
+                'city'=>'required',
+                'university'=>'required',
+                'faculty'=>'required',
+            );
+
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return redirect()->route('lawyer.info', ['type' => 'education'])->withErrors($validator);
+            }
+            $education = new Education;
+            $education->country_id = $request->country;
+            $education->city = $request->city;
+            $education->university =$request->university;
+            $education->faculty =$request->faculty;
+            $education->year = $request->year;
+            $education->lawyer_id = $lawyer->id;
+            $education->save();
+
+            return redirect()->route('lawyer.info', ['type' => 'education']);
+        }
+        else {
             return redirect()->route('lawyer.info');
         }
 
     }
-
+    public function educationDelete($id){
+        $lawyer = Auth::user();
+        $education = Education::findOrFail($id);
+        if($lawyer->id != $education->lawyer_id){
+            return redirect()->back();
+        }
+        $education->delete();
+        return redirect()->route('lawyer.info', ['type' => 'education']);
+    }
     public function awardDelete($id)
     {
         $lawyer = Auth::user();

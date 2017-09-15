@@ -12,6 +12,7 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
+        "webpatser/laravel-countries": "dev-master",
         "mews/purifier": "^2.0",
         "spatie/laravel-backup": "^3.11"
     },

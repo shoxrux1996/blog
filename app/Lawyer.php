@@ -34,7 +34,9 @@ class Lawyer extends Authenticatable
     {
         $this->notify(new LawyerResetPasswordNotification($token));
     }
-
+    public function educations(){
+        return $this->hasMany('yuridik\Education');
+    }
 
     public function user()
     {

@@ -315,28 +315,31 @@
                                 </div>
                             </div>
                             <div class="col-md-9 tab-pane fade profile-content" id="education-{{$lawyer->id}}">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <ul class="list-unstyled">
-                                            <h5><b><i class="fa fa-graduation-cap"></i> Образование 1</b></h5>
-                                            <li><h6><span class="color-gray">Страна:</span> Россия</h6></li>
-                                            <li><h6><span class="color-gray">Город:</span> Красноярск</h6></li>
-                                            <li><h6><span class="color-gray">ВУЗ:</span> СибЮИ ФСКН</h6></li>
-                                            <li><h6><span class="color-gray">Факультет:</span> Общеюридический</h6></li>
-                                            <li><h6><span class="color-gray">Год выпуска:</span> 2013</h6></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <ul class="list-unstyled">
-                                            <h5><b><i class="fa fa-graduation-cap"></i> Образование 2</b></h5>
-                                            <li><h6><span class="color-gray">Страна:</span> Россия</h6></li>
-                                            <li><h6><span class="color-gray">Город:</span> Красноярск</h6></li>
-                                            <li><h6><span class="color-gray">ВУЗ:</span> СибЮИ ФСКН</h6></li>
-                                            <li><h6><span class="color-gray">Факультет:</span> Общеюридический</h6></li>
-                                            <li><h6><span class="color-gray">Год выпуска:</span> 2013</h6></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                @foreach($lawyer->educations as $education)
+                                    @if( $loop->index%3 ==0)
+                                        <div class="row">
+                                            @endif
+                                            <div class="col-sm-4">
+                                                <ul class="list-unstyled">
+                                                    <h5><b><i class="fa fa-graduation-cap"></i> Образование {{$loop->iteration}}
+                                                        </b></h5>
+                                                    <li><h6>
+                                                            <span class="color-gray">Страна:</span> {{$education->country->name}}
+                                                        </h6></li>
+                                                    <li><h6><span class="color-gray">Город:</span> {{$education->city}}</h6>
+                                                    </li>
+                                                    <li><h6><span class="color-gray">ВУЗ:</span> {{$education->university}}</h6>
+                                                    </li>
+                                                    <li><h6><span class="color-gray">Факультет:</span> {{$education->faculty}}
+                                                        </h6></li>
+                                                    <li><h6><span class="color-gray">Год выпуска:</span> {{$education->year}}
+                                                        </h6></li>
+                                                </ul>
+                                            </div>
+                                            @if(($loop->iteration)%3 ==0 ||$loop->last)
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
                             <div class="col-md-9 tab-pane fade profile-content" id="awards-{{$lawyer->id}}">
                                 <!-- Lawyer answered questions -->

@@ -1,5 +1,7 @@
 <?php
+Route::get('api-api',function (){
 
+});
 Route::get('card','Web\ApiController@show')->name('card.payment');
 Route::post('error/post', function (\Illuminate\Http\Request $request){
     $error = new \yuridik\Error;
@@ -178,6 +180,7 @@ Route::prefix('lawyer')->group(function(){
     Route::post('/update/{settingtype}', 'Lawyer\LawyerController@update')->name('lawyer.update');
     Route::get('/award/delete/{id}','Lawyer\LawyerController@awardDelete')->name('lawyer.award.delete');
     Route::get('/file/delete/{id}','Lawyer\LawyerController@fileDelete')->name('lawyer.file.delete');
+    Route::get('/education/delete/{id}', 'Lawyer\LawyerController@educationDelete')->name('lawyer.education.delete');
     Route::prefix('/notifications')->group(function (){
         Route::get('/mark-as-read','Lawyer\LawyerNotificationController@notificationAsRead')->name('lawyer.notification.asRead');
     });

@@ -71,9 +71,11 @@
                                 <li><a data-toggle="tab" href="#education"><i class="fa fa-graduation-cap"></i>
                                         @lang('individual-lawyer.Образование')</a></li>
                                 <li><a data-toggle="tab" href="#answers"><i class="fa fa-reply"></i>
-                                        @lang('individual-lawyer.Отвеченные вопросы') <span class="badge">{{$questions->total()}}</span></a></li>
+                                        @lang('individual-lawyer.Отвеченные вопросы') <span
+                                                class="badge">{{$questions->total()}}</span></a></li>
                                 <li><a data-toggle="tab" href="#articles"><i class="fa fa-newspaper-o"></i>
-                                        @lang('individual-lawyer.Статьи') <span class="badge">{{$blogs->total()}}</span></a></li>
+                                        @lang('individual-lawyer.Статьи') <span class="badge">{{$blogs->total()}}</span></a>
+                                </li>
                             </ul>
                         </div>
                         <!-- END MENU -->
@@ -137,9 +139,13 @@
                     <div class="col-md-9 tab-pane fade profile-content" id="specialisation">
                         <div class="row" id="category-section">
                             <h3>@lang('individual-lawyer.Специализация')</h3>
-                            <h6 class="color-gray"><b>@lang('individual-lawyer.Всего') {{$lawyer->answers->count()}} @lang('individual-lawyer.ответа')</b></h6>
+                            <h6 class="color-gray">
+                                <b>@lang('individual-lawyer.Всего') {{$lawyer->answers->count()}} @lang('individual-lawyer.ответа')</b>
+                            </h6>
                             <hr>
-                            <h6 class="color-gray"><b>@lang('individual-lawyer.Специализируется в') {{$lawyer->categories->count()}} @lang('individual-lawyer.категориях:')</b></h6>
+                            <h6 class="color-gray">
+                                <b>@lang('individual-lawyer.Специализируется в') {{$lawyer->categories->count()}} @lang('individual-lawyer.категориях:')</b>
+                            </h6>
                             <div class="row">
                                 @foreach($lawyer->categories as $category)
                                     <div class="col-md-4 col-sm-4 col-xs-4 categories">
@@ -160,28 +166,32 @@
 
                     <!-- Lawyer's education -->
                     <div class="col-md-9 tab-pane fade profile-content" id="education">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <ul class="list-unstyled">
-                                    <h5><b><i class="fa fa-graduation-cap"></i> Образование 1</b></h5>
-                                    <li><h6><span class="color-gray">Страна:</span> Россия</h6></li>
-                                    <li><h6><span class="color-gray">Город:</span> Красноярск</h6></li>
-                                    <li><h6><span class="color-gray">ВУЗ:</span> СибЮИ ФСКН</h6></li>
-                                    <li><h6><span class="color-gray">Факультет:</span> Общеюридический</h6></li>
-                                    <li><h6><span class="color-gray">Год выпуска:</span> 2013</h6></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-4">
-                                <ul class="list-unstyled">
-                                    <h5><b><i class="fa fa-graduation-cap"></i> Образование 2</b></h5>
-                                    <li><h6><span class="color-gray">Страна:</span> Россия</h6></li>
-                                    <li><h6><span class="color-gray">Город:</span> Красноярск</h6></li>
-                                    <li><h6><span class="color-gray">ВУЗ:</span> СибЮИ ФСКН</h6></li>
-                                    <li><h6><span class="color-gray">Факультет:</span> Общеюридический</h6></li>
-                                    <li><h6><span class="color-gray">Год выпуска:</span> 2013</h6></li>
-                                </ul>
-                            </div>
-                        </div>
+
+                        @foreach($lawyer->educations as $education)
+                            @if( $loop->index%3 ==0)
+                                <div class="row">
+                                    @endif
+                                    <div class="col-sm-4">
+                                        <ul class="list-unstyled">
+                                            <h5><b><i class="fa fa-graduation-cap"></i> Образование {{$loop->iteration}}
+                                                </b></h5>
+                                            <li><h6>
+                                                    <span class="color-gray">Страна:</span> {{$education->country->name}}
+                                                </h6></li>
+                                            <li><h6><span class="color-gray">Город:</span> {{$education->city}}</h6>
+                                            </li>
+                                            <li><h6><span class="color-gray">ВУЗ:</span> {{$education->university}}</h6>
+                                            </li>
+                                            <li><h6><span class="color-gray">Факультет:</span> {{$education->faculty}}
+                                                </h6></li>
+                                            <li><h6><span class="color-gray">Год выпуска:</span> {{$education->year}}
+                                                </h6></li>
+                                        </ul>
+                                    </div>
+                                    @if(($loop->iteration)%3 ==0 ||$loop->last)
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                     <!-- Lawyer's education -->
 

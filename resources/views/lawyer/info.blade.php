@@ -119,9 +119,9 @@
                     <li class="{{$settingtype==='contacts' ? 'active' : ''}}">
                         <a data-toggle="tab" href="#contacts">@lang('lawyer-settings.Контакты')</a>
                     </li>
-                <!-- <li class="{{$settingtype==='education' ? 'active' : ''}}">
-                    <a data-toggle="tab" href="#education">Образование</a>
-                </li> -->
+                    <li class="{{$settingtype==='education' ? 'active' : ''}}">
+                        <a data-toggle="tab" href="#education">Образование</a>
+                    </li>
                     <li class="{{$settingtype==='experience' ? 'active' : ''}}">
                         <a data-toggle="tab" href="#experience">@lang('lawyer-settings.Опыть')</a>
                     </li>
@@ -197,7 +197,8 @@
                             <div class="col-sm-4">
                                 <div class="img-responsive">
                                     @if($lawyer->user->file != null)
-                                        <img id="blah" src="{!!asset($lawyer->user->file->path . $lawyer->user->file->file)!!}"
+                                        <img id="blah"
+                                             src="{!!asset($lawyer->user->file->path . $lawyer->user->file->file)!!}"
                                              alt="..." class="img-thumbnail" style="height: 300px;">
                                     @else
                                         <img id="blah" class="img-thumbnail"
@@ -214,7 +215,8 @@
                                     </span>
                                         @endif
                                         <label class="btn btn-default ">
-                                            @lang('lawyer-settings.Выбрать файл') <input onchange="readURL(this);"  class="image" type="file"
+                                            @lang('lawyer-settings.Выбрать файл') <input onchange="readURL(this);"
+                                                                                         class="image" type="file"
                                                                                          name="image" hidden>
                                         </label>
                                     </div>
@@ -310,36 +312,81 @@
                             </div>
                         </div>
                     </div>
-                <!-- <div id="education" class="tab-pane fade in {{$settingtype==='education' ? 'active' : ''}}">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="country">Страна</label>
-                                <select class="form-control" id="country">
-                                    <option>Узбекистан</option>
-                                </select>
+                    <div id="education" class="tab-pane fade in {{$settingtype==='education' ? 'active' : ''}}">
+                        <!-- Lawyer's education -->
+                        @foreach($lawyer->educations as $education)
+                        @if( $loop->index%3 ==0)<div class="row" style="padding: 10px;" >@endif
+                            <div class="col-sm-4" style="background-color:#fdfdfd;border: 1px solid #f7f7f7;">
+                                <ul class="list-unstyled">
+                                    <h5><b><i class="fa fa-graduation-cap"></i> Образование {{$loop->iteration}}</b></h5>
+                                    <li><h6><span class="color-gray">Страна:</span> {{$education->country->name}}</h6></li>
+                                    <li><h6><span class="color-gray">Город:</span> {{$education->city}}</h6></li>
+                                    <li><h6><span class="color-gray">ВУЗ:</span> {{$education->university}}</h6></li>
+                                    <li><h6><span class="color-gray">Факультет:</span> {{$education->faculty}}</h6></li>
+                                    <li><h6><span class="color-gray">Год выпуска:</span> {{$education->year}}</h6></li>
+
+                                    <a href="{{route('lawyer.education.delete', $education->id)}}" style="float: right;"><i class="fa fa-trash fa-2x"></i></a>
+                                </ul>
                             </div>
-                            <div class="form-group">
-                                <label for="city-input">Город</label>
-                                <input type="text" class="form-control" id="city-input"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="university">ВУЗ</label>
-                                <input type="text" class="form-control" id="university"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="faculty">Факультет</label>
-                                <input type="text" class="form-control" id="faculty"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="graduated-year">Год выпуска</label>
-                                <select class="form-control" id="graduated-year">
-                                    <option>2013</option>
-                                </select>
-                            </div>
+                        @if(($loop->iteration)%3 ==0 ||$loop->last)</div>@endif
+                        @endforeach
+                        <!-- Lawyer's education -->
+                        <div class="row" style="padding: 35px;background-color:#F7F7F7;border: 1px solid #DDD;">
+                            <form action="{{ route('lawyer.update',['settingtype'=>'education'])}}" method="post">
+                                {{csrf_field()}}
+                                <div class="col-sm-10" >
+                                    <div class="form-group">
+                                        <label for="country">Страна</label>
+                                        <select name="country" class="form-control" id="country">
+                                            @foreach($countries as $key => $country)
+                                                <option value="{{$key}}" {{$key == 860 ? "selected": ""}}>{{$country['name']}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group{{$errors->has('city') ? ' has-error' : '' }}">
+                                        <label for="city-input">Город</label>
+                                        @if ($errors->has('city'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('city') }}</strong>
+                                            </span>
+                                        @endif
+                                        <input name="city" type="text" class="form-control" id="city-input"/>
+                                    </div>
+                                    <div class="form-group{{$errors->has('university') ? ' has-error' : '' }}">
+                                        <label for="university">ВУЗ</label>
+                                        @if ($errors->has('university'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('university') }}</strong>
+                                        </span>
+                                        @endif
+                                        <input name="university" type="text" class="form-control" id="university"/>
+                                    </div>
+                                    <div class="form-group{{$errors->has('faculty') ? ' has-error' : '' }}">
+                                        <label for="faculty">Факультет</label>
+                                        @if ($errors->has('faculty'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('faculty') }}</strong>
+                                        </span>
+                                        @endif
+                                        <input name="faculty" type="text" class="form-control" id="faculty"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="graduated-year">Год выпуска</label>
+                                        <select name="year" class="form-control" id="graduated-year">
+                                            @for($i = 2017; $i>=1970; $i--)
+                                                <option value="{{$i}}">{{$i}}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit"
+                                                class="btn btn-default btn-primary pull-right">@lang('lawyer-settings.Сохранить')
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </div> -->
                     <div id="experience" class="tab-pane fade in {{$settingtype==='experience' ? 'active' : ''}}">
                         <form action="{{ route('lawyer.update',['settingtype'=>'experience'])}}" method="post">
                             {{csrf_field()}}
@@ -404,7 +451,7 @@
                                         @if ($errors->has('company'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('company') }}</strong>
-                                    </span>
+                                        </span>
                                         @endif
                                         <input type="text" id="company" name="company" class="form-control"
                                                value="{{$lawyer->company}}"/>
@@ -497,7 +544,8 @@
                                     <div class="row">
                                         @for($j=$i; $j<=$i+2 && $j<$lawyer->files->count(); $j++)
                                             <div class="col-sm-3">
-                                                <a href="{{route('lawyer.award.delete', $lawyer->files[$j]->id)}}" onclick="return confirm('Вы уверены')" class="btn btn-sm btn-danger"
+                                                <a href="{{route('lawyer.award.delete', $lawyer->files[$j]->id)}}"
+                                                   onclick="return confirm('Вы уверены')" class="btn btn-sm btn-danger"
                                                    style="position: absolute;">X</a>
                                                 <img class="img-responsive img-thumbnail"
                                                      src="{!!asset($lawyer->files[$j]->path. $lawyer->files[$j]->file)!!}"/>

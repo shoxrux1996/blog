@@ -172,6 +172,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        Webpatser\Countries\CountriesServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -234,7 +235,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
+        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
+        'Countries' => Webpatser\Countries\CountriesFacade::class,
     ],
 
 ];
