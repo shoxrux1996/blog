@@ -122,6 +122,7 @@
                                     </span>
                                     </div>
                                 </a>
+                                <div class="clearfix"></div>
                                 <hr>
                                 @endforeach
                             </div>

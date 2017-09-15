@@ -179,6 +179,10 @@
     margin-right: 5px;
 }
 
+.post-mini span{
+    word-wrap: break-word;
+}
+
 hr{
     margin-top: 5px;
     margin-bottom: 5px;
