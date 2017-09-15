@@ -87,29 +87,29 @@
         <!-- /Blog item text -->
 
         <!-- Share buttons -->
-        <div class="row share-buttons">
+        <div class="row share-buttons visible-xs">
             <div class="col-sm-12">
                 <ul class="list-unstyled">
                     <li>
                         Поделиться <i class="fa fa-share"></i>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="https://www.facebook.com">
                             <i class="fa fa-facebook-official"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="https://www.odnoklassniki.com">
                             <i class="fa fa-odnoklassniki-square"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="https://www.telegram.com">
                             <i class="fa fa-telegram"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="https://www.twitter.com">
                             <i class="fa fa-twitter-square"></i>
                         </a>
                     </li>
