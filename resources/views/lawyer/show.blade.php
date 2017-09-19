@@ -66,10 +66,10 @@
                             <ul class="nav">
                                 <li class="active"><a data-toggle="tab" href="#profile"><i class="fa fa-user"></i>
                                         @lang('individual-lawyer.Профиль')</a></li>
-                                <li><a data-toggle="tab" href="#specialisation"><i class="fa fa-tasks"></i>
-                                        @lang('individual-lawyer.Специализация')</a></li>
-                                <li><a data-toggle="tab" href="#education"><i class="fa fa-graduation-cap"></i>
-                                        @lang('individual-lawyer.Образование')</a></li>
+                                {{--<li><a data-toggle="tab" href="#specialisation"><i class="fa fa-tasks"></i>--}}
+                                        {{--@lang('individual-lawyer.Специализация')</a></li>--}}
+                                {{--<li><a data-toggle="tab" href="#education"><i class="fa fa-graduation-cap"></i>--}}
+                                        {{--@lang('individual-lawyer.Образование')</a></li>--}}
                                 <li><a data-toggle="tab" href="#answers"><i class="fa fa-reply"></i>
                                         @lang('individual-lawyer.Отвеченные вопросы') <span
                                                 class="badge">{{$questions->total()}}</span></a></li>
@@ -85,7 +85,7 @@
                     <!-- Lawyer's profile -->
                     <div class="col-md-9 tab-pane fade in active profile-content" id="profile">
                         <div class="row text-center">
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 shadow-on-hover">
                                 <h1>10,0</h1>
                                 <h6><b>@lang('individual-lawyer.Рейтинг Yuridik.uz')</b></h6>
                                 <p>
@@ -101,14 +101,14 @@
                                     <i class="fa fa-star"></i>
                                 </p>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 shadow-on-hover">
                                 <h1>99%</h1>
                                 <h6><b>@lang('individual-lawyer.довольных клиентов')</b></h6>
                                 <p>
                                     <a href="#">{{$lawyer->countPositiveFeedbacks() }} @lang('individual-lawyer.отзывов')</a>
                                 </p>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 shadow-on-hover">
                                 <h1>
                                     <i class="fa fa-registered"></i>
                                     <h5><b>@lang('individual-lawyer.Член экспертного совета Yuridik.uz')</b></h5>
@@ -120,6 +120,7 @@
                                 <h4>
                                     <i class="fa fa-building"></i> @lang('individual-lawyer.О себе')
                                 </h4>
+                                <hr>
                                 <p>{{$lawyer->about_me}}</p>
 
                                 <p><span class="color-gray">@lang('individual-lawyer.На проекте:')</span>
@@ -129,71 +130,173 @@
                                 <h4>
                                     <i class="fa fa-money"></i> @lang('individual-lawyer.Стоимость услуг')
                                 </h4>
+                                <hr>
                                 <p>{{$lawyer->profile_shown_price}}</p>
                             </div>
+
+                            <!-- Education -->
+                            <div class="col-sm-12">
+                                <h4>
+                                    <i class="fa fa-graduation-cap"></i> @lang('individual-lawyer.Образование')
+                                </h4>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="education-container">
+                                            <p>
+                                                <b>Университет: </b> Юридический университет
+                                            </p>
+                                            <p>
+                                                <b>Степень: </b> Бакалавр
+                                            </p>
+                                            <p>
+                                                <b>Год окончания: </b> 2015
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="education-container">
+                                            <p>
+                                                <b>Университет: </b> Юридический университет
+                                            </p>
+                                            <p>
+                                                <b>Степень: </b> Магистр
+                                            </p>
+                                            <p>
+                                                <b>Год окончания: </b> 2017
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Education -->
+
+                            <!-- Specialization -->
+                            <div class="col-sm-12" id="specialisation">
+                                <h4>
+                                    <i class="fa fa-tasks"></i> @lang('individual-lawyer.Специализация')
+                                </h4>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <h6>
+                                                    <a href="#">
+                                                        <i class="fa fa-check"></i> Гражданское право
+                                                    </a>
+                                                </h6>
+                                            </li>
+                                            <li>
+                                                <h6>
+                                                    <a href="#">
+                                                        <i class="fa fa-check"></i> Защита прав потребителей
+                                                    </a>
+                                                </h6>
+                                            </li>
+                                            <li>
+                                                <h6>
+                                                    <a href="#">
+                                                        <i class="fa fa-check"></i> Гражданство
+                                                    </a>
+                                                </h6>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <h6>
+                                                    <a href="#">
+                                                        <i class="fa fa-check"></i> Семейное право
+                                                    </a>
+                                                </h6>
+                                            </li>
+                                            <li>
+                                                <h6>
+                                                    <a href="#">
+                                                        <i class="fa fa-check"></i>  Конституционное право
+                                                    </a>
+                                                </h6>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <h6>
+                                                    <a href="#">
+                                                        <i class="fa fa-check"></i> Гражданство
+                                                    </a>
+                                                </h6>
+                                            </li>
+                                            <li>
+                                                <h6>
+                                                    <a href="#">
+                                                        <i class="fa fa-check"></i> Уголовное право
+                                                    </a>
+                                                </h6>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Specialization -->
                         </div>
                     </div>
                     <!-- Lawyer's profile -->
 
-                    <!-- Lawyer's specialisation -->
-                    <div class="col-md-9 tab-pane fade profile-content" id="specialisation">
-                        <div class="row" id="category-section">
-                            <h3>@lang('individual-lawyer.Специализация')</h3>
-                            <h6 class="color-gray">
-                                <b>@lang('individual-lawyer.Всего') {{$lawyer->answers->count()}} @lang('individual-lawyer.ответа')</b>
-                            </h6>
-                            <hr>
-                            <h6 class="color-gray">
-                                <b>@lang('individual-lawyer.Специализируется в') {{$lawyer->categories->count()}} @lang('individual-lawyer.категориях:')</b>
-                            </h6>
-                            <div class="row">
-                                @foreach($lawyer->categories as $category)
-                                    <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                                        <a href="{{route('web.category.show', $category->name)}}">
-                                            <i class="fa {{$category->class}}"></i> {{App::islocale('ru') ? $category->name : $category->name_uz}}
-                                        </a>
-                                        @foreach($category->children as $sub_category)
-                                            <p>
-                                                <a href="{{route('web.category.show', $sub_category->name)}}">{{App::islocale('ru') ? $sub_category->name : $sub_category->name_uz}}</a>
-                                            </p>
-                                        @endforeach
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Lawyer's specialisation -->
+                    {{--<!-- Lawyer's specialisation -->--}}
+                    {{--<div class="col-md-9 tab-pane fade profile-content" id="specialisation">--}}
+                        {{--<div class="row" id="category-section">--}}
+                            {{--<h3>@lang('individual-lawyer.Специализация')</h3>--}}
+                            {{--<h6 class="color-gray"><b>@lang('individual-lawyer.Всего') {{$lawyer->answers->count()}} @lang('individual-lawyer.ответа')</b></h6>--}}
+                            {{--<hr>--}}
+                            {{--<h6 class="color-gray"><b>@lang('individual-lawyer.Специализируется в') {{$lawyer->categories->count()}} @lang('individual-lawyer.категориях:')</b></h6>--}}
+                            {{--<div class="row">--}}
+                                {{--@foreach($lawyer->categories as $category)--}}
+                                    {{--<div class="col-md-4 col-sm-4 col-xs-4 categories">--}}
+                                        {{--<a href="{{route('web.category.show', $category->name)}}">--}}
+                                            {{--<i class="fa {{$category->class}}"></i> {{App::islocale('ru') ? $category->name : $category->name_uz}}--}}
+                                        {{--</a>--}}
+                                        {{--@foreach($category->children as $sub_category)--}}
+                                            {{--<p>--}}
+                                                {{--<a href="{{route('web.category.show', $sub_category->name)}}">{{App::islocale('ru') ? $sub_category->name : $sub_category->name_uz}}</a>--}}
+                                            {{--</p>--}}
+                                        {{--@endforeach--}}
+                                    {{--</div>--}}
+                                {{--@endforeach--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<!-- Lawyer's specialisation -->--}}
 
-                    <!-- Lawyer's education -->
-                    <div class="col-md-9 tab-pane fade profile-content" id="education">
-
-                        @foreach($lawyer->educations as $education)
-                            @if( $loop->index%3 ==0)
-                                <div class="row">
-                                    @endif
-                                    <div class="col-sm-4">
-                                        <ul class="list-unstyled">
-                                            <h5><b><i class="fa fa-graduation-cap"></i> Образование {{$loop->iteration}}
-                                                </b></h5>
-                                            <li><h6>
-                                                    <span class="color-gray">Страна:</span> {{$education->country->name}}
-                                                </h6></li>
-                                            <li><h6><span class="color-gray">Город:</span> {{$education->city}}</h6>
-                                            </li>
-                                            <li><h6><span class="color-gray">ВУЗ:</span> {{$education->university}}</h6>
-                                            </li>
-                                            <li><h6><span class="color-gray">Факультет:</span> {{$education->faculty}}
-                                                </h6></li>
-                                            <li><h6><span class="color-gray">Год выпуска:</span> {{$education->year}}
-                                                </h6></li>
-                                        </ul>
-                                    </div>
-                                    @if(($loop->iteration)%3 ==0 ||$loop->last)
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
-                    <!-- Lawyer's education -->
+                    {{--<!-- Lawyer's education -->--}}
+                    {{--<div class="col-md-9 tab-pane fade profile-content" id="education">--}}
+                        {{--<div class="row">--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<ul class="list-unstyled">--}}
+                                    {{--<h5><b><i class="fa fa-graduation-cap"></i> Образование 1</b></h5>--}}
+                                    {{--<li><h6><span class="color-gray">Страна:</span> Россия</h6></li>--}}
+                                    {{--<li><h6><span class="color-gray">Город:</span> Красноярск</h6></li>--}}
+                                    {{--<li><h6><span class="color-gray">ВУЗ:</span> СибЮИ ФСКН</h6></li>--}}
+                                    {{--<li><h6><span class="color-gray">Факультет:</span> Общеюридический</h6></li>--}}
+                                    {{--<li><h6><span class="color-gray">Год выпуска:</span> 2013</h6></li>--}}
+                                {{--</ul>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-sm-4">--}}
+                                {{--<ul class="list-unstyled">--}}
+                                    {{--<h5><b><i class="fa fa-graduation-cap"></i> Образование 2</b></h5>--}}
+                                    {{--<li><h6><span class="color-gray">Страна:</span> Россия</h6></li>--}}
+                                    {{--<li><h6><span class="color-gray">Город:</span> Красноярск</h6></li>--}}
+                                    {{--<li><h6><span class="color-gray">ВУЗ:</span> СибЮИ ФСКН</h6></li>--}}
+                                    {{--<li><h6><span class="color-gray">Факультет:</span> Общеюридический</h6></li>--}}
+                                    {{--<li><h6><span class="color-gray">Год выпуска:</span> 2013</h6></li>--}}
+                                {{--</ul>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<!-- Lawyer's education -->--}}
 
                     <!-- Lawyer answered questions -->
                     <div class="col-md-9 tab-pane fade profile-content" id="answers">

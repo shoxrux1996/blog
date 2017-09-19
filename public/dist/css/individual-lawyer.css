@@ -109,7 +109,7 @@
     padding: 20px;
 }
 
-#profile .col-sm-4:hover{
+#profile .shadow-on-hover:hover{
     border-radius: 4px;
     transition: 0.5s;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
@@ -118,6 +118,10 @@
 #category-section{
     padding: 0 30px;
     background-color: transparent;
+}
+
+#specialisation a{
+    color: #1F2746;
 }
 
 .tab-content #answers, .tab-content #articles{
