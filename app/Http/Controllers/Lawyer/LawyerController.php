@@ -228,6 +228,7 @@ class LawyerController extends Controller
                 'city'=>'required',
                 'university'=>'required',
                 'faculty'=>'required',
+                'degree' => 'required'
             );
 
             $validator = Validator::make($request->all(), $rules);
@@ -240,6 +241,7 @@ class LawyerController extends Controller
             $education->city = $request->city;
             $education->university =$request->university;
             $education->faculty =$request->faculty;
+            $education->degree = $request->degree;
             $education->year = $request->year;
             $education->lawyer_id = $lawyer->id;
             $education->save();

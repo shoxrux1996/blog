@@ -361,6 +361,20 @@
                                         @endif
                                         <input name="university" type="text" class="form-control" id="university"/>
                                     </div>
+                                    <div class="form-group{{$errors->has('degree') ? ' has-error' : '' }}">
+                                        <label for="degree">Степень</label>
+                                        @if ($errors->has('degree'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('degree') }}</strong>
+                                        </span>
+                                        @endif
+                                        <select name="degree" type="text" class="form-control" id="degree">
+                                            <option value="Бакалавр">Бакалавр</option>
+                                            <option value="Магистр">Магистр</option>
+                                            <option value="Докторат">Докторат</option>
+                                            <option value="Другой">Другой</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group{{$errors->has('faculty') ? ' has-error' : '' }}">
                                         <label for="faculty">Факультет</label>
                                         @if ($errors->has('faculty'))
@@ -370,6 +384,7 @@
                                         @endif
                                         <input name="faculty" type="text" class="form-control" id="faculty"/>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="graduated-year">Год выпуска</label>
                                         <select name="year" class="form-control" id="graduated-year">

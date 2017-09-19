@@ -141,32 +141,22 @@
                                 </h4>
                                 <hr>
                                 <div class="row">
+                                    @foreach($lawyer->educations as $education)
                                     <div class="col-sm-6">
                                         <div class="education-container">
                                             <p>
-                                                <b>Университет: </b> Юридический университет
+                                                <b>Университет: </b> {{$education->university}}
                                             </p>
                                             <p>
-                                                <b>Степень: </b> Бакалавр
+                                                <b>Степень: </b> {{$education->degree}}
                                             </p>
                                             <p>
-                                                <b>Год окончания: </b> 2015
+                                                <b>Год окончания: </b> {{$education->year}}
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="education-container">
-                                            <p>
-                                                <b>Университет: </b> Юридический университет
-                                            </p>
-                                            <p>
-                                                <b>Степень: </b> Магистр
-                                            </p>
-                                            <p>
-                                                <b>Год окончания: </b> 2017
-                                            </p>
-                                        </div>
-                                    </div>
+                                    @endforeach
+
                                 </div>
                             </div>
                             <!-- /Education -->
@@ -178,67 +168,19 @@
                                 </h4>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-xs-4">
+                                    @foreach($lawyer->categories as $category)
+                                        @if( $loop->index%3 ==0)<div class="col-xs-4">@endif
                                         <ul class="list-unstyled">
                                             <li>
                                                 <h6>
-                                                    <a href="#">
-                                                        <i class="fa fa-check"></i> Гражданское право
-                                                    </a>
-                                                </h6>
-                                            </li>
-                                            <li>
-                                                <h6>
-                                                    <a href="#">
-                                                        <i class="fa fa-check"></i> Защита прав потребителей
-                                                    </a>
-                                                </h6>
-                                            </li>
-                                            <li>
-                                                <h6>
-                                                    <a href="#">
-                                                        <i class="fa fa-check"></i> Гражданство
+                                                    <a href="{{route('web.category.show', $category->name)}}">
+                                                        <i class="fa fa-check"></i> {{$category->name}}
                                                     </a>
                                                 </h6>
                                             </li>
                                         </ul>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <h6>
-                                                    <a href="#">
-                                                        <i class="fa fa-check"></i> Семейное право
-                                                    </a>
-                                                </h6>
-                                            </li>
-                                            <li>
-                                                <h6>
-                                                    <a href="#">
-                                                        <i class="fa fa-check"></i>  Конституционное право
-                                                    </a>
-                                                </h6>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <h6>
-                                                    <a href="#">
-                                                        <i class="fa fa-check"></i> Гражданство
-                                                    </a>
-                                                </h6>
-                                            </li>
-                                            <li>
-                                                <h6>
-                                                    <a href="#">
-                                                        <i class="fa fa-check"></i> Уголовное право
-                                                    </a>
-                                                </h6>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                        @if(($loop->iteration)%3 ==0 ||$loop->last)</div>@endif
+                                    @endforeach
                                 </div>
                             </div>
                             <!-- /Specialization -->
