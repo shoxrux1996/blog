@@ -1,7 +1,4 @@
 <?php
-Route::get('api-api',function (){
-
-});
 Route::get('card','Web\ApiController@show')->name('card.payment');
 Route::post('error/post', function (\Illuminate\Http\Request $request){
     $error = new \yuridik\Error;
@@ -137,7 +134,7 @@ Route::prefix('client')->group(function(){
         Route::post('/store', 'Client\ClientQuestionController@store')->name('question.insert.submit');
         Route::get('/edit/{id}','Client\ClientQuestionController@edit')->name('question.edit');
         Route::post('/edit/update/{id}', 'Client\ClientQuestionController@update')->name('question.edit.submit');
-        
+        Route::post('/answer/submit/{question_id}', 'Client\ClientQuestionController@answerStore')->name('client.answer.store');
     });
     Route::prefix('feedback')->group(function(){
     	Route::post('/send/answer/{answer_id}', 'Client\ClientFeedbackController@store')->name('feedback.create');

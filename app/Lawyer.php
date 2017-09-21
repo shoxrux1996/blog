@@ -58,7 +58,7 @@ class Lawyer extends Authenticatable
 
     public function answers()
     {
-        return $this->hasMany('yuridik\Answer');
+        return $this->morphMany('yuridik\Answer', 'lawyerable');
     }
     public function questions(){
         $collections = collect();
@@ -81,7 +81,7 @@ class Lawyer extends Authenticatable
     }
     public function feedbacks()
     {
-        return $this->hasManyThrough('yuridik\Feedback', 'yuridik\Answer');
+        return $this->hasManyThrough('yuridik\Feedback', 'yuridik\Answer','lawyerable_id','answer_id');
     }
 
     public function files()

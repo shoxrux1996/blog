@@ -33,8 +33,8 @@ class LawyersInfoController extends Controller
     public function show($id)
     {
         $lawyer=Lawyer::find($id);
-        $questions = Question::with('answers')->whereHas('answers',function($query) use ($id){
-            $query->with('lawyer')->whereHas('lawyer', function($query) use ($id){
+        $questions = Question::whereHas('answers',function($query) use ($id){
+            $query->whereHas('lawyerable', function($query) use ($id){
                 $query->where('id', $id);
             });
         })->paginate(8, ['*'],'questions');

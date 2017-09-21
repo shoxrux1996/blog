@@ -28,7 +28,8 @@
                         </p>
                         <hr>
                         <p>
-                            <span class="category">Категория: <a href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
+                            <span class="category">Категория: <a
+                                        href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
                             <i class="answers">
                                 {{$question->answers->count()}}
                             </i>
@@ -47,38 +48,67 @@
 
                 <!-- Comment news style -->
                 @foreach($question->answers as $answer)
-                    <div class="col-sm-9 answer">
-                        <div class="answer-footer">
+                    @if($answer->lawyerable == 'yuridik\Lawyer')
+                        <div class="col-sm-9 answer">
+                            <div class="answer-footer">
                             <span class="pull-right answered-time">
                                 {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
                             </span>
+                            </div>
+                            <div class="answer-header">
+                                <img class="img-thumbnail"
+                                     src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
+                                     alt="Lawyer 1"/>
+                                 <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
+                                 <h6 class="lawyer-type">@lang("lawyer-settings.".$answer->lawyerable->job_status)</h6>
+                              </div>
+                            <div class="clearfix">
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+                            <div class="answer-content">
+                                {!! $answer->text !!}
+                            </div>
+                            <div>
+                                @foreach($answer->files as $file)
+                                    <a class="label label-default"
+                                       href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="answer-header">
-                            <img class="img-thumbnail"
-                                 src="{{$answer->lawyer->user->file != null ? asset($answer->lawyer->user->file->path.$answer->lawyer->user->file->file) : asset("dist/images/headshot-1.png")}}"
-                                 alt="Lawyer 1"/>
-                            <h4 class="lawyer-name">{{$answer->lawyer->user->firstName}} {{$answer->lawyer->user->lastName}}</h4>
-                            <h6 class="lawyer-type">@lang("lawyer-settings.".$answer->lawyer->job_status)</h6>
-                        </div>
+                    @else
+                        <div class="col-sm-9 answer">
+                            <div class="answer-footer">
+                            <span class="pull-right answered-time">
+                                {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
+                            </span>
+                            </div>
+                            <div class="answer-header">
+                                <img class="img-thumbnail"
+                                     src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
+                                     alt="Lawyer 1"/>
+                                <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
+                            </div>
+                            <div class="clearfix">
 
-                        <div class="clearfix">
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+                            <div class="answer-content">
+                                {!! $answer->text !!}
+                            </div>
+                            <div>
+                                @foreach($answer->files as $file)
+                                    <a class="label label-default"
+                                       href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                                @endforeach
+                            </div>
 
                         </div>
-                        <div>
-                            <hr>
-                        </div>
-                        <div class="answer-content">
-                            {!! $answer->text !!}
-                        </div>
-                        <div>
-                            @foreach($answer->files as $file)
-                                <a class="label label-default"
-                                   href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                            @endforeach
-                        </div>
-
-                    </div>
-                @endforeach
+                @endif
+            @endforeach
             <!-- /Comment new style -->
             </div>
 
@@ -128,6 +158,26 @@
                             </div>
                         @endif
                     @endif
+                    @if (Auth::guard('client')->check() && $question->solved != true && Auth::guard('client')->id() == $question->client_id)
+                        {{Form::open(['route' => ['client.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
+                            <div class="panel panel-danger col-md-10" style="padding-top: 10px;">
+                            @if ($errors->has('text'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('text') }}</strong>
+                                    </span>
+                            @endif
+                            <div>
+                                {{Form::textarea('text', null,['class'=>'myTextEditor','style' =>'width:100%;', 'placeholder'=>'Ответить'])}}
+                            </div>
+                            <div class="col-md-4" style="margin:10px;">
+                                {{Form::file('files[]', ['multiple' => 'multiple'])}}
+                            </div>
+                            <div class="col-md-2" style="float:right; margin: 10px;">
+                                {{Form::submit('Уточнить', ['class'=> 'btn btn-success'])}}
+                            </div>
+                        </div>
+                        {{Form::close() }}
+                    @endif
                 </div>
             </div>
 
@@ -139,10 +189,9 @@
     <script>tinymce.init({
             mode: "specific_textareas",
             editor_selector: "myTextEditor",
-            plugins:[ 'link code', "textcolor"],
+            plugins: ['link code', "textcolor"],
             height: 300,
             toolbar: ['undo redo | cut copy paste forecolor backcolor fontsizeselect fontselect'],
-
             fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt'
         });
     </script>

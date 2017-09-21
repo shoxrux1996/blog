@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    public function lawyer()
+    public function lawyerable()
     {
-        return $this->belongsTo('yuridik\Lawyer');
+        return $this->morphTo();
     }
 
     public function files()

@@ -50,8 +50,9 @@ class LawyerAnswerController extends Controller
 
         $answer = new Answer;
         $answer->text = Purifier::clean($request->text);
-        $answer->lawyer_id = $lawyer->id;
-        $question->answers()->save($answer);
+        $answer->question_id = $question->id;
+        $lawyer->answers()->save($answer);
+
 
         if ($request->file('files') != null) {
             $file = $request->file('files');
@@ -86,7 +87,7 @@ class LawyerAnswerController extends Controller
     public function edit($id){
         $lawyer = Auth::user();
         $answer = Answer::findOrFail($id);
-        if($answer->lawyer->id != $lawyer->id){
+        if($answer->lawyerable->id != $lawyer->id && $answer->lawyerable_type != 'yuridik\Lawyer'){
             return redirect()->back();
         }
         return view('answer.edit')->withAnswer($answer);

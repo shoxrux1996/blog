@@ -55,13 +55,13 @@ class AnswerNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'file'=>$this->answer->lawyer->user->file,
-            'user' => $this->answer->lawyer->user,
+            'file'=>$this->answer->lawyerable->user->file,
+            'user' => $this->answer->lawyerable->user,
             'created_at'=> $this->answer->created_at,
             'title' => $this->answer->question->title,
-            'lawyer_id' => $this->answer->lawyer->id,
+            'lawyer_id' => $this->answer->lawyerable->id,
             'question_id'=> $this->answer->question->id,
-            'job_status'=> $this->answer->lawyer->job_status,
+            'job_status'=> $this->answer->lawyerable->job_status,
             'id'=>$this->answer->id,
             ];
     }

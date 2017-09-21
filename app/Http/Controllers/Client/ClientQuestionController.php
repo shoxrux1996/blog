@@ -3,6 +3,8 @@
 namespace yuridik\Http\Controllers\Client;
 
 use Illuminate\Support\Facades\Notification;
+use Mews\Purifier\Facades\Purifier;
+use yuridik\Answer;
 use yuridik\Notifications\QuestionsNotification;
 
 use yuridik\Http\Controllers\Controller;
@@ -303,6 +305,36 @@ class ClientQuestionController extends Controller
         Notification::send($admins, new QuestionsNotification($question));
 
         return true;    
+    }
+    public function answerStore(Request $request,$question_id){
+
+        $rules = array(
+            'text' => 'required|min:5|max:10000'
+        );
+        $count = count($request->file('files')) - 1;
+        foreach (range(0, $count) as $i) {
+            $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
+        }
+        Validator::make($request->all(), $rules)->validate();
+        $question = Question::find($question_id);
+        $client = Auth::guard('client')->user();
+        $answer = new Answer;
+        $answer->text = Purifier::clean($request->text);
+        $answer->question_id = $question->id;
+        $client->answers()->save($answer);
+        if ($request->file('files') != null) {
+            $file = $request->file('files');
+            foreach ($file as $key) {
+                $fil = new File;
+                $fil->file = $key->getClientOriginalName();
+                $upload_folder = '/answers/' . time() . '/';
+                $fil->path = $upload_folder;
+                $answer->files()->save($fil);
+                $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
+            }
+        }
+        return redirect()->back();
+
     }
 }
 

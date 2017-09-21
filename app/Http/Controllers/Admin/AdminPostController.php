@@ -92,7 +92,6 @@ class AdminPostController extends Controller
         $question->delete();
         return redirect()->route('admin.documents.index');
     }
-
     public function answers()
     {
         $answers = Answer::orderBy('id', 'desc')->paginate(10);
@@ -100,7 +99,6 @@ class AdminPostController extends Controller
     }
     public function answerShow($id)
     {
-
         return view('answer.admin-show')->withAnswer(Answer::findOrFail($id));
     }
     public function answerDestroy($id)
@@ -112,7 +110,6 @@ class AdminPostController extends Controller
 
     public function comments()
     {
-
         $comments = Comment::orderBy('id', 'desc')->paginate(10);
         return view('comment.list')->withComments($comments);
     }
@@ -125,17 +122,14 @@ class AdminPostController extends Controller
 
     public function users()
     {
-
         $clients = Client::orderBy('id', 'desc')->paginate(8,['*'],'clients');
         $lawyers = Lawyer::orderBy('id', 'desc')->paginate(8,['*'],'lawyers');
         return view('admin.users')->withClients($clients)->withLawyers($lawyers);
     }
     public function clientBlock(Request $request, $id)
     {
-
         $client = Client::findOrFail($id);
         $client->isBlocked = 1;
-
         $client->blockedTill = $request->date;
         $client->save();
         return redirect()->back();
