@@ -34,10 +34,9 @@ class LawyersInfoController extends Controller
     {
         $lawyer=Lawyer::find($id);
         $questions = Question::with('answers')->whereHas('answers',function($query) use ($id){
-            $query->with('lawyer')->whereHas('lawyerable', function($query) use ($id){
-                $query->where('id', $id);
-            });
+                $query->where('lawyerable_id', $id)->where('lawyerable_type','yuridik\Lawyer');
         })->paginate(8, ['*'],'questions');
+        dd($questions);
 
         $blogs = $lawyer->blogs()->paginate(8,['*'],'blogs');
 
