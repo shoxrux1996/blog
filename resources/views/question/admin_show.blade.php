@@ -107,13 +107,14 @@
                 <h3>Ответы</h3>
                 <!-- Comment news style -->
                 @foreach($question->answers as $answer)
+                    @if($answer->lawyerable == 'yuridik\Lawyer')
                     <div class="col-sm-9 answer">
                         <div class="answer-header">
                             <img class="img-thumbnail"
-                                 src="{{$answer->lawyer->user->file != null ? asset($answer->lawyer->user->file->path.$answer->lawyer->user->file->file) : asset("dist/images/headshot-1.png")}}"
+                                 src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
                                  alt="Lawyer 1"/>
-                            <h4 class="lawyer-name">{{$answer->lawyer->firstName}}</h4>
-                            <h6 class="lawyer-type">{{$answer->lawyer->job_status}}</h6>
+                            <h4 class="lawyer-name">{{$answer->lawyerable->firstName}}</h4>
+                            <h6 class="lawyer-type">{{$answer->lawyerable->job_status}}</h6>
                         </div>
                         <div>
                             <hr>
@@ -133,6 +134,37 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                        <div class="col-sm-9 answer">
+                            <div class="answer-footer">
+                            <span class="pull-right answered-time">
+                                {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
+                            </span>
+                            </div>
+                            <div class="answer-header">
+                                <img class="img-thumbnail"
+                                     src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
+                                     alt="Lawyer 1"/>
+                                <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
+                            </div>
+                            <div class="clearfix">
+
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+                            <div class="answer-content">
+                                {!! $answer->text !!}
+                            </div>
+                            <div>
+                                @foreach($answer->files as $file)
+                                    <a class="label label-default"
+                                       href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                                @endforeach
+                            </div>
+
+                        </div>
+                    @endif
                 @endforeach
             <!-- /Comment new style -->
             </div>

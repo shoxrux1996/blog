@@ -67,7 +67,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9 question">
-                <h4 class="title">{{$answer->lawyer->email}}
+                <h4 class="title">{{$answer->lawyerable->email}}
                 </h4>
                 <div>
                     <a
@@ -78,8 +78,8 @@
                 <p>
                     <span class="date">{{Carbon\Carbon::parse($answer->created_at)->toFormattedDateString()}}</span>
                     <span class="number"> вопрос №{{$answer->id}}</span>
-                    <span class="author">{{$answer->lawyer->user->firstName}}
-                        , г.{{$answer->lawyer->user->city->name}} </span>
+                    <span class="author">{{$answer->lawyerable->user->firstName}}
+                        , г.{{$answer->lawyerable->user->city->name}} </span>
                 </p>
                 <hr>
                 <div>
