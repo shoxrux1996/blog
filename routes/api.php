@@ -21,7 +21,5 @@ Route::any('app', function (){
 })->middleware('Api');
 Route::any('success/{transaction}', function ($transaction){
     $trans = yuridik\Transaction::where('paycom_transaction_id', '=', $transaction)->first();
-    if($trans){
-        dd($trans);
-    }
+    return redirect()->route('card.payment');
 });
