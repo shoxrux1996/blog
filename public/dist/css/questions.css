@@ -86,3 +86,28 @@
         font-size: 22px;
     }
 }
+
+
+/* Fee sharing */
+.answer .fee-sharing .fee-sharing-text, .answer .fee-sharing .fee-sharing-action, .answer .fee-sharing .yes-helpful-answer{
+    padding: 10px;
+}
+
+.answer .fee-sharing-text .no-helpful-answer{
+    color: #D75453;
+}
+
+.answer .yes-helpful-answer{
+    color: #60B660;
+}
+
+.answer .fee-sharing .fee-sharing-action b{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.answer .fee-sharing .fee-sharing-action input{
+    display: inline-block;
+    width: 10%;
+    font-weight: bold;
+}

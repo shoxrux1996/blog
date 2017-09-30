@@ -18,6 +18,9 @@
                             </span>
                         </span>
                         @endif
+                        <p>
+                            <button type="button" class="btn btn-warning pull-right">Саволни ёпиш</button>
+                        </p>
                         <h4 class="title">{{$question->title}}</h4>
                         <p class="description">{{$question->text}}</p>
                         <p>
@@ -40,6 +43,10 @@
                                    href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
                             @endforeach
                         </div>
+                        <p>
+                            <button type="button" class="btn btn-success" id="share-fee-button">Gonorarni taqsimlash</button>
+                            <button type="button" class="btn btn-primary">Gonorar yuristlar o'rtasida teng taqsimlansin</button>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -59,9 +66,9 @@
                                 <img class="img-thumbnail"
                                      src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
                                      alt="Lawyer 1"/>
-                                 <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
-                                 <h6 class="lawyer-type">@lang("lawyer-settings.".$answer->lawyerable->job_status)</h6>
-                              </div>
+                                <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
+                                <h6 class="lawyer-type">@lang("lawyer-settings.".$answer->lawyerable->job_status)</h6>
+                            </div>
                             <div class="clearfix">
                             </div>
                             <div>
@@ -90,9 +97,7 @@
                                      alt="Lawyer 1"/>
                                 <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
                             </div>
-                            <div class="clearfix">
-
-                            </div>
+                            <div class="clearfix"></div>
                             <div>
                                 <hr>
                             </div>
@@ -105,6 +110,52 @@
                                        href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
                                 @endforeach
                             </div>
+
+                            <!-- Fee sharing -->
+                            <div class="fee-sharing hidden">
+                                <hr>
+
+                                <!-- Bir nechta javob bergan yurist uchun 1marta pul taqsimlanishi uchun -->
+                                <input type="hidden" value="{{$answer->lawyerable->user->id}}" />
+                                <!-- /Bir nechta javob bergan yurist uchun 1marta pul taqsimlanishi uchun -->
+
+                                <!-- Taqsimlamasdan oldin -->
+                                <p class="fee-sharing-text">
+                                    <b>Yuristning bergan javobi sizga foydali bo'ldimi?</b>
+                                    <span class="pull-right">
+                                        <span class="yes-helpful">
+                                            <button type="button" class="btn btn-success">
+                                                 Ha +
+                                            </button>
+                                         </span>
+                                        <span class="no-helpful">
+                                            <button type="button" class="btn btn-danger">
+                                                Yo'q -
+                                            </button>
+                                        </span>
+                                    </span>
+                                </p>
+                                <!-- /Taqsimlamasdan oldin -->
+
+                                <!-- /Taqsimlagandan keyin -->
+                                <p class="yes-helpful-answer hidden">
+                                    <b>Siz yuristga 0 so'm miqdorda gonorar ajratdingiz</b>
+                                    <button type="button" class="btn btn-primary" name="change-fee">Gonorar miqdorini o'zgartirish</button>
+                                </p>
+                                <!-- /Taqsimlagandan keyin -->
+
+                                <!-- Taqsimlash jarayonida -->
+                                <p class="fee-sharing-action hidden">
+                                    <b>Iltimos, gonorar taqsimlashga yordam bering, ushbu yuristga qancha gonorar ajratasiz?</b>
+                                    <input type="text" class="form-control" placeholder="5000" name="fee-quantity"> so'm
+                                    <button type="button" class="btn btn-success">taqsimlash</button>
+                                    <button type="button" class="btn btn-danger">ortga</button>
+                                </p>
+                                <!-- /Taqsimlash jarayonida -->
+                            </div>
+                            <!-- /Fee sharing -->
+
+
 
                         </div>
                 @endif
@@ -160,7 +211,7 @@
                     @endif
                     @if (Auth::guard('client')->check() && $question->solved != true && Auth::guard('client')->id() == $question->client_id)
                         {{Form::open(['route' => ['client.answer.store', $question->id],'enctype' => 'multipart/form-data', 'method' => 'POST']) }}
-                            <div class="panel panel-danger col-md-10" style="padding-top: 10px;">
+                        <div class="panel panel-danger col-md-10" style="padding-top: 10px;">
                             @if ($errors->has('text'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('text') }}</strong>
@@ -194,5 +245,66 @@
             toolbar: ['undo redo | cut copy paste forecolor backcolor fontsizeselect fontselect'],
             fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt'
         });
+    </script>
+    <script>
+
+        //Gonorarni taqsimlash bosilganda
+        $('#share-fee-button').click(function () {
+           $('.answer').each(function () {
+              $(this).find('.fee-sharing').removeClass('hidden');
+           });
+            $(this).parent().prepend('<p class="text-success"><b>Yurist tomonidan berilgan har bir javobni tagida gonorarni taqsimlash uchun tugmalar qo\'yildi.</b></p>');
+            $(this).remove();
+        });
+
+        //Ha + javob foydali bo'ldi tugmasini bosganda
+        $('.yes-helpful .btn-success').click(function () {
+            $lawyerID = $(this).closest('.fee-sharing').find('[type="hidden"]').val();
+
+            $('.fee-sharing input[value="' + $lawyerID + '"]').each(function () {
+                $(this).closest('.fee-sharing').find('.fee-sharing-action').removeClass('hidden');
+                $(this).closest('.fee-sharing').find('.fee-sharing-text').addClass('hidden');
+            });
+
+        });
+
+        //Yo'q - javob foydali bo'lmadi tugmasini bosganda
+        $('.no-helpful .btn-danger').click(function () {
+            $(this).closest('.fee-sharing').find('[type="hidden"]').remove();
+            $(this).closest('.fee-sharing').find('.fee-sharing-text').html('<b class="no-helpful-answer">Yuristning javobi foydali bo\'lmagani bois, gonorar ajratilmaydi.<b>');
+        });
+
+        //Gonorar miqdorini kiritib taqsimlash tugmasini bosganda
+        $('.fee-sharing-action .btn-success').click(function () {
+            $lawyerID = $(this).closest('.fee-sharing').find('[type="hidden"]').val();
+            var $sharedFee = $(this).closest('.fee-sharing').find('[name="fee-quantity"]').val();
+
+            $('.fee-sharing input[value="' + $lawyerID + '"]').each(function () {
+                $(this).closest('.fee-sharing').find('.fee-sharing-action').addClass('hidden');
+                $(this).closest('.fee-sharing').find('.yes-helpful-answer').removeClass('hidden').find('b').html('<b>Siz yuristga ' + $sharedFee + ' so\'m gonorar taqsimladingiz.</b>');
+            });
+        });
+
+        //Gonorar miqorini kiritib ortga tugmasini bosganda
+        $('.fee-sharing-action .btn-danger').click(function () {
+            $lawyerID = $(this).closest('.fee-sharing').find('[type="hidden"]').val();
+
+            $('.fee-sharing input[value="' + $lawyerID + '"]').each(function () {
+                $(this).closest('.fee-sharing').find('.fee-sharing-text').removeClass('hidden');
+                $(this).closest('.fee-sharing').find('.fee-sharing-action').addClass('hidden');
+            });
+        });
+
+
+        //Gonorar miqdorini o'zgartirishni tugmasini bosganda
+        $('.fee-sharing').on('click', '[name="change-fee"]', function () {
+            $lawyerID = $(this).closest('.fee-sharing').find('[type="hidden"]').val();
+
+            $('.fee-sharing input[value="' + $lawyerID + '"]').each(function () {
+                $(this).closest('.fee-sharing').find('.fee-sharing-text, .yes-helpful-answer').addClass('hidden');
+                $(this).closest('.fee-sharing').find('.fee-sharing-action').removeClass('hidden');
+            });
+        })
+
     </script>
 @endsection
