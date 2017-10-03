@@ -164,11 +164,6 @@
                                     <a href="{{route('web.category.show', [$categories[$j]->name])}}">
                                         <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name}}
                                     </a>
-                                    @foreach($categories[$j]->children as $subcategory)
-                                        <p>
-                                            <a href="{{route('web.category.show', [$subcategory->name])}}">{{$subcategory->name}}</a>
-                                        </p>
-                                    @endforeach
                                 </div>
                             @endfor
                         </div>
@@ -181,11 +176,6 @@
                                     <a href="{{route('web.category.show', [$categories[$j]->name])}}">
                                         <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name_uz}}
                                     </a>
-                                    @foreach($categories[$j]->children as $subcategory)
-                                        <p>
-                                            <a href="{{route('web.category.show', [$subcategory->name])}}">{{$subcategory->name_uz}}</a>
-                                        </p>
-                                    @endforeach
                                 </div>
                             @endfor
                         </div>
