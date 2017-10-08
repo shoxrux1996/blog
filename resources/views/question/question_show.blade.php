@@ -146,7 +146,8 @@
 
                                 <!-- /Fee sharing -->
                             </div>
-                        @else
+                    @else
+                        <!-- Utocnenie -->
                             <div class="col-sm-9 answer">
                                 <div class="answer-footer">
                             <span class="pull-right answered-time">
@@ -173,9 +174,10 @@
                                     @endforeach
                                 </div>
                             </div>
+                        <!-- Utocnenie  -->
                     @endif
-                    @endforeach
-                    <!-- fixed bottom info -->
+                @endforeach
+                <!-- fixed bottom info -->
                     <div class="navbar-fixed-bottom fixed-bottom-info">
                         <p>
                             Sizda <span id="left-money">{{$question->price}}</span> so'm taqsimlanmay
