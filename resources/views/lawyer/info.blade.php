@@ -131,6 +131,9 @@
                     <li class="{{$settingtype==='awards' ? 'active' : ''}}">
                         <a data-toggle="tab" href="#awards">@lang('lawyer-settings.Сертификаты')</a>
                     </li>
+                    <li>
+                        <a data-toggle="tab" href="#lawyer-card">Карта юриста</a>
+                    </li>
                 </ul>
 
                 <div class="tab-content">
@@ -315,22 +318,22 @@
                     <div id="education" class="tab-pane fade in {{$settingtype==='education' ? 'active' : ''}}">
                         <!-- Lawyer's education -->
                         @foreach($lawyer->educations as $education)
-                        @if( $loop->index%3 ==0)<div class="row" style="padding: 10px;" >@endif
-                            <div class="col-sm-4" style="background-color:#fdfdfd;border: 1px solid #f7f7f7;">
-                                <ul class="list-unstyled">
-                                    <h5><b><i class="fa fa-graduation-cap"></i> Образование {{$loop->iteration}}</b></h5>
-                                    <li><h6><span class="color-gray">Страна:</span> {{$education->country->name}}</h6></li>
-                                    <li><h6><span class="color-gray">Город:</span> {{$education->city}}</h6></li>
-                                    <li><h6><span class="color-gray">ВУЗ:</span> {{$education->university}}</h6></li>
-                                    <li><h6><span class="color-gray">Факультет:</span> {{$education->faculty}}</h6></li>
-                                    <li><h6><span class="color-gray">Год выпуска:</span> {{$education->year}}</h6></li>
+                            @if( $loop->index%3 ==0)<div class="row" style="padding: 10px;" >@endif
+                                <div class="col-sm-4" style="background-color:#fdfdfd;border: 1px solid #f7f7f7;">
+                                    <ul class="list-unstyled">
+                                        <h5><b><i class="fa fa-graduation-cap"></i> Образование {{$loop->iteration}}</b></h5>
+                                        <li><h6><span class="color-gray">Страна:</span> {{$education->country->name}}</h6></li>
+                                        <li><h6><span class="color-gray">Город:</span> {{$education->city}}</h6></li>
+                                        <li><h6><span class="color-gray">ВУЗ:</span> {{$education->university}}</h6></li>
+                                        <li><h6><span class="color-gray">Факультет:</span> {{$education->faculty}}</h6></li>
+                                        <li><h6><span class="color-gray">Год выпуска:</span> {{$education->year}}</h6></li>
 
-                                    <a href="{{route('lawyer.education.delete', $education->id)}}" style="float: right;"><i class="fa fa-trash fa-2x"></i></a>
-                                </ul>
-                            </div>
-                        @if(($loop->iteration)%3 ==0 ||$loop->last)</div>@endif
-                        @endforeach
-                        <!-- Lawyer's education -->
+                                        <a href="{{route('lawyer.education.delete', $education->id)}}" style="float: right;"><i class="fa fa-trash fa-2x"></i></a>
+                                    </ul>
+                                </div>
+                                @if(($loop->iteration)%3 ==0 ||$loop->last)</div>@endif
+                    @endforeach
+                    <!-- Lawyer's education -->
                         <div class="row" style="padding: 35px;background-color:#F7F7F7;border: 1px solid #DDD;">
                             <form action="{{ route('lawyer.update',['settingtype'=>'education'])}}" method="post">
                                 {{csrf_field()}}
@@ -596,6 +599,29 @@
                             </form>
                         </div>
                     </div>
+                    <!-- Lawyer card info -->
+                    <div id="lawyer-card" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <img class="img-responsive" align="Card image" src="{{asset('dist/images/Credit-Card-PNG-Image.png')}}" />
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label for="card-number">Номер карты</label>
+                                        <input type="text" id="card-number" class="form-control" placeholder="Номер вашей карты"/>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label for="expire-date">Дата истечения</label>
+                                        <input type="text" id="expire-date" class="form-control" placeholder="мм/гг"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <button type="button" class="btn btn-primary pull-right">Сохранить</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Lawyer card info -->
                 </div>
             </div>
         </div>
@@ -604,14 +630,21 @@
 
 @endsection
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.60/inputmask/jquery.inputmask.js"></script>
+
+
     <script>
+
+        $('#card-number').inputmask("9999 9999 9999 999");
+        $('#expire-date').inputmask("99/99");
+
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
                     $('#blah')
-                        .attr('src', e.target.result);
+                            .attr('src', e.target.result);
                 };
 
                 reader.readAsDataURL(input.files[0]);
