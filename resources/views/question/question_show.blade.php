@@ -18,9 +18,13 @@
                             </span>
                         </span>
                         @endif
-                        <p>
-                            <button type="button" class="btn btn-warning pull-right">Саволни ёпиш</button>
-                        </p>
+                        @if($question->solved != true && Auth::guard('client')->id() == $question->client_id)
+                            <form>
+                                <p>
+                                    <button type="button" class="btn btn-warning pull-right">Саволни ёпиш</button>
+                                </p>
+                            </form>
+                        @endif
                         <h4 class="title">{{$question->title}}</h4>
                         <p class="description">{{$question->text}}</p>
                         <p>
@@ -43,10 +47,16 @@
                                    href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
                             @endforeach
                         </div>
-                        <p>
-                            <button type="button" class="btn btn-success" id="share-fee-button">Gonorarni taqsimlash</button>
-                            <button type="button" class="btn btn-primary">Gonorar yuristlar o'rtasida teng taqsimlansin</button>
-                        </p>
+                        @if($question->solved != true && Auth::guard('client')->id() == $question->client_id)
+                            <p>
+                                <button type="button" class="btn btn-success" id="share-fee-button">Gonorarni
+                                    taqsimlash
+                                </button>
+                                <button type="button" class="btn btn-primary">Gonorar yuristlar o'rtasida teng
+                                    taqsimlansin
+                                </button>
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -54,75 +64,50 @@
                 <h3>Ответы</h3>
 
                 <!-- Comment news style -->
-                @foreach($question->answers as $answer)
-                    @if($answer->lawyerable == 'yuridik\Lawyer')
-                        <div class="col-sm-9 answer">
-                            <div class="answer-footer">
+                <form action="{{route('client.question.pay_lawyer', $question->id)}}" method="post">
+                    {{csrf_field()}}
+                    @foreach($question->answers as $answer)
+                        @if($answer->lawyerable_type == 'yuridik\Lawyer')
+                            <div class="col-sm-9 answer">
+                                <div class="answer-footer">
                             <span class="pull-right answered-time">
                                 {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
                             </span>
-                            </div>
-                            <div class="answer-header">
-                                <img class="img-thumbnail"
-                                     src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
-                                     alt="Lawyer 1"/>
-                                <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
-                                <h6 class="lawyer-type">@lang("lawyer-settings.".$answer->lawyerable->job_status)</h6>
-                            </div>
-                            <div class="clearfix">
-                            </div>
-                            <div>
-                                <hr>
-                            </div>
-                            <div class="answer-content">
-                                {!! $answer->text !!}
-                            </div>
-                            <div>
-                                @foreach($answer->files as $file)
-                                    <a class="label label-default"
-                                       href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @else
-                        <div class="col-sm-9 answer">
-                            <div class="answer-footer">
-                            <span class="pull-right answered-time">
-                                {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
-                            </span>
-                            </div>
-                            <div class="answer-header">
-                                <img class="img-thumbnail"
-                                     src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
-                                     alt="Lawyer 1"/>
-                                <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div>
-                                <hr>
-                            </div>
-                            <div class="answer-content">
-                                {!! $answer->text !!}
-                            </div>
-                            <div>
-                                @foreach($answer->files as $file)
-                                    <a class="label label-default"
-                                       href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                                @endforeach
-                            </div>
+                                </div>
+                                <div class="answer-header">
+                                    <img class="img-thumbnail"
+                                         src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
+                                         alt="Lawyer 1"/>
+                                    <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
+                                    <h6 class="lawyer-type">@lang("lawyer-settings.".$answer->lawyerable->job_status)</h6>
+                                </div>
+                                <div class="clearfix">
+                                </div>
+                                <div>
+                                    <hr>
+                                </div>
+                                <div class="answer-content">
+                                    {!! $answer->text !!}
+                                </div>
+                                <div>
+                                    @foreach($answer->files as $file)
+                                        <a class="label label-default"
+                                           href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                                    @endforeach
+                                </div>
 
-                            <!-- Fee sharing -->
-                            <div class="fee-sharing hidden">
-                                <hr>
+                                <!-- Fee sharing -->
 
-                                <!-- Bir nechta javob bergan yurist uchun 1marta pul taqsimlanishi uchun -->
-                                <input type="hidden" value="{{$answer->lawyerable->user->id}}" />
-                                <!-- /Bir nechta javob bergan yurist uchun 1marta pul taqsimlanishi uchun -->
+                                <div class="fee-sharing hidden">
+                                    <hr>
+                                    <!-- Bir nechta javob bergan yurist uchun 1marta pul taqsimlanishi uchun -->
+                                    <input type="hidden" value="{{$answer->lawyerable->id}}"/>
+                                    <!-- /Bir nechta javob bergan yurist uchun 1marta pul taqsimlanishi uchun -->
 
-                                <!-- Taqsimlamasdan oldin -->
-                                <p class="fee-sharing-text">
-                                    <b>Yuristning bergan javobi sizga foydali bo'ldimi?</b>
-                                    <span class="pull-right">
+                                    <!-- Taqsimlamasdan oldin -->
+                                    <p class="fee-sharing-text">
+                                        <b>Yuristning bergan javobi sizga foydali bo'ldimi?</b>
+                                        <span class="pull-right">
                                         <span class="yes-helpful">
                                             <button type="button" class="btn btn-success">
                                                  Ha +
@@ -134,42 +119,76 @@
                                             </button>
                                         </span>
                                     </span>
-                                </p>
-                                <!-- /Taqsimlamasdan oldin -->
-
-                                <!-- /Taqsimlagandan keyin -->
-                                <p class="yes-helpful-answer hidden">
-                                    <b>Siz yuristga 0 so'm miqdorda gonorar ajratdingiz</b>
-                                    <button type="button" class="btn btn-primary" name="change-fee">Gonorar miqdorini o'zgartirish</button>
-                                </p>
-                                <!-- /Taqsimlagandan keyin -->
-
-                                <!-- Taqsimlash jarayonida -->
-                                <p class="fee-sharing-action hidden">
-                                    <b>Iltimos, gonorar taqsimlashga yordam bering, ushbu yuristga qancha gonorar ajratasiz?</b>
-                                    <input type="text" class="form-control" placeholder="5000" name="fee-quantity"> so'm
-                                    <button type="button" class="btn btn-success">taqsimlash</button>
-                                    <button type="button" class="btn btn-danger">ortga</button>
-                                </p>
-                                <!-- /Taqsimlash jarayonida -->
-
-                                <!-- fixed bottom info -->
-                                <div class="navbar-fixed-bottom fixed-bottom-info">
-                                    <p>
-                                        Sizda <span id="left-money">5000</span> so'm taqsimlanmay qoldi.
-                                        <button type="submit" class="btn btn-success pull-right">Taqsimlashni tugatish</button>
                                     </p>
+                                    <!-- /Taqsimlamasdan oldin -->
+
+                                    <!-- /Taqsimlagandan keyin -->
+                                    <p class="yes-helpful-answer hidden">
+                                        <b>Siz yuristga 0 so'm miqdorda gonorar ajratdingiz</b>
+                                        <button type="button" class="btn btn-primary" name="change-fee">Gonorar
+                                            miqdorini
+                                            o'zgartirish
+                                        </button>
+                                    </p>
+                                    <!-- /Taqsimlagandan keyin -->
+
+                                    <!-- Taqsimlash jarayonida -->
+                                    <p class="fee-sharing-action hidden">
+                                        <b>Iltimos, gonorar taqsimlashga yordam bering, ushbu yuristga qancha gonorar
+                                            ajratasiz?</b>
+                                        <input type="text" class="form-control" placeholder="5000" name="fee-quantity">
+                                        so'm
+                                        <button type="button" class="btn btn-success">taqsimlash</button>
+                                        <button type="button" class="btn btn-danger">ortga</button>
+                                    </p>
+                                    <!-- /Taqsimlash jarayonida -->
                                 </div>
-                                <!-- /fixed bottom info -->
+
+                                <!-- /Fee sharing -->
                             </div>
-                            <!-- /Fee sharing -->
+                        @else
+                            <div class="col-sm-9 answer">
+                                <div class="answer-footer">
+                            <span class="pull-right answered-time">
+                                {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
+                            </span>
+                                </div>
+                                <div class="answer-header">
+                                    <img class="img-thumbnail"
+                                         src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
+                                         alt="Lawyer 1"/>
+                                    <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div>
+                                    <hr>
+                                </div>
+                                <div class="answer-content">
+                                    {!! $answer->text !!}
+                                </div>
+                                <div>
+                                    @foreach($answer->files as $file)
+                                        <a class="label label-default"
+                                           href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                    @endif
+                    @endforeach
+                    <!-- fixed bottom info -->
+                    <div class="navbar-fixed-bottom fixed-bottom-info">
+                        <p>
+                            Sizda <span id="left-money">{{$question->price}}</span> so'm taqsimlanmay
+                            qoldi.
+                            <button type="submit" class="btn btn-success pull-right">Taqsimlashni
+                                tugatish
+                            </button>
+                        </p>
+                    </div>
+                    <!-- /fixed bottom info -->
+                </form>
 
-
-
-                        </div>
-                @endif
-            @endforeach
-            <!-- /Comment new style -->
+                <!-- /Comment new style -->
             </div>
 
             <div class="row">
@@ -261,9 +280,9 @@
 
         //Gonorarni taqsimlash bosilganda
         $('#share-fee-button').click(function () {
-           $('.answer').each(function () {
-              $(this).find('.fee-sharing').removeClass('hidden');
-           });
+            $('.answer').each(function () {
+                $(this).find('.fee-sharing').removeClass('hidden');
+            });
             $(this).parent().prepend('<p class="text-success"><b>Yurist tomonidan berilgan har bir javobni tagida gonorarni taqsimlash uchun tugmalar qo\'yildi.</b></p>');
             $(this).remove();
         });
@@ -296,7 +315,7 @@
             });
 
             //Left money update
-            $leftMoney-= $sharedFee;
+            $leftMoney -= $sharedFee;
             updateLeftMoney($leftMoney);
         });
 
@@ -324,7 +343,7 @@
             updateLeftMoney($leftMoney);
         });
 
-        function updateLeftMoney($leftMoney){
+        function updateLeftMoney($leftMoney) {
             $('span#left-money').text($leftMoney);
         }
 
