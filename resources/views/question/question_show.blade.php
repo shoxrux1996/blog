@@ -152,6 +152,15 @@
                                     <button type="button" class="btn btn-danger">ortga</button>
                                 </p>
                                 <!-- /Taqsimlash jarayonida -->
+
+                                <!-- fixed bottom info -->
+                                <div class="navbar-fixed-bottom fixed-bottom-info">
+                                    <p>
+                                        Sizda <span id="left-money">5000</span> so'm taqsimlanmay qoldi.
+                                        <button type="submit" class="btn btn-success pull-right">Taqsimlashni tugatish</button>
+                                    </p>
+                                </div>
+                                <!-- /fixed bottom info -->
                             </div>
                             <!-- /Fee sharing -->
 
@@ -248,6 +257,8 @@
     </script>
     <script>
 
+        var $leftMoney = parseInt($('#left-money').text());
+
         //Gonorarni taqsimlash bosilganda
         $('#share-fee-button').click(function () {
            $('.answer').each(function () {
@@ -281,8 +292,12 @@
 
             $('.fee-sharing input[value="' + $lawyerID + '"]').each(function () {
                 $(this).closest('.fee-sharing').find('.fee-sharing-action').addClass('hidden');
-                $(this).closest('.fee-sharing').find('.yes-helpful-answer').removeClass('hidden').find('b').html('<b>Siz yuristga ' + $sharedFee + ' so\'m gonorar taqsimladingiz.</b>');
+                $(this).closest('.fee-sharing').find('.yes-helpful-answer').removeClass('hidden').find('b').html('Siz yuristga ' + '<span class=\'shared-fee\'>' + $sharedFee + '</span>' + ' so\'m gonorar taqsimladingiz.');
             });
+
+            //Left money update
+            $leftMoney-= $sharedFee;
+            updateLeftMoney($leftMoney);
         });
 
         //Gonorar miqorini kiritib ortga tugmasini bosganda
@@ -299,12 +314,19 @@
         //Gonorar miqdorini o'zgartirishni tugmasini bosganda
         $('.fee-sharing').on('click', '[name="change-fee"]', function () {
             $lawyerID = $(this).closest('.fee-sharing').find('[type="hidden"]').val();
-
+            var $sharedFee = parseInt($(this).closest('.fee-sharing').find('span.shared-fee').text());
             $('.fee-sharing input[value="' + $lawyerID + '"]').each(function () {
                 $(this).closest('.fee-sharing').find('.fee-sharing-text, .yes-helpful-answer').addClass('hidden');
                 $(this).closest('.fee-sharing').find('.fee-sharing-action').removeClass('hidden');
             });
-        })
+
+            $leftMoney += $sharedFee;
+            updateLeftMoney($leftMoney);
+        });
+
+        function updateLeftMoney($leftMoney){
+            $('span#left-money').text($leftMoney);
+        }
 
     </script>
 @endsection

@@ -111,3 +111,14 @@
     width: 10%;
     font-weight: bold;
 }
+
+.fee-sharing .fixed-bottom-info{
+    background-color: black;
+    padding: 10px;
+    color: #fff;
+}
+
+.fee-sharing .fixed-bottom-info p{
+    margin-bottom: 0;
+    font-size: 18px;
+}
