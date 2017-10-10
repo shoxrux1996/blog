@@ -8,6 +8,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-9">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="col-sm-12 question">
                         @if($question->type == 2 || $question->type == 1 )
                             <span class="question-price">
@@ -49,7 +58,7 @@
                         </div>
                         @if($question->solved != true && Auth::guard('client')->id() == $question->client_id)
                             <p>
-                                <button type="button" class="btn btn-success" id="share-fee-button">Gonorarni
+                                <button type="button"  class="btn btn-success" id="share-fee-button">Gonorarni
                                     taqsimlash
                                 </button>
                                 <button type="button" class="btn btn-primary">Gonorar yuristlar o'rtasida teng
@@ -97,11 +106,12 @@
                                 </div>
 
                                 <!-- Fee sharing -->
-
                                 <div class="fee-sharing hidden">
                                     <hr>
                                     <!-- Bir nechta javob bergan yurist uchun 1marta pul taqsimlanishi uchun -->
-                                    <input type="hidden" value="{{$answer->lawyerable->id}}"/>
+                                    <input type="hidden" class="lawyerID" value="{{$answer->lawyerable->id}}"/>
+
+                                    <input type="hidden" class="answer_helped" name="answer_helped[{{$answer->id}}]">
                                     <!-- /Bir nechta javob bergan yurist uchun 1marta pul taqsimlanishi uchun -->
 
                                     <!-- Taqsimlamasdan oldin -->
@@ -145,6 +155,7 @@
                                     <!-- /Taqsimlash jarayonida -->
                                 </div>
                                 <!-- /Fee sharing -->
+
                             </div>
                     @else
                         <!-- Уточнение-->
@@ -289,7 +300,7 @@
 
         //Ha + javob foydali bo'ldi tugmasini bosganda
         $('.yes-helpful .btn-success').click(function () {
-            $lawyerID = $(this).closest('.fee-sharing').find('[type="hidden"]').val();
+            $lawyerID = $(this).closest('.fee-sharing').find('.lawyerID').val();
 
             $('.fee-sharing input[value="' + $lawyerID + '"]').each(function () {
                 $(this).closest('.fee-sharing').find('.fee-sharing-action').removeClass('hidden');
@@ -300,19 +311,23 @@
 
         //Yo'q - javob foydali bo'lmadi tugmasini bosganda
         $('.no-helpful .btn-danger').click(function () {
-            $(this).closest('.fee-sharing').find('[type="hidden"]').remove();
+            $(this).closest('.fee-sharing').find('.answer_helped').val(0);
+            $(this).closest('.fee-sharing').find('.lawyerID').remove();
             $(this).closest('.fee-sharing').find('.fee-sharing-text').html('<b class="no-helpful-answer">Yuristning javobi foydali bo\'lmagani bois, gonorar ajratilmaydi.<b>');
+
         });
 
         //Gonorar miqdorini kiritib taqsimlash tugmasini bosganda
         $('.fee-sharing-action .btn-success').click(function () {
-            $lawyerID = $(this).closest('.fee-sharing').find('[type="hidden"]').val();
+            $lawyerID = $(this).closest('.fee-sharing').find('.lawyerID').val();
             var $sharedFee = $(this).closest('.fee-sharing').find('.fee-quantity').val();
 
             $('.fee-sharing input[value="' + $lawyerID + '"]').each(function () {
                 $(this).closest('.fee-sharing').find('.fee-quantity').val($sharedFee);
                 $(this).closest('.fee-sharing').find('.fee-sharing-action').addClass('hidden');
-                $(this).closest('.fee-sharing').find('.yes-helpful-answer').removeClass('hidden').find('b').html('Siz yuristga ' + '<span class=\'shared-fee\'>' + $sharedFee + '</span>' + ' so\'m gonorar taqsimladingiz.');
+                $(this).closest('.fee-sharing').find('.yes-helpful-answer').removeClass('hidden')
+                    .find('b').html('Siz yuristga ' + '<span class=\'shared-fee\'>' + $sharedFee + '</span>' + ' so\'m gonorar taqsimladingiz.');
+                $(this).closest('.fee-sharing').find('.answer_helped').val(1);
             });
 
             //Left money update
@@ -322,22 +337,23 @@
 
         //Gonorar miqorini kiritib ortga tugmasini bosganda
         $('.fee-sharing-action .btn-danger').click(function () {
-            $lawyerID = $(this).closest('.fee-sharing').find('[type="hidden"]').val();
-
+            $lawyerID = $(this).closest('.fee-sharing').find('.lawyerID').val();
             $('.fee-sharing input[value="' + $lawyerID + '"]').each(function () {
                 $(this).closest('.fee-sharing').find('.fee-sharing-text').removeClass('hidden');
                 $(this).closest('.fee-sharing').find('.fee-sharing-action').addClass('hidden');
+                $(this).closest('.fee-sharing').find('.answer_helped').val();
             });
         });
 
 
         //Gonorar miqdorini o'zgartirishni tugmasini bosganda
         $('.fee-sharing').on('click', '[name="change-fee"]', function () {
-            $lawyerID = $(this).closest('.fee-sharing').find('[type="hidden"]').val();
+            $lawyerID = $(this).closest('.fee-sharing').find('.lawyerID').val();
             var $sharedFee = parseInt($(this).closest('.fee-sharing').find('span.shared-fee').text());
             $('.fee-sharing input[value="' + $lawyerID + '"]').each(function () {
                 $(this).closest('.fee-sharing').find('.fee-sharing-text, .yes-helpful-answer').addClass('hidden');
                 $(this).closest('.fee-sharing').find('.fee-sharing-action').removeClass('hidden');
+                $(this).closest('.fee-sharing').find('.answer_helped').val();
             });
 
             $leftMoney += $sharedFee;

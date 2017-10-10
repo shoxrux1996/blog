@@ -88,6 +88,11 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
+    'price'                => "Pul Notog'ri taqsimlandi.",
+    'wrong'                => "Notog'ri kiritildi, qayta tekshiring",
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

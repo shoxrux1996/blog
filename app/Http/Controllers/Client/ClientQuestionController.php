@@ -2,6 +2,7 @@
 
 namespace yuridik\Http\Controllers\Client;
 
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rule;
 use Mews\Purifier\Facades\Purifier;
@@ -340,16 +341,34 @@ class ClientQuestionController extends Controller
     public function payForLawyer(Request $request, $id){
         $question = Question::findOrFail($id);
         $rules = array();
-        foreach ($request->lawyers as $key => $lawyer){
-            $rules['lawyers.'.$key] = 'numeric|min:0|max:10000';
+        $lawyers = $request->lawyers;
+        foreach ($lawyers as $key => $lawyer){
+            if(!is_null($lawyer)) {
+                $rules['lawyers.' . $key] = 'numeric|min:0|max:10000';
+            }
+            else
+                unset($lawyers[$key]);
         }
-        Validator::make($request->all(), $rules)->validate();
-        $sum = 0;
+        $answer_helped = $request->answer_helped;
+        foreach ($answer_helped as $key => $answer){
+            if(is_null($answer)) {
+                unset($answer_helped[$key]);
+            }
+        }
+
+        $validator = Validator::make(['lawyers'=>$lawyers], $rules);
+        echo json_encode($validator->messages());
+        echo json_encode($answer_helped);
+        echo json_encode($lawyers);
+      /*  if($validator->fails()){
+            return redirect()->back()->withErrors(__('validation.price'));
+        }
+       $sum = 0;
         foreach ($request->lawyers as $lawyer){
             $sum = $sum + $lawyer;
         }
-        if($question->price <= $sum){
-            print_r($sum);
+        if($question->price < $sum){
+            return redirect()->back()->withErrors(__('validation.key'))->withInput(Input::all());
         }
         foreach ($request->lawyers as $key=>$lawyer_price){
             $order = new Order;
@@ -358,7 +377,7 @@ class ClientQuestionController extends Controller
             $order->amount = -($lawyer_price*0.85);
             $question->orders()->save($order);
         }
-
+        return redirect()->back();*/
     }
 }
 
