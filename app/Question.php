@@ -26,7 +26,7 @@ class Question extends Model
         return $this->hasMany('yuridik\Answer');
     }
 
-    public function order()
+    public function orders()
     {
         return $this->morphMany('yuridik\Order', 'typeable');
     }

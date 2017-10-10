@@ -122,9 +122,7 @@ Route::prefix('user')->group(function(){
 
 Route::prefix('client')->group(function(){
     Route::get('/file/delete/{id}','Client\ClientController@fileDelete')->name('client.file.delete');
-    Route::post('/question/{id}/pay_to_lawyer/', function (\Illuminate\Http\Request $request){
-        dd($request);
-    })->name('client.question.pay_lawyer');
+    Route::post('/question/{id}/pay_to_lawyer/', 'Client\ClientQuestionController@payForLawyer')->name('client.question.pay_lawyer');
 	Route::post('/password/reset', 'Auth\ClientResetPasswordController@reset')->name('client.password.request');
 	Route::get('/password/reset/{token}', 'Auth\ClientResetPasswordController@showResetForm')->name('client.password.reset');
 	Route::get('/', 'Client\ClientController@index')->name('client.dashboard');

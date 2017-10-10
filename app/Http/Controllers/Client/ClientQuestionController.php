@@ -3,6 +3,7 @@
 namespace yuridik\Http\Controllers\Client;
 
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Validation\Rule;
 use Mews\Purifier\Facades\Purifier;
 use yuridik\Answer;
 use yuridik\Notifications\QuestionsNotification;
@@ -18,7 +19,7 @@ use yuridik\Client;
 use Illuminate\Support\Facades\Session;
 use App;
 use Auth;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use yuridik\Order;
 use yuridik\Lawyer;
 use yuridik\Admin;
@@ -297,7 +298,7 @@ class ClientQuestionController extends Controller
             $order = new Order;
             $order->user_id = $question->client->user->id;
             $order->amount = $question->price;
-            $question->order()->save($order);
+            $question->orders()->save($order);
         }
         $lawyers = Lawyer::where('type', 2)->get();
         $admins = Admin::all();
@@ -334,6 +335,29 @@ class ClientQuestionController extends Controller
             }
         }
         return redirect()->back();
+
+    }
+    public function payForLawyer(Request $request, $id){
+        $question = Question::findOrFail($id);
+        $rules = array();
+        foreach ($request->lawyers as $key => $lawyer){
+            $rules['lawyers.'.$key] = 'numeric|min:0|max:10000';
+        }
+        Validator::make($request->all(), $rules)->validate();
+        $sum = 0;
+        foreach ($request->lawyers as $lawyer){
+            $sum = $sum + $lawyer;
+        }
+        if($question->price <= $sum){
+            print_r($sum);
+        }
+        foreach ($request->lawyers as $key=>$lawyer_price){
+            $order = new Order;
+            $lawyer = Lawyer::findOrFail($key);
+            $order->user_id = $lawyer->user->id;
+            $order->amount = -($lawyer_price*0.85);
+            $question->orders()->save($order);
+        }
 
     }
 }

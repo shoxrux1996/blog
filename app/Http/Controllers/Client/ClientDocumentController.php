@@ -125,7 +125,7 @@ class ClientDocumentController extends Controller
             $order->amount = $reques->price;
             $reques->document->update(['status' => 1]);
 
-            $reques->document->order()->save($order);
+            $reques->document->orders()->save($order);
             Session::flash('message', 'Order created successfully');
             return redirect()->route('client.dashboard');
         } else {

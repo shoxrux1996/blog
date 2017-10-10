@@ -28,7 +28,7 @@ class Document extends Model
         return $this->hasMany('yuridik\Request');
     }
 
-    public function order()
+    public function orders()
     {
         return $this->morphMany('yuridik\Order', 'typeable');
     }

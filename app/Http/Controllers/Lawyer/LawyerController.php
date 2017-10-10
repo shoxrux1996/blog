@@ -15,7 +15,7 @@ use yuridik\City;
 use yuridik\Lawyer;
 use yuridik\File;
 use yuridik\Category;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File as LaraFile;
 use Session;
 
@@ -69,7 +69,8 @@ class LawyerController extends Controller
             $lawyer->user->city_id = $request->city;
             $lawyer->push();
             return redirect()->route('lawyer.info', ['type' => 'main']);
-        } elseif ($settingtype === "photo") {
+        }
+        if ($settingtype === "photo") {
             $messages = [
                 'image' => 'Формат не поддерживается',
             ];
@@ -100,7 +101,7 @@ class LawyerController extends Controller
             $lawyer->save();
             return redirect()->route('lawyer.info', ['type' => 'photo']);
         }
-        elseif ($settingtype === "password") {
+        if ($settingtype === "password") {
             if (Hash::check($request->current_password, $lawyer->password)) {
                 $messages = [
                     'required' => 'Обязательно к заполнению',
@@ -119,7 +120,8 @@ class LawyerController extends Controller
                 }
             } else
                 return redirect()->route('lawyer.info', ['type' => 'password'])->withErrors(['wrong-attempt' => 'Неправильный пароль']);
-        } elseif ($settingtype === 'contacts') {
+        }
+        if ($settingtype === 'contacts') {
             $messages = [
                 'required' => 'Обязательно к заполнению',
                 'regex' => 'Неправильный формат',
@@ -134,7 +136,7 @@ class LawyerController extends Controller
                 return redirect()->route('lawyer.info', ['type' => 'contacts']);
             }
         }
-        elseif ($settingtype === 'experience') {
+        if ($settingtype === 'experience') {
             $lawyer->categories()->detach();
             $lawyer->categories()->sync($request->specialization, false);
             if ($request->company !== null || $request->position !== null) {
@@ -170,7 +172,8 @@ class LawyerController extends Controller
                 }
             }
             return redirect()->route('lawyer.info', ['type' => 'experience']);
-        } elseif ($settingtype === 'additional') {
+        }
+        if ($settingtype === 'additional') {
             $messages = [
                 'integer' => 'Неверный формат',
                 'between' => 'Неподходящий число'
@@ -195,7 +198,7 @@ class LawyerController extends Controller
                 return redirect()->route('lawyer.info', ['type' => 'additional']);
             }
         }
-        elseif ($settingtype === 'awards') {
+        if ($settingtype === 'awards') {
             $messages = [
                 'image' => 'Неверный формат',
             ];
@@ -222,17 +225,15 @@ class LawyerController extends Controller
                 }
                 return redirect()->route('lawyer.info', ['type' => 'awards']);
             }
-        }elseif ($settingtype === 'education') {
-
+        }
+        if ($settingtype === 'education') {
             $rules = array(
                 'city'=>'required',
                 'university'=>'required',
                 'faculty'=>'required',
                 'degree' => 'required'
             );
-
             $validator = Validator::make($request->all(), $rules);
-
             if ($validator->fails()) {
                 return redirect()->route('lawyer.info', ['type' => 'education'])->withErrors($validator);
             }
@@ -248,10 +249,25 @@ class LawyerController extends Controller
 
             return redirect()->route('lawyer.info', ['type' => 'education']);
         }
-        else {
-            return redirect()->route('lawyer.info');
-        }
+        if($settingtype === 'lawyer-card'){
+            $card_number = str_replace(' ', '', $request->card_number);
+            $expire_date =str_replace('/', '', $request->expire_date);
+            $card= array('card_number'=>$card_number, 'expire_date'=>$expire_date);
 
+            $rules = array(
+               'card_number'=>'required|digits:16',
+                'expire_date'=>'required|digits:4',
+            );
+
+            $validator = Validator::make($card,$rules);
+            if ($validator->fails()) {
+                return redirect()->route('lawyer.info', ['type' => 'lawyer-card'])->withErrors($validator);
+            }
+            $lawyer->user->card_number =$card_number;
+            $lawyer->user->expire_date =$expire_date;
+            $lawyer->user->save();
+        }
+        return redirect()->route('lawyer.info');
     }
     public function educationDelete($id){
         $lawyer = Auth::user();
