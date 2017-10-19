@@ -90,6 +90,7 @@ return [
 
     'price'                => "Pul Notog'ri taqsimlandi.",
     'wrong'                => "Notog'ri kiritildi, qayta tekshiring",
+    'empty'                => "Hech narsa belgilanmadi",
 
 
 

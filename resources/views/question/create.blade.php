@@ -149,7 +149,7 @@
                         <div class='name'>
                             <label for="standart-price">@lang('question.Стандартная')</label>
                         </div>
-                        <div class='price'>1000 @lang('question.сум')</div>
+                        <div class='price'>5000 @lang('question.сум')</div>
                         <hr>
                         <ul>
                             <li>
@@ -165,7 +165,7 @@
                         <div class='name'>
                             <label for="vip-price">@lang('question.VIP-консультация')</label>
                         </div>
-                        <div class='price'>@lang('question.от') 5000 @lang('question.сум')</div>
+                        <div class='price'>@lang('question.от') 25000 @lang('question.сум')</div>
                         <span>@lang('question.Стоимость вы устанавливаете сами')</span>
                         <hr>
                         <ul>

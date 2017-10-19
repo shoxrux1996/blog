@@ -25,6 +25,8 @@ class Answer extends Model
     {
         return $this->hasOne('yuridik\Feedback');
     }
-
+    public function lawyerFee(){
+        return $this->question->fees()->where('user_id',$this->lawyerable->user->id)->first();
+    }
 
 }

@@ -122,19 +122,22 @@ Route::prefix('user')->group(function(){
 
 Route::prefix('client')->group(function(){
     Route::get('/file/delete/{id}','Client\ClientController@fileDelete')->name('client.file.delete');
-    Route::post('/question/{id}/pay_to_lawyer/', 'Client\ClientQuestionController@payForLawyer')->name('client.question.pay_lawyer');
-	Route::post('/password/reset', 'Auth\ClientResetPasswordController@reset')->name('client.password.request');
+    	Route::post('/password/reset', 'Auth\ClientResetPasswordController@reset')->name('client.password.request');
 	Route::get('/password/reset/{token}', 'Auth\ClientResetPasswordController@showResetForm')->name('client.password.reset');
 	Route::get('/', 'Client\ClientController@index')->name('client.dashboard');
 	Route::get('/settings/info/{type?}', 'Client\ClientController@info')->name('client.info');
 	Route::post('/update/{settingtype}', 'Client\ClientController@update')->name('client.update');
 
     Route::prefix('question')->group(function(){
+        Route::post('/{id}/pay_to_lawyer/', 'Client\ClientQuestionController@payForLawyer')->name('client.question.pay_lawyer');
+        Route::post('/{id}/pat_to_every_lawyer/','Client\ClientQuestionController@payForEveryLawyer')
+            ->name('client.question.pay_to_every_lawyer');
         Route::get('/create', 'Client\ClientQuestionController@create')->name('question.create');
         Route::post('/store', 'Client\ClientQuestionController@store')->name('question.insert.submit');
         Route::get('/edit/{id}','Client\ClientQuestionController@edit')->name('question.edit');
         Route::post('/edit/update/{id}', 'Client\ClientQuestionController@update')->name('question.edit.submit');
         Route::post('/answer/submit/{question_id}', 'Client\ClientQuestionController@answerStore')->name('client.answer.store');
+        Route::post('/{id}/make_solved',  'Client\ClientQuestionController@makeSolved')->name('client.question.makeSolved');
     });
     Route::prefix('feedback')->group(function(){
     	Route::post('/send/answer/{answer_id}', 'Client\ClientFeedbackController@store')->name('feedback.create');
