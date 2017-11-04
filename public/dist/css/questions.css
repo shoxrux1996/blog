@@ -113,7 +113,7 @@
 }
 
 .fee-sharing .fixed-bottom-info{
-    background-color: black;
+    background-color: #202846;
     padding: 10px;
     color: #fff;
 }
@@ -121,4 +121,20 @@
 .fee-sharing .fixed-bottom-info p{
     margin-bottom: 0;
     font-size: 18px;
+}
+
+.answer .shared-fee-value{
+    font-size: 16px;
+    background-color: #28BA9B;
+    padding: 5px 10px 10px 5px;
+    margin-left: -10px;
+    color: white!important;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.question .shared-fee-value span{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 10px;
 }

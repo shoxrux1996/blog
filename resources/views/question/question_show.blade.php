@@ -20,12 +20,12 @@
                     <div class="col-sm-12 question">
                         @if($question->type == 2 || $question->type == 1 )
                             <span class="question-price">
-                            <b>{{$question->price}} сум</b>
-                            <span>
-                            стоимость<br/>
-                            вопроса
+                                <b>{{$question->price}} сум</b>
+                                <span>
+                                стоимость<br/>
+                                вопроса
+                                </span>
                             </span>
-                        </span>
                         @endif
                         @if($question->solved != true && Auth::guard('client')->id() == $question->client_id)
                             <form action="{{route('client.question.makeSolved', $question->id)}}" method="post">
@@ -84,7 +84,12 @@
                             <div class="col-sm-9 answer">
                                 <div class="answer-footer">
                                     @if($answer->lawyerFee() != null)
-                                        <p>{{$answer->lawyerFee()->amount}}</p>
+                                        <span class="shared-fee-value">
+                                            <b>{{$answer->lawyerFee()->amount}} so'm</b>
+                                            <span>
+                                            ajratildi
+                                            </span>
+                                        </span>
                                     @endif
                                     <span class="pull-right answered-time">
                                 {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
@@ -165,49 +170,51 @@
                                 <!-- /Fee sharing -->
 
                             </div>
-                    @else
-                    <!-- Уточнение-->
-                    <div class="col-sm-9 answer">
-                        <div class="answer-footer">
+                        @else
+                        <!-- Уточнение-->
+                            <div class="col-sm-9 answer">
+                                <div class="answer-footer">
                     <span class="pull-right answered-time">
                         {{\Carbon\Carbon::instance($answer->created_at)->toFormattedDateString()}}
                     </span>
-                        </div>
-                        <div class="answer-header">
-                            <img class="img-thumbnail"
-                                 src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
-                                 alt="Lawyer 1"/>
-                            <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div>
-                            <hr>
-                        </div>
-                        <div class="answer-content">
-                            {!! $answer->text !!}
-                        </div>
-                        <div>
-                            @foreach($answer->files as $file)
-                                <a class="label label-default"
-                                   href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
-                            @endforeach
-                        </div>
-                    </div>
-                    <!-- /Уточнение-->
-                    @endif
+                                </div>
+                                <div class="answer-header">
+                                    <img class="img-thumbnail"
+                                         src="{{$answer->lawyerable->user->file != null ? asset($answer->lawyerable->user->file->path.$answer->lawyerable->user->file->file) : asset("dist/images/headshot-1.png")}}"
+                                         alt="Lawyer 1"/>
+                                    <h4 class="lawyer-name">{{$answer->lawyerable->user->firstName}} {{$answer->lawyerable->user->lastName}}</h4>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div>
+                                    <hr>
+                                </div>
+                                <div class="answer-content">
+                                    {!! $answer->text !!}
+                                </div>
+                                <div>
+                                    @foreach($answer->files as $file)
+                                        <a class="label label-default"
+                                           href={!!asset(rawurlencode($file->path.$file->file))!!}> {{ $file->file}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- /Уточнение-->
+                        @endif
                     @endforeach
                     @if($question->type != 0)
                     <!-- fixed bottom info -->
-                    <div class="navbar-fixed-bottom fixed-bottom-info">
-                            <p>
-                                Sizda <span id="left-money">{{$question->price}}</span> so'm taqsimlanmay
-                                qoldi.
-                                <button type="submit" class="btn btn-success pull-right">Taqsimlashni
-                                    tugatish
-                                </button>
-                            </p>
+                        <div class="fee-sharing">
+                            <div class="navbar-fixed-bottom fixed-bottom-info">
+                                <p>
+                                    Sizda <span id="left-money">{{$question->price}}</span> so'm taqsimlanmay
+                                    qoldi.
+                                    <button type="submit" class="btn btn-success pull-right">Taqsimlashni
+                                        tugatish
+                                    </button>
+                                </p>
+                            </div>
                         </div>
-                    <!-- /fixed bottom info -->
+                        <!-- /fixed bottom info -->
                     @endif
                 </form>
                 <!-- /Comment new style -->
@@ -334,7 +341,7 @@
                 $(this).closest('.fee-sharing').find('.fee-quantity').val($sharedFee);
                 $(this).closest('.fee-sharing').find('.fee-sharing-action').addClass('hidden');
                 $(this).closest('.fee-sharing').find('.yes-helpful-answer').removeClass('hidden')
-                    .find('b').html('Siz yuristga ' + '<span class=\'shared-fee\'>' + $sharedFee + '</span>' + ' so\'m gonorar taqsimladingiz.');
+                        .find('b').html('Siz yuristga ' + '<span class=\'shared-fee\'>' + $sharedFee + '</span>' + ' so\'m gonorar taqsimladingiz.');
                 $(this).closest('.fee-sharing').find('.answer_helped').val(1);
                 $(this).closest('.fee-sharing').find('.lawyers').val($sharedFee);
             });
