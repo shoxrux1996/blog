@@ -28,11 +28,24 @@ class Question extends Model
 
     public function order()
     {
-        return $this->morphMany('yuridik\Order', 'typeable');
+        return $this->morphOne('yuridik\Order', 'typeable');
     }
-
+    public function fees(){
+        return $this->morphMany('yuridik\Fee', 'feeable');
+    }
+    public function notPayed(){
+        return $this->fees()->exists() ? 0 : 1;
+    }
     public function countAnswers()
     {
         return $this->answers()->count();
     }
+    public function lawyers(){
+        $collections = collect();
+        $answers = $this->answers->where('lawyerable_type', 'yuridik\Lawyer')->unique('lawyerable_id');
+        foreach ($answers as $answer)
+            $collections->push($answer->lawyerable);
+        return $collections;
+    }
+
 }

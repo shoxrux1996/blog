@@ -534,7 +534,7 @@
                             <div class="row">
                                 <h6><b>@lang('lawyer-settings.Дополнительно')</b></h6>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
+                                    <div class="form-group ">
                                         <label for="profile-shown-price">@lang('lawyer-settings.Стоимость услуг, отображаемая в профиле')</label>
                                         <textarea id="profile-shown-price" cols="20" class="form-control" rows="5"
                                                   name="profile_shown_price">{{$lawyer->profile_shown_price}}</textarea>
@@ -600,24 +600,37 @@
                         </div>
                     </div>
                     <!-- Lawyer card info -->
-                    <div id="lawyer-card" class="tab-pane fade">
+                    <div id="lawyer-card" class="tab-pane fade in {{$settingtype==='lawyer-card' ? 'active' : ''}}">
                         <div class="row">
                             <div class="col-sm-6">
                                 <img class="img-responsive" align="Card image" src="{{asset('dist/images/Credit-Card-PNG-Image.png')}}" />
                             </div>
                             <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-7">
+                                <form method="post" action="{{ route('lawyer.update', ['settingtype'=>'lawyer-card'])}}">
+                                    {{csrf_field()}}
+                                    <div class="row">
+                                    <div class="col-sm-7 {{$errors->has('card_number') ? ' has-error' : ''}}">
                                         <label for="card-number">Номер карты</label>
-                                        <input type="text" id="card-number" class="form-control" placeholder="Номер вашей карты"/>
+                                        @if ($errors->has('card_number'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('card_number') }}</strong>
+                                            </span>
+                                        @endif
+                                        <input type="text" id="card-number" value="{{$lawyer->user->card_number}}" name="card_number" class="form-control" placeholder="Номер вашей карты"/>
                                     </div>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-5 {{$errors->has('expire_date') ? ' has-error' : ''}}">
                                         <label for="expire-date">Дата истечения</label>
-                                        <input type="text" id="expire-date" class="form-control" placeholder="мм/гг"/>
+                                        @if ($errors->has('expire_date'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('expire_date') }}</strong>
+                                            </span>
+                                        @endif
+                                        <input type="text" id="expire-date" value="{{$lawyer->user->expire_date}}" name="expire_date" class="form-control" placeholder="мм/гг"/>
                                     </div>
                                 </div>
-                                <br>
-                                <button type="button" class="btn btn-primary pull-right">Сохранить</button>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary pull-right">Сохранить</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -630,12 +643,10 @@
 
 @endsection
 @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.60/inputmask/jquery.inputmask.js"></script>
-
-
+    <script src="{{asset('dist/js/jquery.inputmask.js')}}"></script>
     <script>
 
-        $('#card-number').inputmask("9999 9999 9999 999");
+        $('#card-number').inputmask("9999 9999 9999 9999");
         $('#expire-date').inputmask("99/99");
 
         function readURL(input) {

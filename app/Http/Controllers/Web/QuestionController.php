@@ -2,6 +2,7 @@
 
 namespace yuridik\Http\Controllers\Web;
 
+use yuridik\Answer;
 use yuridik\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -23,7 +24,6 @@ class QuestionController extends Controller
      */
     public function index()
     {
-
         $questions = Question::orderBy('id', 'desc')->paginate(5);
         $questions_costly = Question::where('type', 1)->orWhere('type',2)
             ->orderBy('id', 'desc')->paginate(5);
