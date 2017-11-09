@@ -30,12 +30,12 @@
                                 <input type="hidden" name="callback" value="http://yuridik.uz:443/api/success/:transaction">
                             {{--<input type="hidden" name="callback" value="http://shoxrux19960822.000webhostapp.com/card"/>--}}
                             <!-- ================================================== -->
-                                    <div class="form-group">
-                                        <input type="number" id="amountWillConvert" class="form-control" placeholder="Введите сумму">
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-primary">Перейти к оплате</button>
-                                    </div>
+                                <div class="form-group">
+                                    <input type="number" id="amountWillConvert" class="form-control" placeholder="Введите сумму">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary">Перейти к оплате</button>
+                                </div>
                             </form>
                         </div>
                     </div>
