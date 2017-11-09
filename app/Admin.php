@@ -48,6 +48,9 @@ class Admin extends Authenticatable
     public function userNotifications(){
         return $this->unreadNotifications()->where('type', 'yuridik\Notifications\UsersNotification');
     }
+    public function withdrawNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\WithdrawsNotification');
+    }
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new AdminResetPasswordNotification($token));

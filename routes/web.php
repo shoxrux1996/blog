@@ -27,6 +27,7 @@ Route::prefix('admin')->group(function(){
         Route::get('blogs', 'Admin\AdminNotificationController@blogsList')->name('admin.blogs.notification.index');
         Route::get('questions', 'Admin\AdminNotificationController@questionsList')->name('admin.questions.notification.index');
         Route::get('answers', 'Admin\AdminNotificationController@answersList')->name('admin.answers.notification.index');
+        Route::get('withdraws', 'Admin\AdminNotificationController@withdrawsList')->name('admin.withdraws.notification.index');
     });
     Route::prefix('blogs')->group(function(){
         Route::get('/delete/{id}', 'Admin\AdminBlogController@destroy')->name('admin.blog.delete');
@@ -106,6 +107,11 @@ Route::prefix('admin')->group(function(){
         Route::post('lawyer/confirm/{id}','Admin\AdminPostController@lawyerConfirm')->name('admin.lawyer.confirm');
         Route::get('lawyer/award/delete/{id}', 'Admin\AdminPostController@lawyerAwardDelete')->name('admin.lawyer.award.delete');
     });
+    Route::prefix('withdraws')->group(function (){
+        Route::get('/', 'Admin\AdminWithdrawController@index')->name('admin.withdraw.requests');
+        Route::get('requests/submit/{id}', 'Admin\AdminWithdrawController@withdraw')->name('admin.withdraw.submit');
+        Route::post('request/','Lawyer\LawyerController@sendWithdrawRequest')->name('lawyer.withdraw.request');
+    });
 });
 
 Route::prefix('user')->group(function(){
@@ -164,9 +170,9 @@ Route::prefix('client')->group(function(){
        });
 
     
-    Route::prefix('blogs')->group(function(){
+  /*  Route::prefix('blogs')->group(function(){
 	 	Route::get('/show/{id}', 'Admin\AdminBlogController@show')->name('client.blog.show');
-	});
+	});*/
 
     Route::get('notification/all-marked', 'Client\ClientNotificationsController@deleteNotifications')->name('client.notifications.delete');
 });
@@ -205,6 +211,7 @@ Route::prefix('lawyer')->group(function(){
         Route::post('/submit/{id}', 'Lawyer\LawyerDocumentController@sendRequest')->name('lawyer.document.request');
         Route::get('show/{id}', 'Lawyer\LawyerDocumentController@show')->name('lawyer.document.show');
     });
+
 });
 
 Route::prefix('question-info')->group(function (){

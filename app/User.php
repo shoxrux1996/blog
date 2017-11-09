@@ -36,9 +36,12 @@ class User extends Model
     public function withdraws(){
         return $this->hasMany('yuridik\Withdraw')->where('state', 1)->orderBy('id', 'desc');
     }
+    public function fees(){
+        return $this->hasMany('yuridik\Fee')->orderBy('id','desc');
+    }
     public function balance()
     {
-        return ($this->transactions()->sum('amount') / 100) - $this->orders()->sum('amount') - $this->withdraws()->sum('amount');
+        return ($this->transactions()->sum('amount') / 100) - $this->orders()->sum('amount') - $this->withdraws()->sum('amount') + $this->fees()->sum('amount');
     }
 
 }

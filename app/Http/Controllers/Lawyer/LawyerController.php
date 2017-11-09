@@ -18,6 +18,7 @@ use yuridik\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File as LaraFile;
 use Session;
+use yuridik\Withdraw;
 
 class LawyerController extends Controller
 {
@@ -301,6 +302,13 @@ class LawyerController extends Controller
         }
         LaraFile::delete(public_path() . $file->path . $file->file);
         $file->delete();
+        return redirect()->back();
+    }
+    public function sendWithdrawRequest(Request $request){
+        $user = Auth::guard('lawyer')->user()->user;
+        $withdraw = new Withdraw;
+        $withdraw->amount = $user->balance();
+        $user->withdraws()->save($withdraw);
         return redirect()->back();
     }
 }

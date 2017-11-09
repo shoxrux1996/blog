@@ -85,7 +85,7 @@
                                 <div class="answer-footer">
                                     @if($answer->lawyerFee() != null)
                                         <span class="shared-fee-value">
-                                            <b>{{$answer->lawyerFee()->amount}} so'm</b>
+                                            <b>{{round(($answer->lawyerFee()->amount*100/85)*100/$question->price, 2)}}%</b>
                                             <span>
                                             ajratildi
                                             </span>
@@ -201,7 +201,7 @@
                             <!-- /Уточнение-->
                         @endif
                     @endforeach
-                    @if($question->type != 0)
+                    @if($question->type != 0 && $question->notPayed() && Auth::guard('client')->id() == $question->client_id)
                     <!-- fixed bottom info -->
                         <div class="fee-sharing">
                             <div class="navbar-fixed-bottom fixed-bottom-info">

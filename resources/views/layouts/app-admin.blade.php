@@ -91,12 +91,12 @@
                 <li>
                     <a href="{{route('admin.clients.index')}}"><i class="fa fa-fw fa-users"></i> Пользователи</a>
                 </li>
-                @if(Auth::user()->type == 2)
+
                     <li>
                         <a href="{{route('admin.moderators.index')}}"><i class="fa fa-fw fa-address-card"></i>
                             Модераторы</a>
                     </li>
-                @endif
+
                 <li>
                     <a href="{{route('admin.comments.index')}}"><i class="fa fa-fw fa-comments"></i> Комментарии</a>
                 </li>
@@ -124,6 +124,9 @@
                  </li>--}}
                 <li>
                     <a href="{{route('admin.cities.index')}}"><i class="fa fa-fw fa-reply"></i> Города</a>
+                </li>
+                <li>
+                    <a href="{{route('admin.withdraw.requests')}}"><i class="fa fa-fw fa-reply"></i> Запросы на оплату</a>
                 </li>
             </ul>
         </div>
