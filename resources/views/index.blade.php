@@ -2,6 +2,19 @@
 @section('styles')
     <link href="{{ asset('dist/css/homepage.css')}}" rel="stylesheet">
 @endsection
+@section('scripts')
+    <script>
+        if(screen.width <= 991){
+            var $searchButton = $('#search-submit-button');
+            $('#search-field').hide();
+            $($searchButton).attr('type', 'button');
+            $($searchButton).click('on', function () {
+                $('#search-field').show("slide", { direction: "right" }, 4000);
+                $($searchButton).attr('type', 'submit');
+            });
+        }
+    </script>
+@endsection
 
 @section('content')
 
@@ -11,13 +24,13 @@
             <div class="col-md-4">
                 <h1>@lang('index.confidence')</h1>
                 <form action="{{route('search.all')}}" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="{{ __('index.search') }}" required/>
+                    <div class="input-group text-center">
+                        <input type="text" class="form-control" id="search-field" name="search" placeholder="{{ __('index.search') }}" required/>
                         <span class="input-group-btn">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                      </button>
-                      </span>
+                          <button type="submit" class="btn btn-default" id="search-submit-button">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                          </button>
+                        </span>
                     </div>
                 </form>
             </div>
@@ -210,9 +223,17 @@
                            href="{{route('web.blog.show', $blog->id)}}">@lang('index.readblog')</a>
                     </div>
                     <h4>
-                        <a href="{{route('web.blog.show', $blog->id)}}">{{mb_substr($blog->title,0,50)}} {{strlen($blog->title) > 50 ? '...' : ""}}</a>
+                        <a href="{{route('web.blog.show', $blog->id)}}">{{$blog->title}}</a>
                     </h4>
-                    <p>{{substr(strip_tags($blog->text),0,80)}} {{strlen(strip_tags($blog->text)) > 80 ? '...' : ""}}</p>
+                    <p class="hidden-xs">{{substr(strip_tags($blog->text),0,80)}} {{strlen(strip_tags($blog->text)) > 80 ? '...' : ""}}</p>
+                    <p class="visible-xs">
+                        <span>
+                           <i class="fa fa-eye"></i> {{$blog->count}}
+                        </span>
+                        <span class="pull-right">
+                            <i class="fa fa-calendar"></i> {{Carbon\Carbon::parse($blog->created_at)->toFormattedDateString()}}
+                        </span>
+                    </p>
                 </div>
             @endforeach
 
