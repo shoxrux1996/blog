@@ -218,7 +218,6 @@ class ClientQuestionController extends Controller
         }
         $question->save();
         // is it possible?
-
         if ($request->file('files') != null) {
             $file = $request->file('files');
             foreach ($file as $key) {
@@ -230,17 +229,17 @@ class ClientQuestionController extends Controller
                 $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
             }
         }
+        $lawyers = Lawyer::where('type', 2)->get();
+        $admins = Admin::all();
+
         if($question->type != 0){
             $order = new Order;
             $order->user_id = $question->client->user->id;
             $order->amount = $question->price;
             $question->order()->save($order);
+            Notification::send($lawyers, new QuestionsNotification($question));
+            Notification::send($admins, new QuestionsNotification($question));
         }
-        $lawyers = Lawyer::where('type', 2)->get();
-        $admins = Admin::all();
-        Notification::send($lawyers, new QuestionsNotification($question));
-        Notification::send($admins, new QuestionsNotification($question));
-
         return true;
     }
 
@@ -410,7 +409,6 @@ class ClientQuestionController extends Controller
         $each = $question->price / $lawyers->count();
 
         foreach($lawyers as $key => $lawyer){
-
             $fee = new Fee;
             $fee->user_id = $lawyer->user->id;
             $fee->amount = 0.85*$each;
