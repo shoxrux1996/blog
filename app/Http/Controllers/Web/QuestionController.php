@@ -43,7 +43,15 @@ class QuestionController extends Controller
     public function show($id)
     {
         $question = Question::find($id);
-        return view('question.question_show')->withQuestion($question);
+        if(!$question->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2) ||
+            (Auth::guard('client')->check() && Auth::guard('client')->user()->id ==$question->client_id))
+        {
+            return view('question.question_show')->withQuestion($question);
+        }
+
+        return redirect()->back();
+
+
     }
 
     public function freeQuestions()

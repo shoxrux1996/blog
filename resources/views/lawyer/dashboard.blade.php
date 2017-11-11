@@ -67,7 +67,7 @@
                                     @endphp
                                     <h3>{{$balance}} @lang('lawyer-dashboard.сум').</h3>
                                     <h3>0 @lang('lawyer-dashboard.юркоинов')</h3>
-                                    <a href="#">@lang('lawyer-dashboard.Управление балансом')</a>
+                                    <a href="{{route('card.payment')}}">@lang('lawyer-dashboard.Управление балансом')</a>
                                     @if(!$lawyer->user->sentWithdrawRequest() and $balance > 0)
                                         <form action="{{route('lawyer.withdraw.request')}}" method="post" onclick="return confirm(shox);">
                                             {{csrf_field()}}
@@ -262,6 +262,6 @@
 @endsection
 @section('scripts')
     <script>
-        var shox = {!! json_encode(__('guarantees.Послу успешной'))!!}
+        var shox = [{!! json_encode(__('guarantees.Послу успешной'))!!}]
     </script>
 @endsection

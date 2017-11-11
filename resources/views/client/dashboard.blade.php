@@ -96,7 +96,7 @@
                                 </li>
                                 <li>
                                     <h3>{{$client->user->balance()}} @lang('client-dashboard.сум').</h3>
-                                    <a href="#">@lang('client-dashboard.Управление балансом')</a>
+                                    <a href="{{route('card.payment')}}">@lang('client-dashboard.Управление балансом')</a>
                                 </li>
                             </ul>
                         </div>

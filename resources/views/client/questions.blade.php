@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-sm-9">
                 @foreach($questions as $question)
-
-                <div class="col-sm-12 question">
+                    @if(!$question->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2))
+                        <div class="col-sm-12 question">
                     @if($question->type ==2)
                         <span class="question-price">
                         <b>{{$question->price}} сум</b>
@@ -35,6 +35,7 @@
                         </a>
                     </p>
                 </div>
+                    @endif
                 @endforeach
 
                 <div class="col-sm-12 text-center">

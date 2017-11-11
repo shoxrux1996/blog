@@ -33,7 +33,8 @@
                                 <ul class="list-unstyled">
                                     @if($category->children != null)
                                         @foreach($category->children as $cat)
-                                            <li><a href="{{route('web.category.show', $cat->name)}}">{{\App::isLocale('ru') ? $cat->name : $cat->name_uz}}</a>
+                                            <li>
+                                                <a href="{{route('web.category.show', $cat->name)}}">{{\App::isLocale('ru') ? $cat->name : $cat->name_uz}}</a>
                                             </li>
                                         @endforeach
                                     @endif
@@ -43,7 +44,8 @@
                                         </li>
                                     @endif
                                     @foreach($cat1 as $cat)
-                                        <li><a href="{{route('web.category.show', $cat->name)}}">{{\App::isLocale('ru') ? $cat->name : $cat->name_uz}}</a>
+                                        <li>
+                                            <a href="{{route('web.category.show', $cat->name)}}">{{\App::isLocale('ru') ? $cat->name : $cat->name_uz}}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -51,7 +53,8 @@
                             <div class="col-sm-6">
                                 <ul class="list-unstyled">
                                     @foreach($cat2 as $cat)
-                                        <li><a href="{{route('web.category.show', $cat->name)}}">{{\App::isLocale('ru') ? $cat->name : $cat->name_uz}}</a>
+                                        <li>
+                                            <a href="{{route('web.category.show', $cat->name)}}">{{\App::isLocale('ru') ? $cat->name : $cat->name_uz}}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -78,7 +81,8 @@
                 <div id="questions" class="tab-pane fade in active">
                     <!-- Questions -->
                     <div class="row">
-                        <h3>Последние вопросы по теме «{{\App::isLocale('ru') ? $category->name : $category->name_uz}}»</h3>
+                        <h3>Последние вопросы по теме «{{\App::isLocale('ru') ? $category->name : $category->name_uz}}
+                            »</h3>
                         <div class="col-sm-9">
                             <!-- Search -->
                             <form method="GET" action="{{route('search.questions.bycategory')}}">
@@ -157,6 +161,7 @@
                             </div>
                             <div id="section2" class="section" style="display: {{ $section == 2 ? "block" : "none" }};">
                                 @foreach($questions_costly as $question)
+                                    @if(!$question->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2))
                                     <div class="col-sm-12 question">
                                     <span class="question-price">
                             <b>{{$question->price}} сум</b>
@@ -185,6 +190,7 @@
                                             </a>
                                         </p>
                                     </div>
+                                    @endif
                                 @endforeach
                                 <div class="col-sm-12 text-center">
                                     {!! $questions_costly->links('pagination') !!}
@@ -228,7 +234,8 @@
                                          class="img-rounded"/>
                                     <h5>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h5>
                                     <h6>
-                                        <b>@lang("lawyer-settings.$lawyer->job_status"), г. {{  $lawyer->user->city->name }}</b>
+                                        <b>@lang("lawyer-settings.$lawyer->job_status"),
+                                            г. {{  $lawyer->user->city->name }}</b>
                                     </h6>
                                     <a type="button" class="btn btn-default btn-success"
                                        href="{{route('web.lawyer.show', $lawyer->id)}}">Посмотреть профиль</a>
@@ -355,10 +362,10 @@
         }
 
 
-        function rotateCard(btn){
+        function rotateCard(btn) {
             var $card = $(btn).closest('.card-container');
             console.log($card);
-            if($card.hasClass('hover')){
+            if ($card.hasClass('hover')) {
                 $card.removeClass('hover');
             } else {
                 $card.addClass('hover');

@@ -128,6 +128,7 @@
             </h3>
             <div id="paid-question-block" class="hidden">
                 @foreach($paid_question_examples as $var)
+                    @if(!$var->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2))
                     <a href="{{ route('web.question.show',['id' => $var->id])}}" class="question clearfix">
                         <div class="asked-time">
                             {{$var->created_at}}
@@ -142,6 +143,7 @@
                             @lang('index.price') {{$var->price}} @lang('index.sum')
                         </div>
                     </a>
+                    @endif
                 @endforeach
             </div>
             <div id="free-question-block" >

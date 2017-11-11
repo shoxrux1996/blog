@@ -212,6 +212,8 @@ class ClientQuestionController extends Controller
             case 2:
                 $question->price = 25000;
                 $question->type = 2;
+                if($request->disable == 1)
+                    $question->disabled = 1;
                 break;
         }
         $question->save();

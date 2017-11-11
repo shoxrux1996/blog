@@ -186,64 +186,11 @@
                             <!-- /Specialization -->
                         </div>
                     </div>
-                    <!-- Lawyer's profile -->
 
-                    {{--<!-- Lawyer's specialisation -->--}}
-                    {{--<div class="col-md-9 tab-pane fade profile-content" id="specialisation">--}}
-                        {{--<div class="row" id="category-section">--}}
-                            {{--<h3>@lang('individual-lawyer.Специализация')</h3>--}}
-                            {{--<h6 class="color-gray"><b>@lang('individual-lawyer.Всего') {{$lawyer->answers->count()}} @lang('individual-lawyer.ответа')</b></h6>--}}
-                            {{--<hr>--}}
-                            {{--<h6 class="color-gray"><b>@lang('individual-lawyer.Специализируется в') {{$lawyer->categories->count()}} @lang('individual-lawyer.категориях:')</b></h6>--}}
-                            {{--<div class="row">--}}
-                                {{--@foreach($lawyer->categories as $category)--}}
-                                    {{--<div class="col-md-4 col-sm-4 col-xs-4 categories">--}}
-                                        {{--<a href="{{route('web.category.show', $category->name)}}">--}}
-                                            {{--<i class="fa {{$category->class}}"></i> {{App::islocale('ru') ? $category->name : $category->name_uz}}--}}
-                                        {{--</a>--}}
-                                        {{--@foreach($category->children as $sub_category)--}}
-                                            {{--<p>--}}
-                                                {{--<a href="{{route('web.category.show', $sub_category->name)}}">{{App::islocale('ru') ? $sub_category->name : $sub_category->name_uz}}</a>--}}
-                                            {{--</p>--}}
-                                        {{--@endforeach--}}
-                                    {{--</div>--}}
-                                {{--@endforeach--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- Lawyer's specialisation -->--}}
-
-                    {{--<!-- Lawyer's education -->--}}
-                    {{--<div class="col-md-9 tab-pane fade profile-content" id="education">--}}
-                        {{--<div class="row">--}}
-                            {{--<div class="col-sm-4">--}}
-                                {{--<ul class="list-unstyled">--}}
-                                    {{--<h5><b><i class="fa fa-graduation-cap"></i> Образование 1</b></h5>--}}
-                                    {{--<li><h6><span class="color-gray">Страна:</span> Россия</h6></li>--}}
-                                    {{--<li><h6><span class="color-gray">Город:</span> Красноярск</h6></li>--}}
-                                    {{--<li><h6><span class="color-gray">ВУЗ:</span> СибЮИ ФСКН</h6></li>--}}
-                                    {{--<li><h6><span class="color-gray">Факультет:</span> Общеюридический</h6></li>--}}
-                                    {{--<li><h6><span class="color-gray">Год выпуска:</span> 2013</h6></li>--}}
-                                {{--</ul>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-sm-4">--}}
-                                {{--<ul class="list-unstyled">--}}
-                                    {{--<h5><b><i class="fa fa-graduation-cap"></i> Образование 2</b></h5>--}}
-                                    {{--<li><h6><span class="color-gray">Страна:</span> Россия</h6></li>--}}
-                                    {{--<li><h6><span class="color-gray">Город:</span> Красноярск</h6></li>--}}
-                                    {{--<li><h6><span class="color-gray">ВУЗ:</span> СибЮИ ФСКН</h6></li>--}}
-                                    {{--<li><h6><span class="color-gray">Факультет:</span> Общеюридический</h6></li>--}}
-                                    {{--<li><h6><span class="color-gray">Год выпуска:</span> 2013</h6></li>--}}
-                                {{--</ul>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- Lawyer's education -->--}}
-
-                    <!-- Lawyer answered questions -->
                     <div class="col-md-9 tab-pane fade profile-content" id="answers">
                         <div class="col-sm-12">
                             @foreach($questions as $question)
+                                @if(!$question->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2))
                                 <div class="col-sm-12 question">
                                     @if($question->type == 2 || $question->type == 1)
                                         <span class="question-price">
@@ -273,6 +220,7 @@
                                         </a>
                                     </p>
                                 </div>
+                                @endif
                             @endforeach
                             <div class="col-sm-12 text-center">
                                 {!! $questions->links('pagination') !!}

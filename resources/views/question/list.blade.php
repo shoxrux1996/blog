@@ -42,6 +42,7 @@
                     </p>
                     <div id="section1" class="section" style="display: {{ $section == 1 ? "block" : "none" }};">
                         @foreach($questions as $question)
+                            @if(!$question->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2))
                             <div class="col-sm-12 question">
                                 @if($question->type == 2 || $question->type == 1)
                                     <span class="question-price">
@@ -70,6 +71,7 @@
                                     </a>
                                 </p>
                             </div>
+                            @endif
                         @endforeach
                             <div class="col-sm-12 text-center">
                                 {!! $questions->links('pagination') !!}
@@ -77,6 +79,7 @@
                     </div>
                     <div id="section2" class="section" style="display: {{ $section == 2 ? "block" : "none" }};">
                         @foreach($questions_costly as $question)
+                            @if(!$question->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2))
                             <div class="col-sm-12 question">
                                     <span class="question-price">
                             <b>{{$question->price}} сум</b>
@@ -104,6 +107,7 @@
                                     </a>
                                 </p>
                             </div>
+                            @endif
                         @endforeach
                             <div class="col-sm-12 text-center">
                                 {!! $questions_costly->links('pagination') !!}

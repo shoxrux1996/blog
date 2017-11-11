@@ -62,10 +62,22 @@
                     <div id="account" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul class="list-unstyled">
+                                @php
+                                    $balance = $lawyer->user->balance();
+                                @endphp
                                 <li>
-                                    <h3>0 @lang('lawyer-settings.сум').</h3>
+                                    <h3>{{$balance}} @lang('lawyer-settings.сум').</h3>
                                     <h3>0 @lang('lawyer-settings.юркоинов')</h3>
-                                    <a href="#">@lang('lawyer-settings.Управление балансом')</a>
+                                    <a href="{{route('card.payment')}}">@lang('lawyer-settings.Управление балансом')</a>
+                                    @if(!$lawyer->user->sentWithdrawRequest() and $balance > 0)
+                                        <form action="{{route('lawyer.withdraw.request')}}" method="post" onclick="return confirm(shox);">
+                                            {{csrf_field()}}
+                                            <button type="submit" class="btn btn-default">Hisobni yechis</button>
+                                        </form>
+                                    @endif
+                                    @if($lawyer->user->sentWithdrawRequest())
+                                        <span class="label label-warning">Ariza yuborildi, iltimos kuting</span>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -661,5 +673,8 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+    </script>
+    <script>
+        var shox = [{!! json_encode(__('guarantees.Послу успешной'))!!}]
     </script>
 @endsection
