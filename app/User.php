@@ -36,6 +36,9 @@ class User extends Model
     public function withdraws(){
         return $this->hasMany('yuridik\Withdraw')->where('state', 1)->orderBy('id', 'desc');
     }
+    public function sentWithdrawRequest(){
+        return $this->hasMany('yuridik\Withdraw')->where('state', 0)->count() > 0 ? true : false;
+    }
     public function fees(){
         return $this->hasMany('yuridik\Fee')->orderBy('id','desc');
     }

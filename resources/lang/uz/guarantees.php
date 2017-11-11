@@ -27,4 +27,5 @@
         'Напишите мне' => " xat yozishingiz mumkin.",
         'поделитесь своим мнением о работе сервиса и идеями по его улучшению. Мы ценим ваш выбор и гордимся оказанным нам доверием.' => "Loyiha bo’yicha fikringizni bildiring, yanada yaxshilash uchun g’oyalar bering. Biz sizning fikringizni va ishonchingizni qardlaymiz! Sizning tanlovingiz va bildirgan ishonchingizdan faxrlanamiz!",
         'С уважением, руководитель Yuridik.uz' => "Hurmat bilan, Yuridik.uz loyihasi koordinatori",
+        'Послу успешной' =>"So'rovingiz tasdiqlagandan so'ng, kartangizda bir kun ichida pul olasiz. Shuning uchun kartangizning raqamini va amal qilish muddatini to'g'ri yozganingizga ishonch hosil qiling",
     ];

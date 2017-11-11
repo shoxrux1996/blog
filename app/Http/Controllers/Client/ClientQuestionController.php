@@ -215,7 +215,7 @@ class ClientQuestionController extends Controller
                 break;
         }
         $question->save();
-        $client->user->save();// is it possible?
+        // is it possible?
 
         if ($request->file('files') != null) {
             $file = $request->file('files');

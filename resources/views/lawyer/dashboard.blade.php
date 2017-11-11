@@ -62,9 +62,18 @@
                         <div class="panel-body">
                             <ul class="list-unstyled">
                                 <li>
-                                    <h3>{{$lawyer->user->balance()}} @lang('lawyer-dashboard.сум').</h3>
+                                    @php
+                                        $balance = $lawyer->user->balance();
+                                    @endphp
+                                    <h3>{{$balance}} @lang('lawyer-dashboard.сум').</h3>
                                     <h3>0 @lang('lawyer-dashboard.юркоинов')</h3>
                                     <a href="#">@lang('lawyer-dashboard.Управление балансом')</a>
+                                    @if(!$lawyer->user->sentWithdrawRequest() and $balance > 0)
+                                        <form action="{{route('lawyer.withdraw.request')}}" method="post" onclick="return confirm(shox);">
+                                            {{csrf_field()}}
+                                            <button type="submit" class="btn btn-default">Hisobni yechis</button>
+                                        </form>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -249,7 +258,10 @@
             </div>
         </div>
     </div>
-
     <!-- /Content -->
-
+@endsection
+@section('scripts')
+    <script>
+        var shox = {!! json_encode(__('guarantees.Послу успешной'))!!}
+    </script>
 @endsection

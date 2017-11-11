@@ -23,6 +23,8 @@ class AdminWithdrawController extends Controller
         $withdraw = Withdraw::findOrFail($id);
         $withdraw->state = 1;
         $withdraw->save();
+        //notify lawyer
+
         return back();
     }
 }

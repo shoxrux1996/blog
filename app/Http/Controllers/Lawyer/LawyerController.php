@@ -2,10 +2,13 @@
 
 namespace yuridik\Http\Controllers\Lawyer;
 
+
 use Illuminate\Support\Facades\Hash;
 
 
+use Illuminate\Support\Facades\Notification;
 use Webpatser\Countries\CountriesFacade;
+use yuridik\Admin;
 use yuridik\Education;
 use yuridik\Http\Controllers\Controller;
 
@@ -18,6 +21,7 @@ use yuridik\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File as LaraFile;
 use Session;
+use yuridik\Notifications\WithdrawsNotification;
 use yuridik\Withdraw;
 
 class LawyerController extends Controller
@@ -268,7 +272,7 @@ class LawyerController extends Controller
             $lawyer->user->expire_date =$expire_date;
             $lawyer->user->save();
         }
-        return redirect()->route('lawyer.info');
+        return redirect()->intended('lawyer.info');
     }
     public function educationDelete($id){
         $lawyer = Auth::user();
@@ -305,10 +309,22 @@ class LawyerController extends Controller
         return redirect()->back();
     }
     public function sendWithdrawRequest(Request $request){
+
         $user = Auth::guard('lawyer')->user()->user;
+
+        if($user->balance() <= 0)
+            return redirect()->back();
+
+        if($user->card_number == null && $user->expire_date == null){
+            return redirect()->route('lawyer.info', ['type' => 'lawyer-card'])->withErrors(['card_number'=>__('validation.required'), 'expire_date'=>__('validation.required')]);
+        }
         $withdraw = new Withdraw;
         $withdraw->amount = $user->balance();
         $user->withdraws()->save($withdraw);
+       // $admin = Admin::where('type', 2)->get();
+//        $admin = Admin::all();
+//        Notification::send($admin, new WithdrawsNotification($withdraw));
+        Session::flash('message', 'Запрос на оплату отправлено успешно');
         return redirect()->back();
     }
 }

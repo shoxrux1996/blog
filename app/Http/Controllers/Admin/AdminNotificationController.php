@@ -83,7 +83,7 @@ class AdminNotificationController extends Controller
     }
     public function withdrawsList(){
         $admin=Auth::guard('admin')->user();
-        $admin->withdrawNotifications()->delete();
+
         return redirect()->route('admin.withdraw.requests');
     }
 }

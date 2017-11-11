@@ -58,39 +58,22 @@
                         <th><a href="#">Время</a></th>
                         <th><a href="#">Сумма (sum)</a></th>
                     </tr>
-                    @foreach($user->transactions as $transaction)
+                    @foreach($transactions as $key=>$transaction )
+                        @php
+                          $service= get_class($transaction) == 'yuridik\Transaction' ? 'Payme - Пополнение баланса' :
+                           (get_class($transaction) == 'yuridik\Withdraw' ? 'Начисленная сумма' :
+                           (get_class($transaction) == 'yuridik\Order' ? substr($transaction->typeable_type, 8).' заказанно' : 'Вам заплачено'))
+                        @endphp
                         <tr>
-                            <td class="col-md-2">#{{$transaction->id}}</td>
-                            <td class="col-md-4">Payme - Пополнение баланса</td>
-                            <td class="col-md-3">{{$transaction->create_time}}</td>
-                            <td class="col-md-3"><span class="sign">+</span> {{number_format($transaction->amount/100, 2)}}</td>
-                        </tr>
-                    @endforeach
-                    @foreach($user->orders as $order)
-                        <tr>
-                            <td class="col-md-2">#{{$order->id}}</td>
-                            <td class="col-md-4">{{substr($order->typeable_type, 8)}}</td>
-                            <td class="col-md-3">{{$order->created_at}}</td>
-                            <td class="col-md-3"><span class="sign"> - </span> {{number_format($order->amount, 2)}}</td>
-                        </tr>
-                    @endforeach
-                    @foreach($user->fees as $fee)
-                        <tr>
-                            <td class="col-md-2">#{{$fee->id}}</td>
-                            <td class="col-md-4">{{substr($fee->feeable_type, 8)}}</td>
-                            <td class="col-md-3">{{$fee->created_at}}</td>
-                            <td class="col-md-3"><span class="sign"> + </span> {{number_format($fee->amount, 2)}}</td>
-                        </tr>
-                    @endforeach
-                    @foreach($user->withdraws as $withdraw)
-                        <tr>
-                            <td class="col-md-2">#{{$withdraw->id}}</td>
-                            <td class="col-md-4">Начисленная сумма</td>
-                            <td class="col-md-3">{{$withdraw->created_at}}</td>
-                            <td class="col-md-3"><span class="sign"> - </span> {{number_format($withdraw->amount, 2)}}</td>
+                            <td class="col-md-2">#{{$loop->iteration}}</td>
+                            <td class="col-md-4">{{$service}}</td>
+                            <td class="col-md-3">{{$transaction->created_at}}</td>
+                            <td class="col-md-3"><span class="sign">{{get_class($transaction) == 'yuridik\Transaction' || get_class($transaction) == 'yuridik\Fee' ? '+' : '-'}}</span> {{get_class($transaction) == 'yuridik\Transaction' ? number_format($transaction->amount/100, 2) : number_format($transaction->amount, 2)}}</td>
                         </tr>
                     @endforeach
                 </table>
+            </td>
+
         </section>
 
     </div>

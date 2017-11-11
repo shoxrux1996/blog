@@ -127,12 +127,12 @@
                             <i class="fa fa-exchange fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">{{$admin->withdrawNotifications()->count()}}</div>
+                            <div class="huge">{{$admin->withdraws()->count()}}</div>
                             <div>Новых запросов на оплату!</div>
                         </div>
                     </div>
                 </div>
-                <a href="{{route('admin.withdraws.notification.index')}}">
+                <a href="{{route('admin.withdraw.requests')}}">
                     <div class="panel-footer">
                         <span class="pull-left">Показать</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
