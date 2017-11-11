@@ -43,6 +43,12 @@
             </div>
         </div>
         <section id="payment-payment" class="section-group">
+            @if(Auth::guard('client')->check())
+                <h4>{{Auth::guard('client')->user()->user->firstName }} {{Auth::guard('client')->user()->user->lastName}}: {{Auth::guard('client')->user()->user->balance()}}</h4>
+            @else
+                <h4>{{Auth::guard('lawyer')->user()->user->firstName }} {{Auth::guard('lawyer')->user()->user->lastName}}: <span class="label label-default">{{Auth::guard('lawyer')->user()->user->balance()}} so'm</span></h4>
+            @endif
+
             <h2 class="header">Транзакции</h2>
             <td class="list-view grid" id="payment-grid">
                 <table class="table table-striped table-bordered">
@@ -57,31 +63,36 @@
                             <td class="col-md-2">#{{$transaction->id}}</td>
                             <td class="col-md-4">Payme - Пополнение баланса</td>
                             <td class="col-md-3">{{$transaction->create_time}}</td>
-                            <td class="col-md-3"><span class="sign">+</span> {{$transaction->amount/100}}</td>
+                            <td class="col-md-3"><span class="sign">+</span> {{number_format($transaction->amount/100, 2)}}</td>
                         </tr>
                     @endforeach
-                </table>
-        </section>
-        <section id="payment-payment" class="section-group">
-            <h2 class="header">Ордеры</h2>
-            <td class="list-view grid" id="payment-grid">
-                <table class="table table-striped table-bordered">
-                    <tr>
-                        <th><a href="#">ID</a></th>
-                        <th><a href="#">Название Ордера</a></th>
-                        <th><a href="#">Время</a></th>
-                        <th><a href="#">Сумма (sum)</a></th>
-                    </tr>
                     @foreach($user->orders as $order)
                         <tr>
                             <td class="col-md-2">#{{$order->id}}</td>
                             <td class="col-md-4">{{substr($order->typeable_type, 8)}}</td>
                             <td class="col-md-3">{{$order->created_at}}</td>
-                            <td class="col-md-3"><span class="sign">+</span> {{number_format($order->amount, 2)}}</td>
+                            <td class="col-md-3"><span class="sign"> - </span> {{number_format($order->amount, 2)}}</td>
+                        </tr>
+                    @endforeach
+                    @foreach($user->fees as $fee)
+                        <tr>
+                            <td class="col-md-2">#{{$fee->id}}</td>
+                            <td class="col-md-4">{{substr($fee->feeable_type, 8)}}</td>
+                            <td class="col-md-3">{{$fee->created_at}}</td>
+                            <td class="col-md-3"><span class="sign"> + </span> {{number_format($fee->amount, 2)}}</td>
+                        </tr>
+                    @endforeach
+                    @foreach($user->withdraws as $withdraw)
+                        <tr>
+                            <td class="col-md-2">#{{$withdraw->id}}</td>
+                            <td class="col-md-4">Начисленная сумма</td>
+                            <td class="col-md-3">{{$withdraw->created_at}}</td>
+                            <td class="col-md-3"><span class="sign"> - </span> {{number_format($withdraw->amount, 2)}}</td>
                         </tr>
                     @endforeach
                 </table>
         </section>
+
     </div>
 @endsection
 @section('scripts')

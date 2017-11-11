@@ -13,6 +13,8 @@ use yuridik\Question;
 use yuridik\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
+use yuridik\Withdraw;
+
 class AdminNotificationController extends Controller
 {
     public function __construct()
@@ -78,5 +80,10 @@ class AdminNotificationController extends Controller
         $blogs = Answer::whereIn('id', $blog_id)->orderBy('id')->paginate(40);
         $admin->answerNotifications()->delete();
         return view('answer.admin-list')->withAnswers($blogs);
+    }
+    public function withdrawsList(){
+        $admin=Auth::guard('admin')->user();
+        $admin->withdrawNotifications()->delete();
+        return redirect()->route('admin.withdraw.requests');
     }
 }
