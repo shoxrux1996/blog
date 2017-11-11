@@ -25,7 +25,6 @@
                                 <input type="hidden" name="merchant" value={{ $merchant_id }}>
                                 <input type="hidden" name="amount" class="payment-amount payment-amount-payme">
                                 <input type="hidden" name="account[user_id]" value={{$user_id}} >
-
                                 <!-- ============= Не обязательные поля ====================== -->
                                 <input type="hidden" name="callback" value="http://yuridik.uz/api/success/:transaction">
                             {{--<input type="hidden" name="callback" value="http://shoxrux19960822.000webhostapp.com/card"/>--}}
