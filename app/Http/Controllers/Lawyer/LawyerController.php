@@ -272,7 +272,7 @@ class LawyerController extends Controller
             $lawyer->user->expire_date =$expire_date;
             $lawyer->user->save();
         }
-        return redirect()->intended('lawyer.info');
+        return redirect()->intended(route('lawyer.info', ['type' => 'lawyer-card']));
     }
     public function educationDelete($id){
         $lawyer = Auth::user();
