@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="description" content="Yuridik.uz - onlayn yuridik konsultatsiya portali. Yuristlar va advokatlar Sizga barcha sohalar bo'yicha onlayn tarzda yuridik xizmatlarni ko'rsatadilar." />
+    <meta name="keywords" content="Задать вопрос юристу, Заказать звонок юристу, Yuristga savol, advokat, advokat qidirish, Toshkent advokatlari, huquqshunos, yurist24, yuristlar, Yuridik, yuridik xabarlar, Legal" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
