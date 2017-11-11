@@ -618,7 +618,7 @@
                                 <img class="img-responsive" align="Card image" src="{{asset('dist/images/Credit-Card-PNG-Image.png')}}" />
                             </div>
                             <div class="col-sm-6">
-                                <form method="post" action="{{route('lawyer.update', ['settingtype'=>'lawyer-card'])}}">
+                                <form method="post" action="{{ route('lawyer.update', ['settingtype'=>'lawyer-card'])}}">
                                     {{csrf_field()}}
                                     <div class="row">
                                     <div class="col-sm-7 {{$errors->has('card_number') ? ' has-error' : ''}}">
