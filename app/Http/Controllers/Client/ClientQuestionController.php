@@ -346,7 +346,7 @@ class ClientQuestionController extends Controller
         $answer_helped = $request->answer_helped;
         foreach ($lawyers as $key => $lawyer){
             if(!is_null($lawyer)) {
-                $rules['lawyers.' . $key] = 'numeric|min:0|max:10000';
+                $rules['lawyers.' . $key] = 'numeric|min:0|max:25000';
             }
             else
                 unset($lawyers[$key]);
@@ -369,6 +369,7 @@ class ClientQuestionController extends Controller
         foreach ($lawyers as $lawyer){
             $sum = $sum + $lawyer;
         }
+        dd($sum);
         if($question->price < $sum){
             return redirect()->back()->withErrors(__('validation.price'));
         }
