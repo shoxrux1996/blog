@@ -369,7 +369,7 @@ class ClientQuestionController extends Controller
         foreach ($lawyers as $lawyer){
             $sum = $sum + $lawyer;
         }
-        dd($sum);
+
         if($question->price < $sum){
             return redirect()->back()->withErrors(__('validation.price'));
         }
