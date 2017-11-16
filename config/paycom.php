@@ -8,7 +8,7 @@ return [
     'login' => 'Paycom',
 
     // File with cashbox key (key can be found in cashbox settings)
-    'keyFile' => 'ed8xyY8RFCXJRR1EApn9Q73qbeIgmQyvKPrm',
+    'keyFile' => '%on7Ft1@o%v6#2yTtKtarnpdswUwVc574JJM',
     // Your database settings
    
 ];
