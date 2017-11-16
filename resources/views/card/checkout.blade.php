@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-sm-7">
                         <div id="paymeForm">
-                            <form method="POST" action="http://checkout.test.paycom.uz" class="form-inline">
+                            <form method="POST" action="https://checkout.paycom.uz" class="form-inline">
                                 <input type="hidden" name="merchant" value={{ $merchant_id }}>
                                 <input type="hidden" name="amount" class="payment-amount payment-amount-payme">
                                 <input type="hidden" name="account[user_id]" value={{$user_id}} >
