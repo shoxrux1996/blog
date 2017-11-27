@@ -14,25 +14,30 @@
             });
         }
     </script>
+
+    <!-- responsiveCarousel.js -->
+    <script src="{{ asset('dist/js/responsiveCarousel.min.js')}}"></script>
 @endsection
 
 @section('content')
 
     <!-- Search Section -->
     <div class="container-fluid" id="search-section">
-        <div class="row">
-            <div class="col-md-4">
-                <h1>@lang('index.confidence')</h1>
-                <form action="{{route('search.all')}}" method="get">
-                    <div class="input-group text-center">
-                        <input type="text" class="form-control" id="search-field" name="search" placeholder="{{ __('index.search') }}" required/>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h1>@lang('index.confidence')</h1>
+                    <form action="{{route('search.all')}}" method="get">
+                        <div class="input-group text-center">
+                            <input type="text" class="form-control" id="search-field" name="search" placeholder="{{ __('index.search') }}" required/>
                         <span class="input-group-btn">
                           <button type="submit" class="btn btn-default" id="search-submit-button">
                             <i class="fa fa-search" aria-hidden="true"></i>
                           </button>
                         </span>
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -117,98 +122,102 @@
 
     <!-- Questions Section -->
     <div class="container-fluid" id="questions-section">
-        <h2 class="text-center">@lang('index.asked') <span
-                    class="total">{{$num_of_questions}}</span> @lang('index.#questions')</h2>
-        <div class="questions-bg clearfix">
-            <h3 class="category text-center">
+        <div class="container">
+            <h2 class="text-center">@lang('index.asked') <span
+                        class="total">{{$num_of_questions}}</span> @lang('index.#questions')</h2>
+            <div class="questions-bg clearfix">
+                <h3 class="category text-center">
                 <span>
                     <button class="active btn-link" id="free-questions">@lang('index.free')</button>
                 </span>
-                <button class="not-active btn-link" id="paid-questions">@lang('index.paid')</button>
-            </h3>
-            <div id="paid-question-block" class="hidden">
-                @foreach($paid_question_examples as $var)
-                    @if(!$var->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2))
-                    <a href="{{ route('web.question.show',['id' => $var->id])}}" class="question clearfix">
-                        <div class="asked-time">
-                            {{$var->created_at}}
-                        </div>
-                        <div class="total-answers">
-                            {{$var->countAnswers()}} @lang('index.answers')
-                        </div>
-                        <div class="asked-question">
-                            {{$var->title}}
-                        </div>
-                        <div class="asked-price">
-                            @lang('index.price') {{$var->price}} @lang('index.sum')
-                        </div>
-                    </a>
-                    @endif
-                @endforeach
+                    <button class="not-active btn-link" id="paid-questions">@lang('index.paid')</button>
+                </h3>
+                <div id="paid-question-block" class="hidden">
+                    @foreach($paid_question_examples as $var)
+                        @if(!$var->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2))
+                            <a href="{{ route('web.question.show',['id' => $var->id])}}" class="question clearfix">
+                                <div class="asked-time">
+                                    {{$var->created_at}}
+                                </div>
+                                <div class="total-answers">
+                                    {{$var->countAnswers()}} @lang('index.answers')
+                                </div>
+                                <div class="asked-question">
+                                    {{$var->title}}
+                                </div>
+                                <div class="asked-price">
+                                    @lang('index.price') {{$var->price}} @lang('index.sum')
+                                </div>
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
+                <div id="free-question-block" >
+                    @foreach($free_question_examples as $var)
+                        <a href="{{ route('web.question.show',['id' => $var->id])}}" class="question clearfix">
+                            <div class="asked-time">
+                                {{$var->created_at}}
+                            </div>
+                            <div class="total-answers">
+                                {{$var->countAnswers()}} @lang('index.answers')
+                            </div>
+                            <div class="asked-question">
+                                {{$var->title}}
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+                <a type="button" class="btn btn-default btn-lg btn-block btn-dark-blue"
+                   href="{{ route('question.list')}}">@lang('index.allquestions')</a>
             </div>
-            <div id="free-question-block" >
-                @foreach($free_question_examples as $var)
-                    <a href="{{ route('web.question.show',['id' => $var->id])}}" class="question clearfix">
-                        <div class="asked-time">
-                            {{$var->created_at}}
-                        </div>
-                        <div class="total-answers">
-                            {{$var->countAnswers()}} @lang('index.answers')
-                        </div>
-                        <div class="asked-question">
-                            {{$var->title}}
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-            <a type="button" class="btn btn-default btn-lg btn-block btn-dark-blue"
-               href="{{ route('question.list')}}">@lang('index.allquestions')</a>
         </div>
     </div>
     <!-- /Questions -->
 
     <!-- Category Section -->
     <div class="container-fluid" id="category-section">
-        <div class="row">
-            <div class="col-md-9 col-sm-12">
-                @if(\App::isLocale('ru'))
-                    @for($i=0; $i<$categories->count(); $i+=3)
-                        <div class="row">
-                            @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
-                                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                                    <a href="{{route('web.category.show', [$categories[$j]->name])}}">
-                                        <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name}}
-                                    </a>
-                                </div>
-                            @endfor
-                        </div>
-                    @endfor
-                @else
-                    @for($i=0; $i<$categories->count(); $i+=3)
-                        <div class="row">
-                            @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
-                                <div class="col-md-4 col-sm-4 col-xs-4 categories">
-                                    <a href="{{route('web.category.show', [$categories[$j]->name])}}">
-                                        <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name_uz}}
-                                    </a>
-                                </div>
-                            @endfor
-                        </div>
-                    @endfor
-                @endif
-            </div>
-            <div class="col-md-3 text-center view-all-categories">
-                <h3>@lang('index.helpforanyquestion')</h3>
-                <p>@lang('index.helpforanyquestionbody')</p>
-                <a type="button" class="btn  btn-dark-blue"
-                   href="{{ route('category.list')}}">@lang('index.allcategories')</a>
-            </div>
-        </div>
+       <div class="container">
+           <div class="row">
+               <div class="col-md-9 col-sm-12">
+                   @if(\App::isLocale('ru'))
+                       @for($i=0; $i<$categories->count(); $i+=3)
+                           <div class="row">
+                               @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
+                                   <div class="col-md-4 col-sm-4 col-xs-4 categories">
+                                       <a href="{{route('web.category.show', [$categories[$j]->name])}}">
+                                           <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name}}
+                                       </a>
+                                   </div>
+                               @endfor
+                           </div>
+                       @endfor
+                   @else
+                       @for($i=0; $i<$categories->count(); $i+=3)
+                           <div class="row">
+                               @for($j=$i; $j<=$i+2 && $j<$categories->count(); $j++)
+                                   <div class="col-md-4 col-sm-4 col-xs-4 categories">
+                                       <a href="{{route('web.category.show', [$categories[$j]->name])}}">
+                                           <i class="fa {{$categories[$j]->class}}"></i> {{$categories[$j]->name_uz}}
+                                       </a>
+                                   </div>
+                               @endfor
+                           </div>
+                       @endfor
+                   @endif
+               </div>
+               <div class="col-md-3 text-center view-all-categories">
+                   <h3>@lang('index.helpforanyquestion')</h3>
+                   <p>@lang('index.helpforanyquestionbody')</p>
+                   <a type="button" class="btn  btn-dark-blue"
+                      href="{{ route('category.list')}}">@lang('index.allcategories')</a>
+               </div>
+           </div>
+       </div>
     </div>
     <!-- Category Section -->
 
     <!-- News Section -->
-    <div class="container-fluid" id="news-section">
+    <div class="container" id="news-section">
         <h1 class="text-center">@lang('index.blogs')</h1>
         <div class="row">
             @foreach($blogs as $blog)
@@ -249,35 +258,35 @@
 
     <!-- Lawyers Section -->
     <div class="container-fluid text-center" id="lawyers-section">
-        <h2>@lang('index.consultionfrom') <span class="total">{{$num_of_lawyers}}</span> @lang('index.lawyers&jurists')
-        </h2>
-        <h5>@lang('index.ourlawyers-...')</h5>
-        <div class="row" id="gallery">
-            <div id="lawyers-carousel" class="crsl-nav">
-                <a href="#" class="previous">Previous</a>
-                <a href="#" class="next">Next</a>
-            </div>
-            <div class="crsl-items" data-navigation="lawyers-carousel">
-                <div class="crsl-wrap">
-                    @foreach($lawyers as $lawyer)
-                        <figure class="crsl-item">
-                            <div class="lawyer text-center">
-                                <a href="{{route('web.lawyer.show', $lawyer->id)}}">
-                                    <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}"
-                                         alt="headshot 1"
-                                         class="img-responsive center-block"/>
-                                    <h4>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h4>
-                                    <h5>г. {{$lawyer->user->city->name}}</h5>
-                                    <hr class="green-divider">
-                                    <p>
-                                        <span class="total">{{$lawyer->feedbacks->count()}}</span> @lang('index.feedbacks')
-                                    </p>
-                                </a>
-                            </div>
-                        </figure>
-                    @endforeach
-
-
+        <div class="container">
+            <h2>@lang('index.consultionfrom') <span class="total">{{$num_of_lawyers}}</span> @lang('index.lawyers&jurists')
+            </h2>
+            <h5>@lang('index.ourlawyers-...')</h5>
+            <div class="row" id="gallery">
+                <div id="lawyers-carousel" class="crsl-nav">
+                    <a href="#" class="previous">Previous</a>
+                    <a href="#" class="next">Next</a>
+                </div>
+                <div class="crsl-items" data-navigation="lawyers-carousel">
+                    <div class="crsl-wrap">
+                        @foreach($lawyers as $lawyer)
+                            <figure class="crsl-item">
+                                <div class="lawyer text-center">
+                                    <a href="{{route('web.lawyer.show', $lawyer->id)}}">
+                                        <img src="{!! $lawyer->user->file != null ? asset($lawyer->user->file->path . $lawyer->user->file->file) : asset('dist/images/headshot-1.png')!!}"
+                                             alt="headshot 1"
+                                             class="img-responsive center-block"/>
+                                        <h4>{{$lawyer->user->firstName}} {{$lawyer->user->lastName}}</h4>
+                                        <h5>г. {{$lawyer->user->city->name}}</h5>
+                                        <hr class="green-divider">
+                                        <p>
+                                            <span class="total">{{$lawyer->feedbacks->count()}}</span> @lang('index.feedbacks')
+                                        </p>
+                                    </a>
+                                </div>
+                            </figure>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -288,23 +297,21 @@
 
     <!-- About Us Section -->
     <div class="container-fluid" id="about-us-section">
-        <h1 class="text-center">@lang('index.aboutus')</h1>
-        <div class="row" style="clear: both; overflow: hidden;">
-            <div class="col-md-6 col-sm-6">
-                <img src="{{asset('dist/images/aboutus.jpg')}}" width="100%" height="auto" controls>
+        <div class="container">
+            <h1 class="text-center">@lang('index.aboutus')</h1>
+            <div class="row" style="clear: both; overflow: hidden;">
+                <div class="col-md-6 col-sm-6">
+                    <img src="{{asset('dist/images/aboutus.jpg')}}" width="100%" height="auto" controls>
 
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <h4>@lang('index.aboutustitle')</h4>
-                <p>@lang('index.aboutusbody1')</p>
-                <p>@lang('index.aboutusbody2')</p>
-                <p>@lang('index.aboutusbody3')</p>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <h4>@lang('index.aboutustitle')</h4>
+                    <p>@lang('index.aboutusbody1')</p>
+                    <p>@lang('index.aboutusbody2')</p>
+                    <p>@lang('index.aboutusbody3')</p>
+                </div>
             </div>
         </div>
     </div>
     <!-- /About Us Section -->
-@endsection
-@section('scripts')
-    <!-- responsiveCarousel.js -->
-    <script src="{{ asset('dist/js/responsiveCarousel.min.js')}}"></script>
 @endsection
