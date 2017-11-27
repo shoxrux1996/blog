@@ -159,9 +159,11 @@
                 @else
                     <div class="dropdown">
                         <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
-                            @if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->user->firstName }} @else {{ Auth::guard('lawyer')->user()->user->firstName }} @endif
+                            {{--<span class="badge "> {{$client->unreadNotifications->count()}} </span>--}}
+                            @if(Auth::guard('client')->check())  {{ Auth::guard('client')->user()->user->firstName }} @else {{ Auth::guard('lawyer')->user()->user->firstName }} @endif
                             <span class="caret"></span>
                         </button>
+
                         <ul class="dropdown-menu">
                             <li class="profile"><a
                                         href="">@if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->email }} @else {{ Auth::guard('lawyer')->user()->email }} @endif</a>
