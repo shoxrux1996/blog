@@ -262,6 +262,7 @@
             <h2>@lang('index.consultionfrom') <span class="total">{{$num_of_lawyers}}</span> @lang('index.lawyers&jurists')
             </h2>
             <h5>@lang('index.ourlawyers-...')</h5>
+        </div>
             <div class="row" id="gallery">
                 <div id="lawyers-carousel" class="crsl-nav">
                     <a href="#" class="previous">Previous</a>
@@ -289,7 +290,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         <a type="button" class="btn  btn-dark-blue"
            href="{{ route('lawyers.list')}}">@lang('index.allprojectlawyers')</a>
     </div>
