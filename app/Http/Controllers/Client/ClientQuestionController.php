@@ -172,7 +172,7 @@ class ClientQuestionController extends Controller
         Validator::make($request->all(), $rules, $messages)->validate();
 
         if ($request->type == 2) {
-            if ($client->user->balance() >= 5000) {
+            if ($client->user->balance() >= 25000) {
                 Session::flash('question-create', 'Question created successfully');
                 return $this->questionCreateEloquent($request,$client,2);
             } else {
