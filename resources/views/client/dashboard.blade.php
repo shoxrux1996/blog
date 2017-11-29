@@ -1,9 +1,6 @@
 @extends('layouts.app')
 @section('styles')
     <link href="{{ asset('dist/css/client.css')}}" rel="stylesheet">
-    <style>
-
-    </style>
 @endsection
 
 @section('content')
@@ -152,7 +149,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12 border-gray background-white" id="orders">
+                    <div class="col-sm-12 border-gray background-white orders" >
                         <h5 class="text-success">@lang('client-dashboard.Мои заказы')</h5>
                         <ul class="nav nav-tabs">
                             <li class="active">
@@ -167,8 +164,8 @@
                                 <a data-toggle="tab" href="#document-requests">@lang('client-dashboard.Документы')</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#notifications"><i class="fa fa-bell"
-                                                                              aria-hidden="true">{{$client->unreadNotifications->count()}}</i></a>
+                                <a data-toggle="tab" href=""><i class="fa fa-bell"
+                                                                aria-hidden="true">{{$client->unreadNotifications->count()}}</i></a>
                             </li>
                         </ul>
 
@@ -240,17 +237,44 @@
                             </div>
                         </div>
                     </div>
+                   <div id="notif">
+                       <div class="col-sm-12 border-gray background-white orders">
+                           <h5 class="text-success">@lang('client-dashboard.Мои заказы')</h5>
+                           <ul class="nav nav-tabs">
+                           </ul>
+
+                           <div class="tab-content">
+                               <div id="notifications" class="">
+                                   <div class="row well well-sm" style="padding: 10px;">
+                                       <span class="col-sm-3">{{$question->created_at}}</span>
+                                       <a class="col-sm-7"
+                                          href="{{ route('web.question.show', ['id'=>$question->id])}}">{{$question->title}}</a>
+                                       {{--
+                                           <a href="{{route('question.edit',$question->id)}}"><i class="col-sm-1 fa fa-pencil" aria-hidden="true"></i></a>
+                                       --}}
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- /Content -->
 
 @endsection
 @if(Session::has('question-create'))
-    @section('scripts')
-        <script type="text/javascript">
-            $("#confirm-email-modal").modal();
-        </script>
-    @endsection
 @endif
+
+@section('scripts')
+    <script type="text/javascript">
+        $("#confirm-email-modal").modal();
+
+         $(document).ready(function () {
+             $('html,body').animate({
+                 scrollTop: $("#notif").offset().top}, 1000);
+         });
+
+    </script>
+@endsection

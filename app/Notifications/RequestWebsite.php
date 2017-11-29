@@ -54,6 +54,7 @@ class RequestWebsite extends Notification
             ->content("*HELLO!* \n Yuridik.uz dan Error topildi!\n Ism:".$error->name. "\n Xato: ".$error->error);
     }
 
+
     /**
      * Get the array representation of the notification.
      *

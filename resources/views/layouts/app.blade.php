@@ -76,117 +76,120 @@
 
 <!-- Header -->
 <div class="container-fluid my-header color-white dark-blue">
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            <a href="#" data-toggle="modal" data-target="#beta-version">
-            <i>@lang('app.attention')</i>
-            </a>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <a href="#" data-toggle="modal" data-target="#beta-version">
+                    <i>@lang('app.attention')</i>
+                </a>
 
-            <!-- Modal -->
-            <div id="beta-version" class="modal fade" role="dialog">
-                <div class="modal-dialog">
+                <!-- Modal -->
+                <div id="beta-version" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
 
-                    <!-- Modal contentforpush-->
+                        <!-- Modal contentforpush-->
 
-                    <div class="modal-content">
-                        <form action="{{route('error.find')}}" method="post">
-                            {{csrf_field()}}
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">@lang('app.thank')</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="name">@lang('app.yourname')</label>
-                                    <input type="text" class="form-control" name="name" id="name">
+                        <div class="modal-content">
+                            <form action="{{route('error.find')}}" method="post">
+                                {{csrf_field()}}
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">@lang('app.thank')</h4>
                                 </div>
-                                <div class="form-group">
-                                    <label for="error">@lang('app.error'):</label>
-                                    <textarea name="error" class="form-control" rows="7" id="error"></textarea>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="name">@lang('app.yourname')</label>
+                                        <input type="text" class="form-control" name="name" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="error">@lang('app.error'):</label>
+                                        <textarea name="error" class="form-control" rows="7" id="error"></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">@lang('app.cancel')</button>
-                                <button type="submit" class="btn btn-default btn-success">@lang('app.send')</button>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /Modal content -->
-
-                    <!-- Style -->
-                    <style>
-                        #beta-version .modal-body label{
-                            color: #1F2746;
-                            float: left;
-                        }
-                    </style>
-                    <!-- /Style -->
-
-                </div>
-            </div>
-            <!-- /Modal -->
-         </div>
-    </div>
-    <div class="row">
-
-        <div class="col-md-2 col-sm-3 col-xs-6">
-            <a href="{{ route('home')}}">
-                <img class="img-responsive" src="{{ asset('dist/images/logo.png')}}" alt="Logo"/>
-            </a>
-        </div>
-        <div class="col-md-10 col-sm-9 col-xs-6 info">
-            <span><i class="fa fa-volume-control-phone" aria-hidden="true"></i> (99) 837-37-77 @lang('app.or')</span>
-            <a href="{{ route('faq') }}"><img src="{{asset('dist/images/help-icon.png')}}" alt="Help Icon"/></a>
-            <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ asset('dist/images/flag-'.\App::getLocale().'.png')}}" alt="Flag"/>
-            </button>
-            <ul class="dropdown-menu">
-                <li>
-                    @if(\App::isLocale('ru'))
-                        <a href="{{ route('lang.switch',['locale'=>'uz']) }}">
-                            <img src="{{ asset('dist/images/flag-uz.png')}}" alt="Flag"/>
-                        </a>
-                    @else
-                        <a href="{{ route('lang.switch',['locale'=>'ru']) }}">
-                            <img src="{{ asset('dist/images/flag-ru.png')}}" alt="Flag"/>
-                        </a>
-                    @endif
-                </li>
-            </ul>
-            <br/>
-            @if (!(Auth::guard('client')->check() || Auth::guard('lawyer')->check()))
-                <a href="{{ route('user.register') }}">@lang('app.registration')</a> | <a href="{{ route('user.login') }}">@lang('app.login')</a>
-            @else
-                <div class="dropdown">
-                    <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
-                        @if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->user->firstName }} @else {{ Auth::guard('lawyer')->user()->user->firstName }} @endif
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li class="profile"><a
-                                    href="">@if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->email }} @else {{ Auth::guard('lawyer')->user()->email }} @endif</a>
-                        </li>
-                        <div class="divider"></div>
-                        <li>
-                            <a href=" {{(Auth::guard('client')->check()) ? route('client.dashboard') : route('lawyer.dashboard')}}">@lang('app.dashboard')</a></li>
-                        <li>
-                            <a href="{{(Auth::guard('client')->check()) ? route('client.info') : route('lawyer.info')}}">@lang('app.edit')</a></li>
-                        {{--<li><a href="#">@lang('app.partners')</a></li>--}}
-                        {{--<li><a href="#">@lang('app.finance')</a></li>--}}
-                        <li><a href="{{ route('user.logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">@lang('app.logout')</a>
-                            <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
-                                  style="display: none;">
-                                {{ csrf_field() }}
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">@lang('app.cancel')</button>
+                                    <button type="submit" class="btn btn-default btn-success">@lang('app.send')</button>
+                                </div>
                             </form>
-                        </li>
-                    </ul>
+                        </div>
+                        <!-- /Modal content -->
+
+                        <!-- Style -->
+                        <style>
+                            #beta-version .modal-body label{
+                                color: #1F2746;
+                                float: left;
+                            }
+                        </style>
+                        <!-- /Style -->
+
+                    </div>
                 </div>
-            @endif
+                <!-- /Modal -->
+            </div>
         </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-6">
+                <a href="{{ route('home')}}">
+                    <img class="img-responsive" src="{{ asset('dist/images/logo.png')}}" alt="Logo"/>
+                </a>
+            </div>
+            <div class="col-md-10 col-sm-9 col-xs-6 info">
+                <span><i class="fa fa-volume-control-phone" aria-hidden="true"></i> (99) 837-37-77 @lang('app.or')</span>
+                <a href="{{ route('faq') }}"><img src="{{asset('dist/images/help-icon.png')}}" alt="Help Icon"/></a>
+                <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown">
+                    <img src="{{ asset('dist/images/flag-'.\App::getLocale().'.png')}}" alt="Flag"/>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        @if(\App::isLocale('ru'))
+                            <a href="{{ route('lang.switch',['locale'=>'uz']) }}">
+                                <img src="{{ asset('dist/images/flag-uz.png')}}" alt="Flag"/>
+                            </a>
+                        @else
+                            <a href="{{ route('lang.switch',['locale'=>'ru']) }}">
+                                <img src="{{ asset('dist/images/flag-ru.png')}}" alt="Flag"/>
+                            </a>
+                        @endif
+                    </li>
+                </ul>
+                <br/>
+                @if (!(Auth::guard('client')->check() || Auth::guard('lawyer')->check()))
+                    <a href="{{ route('user.register') }}">@lang('app.registration')</a> | <a href="{{ route('user.login') }}">@lang('app.login')</a>
+                @else
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
+                            {{--<span class="badge "> {{$client->unreadNotifications->count()}} </span>--}}
+                            @if(Auth::guard('client')->check())  {{ Auth::guard('client')->user()->user->firstName }} @else {{ Auth::guard('lawyer')->user()->user->firstName }} @endif
+                            <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu">
+                            <li class="profile"><a
+                                        href="">@if(Auth::guard('client')->check())   {{ Auth::guard('client')->user()->email }} @else {{ Auth::guard('lawyer')->user()->email }} @endif</a>
+                            </li>
+                            <div class="divider"></div>
+                            <li>
+                                <a href=" {{(Auth::guard('client')->check()) ? route('client.dashboard') : route('lawyer.dashboard')}}">@lang('app.dashboard')</a></li>
+                            <li>
+                                <a href="{{(Auth::guard('client')->check()) ? route('client.info') : route('lawyer.info')}}">@lang('app.edit')</a></li>
+                            {{--<li><a href="#">@lang('app.partners')</a></li>--}}
+                            {{--<li><a href="#">@lang('app.finance')</a></li>--}}
+                            <li><a href="{{ route('user.logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">@lang('app.logout')</a>
+                                <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
+                                      style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <hr class="header-divider">
     </div>
-    <hr class="header-divider">
 </div>
 <!-- /Header -->
 
@@ -215,75 +218,58 @@
         </div>
     </div>
 </nav>
-<!-- Modal -->
-<div id="modal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-                <p>{{Session::get('message')}}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- /Navbar -->
 @yield('content')
 <!-- /Footer -->
 <footer>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 guarantee">
-                <span>@lang('app.qualityguarantee')</span>
-                <p>
-                    <img src="{{asset('dist/images/first-place-icon.png')}}" alt="First place icon" />
-                    @lang('app.bestlawyers')
-                </p>
-                <p>
-                    <img src="{{asset('dist/images/happy-icon.png')}}" alt="Happy icon" />
-                    @lang('app.satisfiedclients')
-                </p>
-                <p>
-                    <img src="{{asset('dist/images/money-back-icon.png')}}" alt="Money back icon" />
-                    @lang('app.moneyback')
-                </p>
-                <p class="text-center"><a href="{{route('guarantees')}}">@lang('app.allguarantees')</a></p>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <span><a href="{{ route('home') }}">Yuridik.uz</a></span>
-                <p><a href="{{ route('about') }}">@lang('app.aboutproject')</a></p>
-                <p><a href="{{ route('team') }}">@lang('app.aboutus')</a></p>
-                <p><a href="{{ route('contacts') }}">@lang('app.contacts')</a></p>
-                <p><a href="{{ route('faq') }}">@lang('app.faqs')</a></p>
-                <p><a href="{{ route('license') }}">@lang('app.Лицензионное соглашение')</a></p>
-                <p><a href="{{ route('guarantees') }}">@lang('app.guarantees')</a></p>
-                {{--<p><a href="{{ route('partners') }}">@lang('app.ourpartners')</a></p>--}}
-                {{--<p><a href="{{ route('category.list') }}">@lang('app.categories')</a></p>--}}
-                {{--<p><a href="{{ route('web.blogs') }}">@lang('app.blog')</a></p>--}}
-            </div>
-            <div class="col-md-3 col-sm-6 hidden-xxs">
-                <span><a href="#">@lang('app.toclients')</a></span>
-                <p><a href="{{ route('question.create') }}">@lang('app.askquestion')</a></p>
-                <p><a href="{{ route('call.create') }}">@lang('app.ordercall')</a></p>
-                <p><a href="{{ route('document.create') }}">@lang('app.orderdocument')</a></p>
-                <p><a href="{{ route('lawyers.list') }}">@lang('app.ourlawyers')</a></p>
-                <p><a href="{{ route('question.list') }}">@lang('app.questions')</a></p>
-                <p><a href="{{route('category.list')}}">@lang('app.Все специализации')</a></p>
-            </div>
-            <div class="col-md-3 col-sm-6 hidden-xxs">
-                <span><a href="#">@lang('app.tolawyers')</a></span>
-                <p><a href="{{ route('become-lawyer') }}">@lang('app.becomelawyer')</a></p>
-                <span><a href="#">@lang('app.topartners')</a></span>
-                <p><a href="{{ route('ad') }}">@lang('app.toadvertisers')</a></p>
-            </div>
-        </div>
-        <div class="row social-link">
+       <div class="container">
+           <div class="row">
+               <div class="col-md-3 col-sm-6 guarantee">
+                   <span>@lang('app.qualityguarantee')</span>
+                   <p>
+                       <img src="{{asset('dist/images/first-place-icon.png')}}" alt="First place icon" />
+                       @lang('app.bestlawyers')
+                   </p>
+                   <p>
+                       <img src="{{asset('dist/images/happy-icon.png')}}" alt="Happy icon" />
+                       @lang('app.satisfiedclients')
+                   </p>
+                   <p>
+                       <img src="{{asset('dist/images/money-back-icon.png')}}" alt="Money back icon" />
+                       @lang('app.moneyback')
+                   </p>
+                   <p class="text-center"><a href="{{route('guarantees')}}">@lang('app.allguarantees')</a></p>
+               </div>
+               <div class="col-md-3 col-sm-6">
+                   <span><a href="{{ route('home') }}">Yuridik.uz</a></span>
+                   <p><a href="{{ route('about') }}">@lang('app.aboutproject')</a></p>
+                   <p><a href="{{ route('team') }}">@lang('app.aboutus')</a></p>
+                   <p><a href="{{ route('contacts') }}">@lang('app.contacts')</a></p>
+                   <p><a href="{{ route('faq') }}">@lang('app.faqs')</a></p>
+                   <p><a href="{{ route('license') }}">@lang('app.Лицензионное соглашение')</a></p>
+                   <p><a href="{{ route('guarantees') }}">@lang('app.guarantees')</a></p>
+                   {{--<p><a href="{{ route('partners') }}">@lang('app.ourpartners')</a></p>--}}
+                   {{--<p><a href="{{ route('category.list') }}">@lang('app.categories')</a></p>--}}
+                   {{--<p><a href="{{ route('web.blogs') }}">@lang('app.blog')</a></p>--}}
+               </div>
+               <div class="col-md-3 col-sm-6 hidden-xxs">
+                   <span><a href="#">@lang('app.toclients')</a></span>
+                   <p><a href="{{ route('question.create') }}">@lang('app.askquestion')</a></p>
+                   <p><a href="{{ route('call.create') }}">@lang('app.ordercall')</a></p>
+                   <p><a href="{{ route('document.create') }}">@lang('app.orderdocument')</a></p>
+                   <p><a href="{{ route('lawyers.list') }}">@lang('app.ourlawyers')</a></p>
+                   <p><a href="{{ route('question.list') }}">@lang('app.questions')</a></p>
+                   <p><a href="{{route('category.list')}}">@lang('app.Все специализации')</a></p>
+               </div>
+               <div class="col-md-3 col-sm-6 hidden-xxs">
+                   <span><a href="#">@lang('app.tolawyers')</a></span>
+                   <p><a href="{{ route('become-lawyer') }}">@lang('app.becomelawyer')</a></p>
+                   <span><a href="#">@lang('app.topartners')</a></span>
+                   <p><a href="{{ route('ad') }}">@lang('app.toadvertisers')</a></p>
+               </div>
+           </div>
+           <div class="row social-link">
           <span>
             <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -295,7 +281,8 @@
             </a>
               <!-- /Yandex.Metrika informer -->
           </span>
-        </div>
+           </div>
+       </div>
     </div>
 </footer>
 <!-- /Footer -->
@@ -312,11 +299,6 @@
 
 
 @yield('scripts')
-@if(Session::has('message'))
-    <script type="text/javascript">
-        $("#modal").modal();
-    </script>
-@endif
 <!-- Custom JS -->
 <script src="{{ asset('dist/js/script.js')}}"></script>
 
