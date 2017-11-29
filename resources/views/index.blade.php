@@ -64,7 +64,8 @@
             <div class="col-md-4 col-sm-4 col-xs-12 text-center">
                 <img src="{{ asset('dist/images/document-icon.png')}}" class="img-responsive" alt="Document icon"/>
                 {{--href="{{ route('document.create')}}"--}}
-                <a type="button" class="btn btn-default" href="{{ route('document.create') }}">@lang('index.orderdocument')</a>
+                <a type="button" class="btn btn-default" data-toggle="modal"
+                   data-target="#document-function">@lang('index.orderdocument')</a>
                 <p class="statistics">40,000,000+</p>
                 <p class="what">@lang('index.madedocuments')</p>
             </div>
