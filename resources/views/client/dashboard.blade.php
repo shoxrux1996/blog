@@ -248,9 +248,9 @@
 
 @endsection
 @if(Session::has('question-create'))
-@section('scripts')
-    <script type="text/javascript">
-        $("#confirm-email-modal").modal();
-    </script>
-@endsection
+    @section('scripts')
+        <script type="text/javascript">
+            $("#confirm-email-modal").modal();
+        </script>
+    @endsection
 @endif

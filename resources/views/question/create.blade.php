@@ -58,7 +58,7 @@
                                     <strong>{{ $errors->first('category') }}</strong>
                                 </span>
                             @endif
-                            {{Form::select('category', $categories, null , ['class'=>'form-control general-input', 'placeholder'=>''])}}
+                            {{Form::select('category', $categories, old('category'), ['class'=>'form-control general-input', 'placeholder'=>''])}}
                         </div>
                         <div class="form-group{{$errors->has('title') ? ' has-error' : '' }} ">
                             <label for="question">@lang('question.Ваш вопрос*')</label>
@@ -67,7 +67,7 @@
                                     <strong>{{ $errors->first('title') }}</strong>
                                 </span>
                             @endif
-                            <input type="text" class="form-control general-input" id="question"
+                            <input type="text" class="form-control general-input" id="question" value="{{old('title')}}"
                                    placeholder="{{ __('question.Как подать в суд, если неизвестен адрес ответчика?') }}"
                                    name="title"/>
                         </div>
@@ -79,7 +79,7 @@
                             </span>
                             @endif
                             <textarea class="form-control general-input" rows="15" id="description"
-                                      name="description"></textarea>
+                                      name="description">{{old('description')}}</textarea>
                         </div>
                         <div class="form-group">
                             <label>@lang('question.Если нужно, прикрепите файл')</label>
@@ -122,7 +122,7 @@
                                     <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                             @endif
-                            <input type="text" class="form-control general-input" id="email" name="email"
+                            <input type="text" class="form-control general-input" id="email" name="email" value="{{old('email')}}"
                                    placeholder="{{ __('question.Введите электронную почту') }}">
                         </div>
                         <div class="form-group{{ $errors->has('password') || $errors->has('wrong-attempt') || $errors->has('password_confirmation') ? ' has-error' : '' }}">

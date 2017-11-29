@@ -78,7 +78,7 @@ class UserLoginController extends Controller
         $credentials = ['email' => $request->email, 'password' => $request->password];
         if (Auth::guard('lawyer')->attempt($credentials, $request->remember)) {
 
-            return redirect()->intended(route('client.dashboard'));
+            return redirect()->intended(route('lawyer.dashboard'));
         }
         return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors(['wrong-attempt' => 'Неправильный email или пароль']);
     }
@@ -88,8 +88,6 @@ class UserLoginController extends Controller
     {
         Auth::guard('lawyer')->logout();
         Auth::guard('client')->logout();
-
-
         return redirect('/');
     }
 
@@ -107,8 +105,6 @@ class UserLoginController extends Controller
             ];
             $this->validate($request, [
                 'email' => 'required|email|exists:clients',], $messages);
-
-
             app('yuridik\Http\Controllers\Auth\ClientForgotPasswordController')->sendClientResetLinkEmail($request);
             return redirect()->route('user.password.request');
         } else {
@@ -117,7 +113,6 @@ class UserLoginController extends Controller
             ];
             $this->validate($request, [
                 'email' => 'required|email|exists:lawyers',], $messages);
-
             app('yuridik\Http\Controllers\Auth\LawyerForgotPasswordController')->sendLawyerResetLinkEmail($request);
             return redirect()->route('user.password.request');
         }
