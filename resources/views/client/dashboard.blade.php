@@ -163,10 +163,6 @@
                             <li>
                                 <a data-toggle="tab" href="#document-requests">@lang('client-dashboard.Документы')</a>
                             </li>
-                            <li>
-                                <a data-toggle="tab" href=""><i class="fa fa-bell"
-                                                                aria-hidden="true">{{$client->unreadNotifications->count()}}</i></a>
-                            </li>
                         </ul>
 
                         <div class="tab-content">
@@ -202,64 +198,58 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="notifications" class="tab-pane fade">
-                                <h5>@lang('client-dashboard.Последние события')</h5>
-                                @foreach($client->answerNotifications as $notification)
-                                    <div class="row" style="padding: 10px;">
-                                            <span class="avatar col-sm-2">
-                                                <img class="img-thumbnail" style="width: 70px;"
-                                                     src="{{$notification->data['file'] != null ? asset($notification->data['file']['path'].$notification->data['file']['file']) : asset('dist/images/headshot-1.jpg')}}"
-                                                     alt="Добавлен новый ответ">
-                                            </span>
-                                        @if(\App::isLocale('ru'))
-                                            <p class="col-sm-6">Юрист <a
-                                                        href="{{route('web.lawyer.show',$notification->data['lawyer_id'] )}}">{{$notification->data['user']['firstName']}} {{$notification->data['user']['lastName']}}</a>
-                                                <a href="{{route('web.question.show', $notification->data['question_id'])}}"
-                                                   class="action">ответил</a> на Ваш
-                                                вопрос «{{$notification->data['title']}}»
-                                            </p>
-                                        @else
-                                            <p class="col-sm-6">Yurist <a
-                                                        href="{{route('web.lawyer.show',$notification->data['lawyer_id'] )}}">{{$notification->data['user']['firstName']}} {{$notification->data['user']['lastName']}}</a>
-                                                sizning «{{$notification->data['title']}}» savolingizga
-                                                <a href="{{route('web.question.show', $notification->data['question_id'])}}"
-                                                   class="action">javob berdi</a>
-                                            </p>
-
-                                        @endif
-                                        <p class="time col-sm-4">{{$notification->created_at}}</p>
-                                    </div>
-                                @endforeach
-                                <div class="col-sm-12" style="margin: 20px 0 20px 0;">
-                                    <a href="{{route('client.notifications.delete')}}"
-                                       class="btn btn-info btn-xs"> @lang('client-dashboard.Mark as Ready')</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                   <div id="notif">
-                       <div class="col-sm-12 border-gray background-white orders">
-                           <h5 class="text-success">@lang('client-dashboard.Мои заказы')</h5>
-                           <ul class="nav nav-tabs">
-                           </ul>
+                    @if($client->unreadNotifications->count())
+                       <div id="notif">
+                           <div class="col-sm-12 border-gray background-white orders">
+                               <h5 class="text-success">@lang('lawyer-dashboard.Уведомление')<i class="fa fa-bell" aria-hidden="true">{{$client->unreadNotifications->count()}}</i></h5>
+                               <ul class="nav nav-tabs">
+                               </ul>
 
-                           <div class="tab-content">
-                               <div id="notifications" class="">
-                                   <div class="row well well-sm" style="padding: 10px;">
-                                       <span class="col-sm-3">{{$question->created_at}}</span>
-                                       <a class="col-sm-7"
-                                          href="{{ route('web.question.show', ['id'=>$question->id])}}">{{$question->title}}</a>
-                                       {{--
-                                           <a href="{{route('question.edit',$question->id)}}"><i class="col-sm-1 fa fa-pencil" aria-hidden="true"></i></a>
-                                       --}}
+                               <div class="tab-content">
+                                   <div id="notifications" class="">
+                                       <div class="row well well-sm" style="padding: 10px;">
+                                           <h5>@lang('client-dashboard.Последние события')</h5>
+                                           @foreach($client->answerNotifications as $notification)
+                                               <div class="row" style="padding: 10px;">
+                                                <span class="avatar col-sm-2">
+                                                    <img class="img-thumbnail" style="width: 70px;"
+                                                         src="{{$notification->data['file'] != null ? asset($notification->data['file']['path'].$notification->data['file']['file']) : asset('dist/images/headshot-1.jpg')}}"
+                                                         alt="Добавлен новый ответ">
+                                                </span>
+                                                   @if(\App::isLocale('ru'))
+                                                       <p class="col-sm-6">Юрист <a
+                                                                   href="{{route('web.lawyer.show',$notification->data['lawyer_id'] )}}">{{$notification->data['user']['firstName']}} {{$notification->data['user']['lastName']}}</a>
+                                                           <a href="{{route('web.question.show', $notification->data['question_id'])}}"
+                                                              class="action">ответил</a> на Ваш
+                                                           вопрос «{{$notification->data['title']}}»
+                                                       </p>
+                                                   @else
+                                                       <p class="col-sm-6">Yurist <a
+                                                                   href="{{route('web.lawyer.show',$notification->data['lawyer_id'] )}}">{{$notification->data['user']['firstName']}} {{$notification->data['user']['lastName']}}</a>
+                                                           sizning «{{$notification->data['title']}}» savolingizga
+                                                           <a href="{{route('web.question.show', $notification->data['question_id'])}}"
+                                                              class="action">javob berdi</a>
+                                                       </p>
+
+                                                   @endif
+                                                   <p class="time col-sm-4">{{$notification->created_at}}</p>
+                                               </div>
+                                           @endforeach
+                                               <div class="col-sm-12" style="margin: 20px 0 20px 0;">
+                                                   <a href="{{route('client.notifications.delete')}}"
+                                                      class="btn btn-info btn-xs"> @lang('client-dashboard.Mark as Ready')</a>
+                                               </div>
+                                       </div>
                                    </div>
                                </div>
                            </div>
                        </div>
+                    @endif
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- /Content -->
 
@@ -270,7 +260,6 @@
 @section('scripts')
     <script type="text/javascript">
         $("#confirm-email-modal").modal();
-
          $(document).ready(function () {
              $('html,body').animate({
                  scrollTop: $("#notif").offset().top}, 1000);

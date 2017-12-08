@@ -45,7 +45,7 @@
                         </p>
                         <hr>
                         <p>
-                            <span class="category">Категория: <a
+                            <span class="category">@lang('questions.Категория'): <a
                                         href="{{route('web.category.show', $question->category->name)}}">{{$question->category->name}}</a></span>
                             <i class="answers">
                                 {{$question->answers->count()}}

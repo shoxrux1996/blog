@@ -6,7 +6,7 @@
  * Time: 13:22
  */
 return [
-    'aboutus' => "Jamoa haqida",
+    'aboutus' => "Loyiha haqida",
     'categories' => "Sohalar bo'yicha savolar ",
     'blog' => "Maqolalar",
     'askquestion' => "Savol berish",
@@ -41,10 +41,14 @@ return [
     'ourlawyers-...' => "Bizning  jamoamiz  qonunchilikni yaxshi biladigan, yetarli amaliy tajribaga ega professional huquqshunoslardan iborat. Bizga murojaat qilib Siz o'z savolingizga asosli va to'g'ri javob olasiz",
     'feedbacks' => "ta minnatdorchiliklar",
     'allprojectlawyers' => "Barcha yuristlar ro'yxati",
-    'aboutustitle' => "Dunyoning istalgan nuqtasida professional yuridik yordam ",
-    'aboutusbody1' => "Malakali yuridik xizmatga ehtiyojingiz bormi? Qanday qilib yurist maslahati olishni bilmayapsizmi? Advokatlik tuzilmalariga borishga vaqtingiz yo'qmi? O'zingiz mustaqil qonunchilikni o'rganib savollarinizga javob qidiryapsiz-u, lekin javob noto'gri bo'lishi ehtimoli tufayli sizga yordam kerakmi? ",
-    'aboutusbody2' => "",
-    'aboutusbody3' => "",
+    'aboutustitle' => "Dunyoning istalgan nuqtasida professional yuridik yordam",
+    'aboutusbody1' => "Malakali yuridik xizmatga ehtiyojingiz bormi? Qanday qilib yurist maslahati olishni bilmayapsizmi? Advokatlik tuzilmalariga borishga vaqtingiz yo'qmi? O'zingiz mustaqil qonunchilikni o'rganib savollaringizga javob qidiryapsiz-u, lekin javob noto'gri bo'lishi ehtimoli tufayli sizga yordam kerakmi?",
+    'aboutusbody2' => "<b>Biz Sizga oson yechim taklif qilamiz: Yuridik.uz xizmati yordamida real vaqtda-onlyan rejimida professional yuristlar xizmatidan foydalaning</b><br> Yuridik.uz — bu faqat yuqori malakali yuristlar xizmatigina emas va yana:",
+    'aboutusbody3' => "<b>- Qulaylik.</b> Siz Toshkentda, Nyu-Yorkda yoki dunyoning istalgan shahrida bo’lishingizdan qat’iy nazar, istalgan vaqtda, tun-u kun onlayn yuridik xizmatlardan foydalaning.
+                        <br><b>- Tejamkorlik.</b> Umumiy boshlang’ich yuridik yordam bepul ko’rsatiladi, pulli xizmatlar uchun to’lovning eng kam miqdori atigi 5000 so’mni tashkil etadi. 
+                        <br><b>- Tezkorlik.</b> Saytda real vaqt rejimida yuristlar bilan onlayn-chat orqali suhbatlashish va 15 daqiqa ichida savolga javob topish mumkin.
+                        <br><b>- Maxfiylik.</b> Biz savolingizni boshqa foydalanuvchilardan va turli qidiruv tizimlaridan yashirish imkoniyatini taqdim etamiz.
+                        ",
 
 
 ];

@@ -82,12 +82,12 @@
                             @if(!$question->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2))
                             <div class="col-sm-12 question">
                                     <span class="question-price">
-                            <b>{{$question->price}} сум</b>
-                            <span>
-                                @lang('questions.стоимость')<br/>
-                                @lang('questions.вопроса')
-                            </span>
-                        </span>
+                                        <b>{{$question->price}} сум</b>
+                                        <span>
+                                            @lang('questions.стоимость')<br/>
+                                            @lang('questions.вопроса')
+                                        </span>
+                                    </span>
 
                                 <h4 class="title"><a
                                             href="{{route('web.question.show', $question->id)}}">{{$question->title}}</a>

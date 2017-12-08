@@ -301,11 +301,11 @@
             <h1 class="text-center">@lang('index.aboutus')</h1>
             <div class="row" style="clear: both; overflow: hidden;">
                 <div class="col-md-6 col-sm-6">
-                    <img src="{{asset('dist/images/aboutus.jpg')}}" width="100%" height="auto" controls>
-
+                    <div class="video-wrapper">
+                        <iframe class="youtube-player" type="text/html" width="600" height="385" src="https://www.youtube.com/embed/AMZmtZnm_C4" frameborder="0"> </iframe>
+                    </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
-                    <h4>@lang('index.aboutustitle')</h4>
                     <p>@lang('index.aboutusbody1')</p>
                     <p>@lang('index.aboutusbody2')</p>
                     <p>@lang('index.aboutusbody3')</p>

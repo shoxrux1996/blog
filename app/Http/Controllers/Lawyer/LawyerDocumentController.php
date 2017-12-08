@@ -19,7 +19,8 @@ class LawyerDocumentController extends Controller
 
     public function index()
     {
-        $documents = Document::where('status', 0)->paginate(3);
+        $documents = Document::where('approved', 1)->paginate(5);
+
         return view('document.list')->withDocuments($documents);
     }
 

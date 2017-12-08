@@ -159,11 +159,6 @@
                             <li>
                                 <a data-toggle="tab" href="#blog-created">@lang('lawyer-dashboard.Блоги')</a>
                             </li>
-                            <li>
-                                <a data-toggle="tab" href="#notifications">@lang('lawyer-dashboard.Уведомление') <i
-                                            class="fa fa-bell"
-                                            aria-hidden="true">{{$lawyer->unreadNotifications->count()}}</i></a>
-                            </li>
                         </ul>
 
                         <div class="tab-content">
@@ -212,48 +207,57 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="notifications" class="tab-pane fade">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <ul>
-                                            <li>@lang('lawyer-dashboard.Новые вопросы')
-                                                <ul>
-                                                    @foreach($lawyer->questionNotifications as $notification)
-                                                        <li>
-                                                            <a href="{{route('web.question.show', $notification->data['id'])}}">{{$notification->data['title']}}</a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                            <li>@lang('lawyer-dashboard.Новые блоги')
-                                                <ul>
-                                                    @foreach($lawyer->blogNotifications as $notification)
-                                                        <li>
-                                                            <a href="{{route('web.blog.show', $notification->data['id'])}}">{{$notification->data['title']}}</a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                            <li>@lang('lawyer-dashboard.Новые комменты')
-                                                <ul>
-                                                    @foreach($lawyer->commentNotifications as $notification)
-                                                        <li>
-                                                            <a href="{{route('web.blog.show', $notification->data['blog_id'])}}">{{$notification->data['comment']}}</a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <div>
-                                            <a href="{{route('lawyer.notification.asRead')}}"
-                                               class="btn btn-info btn-xs"> @lang('lawyer-dashboard.Отметить')</a>
+                        </div>
+                    </div>
+                    @if($lawyer->unreadNotifications->count())
+                        <div id="notif">
+                            <div class="col-sm-12 border-gray background-white orders">
+                                <h5 class="text-success">@lang('lawyer-dashboard.Уведомление')<i class="fa fa-bell" aria-hidden="true">{{$lawyer->unreadNotifications->count()}}</i></h5>
+                                <ul class="nav nav-tabs">
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <ul>
+                                                <li>@lang('lawyer-dashboard.Новые вопросы')
+                                                    <ul>
+                                                        @foreach($lawyer->questionNotifications as $notification)
+                                                            <li>
+                                                                <a href="{{route('web.question.show', $notification->data['id'])}}">{{$notification->data['title']}}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                                <li>@lang('lawyer-dashboard.Новые блоги')
+                                                    <ul>
+                                                        @foreach($lawyer->blogNotifications as $notification)
+                                                            <li>
+                                                                <a href="{{route('web.blog.show', $notification->data['id'])}}">{{$notification->data['title']}}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                                <li>@lang('lawyer-dashboard.Новые комменты')
+                                                    <ul>
+                                                        @foreach($lawyer->commentNotifications as $notification)
+                                                            <li>
+                                                                <a href="{{route('web.blog.show', $notification->data['blog_id'])}}">{{$notification->data['comment']}}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <div>
+                                                <a href="{{route('lawyer.notification.asRead')}}"
+                                                   class="btn btn-info btn-xs"> @lang('lawyer-dashboard.Отметить')</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -263,5 +267,9 @@
 @section('scripts')
     <script>
         var shox = [{!! json_encode(__('guarantees.Послу успешной'))!!}]
+        $(document).ready(function () {
+            $('html,body').animate({
+                scrollTop: $("#notif").offset().top}, 1000);
+        });
     </script>
 @endsection
