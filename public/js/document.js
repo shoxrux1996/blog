@@ -13,5 +13,13 @@ function handler(value){
             type_option.add(option);
         }
     }
-
+}
+function enable(){
+    var input_cost = document.getElementById('cost');
+    input_cost.removeAttribute("disabled");
+}
+function disable(){
+    var input_cost = document.getElementById('cost');
+    input_cost.value = null;
+    input_cost.setAttribute("disabled","disabled");
 }

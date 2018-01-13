@@ -2,6 +2,11 @@
 
 namespace yuridik\Http\Controllers\Client;
 
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
+use Mews\Purifier\Facades\Purifier;
+use yuridik\Admin;
+use yuridik\Fee;
 use yuridik\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -11,10 +16,14 @@ use yuridik\File;
 use yuridik\Client;
 use Illuminate\Support\Facades\Session;
 use Auth;
-use Validator;
 use DB;
+use yuridik\Lawyer;
+use yuridik\Notifications\DocumentsNotification;
 use yuridik\Request as Reques;
 use yuridik\Order;
+use yuridik\Notifications\RequestNotification;
+use yuridik\Notifications\ResponseNotification;
+use yuridik\Response;
 
 class ClientDocumentController extends Controller
 {
@@ -60,7 +69,7 @@ class ClientDocumentController extends Controller
 
         );
 
-        $client = Auth::user();
+        $client = Auth::guard('client')->user();
         $count = count($request->file('files')) - 1;
         foreach (range(0, $count) as $i) {
             $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
@@ -92,6 +101,10 @@ class ClientDocumentController extends Controller
                 $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
             }
         }
+        $lawyers = Lawyer::where('type', 2)->get();
+        $admins = Admin::all();
+        Notification::send($lawyers, new DocumentsNotification($document));
+        Notification::send($admins, new DocumentsNotification($document));
         Session::flash('message', 'Request submitted successfully');
         return redirect()->route('client.dashboard');
     }
@@ -105,14 +118,7 @@ class ClientDocumentController extends Controller
     public function showDoc($id)
     {
         $document = Document::findOrFail($id);
-
-
-        $document_status = true;
-        if ($document->status == 1) {
-            $document_status = false;
-        }
-
-        return view('client.document_show')->withDocument($document)->withShow($document_status);
+        return view('client.document_show')->withDocument($document);
     }
 
     public function acceptRequest(Request $request, $id)
@@ -123,9 +129,15 @@ class ClientDocumentController extends Controller
             $order = new Order;
             $order->user_id = $client->user->id;
             $order->amount = $reques->price;
-            $reques->document->update(['status' => 1]);
+            $reques->document->update(['cost' => $order->amount, 'status' => 1]);
 
             $reques->document->orders()->save($order);
+            $reques->status=1;
+            $reques->save();
+            $lawyer = Lawyer::findOrFail($reques->lawyer->id);
+            $admins = Admin::all();
+            Notification::send($lawyer, new RequestNotification($reques));
+            Notification::send($admins, new RequestNotification($reques));
             Session::flash('message', 'Order created successfully');
             return redirect()->route('client.dashboard');
         } else {
@@ -137,7 +149,64 @@ class ClientDocumentController extends Controller
     public function rejectRequest(Request $request, $id)
     {
         $reques = Reques::findOrFail($id);
-        $reques->status = 0;
+        $reques->status = -1;
         $reques->save();
+        $lawyer = Lawyer::findOrFail($reques->lawyer->id);
+        Notification::send($lawyer, new RequestNotification($reques));
+        return redirect()->back();
+    }
+
+    public function responseDocument(Request $request, $id)
+    {
+        $rules = array(
+            'text' => 'required|min:5|max:10000'
+        );
+        $count = count($request->file('files')) - 1;
+        foreach (range(0, $count) as $i) {
+            $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
+        }
+        Validator::make($request->all(), $rules)->validate();
+        $reques = Reques::findOrFail($id);
+        $client = Auth::guard('client')->user();
+        $response = new Response;
+        $response->text = Purifier::clean($request->text);
+        $response->request_id = $reques->id;
+        $client->responses()->save($response);
+        if ($request->file('files') != null) {
+            $file = $request->file('files');
+            foreach ($file as $key) {
+                $fil = new File;
+                $fil->file = $key->getClientOriginalName();
+                $upload_folder = '/answers/' . time() . '/';
+                $fil->path = $upload_folder;
+                $response->files()->save($fil);
+                $key->move(public_path() . $upload_folder, $key->getClientOriginalName());
+            }
+        }
+        $lawyer = Lawyer::findOrFail($reques->lawyer->id);
+        Notification::send($lawyer, new ResponseNotification($response));
+        return redirect()->back();
+    }
+
+    public function closeDocument(Request $request, $id)
+    {
+        $document = Document::findOrFail($id);
+        $document->status=2;
+        $fee = new Fee;
+        $lawyer = Lawyer::findOrFail($document->requests->where('status',1)->first()->lawyer->id);
+        $fee->user_id = $lawyer->user->id;
+        $fee->amount = $document->cost*0.7;
+        $document->fees()->save($fee);
+        $document->save();
+        $lawyer = Lawyer::findOrFail($lawyer->id);
+        $admins = Admin::all();
+        Notification::send($lawyer, new DocumentsNotification($document));
+        Notification::send($admins, new DocumentsNotification($document));
+        return redirect()->back();
+    }
+
+    public function complainDocument(Request $request, $id)
+    {
+
     }
 }

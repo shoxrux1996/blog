@@ -27,8 +27,8 @@
                                 <input type="hidden" name="account[user_id]" value={{$user_id}} >
                                 <!-- ============= Не обязательные поля ====================== -->
                                 <input type="hidden" name="callback" value="http://yuridik.uz/api/success/:transaction">
-                            {{--<input type="hidden" name="callback" value="http://shoxrux19960822.000webhostapp.com/card"/>--}}
-                            <!-- ================================================== -->
+                                {{--<input type="hidden" name="callback" value="http://shoxrux19960822.000webhostapp.com/card"/>--}}
+                                <!-- ================================================== -->
                                 <div class="form-group">
                                     <input type="number" id="amountWillConvert" class="form-control" placeholder="Введите сумму">
                                 </div>

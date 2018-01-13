@@ -353,6 +353,7 @@ class ClientQuestionController extends Controller
         }
         foreach ($answer_helped as $key => $answer){
             if(is_null($answer)) {
+
                 unset($answer_helped[$key]);
             }
         }

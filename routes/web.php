@@ -151,6 +151,7 @@ Route::prefix('client')->group(function(){
     Route::prefix('document')->group(function(){
     	Route::get('/create', 'Client\ClientDocumentController@create')->name('document.create');
     	Route::post('/store', 'Client\ClientDocumentController@store')->name('document.store');
+        Route::post('document/close/{id}', 'Client\ClientDocumentController@closeDocument')->name('client.document.close');
 
     });
     Route::prefix('call')->group(function(){
@@ -167,6 +168,7 @@ Route::prefix('client')->group(function(){
             Route::get('/question/{id}', 'Client\ClientQuestionController@showQuestion')->name('client.question.show');
             Route::get('/requests', 'Lawyer\LawyerDocumentController@myRequests')->name('my.requests');
             Route::get('/answers', 'Lawyer\LawyerAnswerController@myAnswers')->name('my.answers');
+            Route::post('/document/response/{id}','Client\ClientDocumentController@responseDocument')->name('client.response.store');
        });
 
     
@@ -205,7 +207,11 @@ Route::prefix('lawyer')->group(function(){
         Route::get('/edit/{id}', 'Lawyer\LawyerAnswerController@edit')->name('lawyer.answer.edit');
         Route::post('/update/{id}', 'Lawyer\LawyerAnswerController@update')->name('lawyer.answer.update');
     });
-
+    Route::prefix('response')->group(function (){
+        Route::post('/create/{request_id}', 'Lawyer\LawyerDocumentController@storeResponse')->name('lawyer.response.store');
+        Route::get('/edit/{id}', 'Lawyer\LawyerAnswerController@edit')->name('lawyer.response.edit');
+        Route::post('/update/{id}', 'Lawyer\LawyerAnswerController@update')->name('lawyer.response.update');
+    });
     Route::prefix('document')->group(function(){
         Route::get('/list', 'Lawyer\LawyerDocumentController@index')->name('lawyer.document.info');
         Route::post('/submit/{id}', 'Lawyer\LawyerDocumentController@sendRequest')->name('lawyer.document.request');

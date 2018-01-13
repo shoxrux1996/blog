@@ -60,6 +60,10 @@ class Lawyer extends Authenticatable
     {
         return $this->morphMany('yuridik\Answer', 'lawyerable');
     }
+    public function responses()
+    {
+        return $this->morphMany('yuridik\Response', 'lawyerable');
+    }
     public function questions(){
         $collections = collect();
         foreach($this->answers->unique('question_id') as $answer)
@@ -78,6 +82,15 @@ class Lawyer extends Authenticatable
     }
     public function commentNotifications(){
         return $this->unreadNotifications()->where('type', 'yuridik\Notifications\CommentsNotification');
+    }
+    public function documentNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\DocumentsNotification');
+    }
+    public function responseNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\ResponseNotification');
+    }
+    public function requestNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\RequestNotification');
     }
     public function feedbacks()
     {

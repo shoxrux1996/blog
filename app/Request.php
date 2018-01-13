@@ -15,5 +15,9 @@ class Request extends Model
     {
         return $this->belongsTo('yuridik\Lawyer');
     }
+    public function responses()
+    {
+        return $this->hasMany('yuridik\Response');
+    }
 
 }

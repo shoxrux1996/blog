@@ -18,10 +18,10 @@
 								<div class="col-sm-12 question">
 									<span class="question-price">
 										@if($document->status==0)
-											@if($document->payment_type=="about")
+											@if($document->payment_type=="later")
 												<b>По договоренности</b>
 											@else
-												<b>{{$document->price}} сум</b>
+												<b>{{$document->cost}} сум</b>
 												<span>
 													@lang('questions.стоимость')<br/>
 													@lang('questions.вопроса')

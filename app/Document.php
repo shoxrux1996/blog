@@ -33,8 +33,10 @@ class Document extends Model
         return $this->morphMany('yuridik\Order', 'typeable');
     }
 
-    public function soft_requests()
-    {
-        return $this->requests->where('status', 1);
+    public function fees(){
+        return $this->morphMany('yuridik\Fee', 'feeable');
+    }
+    public function notPayed(){
+        return $this->fees()->exists() ? 0 : 1;
     }
 }

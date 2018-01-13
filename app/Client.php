@@ -57,11 +57,21 @@ class Client extends Authenticatable
     {
         return $this->morphMany('yuridik\Answer', 'lawyerable');
     }
+    public function responses()
+    {
+        return $this->morphMany('yuridik\Response', 'lawyerable');
+    }
     public function answerNotifications(){
         return $this->unreadNotifications()->where('type', 'yuridik\Notifications\AnswerNotification');
     }
     public function requestNotifications(){
-        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\ClientRequestNotification');
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\RequestNotification');
+    }
+    public function documentNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\DocumentsNotification');
+    }
+    public function responseNotifications(){
+        return $this->unreadNotifications()->where('type', 'yuridik\Notifications\ResponseNotification');
     }
 
 

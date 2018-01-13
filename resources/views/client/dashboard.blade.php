@@ -237,6 +237,28 @@
                                                    <p class="time col-sm-4">{{$notification->created_at}}</p>
                                                </div>
                                            @endforeach
+                                           @if($client->requestNotifications->count())
+                                               <li>Requests
+                                                   <ul>
+                                                       @foreach($client->requestNotifications as $notification)
+                                                           <li>
+                                                               <a href="{{route('client.document.show', $notification->data['document_id'])}}"> You get request: {{$notification->data['title']}}</a>
+                                                           </li>
+                                                       @endforeach
+                                                   </ul>
+                                               </li>
+                                           @endif
+                                           @if($client->responseNotifications->count())
+                                               <li>Responses
+                                                   <ul>
+                                                       @foreach($client->responseNotifications as $notification)
+                                                           <li>
+                                                               <a href="{{route('client.document.show', $notification->data['document_id'])}}"> Lawyer responded: {{$notification->data['title']}}</a>
+                                                           </li>
+                                                       @endforeach
+                                                   </ul>
+                                               </li>
+                                           @endif
                                                <div class="col-sm-12" style="margin: 20px 0 20px 0;">
                                                    <a href="{{route('client.notifications.delete')}}"
                                                       class="btn btn-info btn-xs"> @lang('client-dashboard.Mark as Ready')</a>
@@ -252,7 +274,6 @@
         </div>
     </div>
     <!-- /Content -->
-
 @endsection
 @if(Session::has('question-create'))
 @endif

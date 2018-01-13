@@ -220,33 +220,80 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <ul>
-                                                <li>@lang('lawyer-dashboard.Новые вопросы')
-                                                    <ul>
-                                                        @foreach($lawyer->questionNotifications as $notification)
-                                                            <li>
-                                                                <a href="{{route('web.question.show', $notification->data['id'])}}">{{$notification->data['title']}}</a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </li>
-                                                <li>@lang('lawyer-dashboard.Новые блоги')
-                                                    <ul>
-                                                        @foreach($lawyer->blogNotifications as $notification)
-                                                            <li>
-                                                                <a href="{{route('web.blog.show', $notification->data['id'])}}">{{$notification->data['title']}}</a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </li>
-                                                <li>@lang('lawyer-dashboard.Новые комменты')
-                                                    <ul>
-                                                        @foreach($lawyer->commentNotifications as $notification)
-                                                            <li>
-                                                                <a href="{{route('web.blog.show', $notification->data['blog_id'])}}">{{$notification->data['comment']}}</a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </li>
+                                                @if($lawyer->questionNotifications->count())
+                                                    <li>@lang('lawyer-dashboard.Новые вопросы')
+                                                        <ul>
+                                                            @foreach($lawyer->questionNotifications as $notification)
+                                                                <li>
+                                                                    <a href="{{route('web.question.show', $notification->data['id'])}}">{{$notification->data['title']}}</a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                @endif
+                                                @if($lawyer->documentNotifications->count())
+                                                    <li>Documents
+                                                        <ul>
+                                                            @foreach($lawyer->documentNotifications as $notification)
+                                                                <li>
+                                                                    @if($notification->data['status']==0)
+                                                                        <a href="{{route('lawyer.document.show', $notification->data['id'])}}"> New document: {{$notification->data['title']}}</a>
+                                                                    @elseif($notification->data['status']==2)
+                                                                        <a href="{{route('lawyer.document.show', $notification->data['id'])}}"> Document closed: {{$notification->data['title']}}</a>
+                                                                    @endif
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                @endif
+                                                @if($lawyer->requestNotifications->count())
+                                                    <li>Requests
+                                                        <ul>
+                                                            @foreach($lawyer->requestNotifications as $notification)
+                                                                <li>
+                                                                    @if($notification->data['status']==-1)
+                                                                        <a href="{{route('lawyer.document.show', $notification->data['document_id'])}}"> Your request is rejected: {{$notification->data['title']}}</a>
+                                                                    @elseif($notification->data['status']==1)
+                                                                        <a href="{{route('lawyer.document.show', $notification->data['document_id'])}}"> Your request is accepted: {{$notification->data['title']}}</a>
+                                                                    @endif
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                @endif
+                                                @if($lawyer->responseNotifications->count())
+                                                    <li>Responses
+                                                        <ul>
+                                                            @foreach($lawyer->responseNotifications as $notification)
+                                                                <li>
+                                                                    <a href="{{route('lawyer.document.show', $notification->data['document_id'])}}"> Client responded: {{$notification->data['title']}}</a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                @endif
+                                                @if($lawyer->blogNotifications->count())
+                                                    <li>@lang('lawyer-dashboard.Новые блоги')
+                                                        <ul>
+                                                            @foreach($lawyer->blogNotifications as $notification)
+                                                                <li>
+                                                                    <a href="{{route('web.blog.show', $notification->data['id'])}}">{{$notification->data['title']}}</a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                @endif
+                                                @if($lawyer->commentNotifications->count())
+                                                    <li>@lang('lawyer-dashboard.Новые комменты')
+                                                        <ul>
+                                                            @foreach($lawyer->commentNotifications as $notification)
+                                                                <li>
+                                                                    <a href="{{route('web.blog.show', $notification->data['blog_id'])}}">{{$notification->data['comment']}}</a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                @endif
                                             </ul>
                                             <div>
                                                 <a href="{{route('lawyer.notification.asRead')}}"

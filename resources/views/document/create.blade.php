@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('styles')
-<link href="{{ asset('dist/css/services.css')}}" rel="stylesheet">
+    <link href="{{ asset('dist/css/services.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -86,7 +86,7 @@
                         <p>
                             <input type="radio" name="payment_type" value="about" id="cost-2" onclick="enable()"/>
                             <label for="cost-2">Я планирую заплатить</label>
-                            <input type="text" name="cost" class="general-input" id="cost" disabled /> сум
+                            <input type="number" name="cost" class="general-input" id="cost" disabled /> сум
                         </p>
                     </div>
 
@@ -128,7 +128,6 @@
         console.log(subtypes)
     var parents = {!!json_encode($parents, JSON_PRETTY_PRINT) !!}
         console.log(parents)
-
 </script>
 {!! Html::script('js/document.js') !!}
 @endsection
