@@ -54,15 +54,6 @@ class ClientDocumentController extends Controller
 
     public function store(Request $request)
     {
-
-        $messages = [
-            'required' => 'Обязательно к заполнению',
-            'string' => 'Неправильный формат',
-            'title.min' => 'Минимум 3 символов',
-            'description.min' => 'Минимум 10 символов',
-            'mimes' => 'Неверный формат(doc,docx,pdf)',
-            'max' => 'Файл слишком велик',
-        ];
         $rules = array(
             'title' => 'required|min:3',
             'description' => 'required|min:10',
@@ -74,7 +65,7 @@ class ClientDocumentController extends Controller
         foreach (range(0, $count) as $i) {
             $rules['files.' . $i] = 'mimes:doc,docx,pdf|max:3000';
         }
-        Validator::make($request->all(), $rules, $messages)->validate();
+        Validator::make($request->all(), $rules)->validate();
 
         $document = new Document;
         $document->title = $request->title;
@@ -129,11 +120,12 @@ class ClientDocumentController extends Controller
             $order = new Order;
             $order->user_id = $client->user->id;
             $order->amount = $reques->price;
-            $reques->document->update(['cost' => $order->amount, 'status' => 1]);
+            $reques->document->cost = $order->amount;
+            $reques->document->status = 1;
 
             $reques->document->orders()->save($order);
             $reques->status=1;
-            $reques->save();
+            $reques->push();
             $lawyer = Lawyer::findOrFail($reques->lawyer->id);
             $admins = Admin::all();
             Notification::send($lawyer, new RequestNotification($reques));

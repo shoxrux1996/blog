@@ -102,7 +102,9 @@
                         @else
                             <p>Price: <strong> Agree with the price</strong></p>
                         @endif
-                            <p>{{$request->description}}</p>
+                            <p>Description: {{$request->description}}</p>
+                            <p>Created_at: {{$request->created_at}}</p>
+                            <p>Deadline: {{$request->updated_at}}</p>
                         {{Form::open(['route' => ['client.document.accept', $request->id], 'method' => 'POST', 'class'=>'form-horizontal']) }}
                             <div>
                                 <div class ="form-group">

@@ -4,7 +4,6 @@
 @endsection
 
 @section('content')
-
 <!-- Content -->
 <div id="wrapper">
     <div class="container" id="order-document">
@@ -26,16 +25,9 @@
                     <div class="row">
                         @foreach($types as $key => $value)
                         <div class="col-sm-6">
-                            @if($key == 1)
-                                <input type="radio" name="docType" value="{{$key}}" checked onclick="handler(this.value)"/>
-                                <label for="{{$key}}">{{$value}}</label>
-                                <p>{{$definitions[$key]}}</p>
-                             @endif
-                             @if($key != 1)
-                                <input type="radio" name="docType" value="{{$key}}" onclick="handler(this.value)"/>
-                                <label for="{{$key}}">{{$value}}</label>
-                                <p>{{$definitions[$key]}}</p>  
-                            @endif            
+                            <input type="radio" id="docType" name="docType" {{old('docType')==null ? ($key=="1" ? 'checked='.'"'.'checked'.'"' : '') : (old('docType')==$key ? 'checked='.'"'.'checked'.'"' : '')}} value="{{$key}}" onclick="handler(this.value)" />
+                            <label for="{{$key}}">{{$value}}</label>
+                            <p>{{$definitions[$key]}}</p>
                         </div>
                         @endforeach
                     </div>
@@ -51,7 +43,7 @@
                                     <strong>{{ $errors->first('title') }}</strong>
                                 </span>
                             @endif
-                        <input type="text" class="form-control general-input" id="question" name="title" />
+                        <input type="text" class="form-control general-input" id="question" name="title" value="{{old('title')}}"/>
                     </div>
                     <div class="form-group{{$errors->has('description') ? ' has-error' : '' }}">
                         <label for="description">Подробное описание</label>
@@ -60,12 +52,12 @@
                                     <strong>{{ $errors->first('description') }}</strong>
                                 </span>
                             @endif
-                        <textarea class="form-control general-input" rows="15" name="description" placeholder="Чем подробнее вы опишете требования к документу,тем точнее юристы смогут оценить его стоимость."></textarea>
+                        <textarea class="form-control general-input" rows="15" name="description" placeholder="Чем подробнее вы опишете требования к документу,тем точнее юристы смогут оценить его стоимость.">{{old('description')}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Если нужно, прикрепите файл</label>
                         <label class="btn btn-default general-input">
-                            Выбрать файл <input type="file" name="files[]" multiple hidden>
+                            Выбрать файл <input type="file" name="files[]" value="{{old('files')}}" multiple>
                         </label>
                         @if ($errors->any() && !($errors->has('description') || $errors->has('title')))
                             <div class="alert alert-danger">
@@ -80,13 +72,13 @@
                     <div class="form-group">
                         <label>Стоимость документа</label>
                         <p>
-                            <input type="radio" name="payment_type" value="later" id="cost-1" checked onclick="disable()" />
+                            <input type="radio" name="payment_type" value="later" id="cost-1" checked onclick="disable()" {{old('payment_type')=="later" ? 'checked='.'"'.'checked'.'"' : '' }}/>
                             <label for="cost-1">По договоренности с юристом</label>
                         </p>
                         <p>
-                            <input type="radio" name="payment_type" value="about" id="cost-2" onclick="enable()"/>
+                            <input type="radio" name="payment_type" value="about" id="cost-2" onclick="enable()" {{old('payment_type')=="about" ? 'checked='.'"'.'checked'.'"' : '' }}/>
                             <label for="cost-2">Я планирую заплатить</label>
-                            <input type="number" name="cost" class="general-input" id="cost" disabled /> сум
+                            <input type="number" name="cost" value="{{old('cost')}}" class="general-input" id="cost" disabled /> сум
                         </p>
                     </div>
 
@@ -129,5 +121,26 @@
     var parents = {!!json_encode($parents, JSON_PRETTY_PRINT) !!}
         console.log(parents)
 </script>
+
+@if(old('docType')!= null)
+    <script>
+        var type_option = document.getElementById('subType');
+        var l=type_option.length;
+        var docTypeValue = {!! old('docType') !!}
+        for(var i=0;i<l;i++){
+            type_option.remove(0);
+        }
+        for(index in subtypes) {
+            if(parents[index]==docTypeValue){
+                var option = document.createElement("option");
+                option.text = subtypes[index];
+                option.value = index;
+                type_option.add(option);
+                if({!! old('subType') !!} == index)
+                    option.selected = "selected";
+            }
+        }
+    </script>
+@endif
 {!! Html::script('js/document.js') !!}
 @endsection

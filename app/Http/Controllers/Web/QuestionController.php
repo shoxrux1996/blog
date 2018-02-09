@@ -43,6 +43,8 @@ class QuestionController extends Controller
     public function show($id)
     {
         $question = Question::find($id);
+        if(empty($question))
+            abort(404);
         if(!$question->disabled || (Auth::guard('lawyer')->check() && Auth::guard('lawyer')->user()->type == 2) ||
             (Auth::guard('client')->check() && Auth::guard('client')->user()->id ==$question->client_id))
         {
