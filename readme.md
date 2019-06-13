@@ -1,51 +1,43 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+YURIDIK.UZ - LEGAL ADVICE ONLINE
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Yuridik.uz is a service that connects legal professionals with clients online. Any user can get instant advice here on all legal issues, and legal practitioners have the opportunity for additional income.
 
-## About Laravel
+Yuridik.uz is:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+ QUICKLY
+solution of your question within 2 hours
+ AVAILABLE
+legal advice from 5000 sum
+ RIGHT
+joint opinion of lawyers
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Yuridik.uz for a client
+Yuridik.uz for a lawyer
+QUESTION TO LAWYERS
+Practically all service lawyers will get acquainted with your question. This improves not only the speed of receiving a response to your request, but also the quality of the consultation. It is possible that several lawyers will answer your question at once. To learn more
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+Ask the lawyers >>
+NEW CUSTOMERS
+We want you to have no borders - neither territorial nor temporary. This means that in whatever city you are located, the number of your customers will only increase. With Yuridik.uz, you have a real chance to establish a successful practice without leaving your own home.
 
-## Learning Laravel
+ONLINE CHAT WITH LAWYER
+There are situations when a client needs personal contact with a lawyer to get full-fledged advice. At your service - our online chat. Communicate in dialogue mode by selecting the appropriate modes (text, sound, video).
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+Online consultation >>
+FLEXIBLE SCHEDULE AND PLACE OF WORK
+Lawyers at Yuridik.uz are not limited in their working hours. Work in the most comfortable place for you and in the most convenient mode. We will try to make sure that you have as many of these opportunities as possible.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+PREPARATION OF DOCUMENTS
+It is practically impossible for an unprepared person to competently prepare and execute a legal document. Our lawyers will quickly do it for you, even if you need to create a unique document. You will receive standard forms of legal documents almost instantly.
 
-## Laravel Sponsors
+Order a document >>
+GREAT CHOICE OF QUESTIONS
+Practice shows that, by virtue of their profession, lawyers have to be an expert in various fields. You can declare yourself as a specialist of a wide profile, and narrow specialization. Communicate with colleagues, share experiences, improve your professional level.
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+Questions >>
+SELECTION OF THE NECESSARY LAWYER
+The Yuridik.uz catalog contains hundreds of highly qualified lawyers. Decide on his specialization, and our service will offer you a list of lawyers with knowledge and experience in this particular area. Choose and communicate!
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Choose a lawyer >>
+REPUTATION
+There are many reasons that objectively hinder your professional growth. Cooperation with Yuridik.uz radically changes this situation. Participate in competition with your colleagues, earning a rating, reputation, and as a result, new customers.
